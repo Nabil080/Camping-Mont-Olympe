@@ -1,0 +1,136 @@
+{
+    "camping": {
+        "name": null,
+        "adress": null,
+        "phone": null,
+        "website": null,
+        "email": null
+    },
+    "rules": {
+        "seasons": {
+            "exemple":[
+                {
+                    "date":[{ "start": "", "end": "" }],
+                    "days":[]
+                }
+            ]
+        },
+        "reservations":
+        {
+            "check-in": [
+                {
+                    "days": [],
+                    "places": []
+                }
+            ],
+            "check-out": [
+                {
+                    "days": [],
+                    "places": []
+                }
+            ],
+            "min-stay": [
+                {
+                    "places": [],
+                    "seasons": []
+                }
+            ],
+            "max-stay": [
+                {
+                    "places": [],
+                    "seasons": []
+                }
+            ],
+            "paiement": {
+                "cash": true,
+                "card": true,
+                "paypal": true,
+                "check": true,
+                "holidayCheck": true
+            },
+            "emplacement": [
+                {
+                    "can_choose": false,
+                    "places": []
+                }
+            ]
+        },
+        "prices": {
+            "places": {
+                "exemple": [
+                    {
+                        "amount": 0,
+                        "per_days": true,
+                        "per_person": false,
+                        "seasons": []
+                    }
+                ]
+            },
+            "services": {
+                "exemple": [
+                    {
+                        "amount": 0,
+                        "per_days": true,
+                        "per_person": false,
+                        "seasons": []
+                    }
+                ]
+            },
+            "adult": [
+                {
+                    "amount": 4.00,
+                    "per_days": true,
+                    "per_person": true,
+                    "seasons": []
+                }
+            ],
+            "children": [
+                {
+                    "amount": 2.00,
+                    "per_day": true,
+                    "per_person": true,
+                    "seasons": []
+                }
+            ],
+            "coupons": {
+                "exemple":{
+                    "amount": 0,
+                    "type": "devise/percentage",
+                    "duration": { "start": "", "end": ""},
+                    "uses": 0,
+                    "places": []
+                }
+            },
+            "discount": [
+                {
+                    "amount": 0.2,
+                    "type": "devise/percentage",
+                    "duration": { "start": "", "end": ""},
+                    "places": []
+                }
+            ]
+        },
+        "services": {
+            "exemple": [
+                {
+                    "max": 0,
+                    "places": []
+                }
+            ]
+        },
+        "taxes": {
+            "tva": {
+                "amount": 0.20,
+                "type": "percentage",
+                "per_days": false,
+                "per_person": false
+            },
+            "taxe_de_sejour": {
+                "amount": 0.22,
+                "type": "devise",
+                "per_days": true,
+                "per_person": true
+            }
+        }
+    }
+}

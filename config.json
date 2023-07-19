@@ -29,91 +29,105 @@
         }
       ]
     },
-    "reservations": [{
-        "check-in":[
-          {
-            "days": ["All"],
-            "places": ["All"]
-          },
-          {
-            "days": ["1","2","3"],
-            "places": "Camping-Car"
-          }
-        ],
-        "check-out":[
-          {
-            "days": ["All"],
-            "places": ["All"]
-          }
-        ],
-        "min-stay":[
-          {
-            "places": ["All"],
-            "seasons": ["All"]
-          }
-        ],
-        "max-stay":[
-          {
-            "places": ["All"],
-            "seasons": ["All"]
-          }
-        ],
-        "paiement":{
-          "cash":true,
-          "card":true,
-          "paypal":true,
-          "check":true,
-          "holidayCheck":true
+    "reservations": {
+      "check-in": [
+        {
+          "days": ["All"],
+          "places": ["All"]
         },
-        "emplacement":[
+        {
+          "days": ["1", "2", "3"],
+          "places": "Camping-Car"
+        }
+      ],
+      "check-out": [
+        {
+          "days": ["All"],
+          "places": ["All"]
+        }
+      ],
+      "min-stay": [
+        {
+          "places": ["All"],
+          "seasons": ["All"]
+        }
+      ],
+      "max-stay": [
+        {
+          "places": ["All"],
+          "seasons": ["All"]
+        }
+      ],
+      "paiement": {
+        "cash": true,
+        "card": true,
+        "paypal": true,
+        "check": true,
+        "holidayCheck": true
+      },
+      "emplacement": [
+        {
+          "can_choose": true,
+          "places": ["All"]
+        }
+      ]
+    },
+    "prices": {
+      "places": {
+        "grand_confort_caravane": [
           {
-            "can_choose":true,
-            "places": ["All"]
+            "amount": "7.30",
+            "per_days": true,
+            "per_person": false,
+            "seasons": ["All"]
+          }
+        ],
+        "confort_caravane": [
+          {
+            "amount": "6.00",
+            "per_days": true,
+            "per_person": false,
+            "seasons": ["All"]
+          }
+        ],
+        "emplacement_simple": [
+          {
+            "amount": "4.50",
+            "per_days": true,
+            "per_person": false,
+            "seasons": ["All"]
+          }
+        ],
+        "camping_car": [
+          {
+            "amount": "12.70",
+            "per_days": true,
+            "per_person": false,
+            "seasons": ["All"]
           }
         ]
-    }],
-    "prices": [{
-      "places":{
-        "grand_confort_caravane":{
-          "amount": "7.30",
-          "per_days": true,
-          "per_person": false,
-          "seasons": ["All"]
-        },
-        "confort_caravane":{
-          "amount": "6.00",
-          "per_days": true,
-          "per_person": false,
-          "seasons": ["All"]
-        },
-        "emplacement_simple":{
-          "amount": "4.50",
-          "per_days": true,
-          "per_person": false,
-          "seasons": ["All"]
-        },
-        "camping_car":{
-          "amount": "12.70",
-          "per_days": true,
-          "per_person": false,
-          "seasons": ["All"]
-        }
       },
-      "services":[{
-        "animal": {
-          "amount": "1.80",
-          "per_days": false,
-          "per_person": false,
-          "seasons": ["All"]
-        },
-        "tent": {
-          "amount": "2.00",
-          "per_days": false,
-          "per_person": false,
-          "seasons": ["All"]
+      "services": [
+        {
+          "animal": [
+            {
+              "amount": "1.80",
+              "per_days": false,
+              "per_person": false,
+              "seasons": ["All"]
+            }
+          ],
+          "tent": [
+            {
+              "amount": "2.00",
+              "per_days": false,
+              "per_person": false,
+              "seasons": ["All"]
+            }
+          ]
         }
-      }],
-      "adult":[
+      ],
+      "adult": [
         {
           "amount": "4.00",
           "per_days": true,
@@ -127,7 +141,7 @@
           "seasons": ["haute_saison_2023"]
         }
       ],
-      "children":[
+      "children": [
         {
           "amount": "2.00",
           "per_day": true,
@@ -135,7 +149,7 @@
           "seasons": ["All"]
         }
       ],
-      "coupons":[
+      "coupons": [
         {
           "name": "voyage",
           "amount": "2",
@@ -153,7 +167,7 @@
           "places": ["All"]
         }
       ],
-      "discount":[
+      "discount": [
         {
           "amount": "2",
           "type": "devise",
@@ -161,7 +175,7 @@
           "places": ["All"]
         }
       ]
-    }],
+    },
     "services": {
       "animal": [
         {
@@ -175,8 +189,8 @@
       ],
       "tent": [
         {
-        "max": "6",
-        "places": ["All"]
+          "max": "6",
+          "places": ["All"]
         }
       ]
     },
