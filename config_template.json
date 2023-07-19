@@ -1,10 +1,10 @@
 {
     "camping": {
-        "name": null,
-        "adress": null,
-        "phone": null,
-        "website": null,
-        "email": null
+        "name": "",
+        "adress": "",
+        "phone": "",
+        "website": "",
+        "email": ""
     },
     "rules": {
         "seasons": {

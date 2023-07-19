@@ -74,7 +74,7 @@ Infos complémentaires :
 -Taxes de séjour
 
 [Caisse]:
--Trouver une réservation pour l_encaisser
+-Trouver une réservation pour l_mencaisser
 -Caisse du jour, récapitulatif des paiements
 -Consulter la caisse d_un autre jour ou mois
 
@@ -201,6 +201,56 @@ Types de paiements :
 
 .. * CHAMPS EN BDD: -----------------------------
 
+[user]
+-id
+-email
+-first_name
+-last_name
+-phone
+-role
+
+[reservation]
+-id
+_location_
+_spot_
+-start
+-end
+-adults
+-childrens
+-comment
+-price
+-paid
+
+
+[service]
+-id
+-name
+-price
+
+[..? reservation_service]
+_reservation_
+_service_
+-amount
+
+[location]
+-id
+-name
+-description
+-available
+
+[spot]
+-id
+_location_
+
+[image]
+-id
+-path
+-type
+_location_
+
+[News]
+-id
+-message
 
 
 .. * CONFIG.JSON: -----------------------------
