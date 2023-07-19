@@ -32,27 +32,27 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/caisse', name: 'caisse')]
-    public function caisse(): Response
+    #[Route('/planning', name: 'planning')]
+    public function planning(): Response
     {
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'CaisseController',
+            'controller_name' => 'planningController',
         ]);
     }
 
-    #[Route('/caisse', name: 'caisse')]
-    public function caisse(): Response
+    #[Route('/reservation', name: 'reservation')]
+    public function reservation(): Response
     {
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'CaisseController',
+            'controller_name' => 'reservationController',
         ]);
     }
 
-    #[Route('/caisse', name: 'caisse')]
-    public function caisse(): Response
+    #[Route('/users', name: 'users')]
+    public function users(): Response
     {
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'CaisseController',
+            'controller_name' => 'usersController',
         ]);
     }
 }
