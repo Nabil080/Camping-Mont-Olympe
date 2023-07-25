@@ -135,4 +135,26 @@ class Config {
         fwrite($file, $newJson);
     }
 
+    public function deleteSeasonRule(Season $season, SeasonRule $seasonRule)
+    {
+        $initialData = $this->getData();
+        var_dump($initialData['rules']['seasons']);
+
+        foreach($initialData['rules']['seasons'] as $seasonName => $seasonRules){
+            if($seasonName !== $this->titleToJson($season->getName())) continue;
+
+            foreach($seasonRules as $index => $rule){
+                if($rule['start'] == $seasonRule->getStart()
+                && $rule['end'] == $seasonRule->getEnd()
+                && $rule['days'] == $seasonRule->getDays()){
+                    unset($initialData['rules']['seasons'][$seasonName][$index]);
+                }
+            }
+        }
+        
+        $file = $this->openJson();
+        $newJson = json_encode($initialData, JSON_PRETTY_PRINT);
+        fwrite($file, $newJson);
+    }
+
 }
