@@ -151,7 +151,18 @@ class Config {
                 }
             }
         }
-        
+
+        $file = $this->openJson();
+        $newJson = json_encode($initialData, JSON_PRETTY_PRINT);
+        fwrite($file, $newJson);
+    }
+
+    public function deleteSeason(Season $season)
+    {
+        $initialData = $this->getData();
+
+        unset($initialData['rules']['seasons'][$season->getName()]);
+
         $file = $this->openJson();
         $newJson = json_encode($initialData, JSON_PRETTY_PRINT);
         fwrite($file, $newJson);

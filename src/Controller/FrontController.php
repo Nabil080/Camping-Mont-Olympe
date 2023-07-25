@@ -13,9 +13,8 @@ class FrontController extends AbstractController
     public function homepage(Config $config): Response
     {
 
-        $season = $config->getSeasonByName("saison");
-        $rule = $season->getSeasonRules()[0];
-        $config->deleteSeasonRule($season,$rule);
+        $season = $config->getSeasonByName("basse saison 2023");
+        $config->deleteSeason($season);
 
 
         return $this->render('front/index.html.twig', [
