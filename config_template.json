@@ -10,7 +10,8 @@
         "seasons": {
             "exemple":[
                 {
-                    "date":[{ "start": "", "end": "" }],
+                    "start": "",
+                    "end": "",
                     "days":[]
                 }
             ]

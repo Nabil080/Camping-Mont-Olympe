@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Config\Config;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,8 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class FrontController extends AbstractController
 {
     #[Route('/', name: 'app_front')]
-    public function homepage(): Response
+    public function homepage(Config $config): Response
     {
+
+        dd($config->getSeasons());
+
+
         return $this->render('front/index.html.twig', [
             'controller_name' => 'FrontController',
         ]);
