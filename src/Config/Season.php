@@ -4,10 +4,8 @@ namespace App\Config;
 
 class Season extends Config{
     private string $name;
-    private string $start;
-    private string $end;
-    private array $days;
 
+    private array $rules;
 
     public function getName()
     {
@@ -20,6 +18,25 @@ class Season extends Config{
 
         return $this;
     }
+
+    public function getSeasonRules()
+    {
+        return $this->rules;
+    }
+
+    public function setSeasonRules($rules)
+    {
+        $this->rules = $rules;
+
+        return $this;
+    }
+
+}
+
+class SeasonRule extends Season{
+    private string $start;
+    private string $end;
+    private array $days;
 
     public function getStart()
     {
@@ -56,8 +73,12 @@ class Season extends Config{
 
         return $this;
     }
-}
 
-class SeasonRule extends Season{
-    
+    public function seasonRuleToJson(){
+        return [
+            "start" => $this->getStart(),
+            "end" => $this->getEnd(),
+            "days" => $this->getDays()
+        ];
+    }
 }

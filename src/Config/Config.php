@@ -24,6 +24,16 @@ class Config {
         return fopen("config.json",'w');
     }
 
+    public function titleToJson(string $string):string
+    {
+        return strtolower(str_replace(" ", "_",$string));
+    }
+
+    public function JsonToTitle(string $string):string
+    {
+        return ucwords(str_replace("_"," ",$string));
+    }
+
     public function getCamping():Camping
     {
         $data = $this->getData();
@@ -61,18 +71,68 @@ class Config {
     {
         $data = $this->getRules();
         $seasons = [];
-        foreach($data['seasons'] as $SeasonName => $SeasonRules)
-            foreach($SeasonRules as $rule){
-                $season = new Season;
-                $season->setName($SeasonName);
-                $season->setStart($rule['start']);
-                $season->setEnd($rule['end']);
-                $season->setDays($rule['days']);
+        foreach($data['seasons'] as $SeasonName => $SeasonRules){
+            $season = new Season;
+            $season->setName($SeasonName);
+            $rules = [];
 
-                $seasons[] = $season;
+            foreach($SeasonRules as $rule){
+                $seasonRule = new SeasonRule;
+                $seasonRule->setStart($rule['start']);
+                $seasonRule->setEnd($rule['end']);
+                $seasonRule->setDays($rule['days']);
+
+                $rules[] = $seasonRule;
             }
 
+            $season->setSeasonRules($rules);
+            $seasons[] = $season;
+        }
+
         return $seasons;
+    }
+
+    public function getSeasonByName(string $name):Season|bool
+    {
+        $seasons = $this->getSeasons();
+
+        foreach($seasons as $season)
+            if($season->getName() === $this->titleToJson($name))
+
+
+                return $season;
+
+        return false;
+    }
+
+    public function addSeason(Season $season){
+        $initialData = $this->getData();
+
+        if($this->getSeasonByName($season->getName()) === false)
+            $initialData['rules']['seasons'][$season->getName()] = [];
+        
+
+        foreach($season->getSeasonRules() as $seasonRule)
+            $initialData['rules']['seasons'][$season->getName()][] = $seasonRule->seasonRuleToJson();
+        
+
+        $file = $this->openJson();
+        $newJson = json_encode($initialData, JSON_PRETTY_PRINT);
+        fwrite($file, $newJson);
+    }
+
+    public function updateSeason(string $oldname,Season $season){
+        $initialData = $this->getData();
+
+        unset($initialData['rules']['seasons'][$oldname]);
+        $initialData['rules']['seasons'][$season->getName()] = [];
+
+        foreach($season->getSeasonRules() as $seasonRule)
+            $initialData['rules']['seasons'][$season->getName()][] = $seasonRule->seasonRuleToJson();
+        
+        $file = $this->openJson();
+        $newJson = json_encode($initialData, JSON_PRETTY_PRINT);
+        fwrite($file, $newJson);
     }
 
 }
