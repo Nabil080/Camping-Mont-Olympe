@@ -168,4 +168,36 @@ class Config {
         fwrite($file, $newJson);
     }
 
+    public function getReservations():array
+    {
+        $data = $this->getRules();
+        $reservations = [];
+        foreach($data['reservations'] as $ReservationName => $ReservationRules){
+            $reservation = new Reservation;
+            $reservation->setName($ReservationName);
+            $rules = [];
+
+            foreach($ReservationRules as $rule){
+                $ReservationRule = new ReservationRule;
+
+                if($ReservationName === "check-in" || $ReservationName === "check-out"){
+                    $ReservationRule->setDays($rule['days']);
+                    $ReservationRule->setRulePlaces($rule['places']);
+                }
+
+                if($ReservationName === "min-stay" || $ReservationName === "max-stay"){
+                    $ReservationRule->setRulePlaces($rule['places']);
+                    $ReservationRule->setRuleSeasons($rule['seasons']);
+                }
+
+                $rules[] = $ReservationRule;
+            }
+
+            $reservation->setReservationRules($rules);
+            $reservations[] = $reservation;
+        }
+
+        return $reservations;
+    }
+
 }

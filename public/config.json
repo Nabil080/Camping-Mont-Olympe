@@ -61,7 +61,7 @@
                         "2",
                         "3"
                     ],
-                    "places": "Camping-Car"
+                    "places": ["Camping-Car"]
                 }
             ],
             "check-out": [
