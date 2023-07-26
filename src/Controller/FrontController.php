@@ -13,7 +13,7 @@ class FrontController extends AbstractController
     public function homepage(Config $config): Response
     {
 
-        $season = $config->getReservations();
+        $season = $config->getReservationByName("check-in");
         dd($season);
 
 

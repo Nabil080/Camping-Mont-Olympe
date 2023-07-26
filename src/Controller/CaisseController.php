@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CaisseController extends AbstractController
 {
-    #[Route('/admin/caisse', name: 'caisse')]
+    #[Route('/admin/caisse', name: 'admin_caisse')]
     public function index(): Response
     {
         return $this->render('admin/caisse/index.html.twig', [
@@ -16,11 +16,13 @@ class CaisseController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/caisse/{id}', name: 'caisse')]
-    public function cash($id): Response
+    #[Route('/admin/caisse/encaisser', name: 'caisse_cash')]
+    public function cash(): Response
     {
         return $this->render('admin/caisse/cash.html.twig', [
             'controller_name' => 'CaisseController',
         ]);
     }
+
+    
 }

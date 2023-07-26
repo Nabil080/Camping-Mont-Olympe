@@ -16,7 +16,7 @@ class ParamController extends AbstractController
         ]);
     }
 
-    #[Route('/param/camping', name: 'camping')]
+    #[Route('/param/camping', name: 'param_camping')]
     public function camping(): Response
     {
         return $this->render('param/camping.html.twig', [

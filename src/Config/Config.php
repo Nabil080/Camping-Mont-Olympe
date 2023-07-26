@@ -86,7 +86,7 @@ class Config {
             }
 
             $season->setSeasonRules($rules);
-            $seasons[] = $season;
+            $seasons[$SeasonName] = $season;
         }
 
         return $seasons;
@@ -194,10 +194,38 @@ class Config {
             }
 
             $reservation->setReservationRules($rules);
-            $reservations[] = $reservation;
+            $reservations[$ReservationName] = $reservation;
         }
 
         return $reservations;
     }
+
+    public function getReservationByName(string $name):Reservation|bool
+    {
+        $reservations = $this->getReservations();
+
+        foreach($reservations as $reservation)
+            if($reservation->getName() === $this->titleToJson($name))
+
+
+                return $reservation;
+
+        return false;
+    }
+
+    public function updateReservation(string $reservationName, Reservation $reservation)
+    {
+        $initialData = $this->getData();
+
+        $initialData['rules']['reservations'][$reservationName] = [];
+
+        foreach($reservation->getReservationRules() as $reservationRule)
+            // $initialData['rules']['reservations'][$reservationName][] = $seasonRule->seasonRuleToJson();
+        
+        $file = $this->openJson();
+        $newJson = json_encode($initialData, JSON_PRETTY_PRINT);
+        fwrite($file, $newJson);
+    }
+
 
 }
