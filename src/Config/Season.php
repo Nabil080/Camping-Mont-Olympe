@@ -93,9 +93,9 @@ class SeasonRule extends Season{
         return $this;
     }
 
-    public function seasonRuleToJson(){
+    public function seasonRuleToJson($id){
         return [
-            "id" => $this->getId(),
+            "id" => $id,
             "start" => $this->getStart(),
             "end" => $this->getEnd(),
             "days" => $this->getDays()

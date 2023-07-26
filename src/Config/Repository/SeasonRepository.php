@@ -72,22 +72,23 @@ class SeasonRepository extends Config{
         return false;
     }
 
-    public function addSeason(Season $season){
+    public function addSeason(Season $Season){
         $initialData = $this->getData();
         $lastId = $this->getLastId();
+        $newId = 1;
 
 
-        if($this->getSeasonByName($season->getName()) === false)
-            $initialData['seasons'][$season->getName()] = [
+        if($this->getSeasonByName($Season->getName()) === false)
+            $initialData['seasons'][$Season->getName()] = [
                 "id" => $lastId + 1,
-                "name" => $season->getName(),
+                "name" => $Season->getName(),
                 "rules" => []
             ];
-
         
-
-        foreach($season->getSeasonRules() as $seasonRule)
-            $initialData['rules']['seasons'][$season->getName()][] = $seasonRule->seasonRuleToJson();
+        foreach($Season->getSeasonRules() as $Rule){
+            $initialData['seasons'][$Season->getName()]['rules'][] = $Rule->seasonRuleToJson($newId);
+            $newId++;
+        }
         
 
         $file = $this->openJson();

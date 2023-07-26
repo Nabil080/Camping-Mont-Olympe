@@ -14,7 +14,7 @@ class FrontController extends AbstractController
     #[Route('/', name: 'app_front')]
     public function homepage(Config $config, SeasonRepository $seasonRepository): Response
     {
-        // $config->create();
+        $config->create();
 
 
         $seasons = $seasonRepository->getSeasonById(1);
