@@ -378,9 +378,7 @@ class Config {
         ];
 
 
-        $file = $this->openJson();
-        $newJson = json_encode($config, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);
-        fwrite($file, $newJson);
+        $this->setJson($config);
     }
 
     public function deleteSeason(Season $season)

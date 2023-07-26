@@ -20,7 +20,6 @@ class FrontController extends AbstractController
         $seasons = $seasonRepository->getSeasonById(1);
         $seasons->setName('songe');
         $seasonRepository->addSeason($seasons);
-        dd($seasons);
 
         return $this->render('front/index.html.twig', [
             'controller_name' => 'FrontController',

@@ -91,8 +91,6 @@ class SeasonRepository extends Config{
         }
         
 
-        $file = $this->openJson();
-        $newJson = json_encode($initialData, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);
-        fwrite($file, $newJson);
+        $this->setJson($initialData);
     }
 }
