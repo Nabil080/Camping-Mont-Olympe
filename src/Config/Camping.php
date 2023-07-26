@@ -2,7 +2,7 @@
 
 namespace App\Config;
 
-class Camping extends Config{
+class Camping{
     private string $name;
     private string $adress;
     private string $phone;

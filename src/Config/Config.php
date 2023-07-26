@@ -4,8 +4,20 @@ namespace App\Config;
 
 class Config {
 
+    private string $path = "config.json";
+
+    private function getPath():string
+    {
+        return $this->path;
+    }
+
+    public function setPath($path):void
+    {
+        $this->$path = $path;
+    }
+
     public function getJson(){
-        $json = file_get_contents("config.json");
+        $json = file_get_contents($this->getPath());
 
         return $json;
     }
@@ -15,13 +27,16 @@ class Config {
         return json_decode($this->getJSon(),$asArray);
     }
 
-    public function getRules(bool $asArray = true):array
+    public function openJson()
     {
-        return $this->getData($asArray)['rules'];
+        return fopen($this->getPath(),'w');
     }
 
-    public function openJson(){
-        return fopen("config.json",'w');
+    public function updateJson(array|string $data)
+    {
+        $file = $this->openJson();
+        $newJson = json_encode($data, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);
+        fwrite($file, $newJson);
     }
 
     public function titleToJson(string $string):string
@@ -32,39 +47,6 @@ class Config {
     public function JsonToTitle(string $string):string
     {
         return ucwords(str_replace("_"," ",$string));
-    }
-
-    public function getCamping():Camping
-    {
-        $data = $this->getData();
-
-        $camping = new Camping;
-        $camping->setName($data['camping']['name']);
-        $camping->setAdress($data['camping']['adress']);
-        $camping->setPhone($data['camping']['phone']);
-        $camping->setWebsite($data['camping']['website']);
-        $camping->setEmail($data['camping']['email']);
-
-
-        return $camping;
-    }
-
-    public function setCamping(Camping $camping):void
-    {
-        $initialData = $this->getData();
-        $newData = $initialData;
-
-        $newData['camping'] = [
-            "name" => $camping->getName(),
-            "adress" => $camping->getAdress(),
-            "phone" => $camping->getPhone(),
-            "website" => $camping->getWebsite(),
-            "email" => $camping->getEmail()
-        ];
-
-        $file = $this->openJson();
-        $newJson = json_encode($newData,JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);
-        fwrite($file, $newJson);
     }
 
     public function getSeasons():array

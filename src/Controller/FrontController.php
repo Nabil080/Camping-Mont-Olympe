@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Config\Config;
-use App\Config\SeasonRule;
+use App\Config\Repository\CampingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,10 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class FrontController extends AbstractController
 {
     #[Route('/', name: 'app_front')]
-    public function homepage(Config $config): Response
+    public function homepage(Config $config, CampingRepository $campingRepository): Response
     {
-
-        $config->create();
+        dd($campingRepository->getCamping());
+        
 
         return $this->render('front/index.html.twig', [
             'controller_name' => 'FrontController',
