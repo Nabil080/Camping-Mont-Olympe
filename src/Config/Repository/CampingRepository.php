@@ -34,8 +34,6 @@ class CampingRepository extends Config{
             "email" => $camping->getEmail()
         ];
 
-        $file = $this->openJson();
-        $newJson = json_encode($newData,JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);
-        fwrite($file, $newJson);
+        $this->setJson($newData);
     }
 }

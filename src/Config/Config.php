@@ -32,7 +32,7 @@ class Config {
         return fopen($this->getPath(),'w');
     }
 
-    public function updateJson(array|string $data)
+    public function setJson(array|string $data)
     {
         $file = $this->openJson();
         $newJson = json_encode($data, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);
@@ -47,31 +47,6 @@ class Config {
     public function JsonToTitle(string $string):string
     {
         return ucwords(str_replace("_"," ",$string));
-    }
-
-    public function getSeasons():array
-    {
-        $data = $this->getRules();
-        $seasons = [];
-        foreach($data['seasons'] as $SeasonName => $SeasonRules){
-            $season = new Season;
-            $season->setName($SeasonName);
-            $rules = [];
-
-            foreach($SeasonRules as $rule){
-                $seasonRule = new SeasonRule;
-                $seasonRule->setStart($rule['start']);
-                $seasonRule->setEnd($rule['end']);
-                $seasonRule->setDays($rule['days']);
-
-                $rules[] = $seasonRule;
-            }
-
-            $season->setSeasonRules($rules);
-            $seasons[$SeasonName] = $season;
-        }
-
-        return $seasons;
     }
 
     public function getSeasonByName(string $name):Season|bool

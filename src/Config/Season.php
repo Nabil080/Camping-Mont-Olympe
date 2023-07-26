@@ -2,11 +2,20 @@
 
 namespace App\Config;
 
-class Season extends Config{
+class Season{
+    private int $id;
     private string $name;
-
     private array $rules;
 
+    public function getId():int
+    {
+        return $this->id;
+    }
+
+    public function setId($id):void
+    {
+        $this->id = $id;
+    }
     public function getName()
     {
         return $this->name;
