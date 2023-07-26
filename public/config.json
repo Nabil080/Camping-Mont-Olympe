@@ -6,37 +6,47 @@
         "website": "www.camping-mont-olympe.fr",
         "email": "contact@camping-mont-olympe.fr"
     },
-    "rules": {
-        "seasons": {
-            "basse_saison_2023": [
+    "seasons": {
+        "Saison 1": {
+            "id": 1,
+            "name": "Saison 1",
+            "rules": [
                 {
-                  "start": "2023-01-01",
-                  "end": "2023-06-30",
-                  "days": [
-                      "1",
-                      "2",
-                      "3",
-                      "4",
-                      "5"
-                  ]
+                    "id": 1,
+                    "start": "2023-01-01",
+                    "end": "2023-06-30",
+                    "days": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    ]
                 },
                 {
-                  "start": "2023-09-01",
-                  "end": "2023-09-15",
+                    "id": 2,
+                    "start": "2023-09-01",
+                    "end": "2023-09-15",
                     "days": [
                         "All"
                     ]
                 }
-            ],
-            "haute_saison_2023": [
+            ]
+        },
+        "Saison 2": {
+            "id": 2,
+            "name": "Saison 2",
+            "rules": [
                 {
-                  "start": "2023-07-01",
-                  "end": "2023-08-31",
-                  "days": [
+                    "id": 1,
+                    "start": "2023-07-01",
+                    "end": "2023-08-31",
+                    "days": [
                         "All"
                     ]
                 },
                 {
+                    "id": 2,
                     "start": "2023-09-16",
                     "end": "2023-09-24",
                     "days": [
@@ -44,237 +54,211 @@
                     ]
                 }
             ]
-        },
-        "reservations": {
-            "check-in": [
+        }
+    },
+    "reservations": {
+        "check-in": {
+            "id": 1,
+            "name": "check-in",
+            "rules": [
                 {
-                    "days": [
-                        "All"
-                    ],
-                    "places": [
-                        "All"
-                    ]
+                    "id": 1,
+                    "days": [],
+                    "places": []
                 },
                 {
-                    "days": [
-                        "1",
-                        "2",
-                        "3"
-                    ],
-                    "places": ["Camping-Car"]
-                }
-            ],
-            "check-out": [
-                {
-                    "days": [
-                        "All"
-                    ],
-                    "places": [
-                        "All"
-                    ]
-                }
-            ],
-            "min-stay": [
-                {
-                    "places": [
-                        "All"
-                    ],
-                    "seasons": [
-                        "All"
-                    ]
-                }
-            ],
-            "max-stay": [
-                {
-                    "places": [
-                        "All"
-                    ],
-                    "seasons": [
-                        "All"
-                    ]
-                }
-            ],
-            "paiement": {
-                "cash": true,
-                "card": true,
-                "paypal": true,
-                "check": true,
-                "holidayCheck": true
-            },
-            "emplacement": [
-                {
-                    "can_choose": true,
-                    "places": [
-                        "All"
-                    ]
+                    "id": 2,
+                    "days": [],
+                    "places": []
                 }
             ]
         },
-        "prices": {
-            "places": {
-                "grand_confort_caravane": [
-                    {
-                        "amount": "7.30",
-                        "per_days": true,
-                        "per_person": false,
-                        "seasons": [
-                            "All"
-                        ]
-                    }
-                ],
-                "confort_caravane": [
-                    {
-                        "amount": "6.00",
-                        "per_days": true,
-                        "per_person": false,
-                        "seasons": [
-                            "All"
-                        ]
-                    }
-                ],
-                "emplacement_simple": [
-                    {
-                        "amount": "4.50",
-                        "per_days": true,
-                        "per_person": false,
-                        "seasons": [
-                            "All"
-                        ]
-                    }
-                ],
-                "camping_car": [
-                    {
-                        "amount": "12.70",
-                        "per_days": true,
-                        "per_person": false,
-                        "seasons": [
-                            "All"
-                        ]
-                    }
-                ]
-            },
-            "services": {
-                "animal": [
-                    {
-                        "amount": "1.80",
-                        "per_days": false,
-                        "per_person": false,
-                        "seasons": [
-                            "All"
-                        ]
-                    }
-                ],
-                "tent": [
-                    {
-                        "amount": "2.00",
-                        "per_days": false,
-                        "per_person": false,
-                        "seasons": [
-                            "All"
-                        ]
-                    }
-                ]
-            },
-            "adult": [
+        "check-out": {
+            "id": 2,
+            "name": "check-out",
+            "rules": [
                 {
-                    "amount": "4.00",
-                    "per_days": true,
-                    "per_person": true,
-                    "seasons": [
-                        "All"
-                    ]
-                },
-                {
-                    "amount": "4.60",
-                    "per_days": true,
-                    "per_person": true,
-                    "seasons": [
-                        "haute_saison_2023"
-                    ]
-                }
-            ],
-            "children": [
-                {
-                    "amount": "2.00",
-                    "per_day": true,
-                    "per_person": true,
-                    "seasons": [
-                        "All"
-                    ]
-                }
-            ],
-            "coupons": [
-                {
-                    "name": "voyage",
-                    "amount": "2",
-                    "type": "devise",
-                    "duration": false,
-                    "uses": "10",
-                    "places": [
-                        "All"
-                    ]
-                },
-                {
-                    "name": "\u00e9t\u00e9",
-                    "amount": "0.10",
-                    "type": "percentage",
-                    "duration": {
-                        "start": "2023-01-01",
-                        "end": "2023-06-30"
-                    },
-                    "uses": false,
-                    "places": [
-                        "All"
-                    ]
-                }
-            ],
-            "discount": [
-                {
-                    "amount": "2",
-                    "type": "devise",
-                    "duration": {
-                        "start": "2023-01-01",
-                        "end": "2023-04-15"
-                    },
-                    "places": [
-                        "All"
-                    ]
+                    "id": 1,
+                    "days": [],
+                    "places": []
                 }
             ]
+        },
+        "min-stay": {
+            "id": 3,
+            "name": "min-stay",
+            "rules": [
+                {
+                    "id": 1,
+                    "places": [],
+                    "seasons": []
+                }
+            ]
+        },
+        "max-stay": {
+            "id": 4,
+            "name": "max-stay",
+            "rules": [
+                {
+                    "id": 1,
+                    "places": [],
+                    "seasons": []
+                }
+            ]
+        },
+        "emplacement": {
+            "id": 5,
+            "name": "emplacement",
+            "rules": [
+                {
+                    "id": 1,
+                    "canChoose": false,
+                    "places": []
+                }
+            ]
+        }
+    },
+    "prices": {
+        "places": {
+            "H\u00e9bergement 1": {
+                "id": 1,
+                "name": "H\u00e9bergement 1",
+                "rules": [
+                    {
+                        "id": 1,
+                        "amount": 0,
+                        "per_days": true,
+                        "per_person": false,
+                        "seasons": []
+                    }
+                ]
+            }
         },
         "services": {
-            "animal": [
+            "Service 1": {
+                "id": 1,
+                "name": "Service 1",
+                "rules": [
+                    {
+                        "id": 1,
+                        "amount": 0,
+                        "per_days": false,
+                        "per_person": false,
+                        "seasons": []
+                    }
+                ]
+            }
+        },
+        "age": {
+            "adult": {
+                "id": 1,
+                "name": "adult",
+                "rules": [
+                    {
+                        "id": 1,
+                        "amount": 0,
+                        "per_days": true,
+                        "per_person": true,
+                        "seasons": []
+                    }
+                ]
+            },
+            "children": {
+                "id": 2,
+                "name": "children",
+                "rules": [
+                    {
+                        "id": 1,
+                        "amount": 0,
+                        "per_days": true,
+                        "per_person": true,
+                        "seasons": []
+                    }
+                ]
+            }
+        },
+        "offers": {
+            "coupons": {
+                "id": 1,
+                "name": "coupons",
+                "rules": [
+                    {
+                        "id": 1,
+                        "name": "REMISE08",
+                        "amount": 0,
+                        "type": "devise",
+                        "uses": 20,
+                        "start": "2023-01-01",
+                        "end": false,
+                        "places": []
+                    }
+                ]
+            },
+            "discounts": {
+                "id": 2,
+                "name": "discounts",
+                "rules": [
+                    {
+                        "id": 1,
+                        "name": "solde de noel",
+                        "amount": 0.2,
+                        "type": "percentage",
+                        "uses": false,
+                        "start": "2023-12-01",
+                        "end": "2024-01-01",
+                        "places": []
+                    }
+                ]
+            }
+        }
+    },
+    "services": {
+        "Service 1": {
+            "id": 1,
+            "name": "Service 1",
+            "rules": [
                 {
-                    "max": "3",
-                    "places": [
-                        "All"
-                    ]
-                },
-                {
-                    "max": "6",
-                    "places": [
-                        "port"
-                    ]
-                }
-            ],
-            "tent": [
-                {
-                    "max": "6",
-                    "places": [
-                        "All"
-                    ]
+                    "id": 1,
+                    "max": 0,
+                    "places": []
                 }
             ]
         },
-        "taxes": {
-            "tva": {
-                "amount": "0.20",
-                "type": "percentage"
-            },
-            "taxe_de_sejour": {
-                "amount": "0.20",
-                "type": "devise"
-            }
+        "Service 2": {
+            "id": 2,
+            "name": "Service 2",
+            "rules": [
+                {
+                    "id": 1,
+                    "max": 6,
+                    "places": []
+                }
+            ]
+        }
+    },
+    "paiement": {
+        "cash": true,
+        "card": true,
+        "paypal": true,
+        "check": true,
+        "holiday_check": true
+    },
+    "taxes": {
+        "TVA": {
+            "id": 1,
+            "name": "TVA",
+            "amount": 0.2,
+            "type": "percentage",
+            "per_days": false,
+            "per_person": false
+        },
+        "taxe de s\u00e9jour": {
+            "id": 2,
+            "name": "taxe de s\u00e9jour",
+            "amount": 0.22,
+            "type": "devise",
+            "per_days": true,
+            "per_person": true
         }
     }
 }
