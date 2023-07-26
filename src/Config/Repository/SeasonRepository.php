@@ -7,6 +7,14 @@ use App\Config\Config;
 use App\Config\SeasonRule;
 
 class SeasonRepository extends Config{
+    public function getLastId():int
+    {
+        $seasons = $this->getSeasons();
+        $lastSeason = end($seasons);
+
+
+        return $lastSeason->getId();
+    }
 
     public function getSeasons():array
     {
@@ -66,9 +74,16 @@ class SeasonRepository extends Config{
 
     public function addSeason(Season $season){
         $initialData = $this->getData();
+        $lastId = $this->getLastId();
+
 
         if($this->getSeasonByName($season->getName()) === false)
-            $initialData['rules']['seasons'][$season->getName()] = [];
+            $initialData['seasons'][$season->getName()] = [
+                "id" => $lastId + 1,
+                "name" => $season->getName(),
+                "rules" => []
+            ];
+
         
 
         foreach($season->getSeasonRules() as $seasonRule)

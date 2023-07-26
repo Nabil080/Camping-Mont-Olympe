@@ -43,10 +43,20 @@ class Season{
 }
 
 class SeasonRule extends Season{
+    private int $id;
     private string $start;
     private string $end;
     private array $days;
 
+    public function getId():int
+    {
+        return $this->id;
+    }
+
+    public function setId($id):void
+    {
+        $this->id = $id;
+    }
     public function getStart()
     {
         return $this->start;
@@ -85,6 +95,7 @@ class SeasonRule extends Season{
 
     public function seasonRuleToJson(){
         return [
+            "id" => $this->getId(),
             "start" => $this->getStart(),
             "end" => $this->getEnd(),
             "days" => $this->getDays()

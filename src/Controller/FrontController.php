@@ -14,8 +14,12 @@ class FrontController extends AbstractController
     #[Route('/', name: 'app_front')]
     public function homepage(Config $config, SeasonRepository $seasonRepository): Response
     {
+        // $config->create();
 
-        $seasons = $seasonRepository->getSeasonById(2);
+
+        $seasons = $seasonRepository->getSeasonById(1);
+        $seasons->setName('songe');
+        $seasonRepository->addSeason($seasons);
         dd($seasons);
 
         return $this->render('front/index.html.twig', [
