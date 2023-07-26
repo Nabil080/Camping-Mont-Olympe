@@ -15,7 +15,7 @@ class FrontController extends AbstractController
     public function homepage(Config $config, SeasonRepository $seasonRepository): Response
     {
 
-        $seasons = $seasonRepository->getSeasons();
+        $seasons = $seasonRepository->getSeasonById(2);
         dd($seasons);
 
         return $this->render('front/index.html.twig', [

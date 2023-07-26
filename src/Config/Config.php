@@ -49,34 +49,6 @@ class Config {
         return ucwords(str_replace("_"," ",$string));
     }
 
-    public function getSeasonByName(string $name):Season|bool
-    {
-        $seasons = $this->getSeasons();
-
-        foreach($seasons as $season)
-            if($season->getName() === $this->titleToJson($name))
-
-
-                return $season;
-
-        return false;
-    }
-
-    public function addSeason(Season $season){
-        $initialData = $this->getData();
-
-        if($this->getSeasonByName($season->getName()) === false)
-            $initialData['rules']['seasons'][$season->getName()] = [];
-        
-
-        foreach($season->getSeasonRules() as $seasonRule)
-            $initialData['rules']['seasons'][$season->getName()][] = $seasonRule->seasonRuleToJson();
-        
-
-        $file = $this->openJson();
-        $newJson = json_encode($initialData, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);
-        fwrite($file, $newJson);
-    }
 
     public function updateSeason(string $oldname,Season $season){
         $initialData = $this->getData();
