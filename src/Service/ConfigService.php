@@ -48,10 +48,10 @@ class ConfigService
         $this->saveConfigData($config);
     }
 
-    public function updatePriceRule(string $type, int $ruleIndex, array $rule): void
+    public function updatePriceRule(string $type, int $typeId, array $rule): void
     {
         $config = $this->getConfigData();
-        $config['prices'][$type][$ruleIndex] = $rule;
+        $config['prices'][$type][$typeId]['rules'][$rule['id']] = $rule;
         $this->saveConfigData($config);
     }
 
