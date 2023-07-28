@@ -1,20 +1,82 @@
+{# templates/admin/settings/prices/index.html.twig #}
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ParamController!{% endblock %}
+{% block title %}Admin - Places Price Rules{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="container mx-auto py-6">
+        <h1 class="text-3xl font-bold mb-4">Price Rules</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <table class="w-full border-collapse border border-gray-400">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="p-2">Emplacement</th>
+                    <th class="p-2">Prix</th>
+                    <th class="p-2">Par jour</th>
+                    <th class="p-2">Par personne</th>
+                    <th class="p-2">Saisons</th>
+                    <th class="p-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for place in places_rules %}
+                        <tr class="text-center">
+                            <td rowspan="{{ place.rules|length }}" class="p-2">{{ place.name }}</td>
+                        <tr>
+                    {% for rule in place.rules %}
+                        <tr class="text-center">
+                            <td class="p-2">{{ rule.id }}</td>
+                            <td class="p-2">{{ rule.amount }}</td>
+                            <td class="p-2">{{ rule.per_days ? 'Oui' : 'Non' }}</td>
+                            <td class="p-2">{{ rule.per_person ? 'Oui' : 'Non' }}</td>
+                            <td class="p-2">{{ rule.seasons is empty ? "Toutes" : rule.seasons|join(', ') }}</td>
+                            <td class="p-2">
+                                {# <a href="{{ path('admin_settings_prices_edit', {'type': 'places', 'place': place, 'ruleIndex': loop.index0}) }}" class="text-blue-600 underline mr-2">Edit</a>
+                                <a href="{{ path('admin_settings_prices_delete', {'type': 'places', 'place': place, 'ruleIndex': loop.index0}) }}" class="text-red-600 underline" onclick="return confirm('Are you sure you want to delete this rule?')">Delete</a> #}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/uimm/Bureau/symfony/camping/src/Controller/ParamController.php'|file_link(0) }}">src/Controller/ParamController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/uimm/Bureau/symfony/camping/templates/param/index.html.twig'|file_link(0) }}">templates/param/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <h2 class="text-2xl font-bold mt-6">Add New Rule</h2>
+        {# Add form for adding a new rule here #}
+
+
+        <table class="w-full border-collapse border border-gray-400">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="p-2">Services</th>
+                    <th class="p-2">Prix</th>
+                    <th class="p-2">Par jour</th>
+                    <th class="p-2">Par personne</th>
+                    <th class="p-2">Saisons</th>
+                    <th class="p-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service in services_rules %}
+                        <tr class="text-center">
+                            <td rowspan="{{ service.rules|length }}" class="p-2">{{ service.name }}</td>
+                        <tr>
+                    {% for rule in service.rules %}
+                        <tr class="text-center">
+                            <td class="p-2">{{ rule.id }}</td>
+                            <td class="p-2">{{ rule.amount }}</td>
+                            <td class="p-2">{{ rule.per_days ? 'Oui' : 'Non' }}</td>
+                            <td class="p-2">{{ rule.per_person ? 'Oui' : 'Non' }}</td>
+                            <td class="p-2">{{ rule.seasons is empty ? "Toutes" : rule.seasons|join(', ') }}</td>
+                            <td class="p-2">
+                                {# <a href="{{ path('admin_settings_prices_edit', {'type': 'services', 'place': place, 'ruleIndex': loop.index0}) }}" class="text-blue-600 underline mr-2">Edit</a>
+                                <a href="{{ path('admin_settings_prices_delete', {'type': 'services', 'place': place, 'ruleIndex': loop.index0}) }}" class="text-red-600 underline" onclick="return confirm('Are you sure you want to delete this rule?')">Delete</a> #}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
 {% endblock %}
