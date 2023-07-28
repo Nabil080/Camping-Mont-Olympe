@@ -51,7 +51,10 @@ class ConfigService
     public function updatePriceRule(string $type, int $typeId, array $rule): void
     {
         $config = $this->getConfigData();
-        $config['prices'][$type][$typeId]['rules'][$rule['id']] = $rule;
+        foreach($config['prices'][$type][$typeId]['rules'] as $index => $oldRule)
+            if($oldRule['id'] === $rule['id'])
+                $config['prices'][$type][$typeId]['rules'][$index] = $rule;
+                
         $this->saveConfigData($config);
     }
 
