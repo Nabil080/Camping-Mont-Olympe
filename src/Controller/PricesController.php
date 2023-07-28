@@ -52,4 +52,12 @@ class PricesController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route("/prices/delete/{type}/{id}/{rule}", name: "admin_settings_prices_delete")]
+    public function delete($type, $id, $rule, Request $request, ConfigService $configService): Response
+    {
+            $configService->deletePriceRule($type, $id, $rule);
+            $this->addFlash('success', 'New "places" price rule added successfully!');
+            return $this->redirectToRoute('admin_settings_prices');
+    }
 }

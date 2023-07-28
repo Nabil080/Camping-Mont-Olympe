@@ -165,15 +165,6 @@
                         "seasons": [
                             "Saison 1"
                         ]
-                    },
-                    {
-                        "id": 3,
-                        "amount": 10,
-                        "per_days": true,
-                        "per_person": false,
-                        "seasons": [
-                            "songe"
-                        ]
                     }
                 ]
             },
@@ -211,16 +202,6 @@
                         "per_days": false,
                         "per_person": false,
                         "seasons": []
-                    },
-                    {
-                        "id": 2,
-                        "amount": 10,
-                        "per_days": true,
-                        "per_person": false,
-                        "seasons": [
-                            "Saison 1",
-                            "songe"
-                        ]
                     }
                 ]
             }

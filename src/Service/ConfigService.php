@@ -55,10 +55,13 @@ class ConfigService
         $this->saveConfigData($config);
     }
 
-    public function deletePriceRule(string $type, int $ruleIndex): void
+    public function deletePriceRule(string $type, int $id, int $ruleId): void
     {
         $config = $this->getConfigData();
-        unset($config['prices'][$type][$ruleIndex]);
+        foreach($config['prices'][$type][$id]['rules'] as $index => $rule);
+            if($rule['id'] === $ruleId)
+                unset($config['prices'][$type][$id]['rules'][$index]);
+
         $this->saveConfigData($config);
     }
 

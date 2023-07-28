@@ -50,7 +50,7 @@
                         {% endif %}
                             <td class="p-2 space-x-4 text-end w-fit">
                                 <a href="" class=""><i class="fa fa-pen"></i></a>
-                                <a href="" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')"><i class="fa fa-trash"></i></a>
+                                <a href="{{ path('admin_settings_prices_delete', {'type': type, 'id': param.id, 'rule': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                 {% endfor %}
