@@ -155,15 +155,8 @@
                         "amount": 0,
                         "per_days": true,
                         "per_person": false,
-                        "seasons": []
-                    },
-                    {
-                        "id": 2,
-                        "amount": 6.5,
-                        "per_days": true,
-                        "per_person": false,
                         "seasons": [
-                            "Saison 1"
+                            null
                         ]
                     }
                 ]
@@ -239,7 +232,7 @@
             }
         },
         "offers": {
-            "coupons": {
+            "1": {
                 "id": 1,
                 "name": "coupons",
                 "rules": [
@@ -262,10 +255,23 @@
                         "start": "2023-01-01",
                         "end": "2023-05-62",
                         "places": []
+                    },
+                    {
+                        "id": 3,
+                        "name": "SOLDAT10",
+                        "amount": 0.2,
+                        "type": "percentage",
+                        "uses": 10,
+                        "start": "2018-01-01",
+                        "end": "2018-01-01",
+                        "places": [
+                            "Saison 1",
+                            "Saison 2"
+                        ]
                     }
                 ]
             },
-            "discounts": {
+            "2": {
                 "id": 2,
                 "name": "discounts",
                 "rules": [

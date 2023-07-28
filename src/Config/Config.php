@@ -108,7 +108,7 @@ class Config {
         ];
 
         $config["seasons"] = [
-            "Saison 1" => [
+            1 => [
                 "id" => 1,
                 "name" => "Saison 1",
                 "rules" => [
