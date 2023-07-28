@@ -24,16 +24,27 @@ class ConfigService
         file_put_contents($this->configFilePath, $newJson);
     }
 
-    public function getPricesRules(string $type): array
+    public function getPricesRules(string $type = null): array
     {
         $config = $this->getConfigData();
+
+        if($type === null) return $config['prices'];
+
         return $config['prices'][$type] ?? [];
     }
 
-    public function addPriceRule(string $type, array $rule): void
+    public function getLastPricesRules(string $type):int
+    {
+        $lastId = $this->getPricesRules($type);
+        $lastId = end($lastId);
+        
+        return $lastId['id'];
+    }
+
+    public function addPriceRule(string $type, int $typeId, array $rule): void
     {
         $config = $this->getConfigData();
-        $config['prices'][$type][] = $rule;
+        $config['prices'][$type][$typeId]['rules'][] = $rule;
         $this->saveConfigData($config);
     }
 
@@ -49,5 +60,17 @@ class ConfigService
         $config = $this->getConfigData();
         unset($config['prices'][$type][$ruleIndex]);
         $this->saveConfigData($config);
+    }
+
+
+    // SEASONS
+
+    public function getConfigByName(string $name = null): array
+    {
+        $config = $this->getConfigData();
+
+        if($name === null) return $config;
+
+        return $config[$name] ?? [];
     }
 }

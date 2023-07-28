@@ -146,7 +146,7 @@
     },
     "prices": {
         "places": {
-            "H\u00e9bergement 1": {
+            "1": {
                 "id": 1,
                 "name": "H\u00e9bergement 1",
                 "rules": [
@@ -156,12 +156,52 @@
                         "per_days": true,
                         "per_person": false,
                         "seasons": []
+                    },
+                    {
+                        "id": 2,
+                        "amount": 6.5,
+                        "per_days": true,
+                        "per_person": false,
+                        "seasons": [
+                            "Saison 1"
+                        ]
+                    },
+                    {
+                        "id": 3,
+                        "amount": 10,
+                        "per_days": true,
+                        "per_person": false,
+                        "seasons": [
+                            "songe"
+                        ]
+                    }
+                ]
+            },
+            "2": {
+                "id": 2,
+                "name": "H\u00e9bergement 2",
+                "rules": [
+                    {
+                        "id": 1,
+                        "amount": 0,
+                        "per_days": true,
+                        "per_person": false,
+                        "seasons": []
+                    },
+                    {
+                        "id": 2,
+                        "amount": 6.5,
+                        "per_days": true,
+                        "per_person": false,
+                        "seasons": [
+                            "Saison 1"
+                        ]
                     }
                 ]
             }
         },
         "services": {
-            "Service 1": {
+            "1": {
                 "id": 1,
                 "name": "Service 1",
                 "rules": [
@@ -171,11 +211,21 @@
                         "per_days": false,
                         "per_person": false,
                         "seasons": []
+                    },
+                    {
+                        "id": 2,
+                        "amount": 10,
+                        "per_days": true,
+                        "per_person": false,
+                        "seasons": [
+                            "Saison 1",
+                            "songe"
+                        ]
                     }
                 ]
             }
         },
-        "age": {
+        "ages": {
             "adult": {
                 "id": 1,
                 "name": "adult",
@@ -211,11 +261,21 @@
                     {
                         "id": 1,
                         "name": "REMISE08",
-                        "amount": 0,
+                        "amount": 5,
                         "type": "devise",
                         "uses": 20,
                         "start": "2023-01-01",
-                        "end": false,
+                        "end": null,
+                        "places": []
+                    },
+                    {
+                        "id": 2,
+                        "name": "NOEL52",
+                        "amount": 0.1,
+                        "type": "percentage",
+                        "uses": null,
+                        "start": "2023-01-01",
+                        "end": "2023-05-62",
                         "places": []
                     }
                 ]
@@ -229,7 +289,7 @@
                         "name": "solde de noel",
                         "amount": 0.2,
                         "type": "percentage",
-                        "uses": false,
+                        "uses": null,
                         "start": "2023-12-01",
                         "end": "2024-01-01",
                         "places": []
