@@ -81,4 +81,12 @@ class MoneyController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route("/taxes/delete/{taxId}", name: "admin_settings_seasons_tax_delete")]
+    public function deleteTax(int $taxId, Request $request, ConfigService $configService): Response
+    {
+            $configService->deleteTax($taxId);
+            $this->addFlash('success', 'New "places" price rule added successfully!');
+            return $this->redirectToRoute('admin_settings_money');
+    }
 }

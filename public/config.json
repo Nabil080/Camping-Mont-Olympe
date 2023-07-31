@@ -437,14 +437,6 @@
             "type": "devise",
             "per_days": true,
             "per_person": true
-        },
-        "3": {
-            "id": 3,
-            "name": "Taxons",
-            "amount": 90,
-            "type": "percentage",
-            "per_days": true,
-            "per_person": true
         }
     }
 }

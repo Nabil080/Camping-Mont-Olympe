@@ -302,6 +302,13 @@ class ConfigService
         $this->saveConfigData($config);
     }
 
+    public function deleteTax(int $taxId): void
+    {
+        $config = $this->getConfigData();
+        unset($config['taxes'][$taxId]);
+        $this->saveConfigData($config);
+    }
+
     public function getPaiements(): array
     {
         $config = $this->getConfigData();
