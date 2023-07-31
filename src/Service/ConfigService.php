@@ -271,11 +271,13 @@ class ConfigService
 
     // ! ---------------- MONEY
 
-    public function getTaxes(): array
+    public function getTaxes(int $taxId = null): array
     {
         $config = $this->getConfigData();
-        
-        return $config['taxes'];
+
+        if($taxId === null) return $config['taxes'];
+
+        return $config['taxes'][$taxId] ?? [];        
     }
 
     public function getLastTaxes(): int
@@ -290,6 +292,13 @@ class ConfigService
     {
         $config = $this->getConfigData();
         $config['taxes'][$tax['id']] = $tax;
+        $this->saveConfigData($config);
+    }
+
+    public function updateTax(int $taxId, array $tax): void
+    {
+        $config = $this->getConfigData();
+        $config['taxes'][$taxId] = $tax;
         $this->saveConfigData($config);
     }
 

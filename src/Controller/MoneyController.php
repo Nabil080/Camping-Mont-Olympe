@@ -53,4 +53,32 @@ class MoneyController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/taxes/update/{taxId}', name: 'admin_settings_taxes_update')]
+    public function updateTax(int $taxId, ConfigService $configService, Request $request): Response
+    {
+        $oldTax = $configService->getTaxes($taxId);
+
+        $form = $this->createForm(TaxesType::class);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) { 
+            $tax = ["id" => $taxId];
+            $tax += $form->getData();
+
+            $configService->updateTax($taxId, $tax);
+            $this->addFlash('success', 'New "places" price rule added successfully!');
+            return $this->redirectToRoute('admin_settings_money');
+        }else{
+            $form->get('name')->setData($oldTax['name']);
+            $form->get('amount')->setData($oldTax['amount']);
+            $form->get('type')->setData($oldTax['type']);
+            $form->get('per_days')->setData($oldTax['per_days']);
+            $form->get('per_person')->setData($oldTax['per_person']);
+        }
+
+        return $this->render('param/money/add.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }
