@@ -257,6 +257,17 @@ class ConfigService
 
         $this->saveConfigData($config);
     }
+    
+    public function deleteServiceRule(int $serviceId, int $ruleId): void
+    {
+        $config = $this->getConfigData();
+
+        foreach($config['services'][$serviceId]['rules'] as $index => $rule)
+        if($rule['id'] === $ruleId)
+            unset($config['services'][$serviceId]['rules'][$index]);
+
+        $this->saveConfigData($config);
+    }
 
     // ! ---------------- TOOLS
 

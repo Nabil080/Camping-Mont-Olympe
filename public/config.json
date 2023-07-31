@@ -369,29 +369,22 @@
         "1": {
             "id": 1,
             "name": "Service 1",
-            "rules": [
-                {
-                    "id": 1,
-                    "max": 0,
-                    "places": [
-                        null
-                    ]
-                },
-                {
+            "rules": {
+                "1": {
                     "id": 2,
                     "max": 6,
                     "places": [
                         "Camping Car"
                     ]
                 },
-                {
+                "2": {
                     "id": 3,
                     "max": 10,
                     "places": [
                         null
                     ]
                 }
-            ]
+            }
         },
         "2": {
             "id": 2,

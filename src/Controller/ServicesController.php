@@ -71,4 +71,13 @@ class ServicesController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route("/services/{serviceId}/delete/{ruleId}", name: "admin_settings_services_delete")]
+    public function deleteRule(int $serviceId, int $ruleId, Request $request, ConfigService $configService): Response
+    {
+            $configService->deleteserviceRule($serviceId, $ruleId);
+
+            $this->addFlash('success', 'New "places" price rule added successfully!');
+            return $this->redirectToRoute('admin_settings_services');
+    }
 }
