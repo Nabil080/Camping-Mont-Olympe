@@ -39,17 +39,13 @@
                     "id": 1,
                     "start": "2023-07-01",
                     "end": "2023-08-31",
-                    "days": [
-                        
-                    ]
+                    "days": []
                 },
                 {
                     "id": 2,
                     "start": "2023-09-16",
                     "end": "2023-09-24",
-                    "days": [
-                        
-                    ]
+                    "days": []
                 }
             ]
         },
@@ -73,11 +69,14 @@
                     "id": 2,
                     "start": "2023-09-01",
                     "end": "2023-09-15",
-                    "days": [
-                        
-                    ]
+                    "days": []
                 }
             ]
+        },
+        "4": {
+            "id": 4,
+            "name": "Test",
+            "rules": []
         }
     },
     "reservations": {
@@ -262,7 +261,7 @@
                 "rules": [
                     {
                         "id": 1,
-                        "name": "solde de nöel",
+                        "name": "solde de n\u00f6el",
                         "amount": 0.2,
                         "type": "percentage",
                         "uses": null,

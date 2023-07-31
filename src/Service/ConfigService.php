@@ -102,11 +102,28 @@ class ConfigService
 
     // ! ----------------- SEASON RULES
 
-    public function getSeasonsRules(): array
+    public function getSeasons(): array
     {
         $config = $this->getConfigData();
 
         return $config['seasons'] ?? [];
+    }
+
+    public function getLastSeason():int
+    {
+        $lastId = $this->getSeasons();
+        $lastId = end($lastId);
+        
+        return $lastId['id'];
+    }
+
+    public function addSeason($season): void
+    {
+        $config = $this->getConfigData();
+
+        $config['seasons'][$season['id']] = $season;
+
+        $this->saveConfigData($config);
     }
 
     public function deleteSeason(int $seasonId): void

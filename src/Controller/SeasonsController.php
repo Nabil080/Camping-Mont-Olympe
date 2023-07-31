@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\OfferRuleType;
 use App\Form\PriceRuleType;
+use App\Form\SeasonType;
 use App\Service\ConfigService;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,11 +17,33 @@ class SeasonsController extends AbstractController
     #[Route('/seasons', name: 'admin_settings_seasons')]
     public function index(ConfigService $configService): Response
     {
-        $seasons = $configService->getSeasonsRules();
+        $seasons = $configService->getSeasons();
 
 
         return $this->render('param/seasons/index.html.twig', [
             'seasons' => $seasons,
+        ]);
+    }
+
+    #[Route("/seasons/add", name: "admin_settings_seasons_add")]
+    public function add(Request $request, ConfigService $configService): Response
+    {
+
+        $form = $this->createForm(SeasonType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $lastId = $configService->getLastSeason();
+            $name = $form->getData()['name'];
+            $season = ["id" => $lastId + 1, "name" => $name, "rules" => [] ];
+
+            $configService->addSeason($season);
+            $this->addFlash('success', 'New "places" price rule added successfully!');
+            return $this->redirectToRoute('admin_settings_seasons');
+        }
+
+        return $this->render('param/seasons/add.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 
