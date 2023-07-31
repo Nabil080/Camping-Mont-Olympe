@@ -366,7 +366,7 @@
         }
     },
     "services": {
-        "Service 1": {
+        "1": {
             "id": 1,
             "name": "Service 1",
             "rules": [
@@ -379,7 +379,7 @@
                 }
             ]
         },
-        "Service 2": {
+        "2": {
             "id": 2,
             "name": "Service 2",
             "rules": [

@@ -92,7 +92,7 @@ class ConfigService
     public function deletePriceRule(string $type, int $id, int $ruleId): void
     {
         $config = $this->getConfigData();
-        foreach($config['prices'][$type][$id]['rules'] as $index => $rule);
+        foreach($config['prices'][$type][$id]['rules'] as $index => $rule)
             if($rule['id'] === $ruleId)
                 unset($config['prices'][$type][$id]['rules'][$index]);
 
@@ -215,11 +215,22 @@ class ConfigService
     public function deleteReservationRule(string $type, int $ruleId): void
     {
         $config = $this->getConfigData();
-        foreach($config['reservations'][$type] as $index => $rule);
+        foreach($config['reservations'][$type] as $index => $rule)
             if($rule['id'] === $ruleId)
-                unset($config['reservations'][$type][$index]);
+                unset($config['reservations'][$type][$index]);        
 
         $this->saveConfigData($config);
+    }
+
+    // ! ------------ SERVICES 
+
+    public function getServices(int $id = null): array
+    {
+        $config = $this->getConfigData();
+
+        if($id === null) return $config['services'];
+
+        return $config['services'][$id] ?? [];
     }
 
     // ! ---------------- TOOLS
