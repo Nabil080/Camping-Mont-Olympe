@@ -105,10 +105,7 @@
         }
     },
     "reservations": {
-        "check-in": {
-            "id": 1,
-            "name": "check-in",
-            "rules": [
+        "checkIn": [
                 {
                     "id": 1,
                     "days": [
@@ -128,11 +125,8 @@
                     ]
                 }
             ]
-        },
-        "check-out": {
-            "id": 2,
-            "name": "check-out",
-            "rules": [
+        ,
+        "checkOut": [
                 {
                     "id": 1,
                     "days": [
@@ -143,11 +137,8 @@
                     ]
                 }
             ]
-        },
-        "min-stay": {
-            "id": 3,
-            "name": "min-stay",
-            "rules": [
+        ,
+        "minStay": [
                 {
                     "id": 1,
                     "places": [
@@ -158,11 +149,8 @@
                     ]
                 }
             ]
-        },
-        "max-stay": {
-            "id": 4,
-            "name": "max-stay",
-            "rules": [
+        ,
+        "maxStay": [
                 {
                     "id": 1,
                     "places": [
@@ -173,11 +161,8 @@
                     ]
                 }
             ]
-        },
-        "emplacement": {
-            "id": 5,
-            "name": "emplacement",
-            "rules": [
+        ,
+        "places": [
                 {
                     "id": 1,
                     "canChoose": false,
@@ -186,7 +171,6 @@
                     ]
                 }
             ]
-        }
     },
     "prices": {
         "places": {

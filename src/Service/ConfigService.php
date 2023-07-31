@@ -176,4 +176,15 @@ class ConfigService
         $this->saveConfigData($config);
     }
 
+    // ! RESERVATIONS RULES
+
+    public function getReservationsRules(string $type = null): array
+    {
+        $config = $this->getConfigData();
+
+        if($type === null) return $config['reservations'];
+
+        return $config['reservations'][$type] ?? [];
+    }
+
 }
