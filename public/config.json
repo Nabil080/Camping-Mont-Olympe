@@ -414,7 +414,7 @@
             ]
         }
     },
-    "paiement": {
+    "paiements": {
         "cash": true,
         "card": true,
         "paypal": true,
@@ -422,7 +422,7 @@
         "holiday_check": true
     },
     "taxes": {
-        "TVA": {
+        "1": {
             "id": 1,
             "name": "TVA",
             "amount": 0.2,
@@ -430,11 +430,19 @@
             "per_days": false,
             "per_person": false
         },
-        "taxe de s\u00e9jour": {
+        "2": {
             "id": 2,
             "name": "taxe de s\u00e9jour",
             "amount": 0.22,
             "type": "devise",
+            "per_days": true,
+            "per_person": true
+        },
+        "3": {
+            "id": 3,
+            "name": "Taxons",
+            "amount": 20,
+            "type": "percentage",
             "per_days": true,
             "per_person": true
         }

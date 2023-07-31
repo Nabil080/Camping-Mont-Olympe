@@ -1,0 +1,17 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Add Taxes{% endblock %}
+
+{% block body %}
+    <h1>Add Taxes</h1>
+
+    {{ form_start(form) }}
+        {% for row in form.children %}
+            {{form_row(row)}}
+        {% endfor %}
+        <button type="submit">Add Taxes</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('admin_settings_money') }}">Back to List</a>
+{% endblock %}

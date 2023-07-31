@@ -269,6 +269,44 @@ class ConfigService
         $this->saveConfigData($config);
     }
 
+    // ! ---------------- MONEY
+
+    public function getTaxes(): array
+    {
+        $config = $this->getConfigData();
+        
+        return $config['taxes'];
+    }
+
+    public function getLastTaxes(): int
+    {
+        $lastId = $this->getTaxes();
+        $lastId = end($lastId);
+        
+        return $lastId ? $lastId['id'] : 0;
+    }
+
+    public function addTax(array $tax): void
+    {
+        $config = $this->getConfigData();
+        $config['taxes'][$tax['id']] = $tax;
+        $this->saveConfigData($config);
+    }
+
+    public function getPaiements(): array
+    {
+        $config = $this->getConfigData();
+        
+        return $config['taxes'];
+    }
+
+    public function updatePaiements(string $type, bool $bool): void
+    {
+        $config = $this->getConfigData();
+        $config['paiements'][$type] = $bool;
+        $this->saveConfigData($config);
+    }
+
     // ! ---------------- TOOLS
 
     public function getPlacesChoices(): array
