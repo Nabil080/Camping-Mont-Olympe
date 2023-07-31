@@ -376,6 +376,13 @@
                     "places": [
                         null
                     ]
+                },
+                {
+                    "id": 2,
+                    "max": 6,
+                    "places": [
+                        "Camping Car"
+                    ]
                 }
             ]
         },
@@ -388,6 +395,13 @@
                     "max": 6,
                     "places": [
                         null
+                    ]
+                },
+                {
+                    "id": 2,
+                    "max": 2,
+                    "places": [
+                        "Camping Car"
                     ]
                 }
             ]

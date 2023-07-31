@@ -233,6 +233,21 @@ class ConfigService
         return $config['services'][$id] ?? [];
     }
 
+    public function getLastServicesRule(int $serviceId):int
+    {
+        $lastId = $this->getServices($serviceId)['rules'];
+        $lastId = end($lastId);
+        
+        return $lastId ? $lastId['id'] : 0;
+    }
+
+    public function addServiceRule(int $serviceId, array $rule): void
+    {
+        $config = $this->getConfigData();
+        $config['services'][$serviceId]['rules'][] = $rule;
+        $this->saveConfigData($config);
+    }
+
     // ! ---------------- TOOLS
 
     public function getPlacesChoices(): array
