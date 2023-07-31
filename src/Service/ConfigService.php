@@ -12,6 +12,17 @@ class ConfigService
         $this->configFilePath = $configFilePath;
     }
 
+    // ! --------------- CONFIG
+
+    public function getConfigByName(string $name = null): array
+    {
+        $config = $this->getConfigData();
+
+        if($name === null) return $config;
+
+        return $config[$name] ?? [];
+    }
+
     private function getConfigData(): array
     {
         $json = file_get_contents($this->configFilePath);
@@ -23,6 +34,26 @@ class ConfigService
         $newJson = json_encode($data, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);
         file_put_contents($this->configFilePath, $newJson);
     }
+
+    // ! ----------------- CAMPING
+
+    public function getCamping():array
+    {
+        $config = $this->getConfigData();
+
+        return $config['camping'];
+    }
+
+    public function updateCamping(array $camping):void
+    {
+        $config = $this->getConfigData();
+        
+        $config['camping'] = $camping;
+
+        $this->saveConfigData($config);
+    }
+
+    // ! ----------------- PRICES RULES
 
     public function getPricesRules(string $type = null): array
     {
@@ -54,7 +85,7 @@ class ConfigService
         foreach($config['prices'][$type][$typeId]['rules'] as $index => $oldRule)
             if($oldRule['id'] === $rule['id'])
                 $config['prices'][$type][$typeId]['rules'][$index] = $rule;
-                
+
         $this->saveConfigData($config);
     }
 
@@ -69,14 +100,14 @@ class ConfigService
     }
 
 
-    // SEASONS
+    // ! ----------------- SEASON RULES
 
-    public function getConfigByName(string $name = null): array
+    public function getSeasonsRules(): array
     {
         $config = $this->getConfigData();
 
-        if($name === null) return $config;
-
-        return $config[$name] ?? [];
+        return $config['seasons'] ?? [];
     }
+
+
 }

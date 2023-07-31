@@ -7,7 +7,7 @@
         "email": "contact@camping-mont-olympe.fr"
     },
     "seasons": {
-        "Saison 1": {
+        "1": {
             "id": 1,
             "name": "Saison 1",
             "rules": [
@@ -27,13 +27,11 @@
                     "id": 2,
                     "start": "2023-09-01",
                     "end": "2023-09-15",
-                    "days": [
-                        "All"
-                    ]
+                    "days": []
                 }
             ]
         },
-        "Saison 2": {
+        "2": {
             "id": 2,
             "name": "Saison 2",
             "rules": [
@@ -42,7 +40,7 @@
                     "start": "2023-07-01",
                     "end": "2023-08-31",
                     "days": [
-                        "All"
+                        
                     ]
                 },
                 {
@@ -50,12 +48,12 @@
                     "start": "2023-09-16",
                     "end": "2023-09-24",
                     "days": [
-                        "All"
+                        
                     ]
                 }
             ]
         },
-        "songe": {
+        "3": {
             "id": 3,
             "name": "songe",
             "rules": [
@@ -76,7 +74,7 @@
                     "start": "2023-09-01",
                     "end": "2023-09-15",
                     "days": [
-                        "All"
+                        
                     ]
                 }
             ]
@@ -255,19 +253,6 @@
                         "start": "2023-01-01",
                         "end": "2023-05-62",
                         "places": []
-                    },
-                    {
-                        "id": 3,
-                        "name": "SOLDAT10",
-                        "amount": 0.2,
-                        "type": "percentage",
-                        "uses": 10,
-                        "start": "2018-01-01",
-                        "end": "2018-01-01",
-                        "places": [
-                            "Saison 1",
-                            "Saison 2"
-                        ]
                     }
                 ]
             },
@@ -277,7 +262,7 @@
                 "rules": [
                     {
                         "id": 1,
-                        "name": "solde de noel",
+                        "name": "solde de nöel",
                         "amount": 0.2,
                         "type": "percentage",
                         "uses": null,
