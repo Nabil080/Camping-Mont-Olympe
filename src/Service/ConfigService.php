@@ -155,6 +155,16 @@ class ConfigService
         $this->saveConfigData($config);
     }
 
+    public function updateSeasonRule(int $seasonId, array $rule): void
+    {
+        $config = $this->getConfigData();
+        foreach($config['seasons'][$seasonId]['rules'] as $index => $oldRule)
+            if($oldRule['id'] === $rule['id'])
+                $config['seasons'][$seasonId]['rules'][$index] = $rule;
+
+        $this->saveConfigData($config);
+    }
+
     public function deleteSeasonRule(int $seasonId, int $ruleId): void
     {
         $config = $this->getConfigData();

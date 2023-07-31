@@ -28,9 +28,9 @@
                         <td class="p-2 ">{{ season.name }}</td>
                         <td></td><td></td><td></td>
                         <td class="p-2 space-x-4 text-end w-fit">
-                            <a href="{{ path('admin_settings_seasons_rule_add', {'id': season.id}) }}" class="cursor-pointer"><i class="fa fa-plus"></i></a>
-                            <a href="{{path('admin_settings_seasons_update', {'id': season.id}) }}"><i class="fa fa-pen"></i></a>
-                            <a href="{{ path('admin_settings_seasons_delete', {'id': season.id}) }}" onclick="return confirm('Voulez vous vraiment supprimer cette saison ?')"><i class="fa fa-trash"></i></a>
+                            <a href="{{ path('admin_settings_seasons_rule_add', {'seasonId': season.id}) }}" class="cursor-pointer"><i class="fa fa-plus"></i></a>
+                            <a href="{{path('admin_settings_seasons_update', {'seasonId': season.id}) }}"><i class="fa fa-pen"></i></a>
+                            <a href="{{ path('admin_settings_seasons_delete', {'seasonId': season.id}) }}" onclick="return confirm('Voulez vous vraiment supprimer cette saison ?')"><i class="fa fa-trash"></i></a>
                         </td>
                     <tr>
                 {% for rule in season.rules %}
@@ -53,7 +53,7 @@
                                 {% endfor %}
                             </td>
                             <td class="p-2 space-x-4 text-end">
-                                <a href="" class=""><i class="fa fa-pen"></i></a>
+                                <a href="{{ path('admin_settings_seasons_rule_update', {'seasonId': season.id, 'ruleId': rule.id}) }}" class=""><i class="fa fa-pen"></i></a>
                                 <a href="{{ path('admin_settings_seasons_rule_delete', {'seasonId': season.id, 'ruleId': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
