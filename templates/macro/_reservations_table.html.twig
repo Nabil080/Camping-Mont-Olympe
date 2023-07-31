@@ -29,7 +29,7 @@
                     <td class="p-2">{{ rule.places.0 is null ? "Tous" : rule.places|join(', ') }}</td>
                     <td class="p-2">{{ rule.seasons.0 is null ? "Toutes" : rule.seasons|join(', ') }}</td>
                     <td class="p-2 space-x-4 text-end">
-                        <a href="" class=""><i class="fa fa-pen"></i></a>
+                        <a href="{{ path('admin_settings_reservations_update', {'type': type, 'ruleId': rule.id}) }}" class=""><i class="fa fa-pen"></i></a>
                         <a href="{{ path('admin_settings_reservations_delete', {'type': type, 'ruleId': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
@@ -57,7 +57,7 @@
                     <td class="p-2">{{ rule.places.0 is null ? "Tous" : rule.places|join(', ') }}</td>
                     <td class="p-2">{{ rule.seasons.0 is null ? "Toutes" : rule.seasons|join(', ') }}</td>
                     <td class="p-2 space-x-4 text-end">
-                        <a href="" class=""><i class="fa fa-pen"></i></a>
+                        <a href="{{ path('admin_settings_reservations_update', {'type': type, 'ruleId': rule.id}) }}" class=""><i class="fa fa-pen"></i></a>
                         <a href="{{ path('admin_settings_reservations_delete', {'type': type, 'ruleId': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>

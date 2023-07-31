@@ -59,6 +59,46 @@ class ReservationsController extends AbstractController
         ]);
     }
 
+    #[Route("/reservations/{type}/update/{ruleId}", name: "admin_settings_reservations_update")]
+    public function update(string $type, int $ruleId, Request $request, ConfigService $configService): Response
+    {
+        $oldReservation = $configService->getReservationsRules($type);
+        foreach($oldReservation as $index => $rule){
+            if($rule['id'] === $ruleId)
+                $oldRule = $oldReservation[$index];
+        }
+
+        $isCheck = str_contains(strtolower($type),'check') ? true : false;
+        $isStay = str_contains(strtolower($type),'stay') ? true : false;
+
+        if($isCheck) $form = $this->createForm(CheckRuleType::class);
+        if($isStay) $form = $this->createForm(StayRuleType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $rule = ["id" => $ruleId];
+            $rule += $form->getData();
+
+
+            $configService->updateReservationRule($type, $rule);
+            $this->addFlash('success', 'New "places" price rule added successfully!');
+            return $this->redirectToRoute('admin_settings_reservations');
+        }else{
+            if($isCheck){
+                $form->get('days')->setData($oldRule['days']);
+            }elseif($isStay){
+                $form->get('amount')->setData($oldRule['amount']);
+            }
+            $form->get('places')->setData($oldRule['places']);
+            $form->get('seasons')->setData($oldRule['seasons']);
+        }
+
+        return $this->render('param/reservations/add.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
     #[Route("/reservations/{type}/delete/{ruleId}", name: "admin_settings_reservations_delete")]
     public function delete(string $type,int $ruleId, Request $request, ConfigService $configService): Response
     {
