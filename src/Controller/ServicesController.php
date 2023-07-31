@@ -41,4 +41,34 @@ class ServicesController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+    #[Route('/services/{serviceId}/update/{ruleId}', name: 'admin_settings_services_update')]
+    public function update(int $serviceId, int $ruleId, ConfigService $configService, Request $request): Response
+    {
+        $oldService = $configService->getServices($serviceId);
+        foreach($oldService['rules'] as $index => $rule){
+            if($rule['id'] === $ruleId)
+                $oldRule = $oldService['rules'][$index];
+        }
+
+        $form = $this->createForm(ServiceRuleType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $rule = ["id" => $ruleId];
+            $rule += $form->getData();
+
+            $configService->updateServiceRule($serviceId, $rule);
+            $this->addFlash('success', 'New "places" price rule added successfully!');
+            return $this->redirectToRoute('admin_settings_services');
+        }else{
+                $form->get('max')->setData($oldRule['max']);
+                $form->get('places')->setData($oldRule['places']);
+        }
+
+        return $this->render('param/services/add.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }

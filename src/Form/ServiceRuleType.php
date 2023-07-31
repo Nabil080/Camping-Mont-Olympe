@@ -25,6 +25,9 @@ class ServiceRuleType extends AbstractType
         ])
         ->add('places', ChoiceType::class, [
             'choices' => $this->cs->getPlacesChoices(),
+            'choice_attr' => [
+                'Tous' => ['selected' => true],
+            ],
             'multiple' => true,
             'required' => false,
         ])

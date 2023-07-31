@@ -248,6 +248,16 @@ class ConfigService
         $this->saveConfigData($config);
     }
 
+    public function updateServiceRule(int $serviceId, array $rule): void
+    {
+        $config = $this->getConfigData();
+        foreach($config['services'][$serviceId]['rules'] as $index => $oldRule)
+            if($oldRule['id'] === $rule['id'])
+                $config['services'][$serviceId]['rules'][$index] = $rule;
+
+        $this->saveConfigData($config);
+    }
+
     // ! ---------------- TOOLS
 
     public function getPlacesChoices(): array
