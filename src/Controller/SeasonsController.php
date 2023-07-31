@@ -80,4 +80,13 @@ class SeasonsController extends AbstractController
             $this->addFlash('success', 'New "places" price rule added successfully!');
             return $this->redirectToRoute('admin_settings_seasons');
     }
+
+    #[Route("/seasons/{seasonId}/delete/rule/{ruleId}", name: "admin_settings_seasons_rule_delete")]
+    public function deleteRule(int $seasonId, int $ruleId, Request $request, ConfigService $configService): Response
+    {
+            $configService->deleteSeasonRule($seasonId, $ruleId);
+
+            $this->addFlash('success', 'New "places" price rule added successfully!');
+            return $this->redirectToRoute('admin_settings_seasons');
+    }
 }
