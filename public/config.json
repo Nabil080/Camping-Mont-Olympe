@@ -106,82 +106,122 @@
     },
     "reservations": {
         "checkIn": [
-                {
-                    "id": 1,
-                    "days": [
-                        null
-                    ],
-                    "places": [
-                        null
-                    ],
-                    "seasons": [
-                        null
-                    ]
-                },
-                {
-                    "id": 2,
-                    "days": [
-                        null
-                    ],
-                    "places": [
-                        null
-                    ],
-                    "seasons": [
-                        null
-                    ]
-                }
-            ]
-        ,
+            {
+                "id": 1,
+                "days": [
+                    null
+                ],
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
+            },
+            {
+                "id": 2,
+                "days": [
+                    null
+                ],
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
+            },
+            {
+                "id": 3,
+                "days": [
+                    null
+                ],
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    "Saison 2"
+                ]
+            },
+            {
+                "id": 4,
+                "days": [
+                    7
+                ],
+                "places": [
+                    "campingCar"
+                ],
+                "seasons": [
+                    null
+                ]
+            }
+        ],
         "checkOut": [
-                {
-                    "id": 1,
-                    "days": [
-                        null
-                    ],
-                    "places": [
-                        null
-                    ],
-                    "seasons": [
-                        null
-                    ]
-                }
-            ]
-        ,
+            {
+                "id": 1,
+                "days": [
+                    null
+                ],
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
+            }
+        ],
         "minStay": [
-                {
-                    "id": 1,
-                    "amount": 1,
-                    "places": [
-                        null
-                    ],
-                    "seasons": [
-                        null
-                    ]
-                }
-            ]
-        ,
+            {
+                "id": 1,
+                "amount": 1,
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
+            },
+            {
+                "id": 2,
+                "amount": 10,
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
+            }
+        ],
         "maxStay": [
-                {
-                    "id": 1,
-                    "amount": 2,
-                    "places": [
-                        null
-                    ],
-                    "seasons": [
-                        null
-                    ]
-                }
-            ]
-        ,
+            {
+                "id": 1,
+                "amount": 2,
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
+            },
+            {
+                "id": 2,
+                "amount": 90,
+                "places": [
+                    "Camping Car"
+                ],
+                "seasons": [
+                    "Songe"
+                ]
+            }
+        ],
         "places": [
-                {
-                    "id": 1,
-                    "canChoose": false,
-                    "places": [
-                        null
-                    ]
-                }
-            ]
+            {
+                "id": 1,
+                "canChoose": false,
+                "places": [
+                    null
+                ]
+            }
+        ]
     },
     "prices": {
         "places": {

@@ -2,14 +2,17 @@
 
 namespace App\Controller;
 
+use App\Form\CheckRuleType;
+use App\Form\StayRuleType;
 use App\Service\ConfigService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ReservationsController extends AbstractController
 {
-    #[Route('/reservations', name: 'app_reservations')]
+    #[Route('/reservations', name: 'admin_settings_reservations')]
     public function index(ConfigService $configService): Response
     {
         $checkin = $configService->getReservationsRules('checkIn');
@@ -27,6 +30,32 @@ class ReservationsController extends AbstractController
             'maxstay' => $maxstay,
             'places' => $places,
             'reservations' => $reservations,
+        ]);
+    }
+
+    #[Route("/reservations/{type}/add", name: "admin_settings_reservations_add")]
+    public function add(string $type, Request $request, ConfigService $configService): Response
+    {
+        $isCheck = str_contains(strtolower($type),'check') ? true : false;
+        $isStay = str_contains(strtolower($type),'stay') ? true : false;
+
+        if($isCheck) $form = $this->createForm(CheckRuleType::class);
+        if($isStay) $form = $this->createForm(StayRuleType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $lastId = $configService->getLastReservationRule($type);
+            $rule = ["id" => $lastId + 1];
+            $rule += $form->getData();
+
+            $configService->addReservationRule($type, $rule);
+            $this->addFlash('success', 'New "places" price rule added successfully!');
+            return $this->redirectToRoute('admin_settings_reservations');
+        }
+
+        return $this->render('param/reservations/add.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }

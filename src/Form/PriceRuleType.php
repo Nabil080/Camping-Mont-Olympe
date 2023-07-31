@@ -15,6 +15,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PriceRuleType extends AbstractType
 {
+    private ConfigService $cs;
+
+    public function __construct(){
+        $this->cs = new ConfigService;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -26,24 +32,9 @@ class PriceRuleType extends AbstractType
                 'required' => false,
             ])
             ->add('seasons', ChoiceType::class, [
-                'choices' => $this->getSeasonChoices(),
+                'choices' => $this->cs->getSeasonsChoices(),
                 'multiple' => true,
                 'required' => false,
             ]);
-    }
-
-    private function getSeasonChoices(): array
-    {
-        // Get all seasons from the config
-        $configService = new ConfigService;
-        $seasons = $configService->getConfigByName('seasons');
-
-        // Create an array of choices for the seasons select field
-        $choices = ["Toutes" => null];
-        foreach ($seasons as $season) {
-            $choices[$season['name']] = $season['name'];
-        }
-
-        return $choices;
     }
 }

@@ -35,10 +35,10 @@
                     <tr>
                 {% for rule in season.rules %}
                         <tr class="text-center">
-                            <td></td>
-                            <td>{{ rule.start }}</td>
-                            <td>{{ rule.end }}</td>
-                            <td>
+                            <td class="p-2"></td>
+                            <td class="p-2">{{ rule.start }}</td>
+                            <td class="p-2">{{ rule.end }}</td>
+                            <td class="p-2">
                                 {% for day in rule.days %}
                                     {% if day is same as 1 %} <span>Lundi</span>
                                     {% elseif day is same as 2 %} <span>Mardi</span>

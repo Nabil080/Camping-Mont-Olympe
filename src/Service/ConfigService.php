@@ -187,4 +187,62 @@ class ConfigService
         return $config['reservations'][$type] ?? [];
     }
 
+    public function getLastReservationRule(string $type):int
+    {
+        $lastId = $this->getReservationsRules($type);
+        $lastId = end($lastId);
+        
+        return $lastId ? $lastId['id'] : 0;
+    }
+
+    public function addReservationRule(string $type, array $rule): void
+    {
+        $config = $this->getConfigData();
+        $config['reservations'][$type][] = $rule;
+        $this->saveConfigData($config);
+    }
+
+    // ! ---------------- TOOLS
+
+    public function getPlacesChoices(): array
+    {
+        // TODO: fetch la bdd pour les emplacements
+        $configService = new ConfigService();
+        $seasons = $configService->getConfigByName('seasons');
+
+        $choices = ["Tous" => null,"Camping-car" => "Camping Car"];
+
+        return $choices;
+    }
+
+    public function getSeasonsChoices(): array
+    {
+        $configService = new ConfigService;
+        $seasons = $configService->getConfigByName('seasons');
+
+        $choices = ["Toutes" => null];
+        foreach ($seasons as $season) {
+            $choices[$season['name']] = $season['name'];
+        }
+
+        return $choices;
+    }
+
+    public function getDaysChoices(): array
+    {
+        return [
+            "Tous" => null,
+            "Lundi" => 1,
+            "Mardi" => 2,
+            "Mercredi" => 3,
+            "Jeudi" => 4,
+            "Vendredi" => 5,
+            "Samedi" => 6,
+            "Dimanche" => 7,
+        ];
+    }
+
+
+
+
 }

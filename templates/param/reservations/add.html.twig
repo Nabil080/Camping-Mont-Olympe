@@ -2,19 +2,15 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Admin - Add Places Price Rule{% endblock %}
+{% block title %}Admin - Add Reservations Rule{% endblock %}
 
 {% block body %}
-    <h1>Add Places Price Rule</h1>
+    <h1>Add Reservations Rule</h1>
 
     {{ form_start(form) }}
         {% for row in form.children %}
             {{form_row(row)}}
         {% endfor %}
-        {# {{ form_row(form.amount) }} #}
-        {# {{ form_row(form.per_days) }} #}
-        {# {{ form_row(form.per_person) }} #}
-        {# {{ form_row(form.seasons) }} #}
         <button type="submit">Add Rule</button>
     {{ form_end(form) }}
 
