@@ -9,7 +9,7 @@
     "seasons": {
         "1": {
             "id": 1,
-            "name": "Saison 1",
+            "name": "Saison une",
             "rules": [
                 {
                     "id": 1,
@@ -51,7 +51,7 @@
         },
         "3": {
             "id": 3,
-            "name": "songe",
+            "name": "Songe",
             "rules": [
                 {
                     "id": 1,

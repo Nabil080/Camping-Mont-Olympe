@@ -47,6 +47,31 @@ class SeasonsController extends AbstractController
         ]);
     }
 
+    #[Route("/seasons/update/{id}", name: "admin_settings_seasons_update")]
+    public function update(int $id, Request $request, ConfigService $configService): Response
+    {
+        $oldSeason = $configService->getSeasons()[$id];
+
+        $form = $this->createForm(SeasonType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $name = $form->getData()['name'];
+            $season = ["id" => $oldSeason['id'], "name" => $name, "rules" => $oldSeason['rules'] ];
+
+            $configService->updateSeason($id, $season);
+
+            $this->addFlash('success', 'New "places" price rule added successfully!');
+            return $this->redirectToRoute('admin_settings_seasons');
+        }else{
+            $form->get('name')->setData($oldSeason['name']);
+        }
+
+        return $this->render('param/seasons/add.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
     #[Route("/seasons/delete/{id}", name: "admin_settings_seasons_delete")]
     public function delete($id, Request $request, ConfigService $configService): Response
     {

@@ -126,6 +126,15 @@ class ConfigService
         $this->saveConfigData($config);
     }
 
+    public function updateSeason(int $id, array $season): void
+    {
+        $config = $this->getConfigData();
+
+        $config['seasons'][$id] = $season;
+
+        $this->saveConfigData($config);
+    }
+
     public function deleteSeason(int $seasonId): void
     {
         $config = $this->getConfigData();
