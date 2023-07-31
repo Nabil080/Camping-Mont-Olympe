@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% import "macro/_price_table.html.twig" as macros %}
+
+{% block title %}Admin - Price Rules{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto py-6">
+        <h1 class="text-3xl font-bold mb-4">Price Rules</h1>
+
+        {% for type, rules in prices %}
+                {{ macros.price_table(type,rules) }}
+        {% endfor %}
+
+    </div>
+{% endblock %}

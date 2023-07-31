@@ -1,0 +1,25 @@
+{% macro service_table(service) %}
+    
+    <table class="w-full border-collapse border border-gray-400 mb-12">
+        <thead>    
+            <tr class="bg-gray-200">
+                <th class="p-2">Nombre maximum</th>
+                <th class="p-2">Emplacements</th>
+                <th class="p-2 text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in service.rules %}
+                <tr class="text-center">
+                    <td class="p-2">{{ rule.max }}</td>
+                    <td class="p-2">{{ rule.places.0 is null ? "Tous" : rule.places|join(', ') }}</td>
+                    <td class="p-2 space-x-4 text-end">
+                        <a href="{{ path('admin_settings_services_update', {'serviceId': service.id, 'ruleId': rule.id}) }}" class=""><i class="fa fa-pen"></i></a>
+                        <a href="{{ path('admin_settings_services_delete', {'serviceId': service.id, 'ruleId': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endmacro %}

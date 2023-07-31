@@ -7,20 +7,16 @@
         "email": "contact@camping-mont-olympe.fr"
     },
     "seasons": {
-        "Saison 1": {
+        "1": {
             "id": 1,
-            "name": "Saison 1",
+            "name": "Saison une",
             "rules": [
                 {
                     "id": 1,
                     "start": "2023-01-01",
                     "end": "2023-06-30",
                     "days": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5
+                        null
                     ]
                 },
                 {
@@ -28,12 +24,20 @@
                     "start": "2023-09-01",
                     "end": "2023-09-15",
                     "days": [
-                        "All"
+                        null
+                    ]
+                },
+                {
+                    "id": 3,
+                    "start": "2018-01-01",
+                    "end": "2019-01-01",
+                    "days": [
+                        null
                     ]
                 }
             ]
         },
-        "Saison 2": {
+        "2": {
             "id": 2,
             "name": "Saison 2",
             "rules": [
@@ -42,7 +46,7 @@
                     "start": "2023-07-01",
                     "end": "2023-08-31",
                     "days": [
-                        "All"
+                        null
                     ]
                 },
                 {
@@ -50,25 +54,21 @@
                     "start": "2023-09-16",
                     "end": "2023-09-24",
                     "days": [
-                        "All"
+                        null
                     ]
                 }
             ]
         },
-        "songe": {
+        "3": {
             "id": 3,
-            "name": "songe",
+            "name": "Songe",
             "rules": [
                 {
                     "id": 1,
                     "start": "2023-01-01",
                     "end": "2023-06-30",
                     "days": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5
+                        null
                     ]
                 },
                 {
@@ -76,77 +76,156 @@
                     "start": "2023-09-01",
                     "end": "2023-09-15",
                     "days": [
-                        "All"
+                        null
+                    ]
+                }
+            ]
+        },
+        "4": {
+            "id": 4,
+            "name": "Test",
+            "rules": [
+                {
+                    "id": 1,
+                    "start": "2018-01-01",
+                    "end": "2018-01-01",
+                    "days": [
+                        null
+                    ]
+                },
+                {
+                    "id": 2,
+                    "start": "2018-01-01",
+                    "end": "2018-03-03",
+                    "days": [
+                        null
                     ]
                 }
             ]
         }
     },
     "reservations": {
-        "check-in": {
-            "id": 1,
-            "name": "check-in",
-            "rules": [
-                {
-                    "id": 1,
-                    "days": [],
-                    "places": []
-                },
-                {
-                    "id": 2,
-                    "days": [],
-                    "places": []
-                }
-            ]
-        },
-        "check-out": {
-            "id": 2,
-            "name": "check-out",
-            "rules": [
-                {
-                    "id": 1,
-                    "days": [],
-                    "places": []
-                }
-            ]
-        },
-        "min-stay": {
-            "id": 3,
-            "name": "min-stay",
-            "rules": [
-                {
-                    "id": 1,
-                    "places": [],
-                    "seasons": []
-                }
-            ]
-        },
-        "max-stay": {
-            "id": 4,
-            "name": "max-stay",
-            "rules": [
-                {
-                    "id": 1,
-                    "places": [],
-                    "seasons": []
-                }
-            ]
-        },
-        "emplacement": {
-            "id": 5,
-            "name": "emplacement",
-            "rules": [
-                {
-                    "id": 1,
-                    "canChoose": false,
-                    "places": []
-                }
-            ]
-        }
+        "checkIn": [
+            {
+                "id": 1,
+                "days": [
+                    null
+                ],
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
+            },
+            {
+                "id": 2,
+                "days": [
+                    null
+                ],
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
+            },
+            {
+                "id": 3,
+                "days": [
+                    null
+                ],
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    "Saison 2"
+                ]
+            },
+            {
+                "id": 4,
+                "days": [
+                    1
+                ],
+                "places": [
+                    "Camping Car"
+                ],
+                "seasons": [
+                    null
+                ]
+            }
+        ],
+        "checkOut": [
+            {
+                "id": 1,
+                "days": [
+                    null
+                ],
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
+            }
+        ],
+        "minStay": [
+            {
+                "id": 1,
+                "amount": 1,
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
+            },
+            {
+                "id": 2,
+                "amount": 10,
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
+            }
+        ],
+        "maxStay": [
+            {
+                "id": 1,
+                "amount": 12,
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    "Saison une"
+                ]
+            },
+            {
+                "id": 2,
+                "amount": 90,
+                "places": [
+                    "Camping Car"
+                ],
+                "seasons": [
+                    "Songe"
+                ]
+            }
+        ],
+        "places": [
+            {
+                "id": 1,
+                "canChoose": false,
+                "places": [
+                    null
+                ]
+            }
+        ]
     },
     "prices": {
         "places": {
-            "H\u00e9bergement 1": {
+            "1": {
                 "id": 1,
                 "name": "H\u00e9bergement 1",
                 "rules": [
@@ -155,13 +234,39 @@
                         "amount": 0,
                         "per_days": true,
                         "per_person": false,
-                        "seasons": []
+                        "seasons": [
+                            null
+                        ]
+                    }
+                ]
+            },
+            "2": {
+                "id": 2,
+                "name": "H\u00e9bergement 2",
+                "rules": [
+                    {
+                        "id": 1,
+                        "amount": 0,
+                        "per_days": true,
+                        "per_person": false,
+                        "seasons": [
+                            "Saison 2"
+                        ]
+                    },
+                    {
+                        "id": 2,
+                        "amount": 6.5,
+                        "per_days": true,
+                        "per_person": false,
+                        "seasons": [
+                            "Saison 1"
+                        ]
                     }
                 ]
             }
         },
         "services": {
-            "Service 1": {
+            "1": {
                 "id": 1,
                 "name": "Service 1",
                 "rules": [
@@ -170,12 +275,14 @@
                         "amount": 0,
                         "per_days": false,
                         "per_person": false,
-                        "seasons": []
+                        "seasons": [
+                            "Saison 1"
+                        ]
                     }
                 ]
             }
         },
-        "age": {
+        "ages": {
             "adult": {
                 "id": 1,
                 "name": "adult",
@@ -185,7 +292,9 @@
                         "amount": 0,
                         "per_days": true,
                         "per_person": true,
-                        "seasons": []
+                        "seasons": [
+                            null
+                        ]
                     }
                 ]
             },
@@ -198,79 +307,122 @@
                         "amount": 0,
                         "per_days": true,
                         "per_person": true,
-                        "seasons": []
+                        "seasons": [
+                            null
+                        ]
                     }
                 ]
             }
         },
         "offers": {
-            "coupons": {
+            "1": {
                 "id": 1,
                 "name": "coupons",
                 "rules": [
                     {
                         "id": 1,
                         "name": "REMISE08",
-                        "amount": 0,
+                        "amount": 5,
                         "type": "devise",
                         "uses": 20,
                         "start": "2023-01-01",
-                        "end": false,
-                        "places": []
+                        "end": null,
+                        "places": [
+                            null
+                        ]
+                    },
+                    {
+                        "id": 2,
+                        "name": "NOEL52",
+                        "amount": 0.1,
+                        "type": "percentage",
+                        "uses": null,
+                        "start": "2023-01-01",
+                        "end": "2023-05-62",
+                        "places": [
+                            null
+                        ]
                     }
                 ]
             },
-            "discounts": {
+            "2": {
                 "id": 2,
                 "name": "discounts",
                 "rules": [
                     {
                         "id": 1,
-                        "name": "solde de noel",
+                        "name": "solde de n\u00f6el",
                         "amount": 0.2,
                         "type": "percentage",
-                        "uses": false,
+                        "uses": null,
                         "start": "2023-12-01",
                         "end": "2024-01-01",
-                        "places": []
+                        "places": [
+                            null
+                        ]
                     }
                 ]
             }
         }
     },
     "services": {
-        "Service 1": {
+        "1": {
             "id": 1,
             "name": "Service 1",
-            "rules": [
-                {
-                    "id": 1,
-                    "max": 0,
-                    "places": []
+            "rules": {
+                "1": {
+                    "id": 2,
+                    "max": 6,
+                    "places": [
+                        "Camping Car"
+                    ]
+                },
+                "2": {
+                    "id": 3,
+                    "max": 10,
+                    "places": [
+                        null
+                    ]
                 }
-            ]
+            }
         },
-        "Service 2": {
+        "2": {
             "id": 2,
             "name": "Service 2",
             "rules": [
                 {
                     "id": 1,
                     "max": 6,
-                    "places": []
+                    "places": [
+                        null
+                    ]
+                },
+                {
+                    "id": 2,
+                    "max": 2,
+                    "places": [
+                        "Camping Car"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "max": 10,
+                    "places": [
+                        null
+                    ]
                 }
             ]
         }
     },
-    "paiement": {
+    "paiements": {
         "cash": true,
         "card": true,
         "paypal": true,
         "check": true,
-        "holiday_check": true
+        "holiday_check": false
     },
     "taxes": {
-        "TVA": {
+        "1": {
             "id": 1,
             "name": "TVA",
             "amount": 0.2,
@@ -278,7 +430,7 @@
             "per_days": false,
             "per_person": false
         },
-        "taxe de s\u00e9jour": {
+        "2": {
             "id": 2,
             "name": "taxe de s\u00e9jour",
             "amount": 0.22,

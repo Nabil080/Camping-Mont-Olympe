@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Rules{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto py-6">
+        <h1 class="text-3xl font-bold mb-4">Seasons Rules</h1>
+        <div class="absolute" >
+            <a href="{{ path('admin_settings_seasons_add') }}" class="cursor-pointer">
+                <i class="fa fa-plus"></i> Ajouter une saison
+            </a>
+        </div>
+
+
+    <table class="w-full border-collapse border border-gray-400 my-12">
+        <thead>    
+            <tr class="bg-gray-200">
+                <th class="p-2">Saison</th>
+                <th class="p-2">Début</th>
+                <th class="p-2">Fin</th>
+                <th class="p-2">Jours</th>
+                <th class="p-2 text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for season in seasons %}
+                    <tr class="text-center bg-green-50">
+                        <td class="p-2 ">{{ season.name }}</td>
+                        <td></td><td></td><td></td>
+                        <td class="p-2 space-x-4 text-end w-fit">
+                            <a href="{{ path('admin_settings_seasons_rule_add', {'seasonId': season.id}) }}" class="cursor-pointer"><i class="fa fa-plus"></i></a>
+                            <a href="{{path('admin_settings_seasons_update', {'seasonId': season.id}) }}"><i class="fa fa-pen"></i></a>
+                            <a href="{{ path('admin_settings_seasons_delete', {'seasonId': season.id}) }}" onclick="return confirm('Voulez vous vraiment supprimer cette saison ?')"><i class="fa fa-trash"></i></a>
+                        </td>
+                    <tr>
+                {% for rule in season.rules %}
+                        <tr class="text-center">
+                            <td class="p-2"></td>
+                            <td class="p-2">{{ rule.start }}</td>
+                            <td class="p-2">{{ rule.end }}</td>
+                            <td class="p-2">
+                                {% for day in rule.days %}
+                                    {% if day is same as 1 %} <span>Lundi</span>
+                                    {% elseif day is same as 2 %} <span>Mardi</span>
+                                    {% elseif day is same as 3 %} <span>Mercredi</span>
+                                    {% elseif day is same as 4 %} <span>Jeudi</span>
+                                    {% elseif day is same as 5 %} <span>Vendredi</span>
+                                    {% elseif day is same as 6 %} <span>Samedi</span>
+                                    {% elseif day is same as 7 %} <span>Dimanche</span>
+                                    {% elseif day is null %} <span>Tous</span>
+                                    {% endif %}
+                                    {% if not loop.last %} , {% elseif loop.last and day is not null %} . {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td class="p-2 space-x-4 text-end">
+                                <a href="{{ path('admin_settings_seasons_rule_update', {'seasonId': season.id, 'ruleId': rule.id}) }}" class=""><i class="fa fa-pen"></i></a>
+                                <a href="{{ path('admin_settings_seasons_rule_delete', {'seasonId': season.id, 'ruleId': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    </div>
+{% endblock %}

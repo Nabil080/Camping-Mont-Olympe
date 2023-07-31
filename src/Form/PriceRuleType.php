@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Form;
+
+use App\Service\ConfigService;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class PriceRuleType extends AbstractType
+{
+    private ConfigService $cs;
+
+    public function __construct(){
+        $this->cs = new ConfigService;
+    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('amount', NumberType::class)
+            ->add('per_days', CheckboxType::class, [
+                'required' => false,
+            ])
+            ->add('per_person', CheckboxType::class, [
+                'required' => false,
+            ])
+            ->add('seasons', ChoiceType::class, [
+                'choices' => $this->cs->getSeasonsChoices(),
+                'multiple' => true,
+                'required' => false,
+            ]);
+    }
+}
