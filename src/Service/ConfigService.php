@@ -69,7 +69,7 @@ class ConfigService
         $lastId = $this->getPricesRules($type);
         $lastId = end($lastId);
         
-        return $lastId['id'];
+        return $lastId ? $lastId['id'] : 0;
     }
 
     public function addPriceRule(string $type, int $typeId, array $rule): void
@@ -100,7 +100,7 @@ class ConfigService
     }
 
 
-    // ! ----------------- SEASON RULES
+    // ! ----------------- SEASON
 
     public function getSeasons(): array
     {
@@ -113,34 +113,45 @@ class ConfigService
     {
         $lastId = $this->getSeasons();
         $lastId = end($lastId);
-        
-        return $lastId['id'];
+
+        return $lastId ? $lastId['id'] : 0;
     }
 
     public function addSeason($season): void
     {
         $config = $this->getConfigData();
-
         $config['seasons'][$season['id']] = $season;
-
         $this->saveConfigData($config);
     }
 
     public function updateSeason(int $id, array $season): void
     {
         $config = $this->getConfigData();
-
         $config['seasons'][$id] = $season;
-
         $this->saveConfigData($config);
     }
 
     public function deleteSeason(int $seasonId): void
     {
         $config = $this->getConfigData();
-
         unset($config['seasons'][$seasonId]);
+        $this->saveConfigData($config);
+    }
 
+    // ! ------------ SEASON Rules
+
+    public function getLastSeasonRule(int $seasonId):int
+    {
+        $lastId = $this->getSeasons()[$seasonId]['rules'];
+        $lastId = end($lastId);
+        
+        return $lastId ? $lastId['id'] : 0;
+    }
+
+    public function addSeasonRule(int $seasonId, array $rule): void
+    {
+        $config = $this->getConfigData();
+        $config['seasons'][$seasonId]['rules'][] = $rule;
         $this->saveConfigData($config);
     }
 

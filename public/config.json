@@ -27,7 +27,17 @@
                     "id": 2,
                     "start": "2023-09-01",
                     "end": "2023-09-15",
-                    "days": []
+                    "days": [
+                        null
+                    ]
+                },
+                {
+                    "id": 3,
+                    "start": "2018-01-01",
+                    "end": "2019-01-01",
+                    "days": [
+                        null
+                    ]
                 }
             ]
         },
@@ -39,13 +49,17 @@
                     "id": 1,
                     "start": "2023-07-01",
                     "end": "2023-08-31",
-                    "days": []
+                    "days": [
+                        null
+                    ]
                 },
                 {
                     "id": 2,
                     "start": "2023-09-16",
                     "end": "2023-09-24",
-                    "days": []
+                    "days": [
+                        null
+                    ]
                 }
             ]
         },
@@ -69,14 +83,27 @@
                     "id": 2,
                     "start": "2023-09-01",
                     "end": "2023-09-15",
-                    "days": []
+                    "days": [
+                        null
+                    ]
                 }
             ]
         },
         "4": {
             "id": 4,
             "name": "Test",
-            "rules": []
+            "rules": [
+                {
+                    "id": 1,
+                    "start": "2018-01-01",
+                    "end": "2018-01-01",
+                    "days": [
+                        1,
+                        2,
+                        6
+                    ]
+                }
+            ]
         }
     },
     "reservations": {
@@ -86,13 +113,21 @@
             "rules": [
                 {
                     "id": 1,
-                    "days": [],
-                    "places": []
+                    "days": [
+                        null
+                    ],
+                    "places": [
+                        null
+                    ]
                 },
                 {
                     "id": 2,
-                    "days": [],
-                    "places": []
+                    "days": [
+                        null
+                    ],
+                    "places": [
+                        null
+                    ]
                 }
             ]
         },
@@ -102,8 +137,12 @@
             "rules": [
                 {
                     "id": 1,
-                    "days": [],
-                    "places": []
+                    "days": [
+                        null
+                    ],
+                    "places": [
+                        null
+                    ]
                 }
             ]
         },
@@ -113,8 +152,12 @@
             "rules": [
                 {
                     "id": 1,
-                    "places": [],
-                    "seasons": []
+                    "places": [
+                        null
+                    ],
+                    "seasons": [
+                        null
+                    ]
                 }
             ]
         },
@@ -124,8 +167,12 @@
             "rules": [
                 {
                     "id": 1,
-                    "places": [],
-                    "seasons": []
+                    "places": [
+                        null
+                    ],
+                    "seasons": [
+                        null
+                    ]
                 }
             ]
         },
@@ -136,7 +183,9 @@
                 {
                     "id": 1,
                     "canChoose": false,
-                    "places": []
+                    "places": [
+                        null
+                    ]
                 }
             ]
         }
@@ -210,7 +259,9 @@
                         "amount": 0,
                         "per_days": true,
                         "per_person": true,
-                        "seasons": []
+                        "seasons": [
+                            null
+                        ]
                     }
                 ]
             },
@@ -223,7 +274,9 @@
                         "amount": 0,
                         "per_days": true,
                         "per_person": true,
-                        "seasons": []
+                        "seasons": [
+                            null
+                        ]
                     }
                 ]
             }
@@ -241,7 +294,9 @@
                         "uses": 20,
                         "start": "2023-01-01",
                         "end": null,
-                        "places": []
+                        "places": [
+                            null
+                        ]
                     },
                     {
                         "id": 2,
@@ -251,7 +306,9 @@
                         "uses": null,
                         "start": "2023-01-01",
                         "end": "2023-05-62",
-                        "places": []
+                        "places": [
+                            null
+                        ]
                     }
                 ]
             },
@@ -267,7 +324,9 @@
                         "uses": null,
                         "start": "2023-12-01",
                         "end": "2024-01-01",
-                        "places": []
+                        "places": [
+                            null
+                        ]
                     }
                 ]
             }
@@ -281,7 +340,9 @@
                 {
                     "id": 1,
                     "max": 0,
-                    "places": []
+                    "places": [
+                        null
+                    ]
                 }
             ]
         },
@@ -292,7 +353,9 @@
                 {
                     "id": 1,
                     "max": 6,
-                    "places": []
+                    "places": [
+                        null
+                    ]
                 }
             ]
         }

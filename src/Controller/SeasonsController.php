@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Config\SeasonRule;
 use App\Form\OfferRuleType;
 use App\Form\PriceRuleType;
+use App\Form\SeasonRuleType;
 use App\Form\SeasonType;
 use App\Service\ConfigService;
 use DateTime;
@@ -81,7 +83,31 @@ class SeasonsController extends AbstractController
             return $this->redirectToRoute('admin_settings_seasons');
     }
 
-    #[Route("/seasons/{seasonId}/delete/rule/{ruleId}", name: "admin_settings_seasons_rule_delete")]
+    #[Route("/seasons/{id}/rule/add", name: "admin_settings_seasons_rule_add")]
+    public function addRule(int $id, Request $request, ConfigService $configService): Response
+    {
+
+        $form = $this->createForm(SeasonRuleType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $lastId = $configService->getLastSeasonRule($id);
+            $rule = ["id" => $lastId + 1];
+            $rule += $form->getData();
+
+            $configService->addSeasonRule($id, $rule);
+            $this->addFlash('success', 'New "places" price rule added successfully!');
+            return $this->redirectToRoute('admin_settings_seasons');
+        }
+
+        return $this->render('param/seasons/add_rule.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    
+
+    #[Route("/seasons/{seasonId}/rule/delete/{ruleId}", name: "admin_settings_seasons_rule_delete")]
     public function deleteRule(int $seasonId, int $ruleId, Request $request, ConfigService $configService): Response
     {
             $configService->deleteSeasonRule($seasonId, $ruleId);

@@ -28,7 +28,7 @@
                         <td class="p-2 ">{{ season.name }}</td>
                         <td></td><td></td><td></td>
                         <td class="p-2 space-x-4 text-end w-fit">
-                            <a href="{{ path('admin_settings_seasons_add') }}" class="cursor-pointer"><i class="fa fa-plus"></i></a>
+                            <a href="{{ path('admin_settings_seasons_rule_add', {'id': season.id}) }}" class="cursor-pointer"><i class="fa fa-plus"></i></a>
                             <a href="{{path('admin_settings_seasons_update', {'id': season.id}) }}"><i class="fa fa-pen"></i></a>
                             <a href="{{ path('admin_settings_seasons_delete', {'id': season.id}) }}" onclick="return confirm('Voulez vous vraiment supprimer cette saison ?')"><i class="fa fa-trash"></i></a>
                         </td>
@@ -47,10 +47,10 @@
                                     {% elseif day is same as 5 %} <span>Vendredi</span>
                                     {% elseif day is same as 6 %} <span>Samedi</span>
                                     {% elseif day is same as 7 %} <span>Dimanche</span>
+                                    {% elseif day is null %} <span>Tous</span>
                                     {% endif %}
-                                    {% if not loop.last %} , {% else %} . {% endif %}
+                                    {% if not loop.last %} , {% elseif loop.last and day is not null %} . {% endif %}
                                 {% endfor %}
-                                {% if rule.days is empty %} Tous {% endif %}
                             </td>
                             <td class="p-2 space-x-4 text-end">
                                 <a href="" class=""><i class="fa fa-pen"></i></a>
