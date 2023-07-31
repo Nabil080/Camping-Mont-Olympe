@@ -109,5 +109,14 @@ class ConfigService
         return $config['seasons'] ?? [];
     }
 
+    public function deleteSeason(int $seasonId): void
+    {
+        $config = $this->getConfigData();
+
+        unset($config['seasons'][$seasonId]);
+
+        $this->saveConfigData($config);
+    }
+
 
 }
