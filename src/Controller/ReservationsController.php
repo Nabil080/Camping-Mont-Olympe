@@ -12,10 +12,10 @@ class ReservationsController extends AbstractController
     #[Route('/reservations', name: 'app_reservations')]
     public function index(ConfigService $configService): Response
     {
-        $checkin = $configService->getReservationsRules('check-in');
-        $checkout = $configService->getReservationsRules('check-out');
-        $minstay = $configService->getReservationsRules('min-stay');
-        $maxstay = $configService->getReservationsRules('max-stay');
+        $checkin = $configService->getReservationsRules('checkIn');
+        $checkout = $configService->getReservationsRules('checkOut');
+        $minstay = $configService->getReservationsRules('minStay');
+        $maxstay = $configService->getReservationsRules('maxStay');
         $places = $configService->getReservationsRules('places');
 
         $reservations = $configService->getReservationsRules();

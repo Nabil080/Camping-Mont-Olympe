@@ -113,6 +113,9 @@
                     ],
                     "places": [
                         null
+                    ],
+                    "seasons": [
+                        null
                     ]
                 },
                 {
@@ -121,6 +124,9 @@
                         null
                     ],
                     "places": [
+                        null
+                    ],
+                    "seasons": [
                         null
                     ]
                 }
@@ -134,6 +140,9 @@
                     ],
                     "places": [
                         null
+                    ],
+                    "seasons": [
+                        null
                     ]
                 }
             ]
@@ -141,6 +150,7 @@
         "minStay": [
                 {
                     "id": 1,
+                    "amount": 1,
                     "places": [
                         null
                     ],
@@ -153,6 +163,7 @@
         "maxStay": [
                 {
                     "id": 1,
+                    "amount": 2,
                     "places": [
                         null
                     ],

@@ -1,0 +1,55 @@
+{% macro check_table(check, isIn) %}
+    
+    <table class="w-full border-collapse border border-gray-400 mb-12">
+        <thead>    
+            <tr class="bg-gray-200">
+                <th class="p-2">Jours {{ isIn ? "d'arrivées" : "de départ" }}</th>
+                <th class="p-2">Type d'hébergement</th>
+                <th class="p-2">Saisons</th>
+                <th class="p-2 text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in check %}
+                <tr class="text-center">
+                    <td class="p-2">{{ rule.days.0 is null ? "Tous" : rule.days|join(', ') }}</td>
+                    <td class="p-2">{{ rule.places.0 is null ? "Tous" : rule.places|join(', ') }}</td>
+                    <td class="p-2">{{ rule.seasons.0 is null ? "Toutes" : rule.seasons|join(', ') }}</td>
+                    <td class="p-2 space-x-4 text-end">
+                        <a href="" class=""><i class="fa fa-pen"></i></a>
+                        <a href="" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endmacro %}
+
+{% macro stay_table(stay, isMin) %}
+    
+    <table class="w-full border-collapse border border-gray-400 mb-12">
+        <thead>    
+            <tr class="bg-gray-200">
+                <th class="p-2">Séjour {{ isMin ? "minimum" : "maximum" }}</th>
+                <th class="p-2">Type d'hébergement</th>
+                <th class="p-2">Saisons</th>
+                <th class="p-2 text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in stay %}
+                <tr class="text-center">
+                    <td class="p-2">{{ rule.amount }} {{ rule.amount is same as 1 ? 'nuit' : 'nuits' }}</td>
+                    <td class="p-2">{{ rule.places.0 is null ? "Tous" : rule.places|join(', ') }}</td>
+                    <td class="p-2">{{ rule.seasons.0 is null ? "Toutes" : rule.seasons|join(', ') }}</td>
+                    <td class="p-2 space-x-4 text-end">
+                        <a href="" class=""><i class="fa fa-pen"></i></a>
+                        <a href="" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endmacro %}
