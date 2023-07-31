@@ -35,7 +35,7 @@ class FrontController extends AbstractController
         ]);
     }
 
-    #[Route('/emplacement/{id}', name: 'emplacement')]
+    #[Route('/emplacement/{id<\d+>}', name: 'emplacement')]
     public function emplacement($id): Response
     {
 

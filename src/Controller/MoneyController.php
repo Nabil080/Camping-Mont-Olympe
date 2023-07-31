@@ -82,7 +82,7 @@ class MoneyController extends AbstractController
         ]);
     }
 
-    #[Route("/taxes/delete/{taxId}", name: "admin_settings_seasons_tax_delete")]
+    #[Route("/taxes/delete/{taxId<\d+>}", name: "admin_settings_seasons_tax_delete")]
     public function deleteTax(int $taxId, Request $request, ConfigService $configService): Response
     {
             $configService->deleteTax($taxId);

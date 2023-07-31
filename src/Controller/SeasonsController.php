@@ -49,7 +49,7 @@ class SeasonsController extends AbstractController
         ]);
     }
 
-    #[Route("/seasons/update/{seasonId}", name: "admin_settings_seasons_update")]
+    #[Route("/seasons/update/{seasonId<\d+>}", name: "admin_settings_seasons_update")]
     public function update(int $seasonId, Request $request, ConfigService $configService): Response
     {
         $oldSeason = $configService->getSeasons()[$seasonId];
@@ -74,7 +74,7 @@ class SeasonsController extends AbstractController
         ]);
     }
 
-    #[Route("/seasons/delete/{seasonId}", name: "admin_settings_seasons_delete")]
+    #[Route("/seasons/delete/{seasonId<\d+>}", name: "admin_settings_seasons_delete")]
     public function delete($seasonId, Request $request, ConfigService $configService): Response
     {
             $configService->deleteSeason($seasonId);
@@ -83,7 +83,7 @@ class SeasonsController extends AbstractController
             return $this->redirectToRoute('admin_settings_seasons');
     }
 
-    #[Route("/seasons/{seasonId}/rule/add", name: "admin_settings_seasons_rule_add")]
+    #[Route("/seasons/{seasonId<\d+>}/rule/add", name: "admin_settings_seasons_rule_add")]
     public function addRule(int $seasonId, Request $request, ConfigService $configService): Response
     {
 
@@ -105,7 +105,7 @@ class SeasonsController extends AbstractController
         ]);
     }
 
-    #[Route("/seasons/{seasonId}/rule/update/{ruleId}", name: "admin_settings_seasons_rule_update")]
+    #[Route("/seasons/{seasonId<\d+>}/rule/update/{ruleId<\d+>}", name: "admin_settings_seasons_rule_update")]
     public function updateRule(int $seasonId, int $ruleId, Request $request, ConfigService $configService): Response
     {
         $oldSeason = $configService->getSeasons()[$seasonId];
@@ -135,7 +135,7 @@ class SeasonsController extends AbstractController
         ]);
     }
 
-    #[Route("/seasons/{seasonId}/rule/delete/{ruleId}", name: "admin_settings_seasons_rule_delete")]
+    #[Route("/seasons/{seasonId<\d+>}/rule/delete/{ruleId<\d+>}", name: "admin_settings_seasons_rule_delete")]
     public function deleteRule(int $seasonId, int $ruleId, Request $request, ConfigService $configService): Response
     {
             $configService->deleteSeasonRule($seasonId, $ruleId);

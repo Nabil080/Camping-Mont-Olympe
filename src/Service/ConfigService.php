@@ -363,7 +363,14 @@ class ConfigService
         ];
     }
 
+    public function getServicesChoices(): array
+    {
+        $services = $this->getServices();
+        $choices = [];
+        foreach($services as $service){
+            $choices += [$service['name'] => $service['id']];
+        }
 
-
-
+        return $choices;
+    }
 }

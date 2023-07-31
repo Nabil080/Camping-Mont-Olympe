@@ -59,7 +59,7 @@ class ReservationsController extends AbstractController
         ]);
     }
 
-    #[Route("/reservations/{type}/update/{ruleId}", name: "admin_settings_reservations_update")]
+    #[Route("/reservations/{type}/update/{ruleId<\d+>}", name: "admin_settings_reservations_update")]
     public function update(string $type, int $ruleId, Request $request, ConfigService $configService): Response
     {
         $oldReservation = $configService->getReservationsRules($type);
@@ -99,7 +99,7 @@ class ReservationsController extends AbstractController
         ]);
     }
 
-    #[Route("/reservations/{type}/delete/{ruleId}", name: "admin_settings_reservations_delete")]
+    #[Route("/reservations/{type}/delete/{ruleId<\d+>}", name: "admin_settings_reservations_delete")]
     public function delete(string $type,int $ruleId, Request $request, ConfigService $configService): Response
     {
             $configService->deleteReservationRule($type, $ruleId);

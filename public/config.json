@@ -419,7 +419,7 @@
         "card": true,
         "paypal": true,
         "check": true,
-        "holiday_check": true
+        "holiday_check": false
     },
     "taxes": {
         "1": {

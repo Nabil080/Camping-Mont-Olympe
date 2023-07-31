@@ -43,7 +43,7 @@ class ServicesController extends AbstractController
     }
 
 
-    #[Route('/services/{serviceId}/update/{ruleId}', name: 'admin_settings_services_update')]
+    #[Route('/services/{serviceId}/update/{ruleId<\d+>}', name: 'admin_settings_services_update')]
     public function update(int $serviceId, int $ruleId, ConfigService $configService, Request $request): Response
     {
         $oldService = $configService->getServices($serviceId);
@@ -72,7 +72,7 @@ class ServicesController extends AbstractController
         ]);
     }
 
-    #[Route("/services/{serviceId}/delete/{ruleId}", name: "admin_settings_services_delete")]
+    #[Route("/services/{serviceId}/delete/{ruleId<\d+>}", name: "admin_settings_services_delete")]
     public function deleteRule(int $serviceId, int $ruleId, Request $request, ConfigService $configService): Response
     {
             $configService->deleteserviceRule($serviceId, $ruleId);
