@@ -58,4 +58,12 @@ class ReservationsController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route("/reservations/{type}/delete/{ruleId}", name: "admin_settings_reservations_delete")]
+    public function delete(string $type,int $ruleId, Request $request, ConfigService $configService): Response
+    {
+            $configService->deleteReservationRule($type, $ruleId);
+            $this->addFlash('success', 'New "places" price rule added successfully!');
+            return $this->redirectToRoute('admin_settings_reservations');
+    }
 }

@@ -202,6 +202,16 @@ class ConfigService
         $this->saveConfigData($config);
     }
 
+    public function deleteReservationRule(string $type, int $ruleId): void
+    {
+        $config = $this->getConfigData();
+        foreach($config['reservations'][$type] as $index => $rule);
+            if($rule['id'] === $ruleId)
+                unset($config['reservations'][$type][$index]);
+
+        $this->saveConfigData($config);
+    }
+
     // ! ---------------- TOOLS
 
     public function getPlacesChoices(): array
