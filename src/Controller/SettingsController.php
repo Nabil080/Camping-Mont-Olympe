@@ -6,12 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ParamController extends AbstractController
+class SettingsController extends AbstractController
 {
-    #[Route('/param', name: 'param')]
+    #[Route('/admin/settings', name: 'admin_settings')]
     public function index(): Response
     {
-        return $this->render('param/index.html.twig', [
+        return $this->render('admin/settings/index.html.twig', [
             'controller_name' => 'ParamController',
         ]);
     }
@@ -63,6 +63,4 @@ class ParamController extends AbstractController
             'controller_name' => 'reservationsController',
         ]);
     }
-
-
 }
