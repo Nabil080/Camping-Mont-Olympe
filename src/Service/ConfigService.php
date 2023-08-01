@@ -2,14 +2,15 @@
 
 namespace App\Service;
 
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+
 class ConfigService
 {
     private string $configFilePath;
 
-    public function __construct(string $configFilePath = null)
+    public function __construct(ParameterBagInterface $parameterBag)
     {
-        if($configFilePath === null) $configFilePath = "config.json";
-        $this->configFilePath = $configFilePath;
+        $this->configFilePath = $parameterBag->get('kernel.project_dir').'/config/config.json';
     }
 
     // ! --------------- CONFIG

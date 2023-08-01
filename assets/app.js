@@ -8,3 +8,5 @@ import './styles/app.css';
 // stimulus
 import './bootstrap.js';
 
+// flowbite
+import 'flowbite';
