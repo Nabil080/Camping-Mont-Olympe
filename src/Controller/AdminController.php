@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,8 +12,12 @@ class AdminController extends AbstractController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
+        $formatter = new \IntlDateFormatter('fr_FR', \IntlDateFormatter::FULL, \IntlDateFormatter::FULL);
+        $now = new \DateTime('now', new DateTimeZone('Europe/Paris'));
+
+
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+            'date' => $now,
         ]);
     }
 

@@ -1,11 +1,60 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Hello AdminController!
+{% endblock %}
 
 {% block body %}
 
+	<h1 class="text-3xl text-center my-8">Interface administrateur</h1>
 
+	<header class="flex justify-center mx-12 gap-12 text-xl">
+		<section>
+			<p>Bienvenue
+				<span class="underline">Nabil</span>, nous sommes
+				<span class="font-medium">{{ date|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY")}}</span>
+				<br>42 emplacements occupés, 26 de libres.
+				<br>3 arrivées et 1 sorties de prévues
+			</p>
+		</section>
+		<section id="fast-search" class="my-auto">
+			<span>Recherche de réservation rapide :</span>
+			<input type="text" placeholder="N° de réservation ou nom du client.">
+		</section>
+	</header>
 
+	<section id="admin-cards" class="border my-12 grid grid-cols-3 mx-auto w-fit p-4">
+		<article class="admin-card border p-4 ">
+			<div class="top-card">
+				<img src="" alt="">
+			</div>
+			<div class="bot-card text-center">
+				<p>Consulter les
+					<span class="font-semibold">réservations</span>
+				</p>
+			</div>
+		</article>
+		<article class="admin-card border p-4 ">
+			<div class="top-card">
+				<img src="" alt="">
+			</div>
+			<div class="bot-card text-center">
+				<p>Ouvrir la
+					<span class="font-semibold">caisse</span>
+				</p>
+			</div>
+		</article>
+		<article class="admin-card border p-4 ">
+			<div class="top-card">
+				<img src="" alt="">
+			</div>
+			<div class="bot-card text-center">
+				<p>Consulter le
+					<span class="font-semibold">planning</span>
+				</p>
+			</div>
+		</article>
+
+	</section>
 
 
 {% endblock %}
