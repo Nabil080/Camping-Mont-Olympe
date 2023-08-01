@@ -15,7 +15,7 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-	<body>
+	<body class="bg-green-">
 
 		{% block nav %}
 			{{ include('include/_nav_admin.html.twig') }}
@@ -23,8 +23,6 @@
 
 		{% block body %}{% endblock %}
 
-		{% block footer %}
-			{{ include('include/_footer_admin.html.twig') }}
-		{% endblock %}
+		{% block footer %}{% endblock %}
 	</body>
 </html>

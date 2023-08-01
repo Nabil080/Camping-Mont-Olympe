@@ -28,7 +28,7 @@
 
 		<section id="admin-cards" class=" my-16 grid grid-cols-3 gap-24 mx-auto w-fit p-4">
 			<a href="">
-				<article class="admin-card flex flex-col gap-5 px-12 py-8 border-2 border-black hover:bg-gray-200 rounded-xl ">
+				<article class="admin-card bg-white flex flex-col gap-5 px-12 py-8 border-2 border-black hover:bg-green-200 rounded-xl ">
 					<div class="top-card grid place-content-center">
 						<svg class="w-56 h-56" viewbox="0 0 1024 1024" fill="#000000" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg">
 							<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -48,7 +48,7 @@
 				</article>
 			</a>
 			<a href="">
-				<article class="admin-card flex flex-col gap-5 px-12 py-8 border-2 border-black hover:bg-gray-200 rounded-xl ">
+				<article class="admin-card bg-white flex flex-col gap-5 px-12 py-8 border-2 border-black hover:bg-green-200 rounded-xl ">
 					<div class="top-card grid place-content-center">
 						<svg class="w-56 h-56" fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 64 64" xml:space="preserve">
 							<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -88,7 +88,7 @@
 				</article>
 			</a>
 			<a href="">
-				<article class="admin-card flex flex-col gap-5 px-12 py-8 border-2 border-black hover:bg-gray-200 rounded-xl ">
+				<article class="admin-card bg-white flex flex-col gap-5 px-12 py-8 border-2 border-black hover:bg-green-200 rounded-xl ">
 					<div class="top-card grid place-content-center">
 						<svg class="w-56 h-56" fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 490 490" xml:space="preserve">
 							<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -128,4 +128,9 @@
 		</section>
 	</container>
 
+{% endblock %}
+
+
+{% block footer %}
+	{{ include('include/_footer_admin.html.twig') }}
 {% endblock %}
