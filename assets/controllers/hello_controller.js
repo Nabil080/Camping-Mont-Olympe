@@ -1,4 +1,4 @@
-import { Controller } from '@hotwired/stimulus';
+import { Controller } from "@hotwired/stimulus";
 
 /*
  * This is an example Stimulus controller!
@@ -10,21 +10,19 @@ import { Controller } from '@hotwired/stimulus';
  * Delete this file or adapt it for your use!
  */
 export default class extends Controller {
-    connect() {
-        this.element.dataset.action = "hello#click"
+  connect() {
+    this.element.dataset.action = "hello#click";
 
-        console.log('début')
+    console.log("début");
+  }
 
-    }
+  click(event) {
+    event.preventDefault();
 
-    click(event) {
-        event.preventDefault()
+    this.element.textContent = "Sympa";
 
-        this.element.textContent = "Sympa"
+    document.querySelector("body").dataset.action = "hello#click";
 
-        document.querySelector('body').dataset.action = "hello#click"
-
-
-        console.log('hi')
-    }
+    console.log("hi");
+  }
 }
