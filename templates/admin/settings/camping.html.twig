@@ -5,41 +5,61 @@
 
 {% block body %}
 
-	<section id="camping-infos" class="flex">
-
-		<section id="left-infos" class="w-1/2">
-			<div id="infos" class="flex flex-col gap-4">
-				<div class="flex gap-2">
-					<label for="">Nom</label>
-					<p>{{ camping.name }}</p>
-				</div>
-				<div class="flex gap-2">
-					<label for="">Adresse</label>
-					<p>{{ camping.adress }}</p>
-				</div>
-				<div class="flex gap-2">
-					<label for="">Téléphone</label>
-					<p>{{ camping.phone }}</p>
-				</div>
-				<div class="flex gap-2">
-					<label for="">Email</label>
-					<p>{{ camping.email }}</p>
-				</div>
-				<div class="flex gap-2">
-					<label for="">Site internet</label>
-					<p>{{ camping.website }}</p>
-				</div>
-				<button class="g-button w-fit">Modifier les informations</button>
+	<header class="mt-8 flex justify-center items-center gap-2">
+		<h1 class="text-3xl">Informations camping</h1>
+		<div class="group relative cursor-help">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+			<div class="hidden group-hover:block absolute bg-white border left-1/2 -translate-x-1/2 mt-4 border-black p-2 w-[300px]">
+				Ces informations sont affichés sur le site, mais également sur les factures générées, veillez à les mettre à jour.
 			</div>
-			<div id="logo">
-				<img src="{{ asset('img/logo-camping.png') }}" alt="">
+		</div>
+	</header>
+
+	<section id="camping-infos" class="flex text-xl p-4 justify-center gap-20">
+
+		<section id="left-infos" class="p-4 flex flex-col justify-between">
+			<div id="infos" class="flex flex-col gap-4 p-12">
+				<div class="flex gap-2">
+					<label>
+						<span class="underline">Nom</span>
+						:</label>
+					<p class="grow text-end">{{ camping.name }}</p>
+				</div>
+				<div class="flex gap-2">
+					<label>
+						<span class="underline">Adresse</span>
+						:</label>
+					<p class="grow text-end">{{ camping.adress }}</p>
+				</div>
+				<div class="flex gap-2">
+					<label>
+						<span class="underline">Téléphone</span>
+						:</label>
+					<p class="grow text-end">{{ camping.phone }}</p>
+				</div>
+				<div class="flex gap-2">
+					<label>
+						<span class="underline">Email</span>
+						:</label>
+					<p class="grow text-end">{{ camping.email }}</p>
+				</div>
+				<div class="flex gap-2">
+					<label>
+						<span class="underline">Site internet</span>
+						:</label>
+					<p class="grow text-end">{{ camping.website }}</p>
+				</div>
+				<button class="g-button">Modifier les informations</button>
+			</div>
+			<div id="logo" class="p-12 flex flex-col gap-4">
+				<img src="{{ asset('img/logo-camping.png') }}" class="w-full" alt="logo du camping">
 				<button class="g-button">Modifier le logo</button>
 			</div>
 		</section>
 
-		<section id="right-infos" class="w-1/2">
-			<div id="map">
-				<img src="{{ asset('img/map.jpg') }}"></img>
+		<section id="right-infos" class="w-1/4 p-4">
+			<div id="map" class="w-full [&>img]:w-full p-12 flex flex-col gap-4">
+				<img src="{{ asset('img/map.jpg') }}" class="w-full"></img>
 			<button class="g-button">Modifier la carte</button>
 		</div>
 	</section>
