@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ReservationsController extends AbstractController
 {
-    #[Route('/reservations', name: 'admin_settings_reservations')]
+    #[Route('/admin/settings/reservations', name: 'admin_settings_reservations')]
     public function index(ConfigService $configService): Response
     {
         $checkin = $configService->getReservationsRules('checkIn');
@@ -23,7 +23,7 @@ class ReservationsController extends AbstractController
 
         $reservations = $configService->getReservationsRules();
 
-        return $this->render('param/reservations/index.html.twig', [
+        return $this->render('admin/settings/reservations/index.html.twig', [
             'checkin' => $checkin,
             'checkout' => $checkout,
             'minstay' => $minstay,
@@ -36,11 +36,11 @@ class ReservationsController extends AbstractController
     #[Route("/reservations/{type}/add", name: "admin_settings_reservations_add")]
     public function add(string $type, Request $request, ConfigService $configService): Response
     {
-        $isCheck = str_contains(strtolower($type),'check') ? true : false;
-        $isStay = str_contains(strtolower($type),'stay') ? true : false;
+        $isCheck = str_contains(strtolower($type), 'check') ? true : false;
+        $isStay = str_contains(strtolower($type), 'stay') ? true : false;
 
-        if($isCheck) $form = $this->createForm(CheckRuleType::class);
-        if($isStay) $form = $this->createForm(StayRuleType::class);
+        if ($isCheck) $form = $this->createForm(CheckRuleType::class);
+        if ($isStay) $form = $this->createForm(StayRuleType::class);
 
         $form->handleRequest($request);
 
@@ -63,16 +63,16 @@ class ReservationsController extends AbstractController
     public function update(string $type, int $ruleId, Request $request, ConfigService $configService): Response
     {
         $oldReservation = $configService->getReservationsRules($type);
-        foreach($oldReservation as $index => $rule){
-            if($rule['id'] === $ruleId)
+        foreach ($oldReservation as $index => $rule) {
+            if ($rule['id'] === $ruleId)
                 $oldRule = $oldReservation[$index];
         }
 
-        $isCheck = str_contains(strtolower($type),'check') ? true : false;
-        $isStay = str_contains(strtolower($type),'stay') ? true : false;
+        $isCheck = str_contains(strtolower($type), 'check') ? true : false;
+        $isStay = str_contains(strtolower($type), 'stay') ? true : false;
 
-        if($isCheck) $form = $this->createForm(CheckRuleType::class);
-        if($isStay) $form = $this->createForm(StayRuleType::class);
+        if ($isCheck) $form = $this->createForm(CheckRuleType::class);
+        if ($isStay) $form = $this->createForm(StayRuleType::class);
 
         $form->handleRequest($request);
 
@@ -84,10 +84,10 @@ class ReservationsController extends AbstractController
             $configService->updateReservationRule($type, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
             return $this->redirectToRoute('admin_settings_reservations');
-        }else{
-            if($isCheck){
+        } else {
+            if ($isCheck) {
                 $form->get('days')->setData($oldRule['days']);
-            }elseif($isStay){
+            } elseif ($isStay) {
                 $form->get('amount')->setData($oldRule['amount']);
             }
             $form->get('places')->setData($oldRule['places']);
@@ -100,10 +100,10 @@ class ReservationsController extends AbstractController
     }
 
     #[Route("/reservations/{type}/delete/{ruleId<\d+>}", name: "admin_settings_reservations_delete")]
-    public function delete(string $type,int $ruleId, Request $request, ConfigService $configService): Response
+    public function delete(string $type, int $ruleId, Request $request, ConfigService $configService): Response
     {
-            $configService->deleteReservationRule($type, $ruleId);
-            $this->addFlash('success', 'New "places" price rule added successfully!');
-            return $this->redirectToRoute('admin_settings_reservations');
+        $configService->deleteReservationRule($type, $ruleId);
+        $this->addFlash('success', 'New "places" price rule added successfully!');
+        return $this->redirectToRoute('admin_settings_reservations');
     }
 }
