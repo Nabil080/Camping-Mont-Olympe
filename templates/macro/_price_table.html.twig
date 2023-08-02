@@ -1,11 +1,13 @@
 {% macro price_table(type, params) %}
 
-	<h3 class="mt-8 mb-4 text-2xl">
-		{{ type is same as 'places' ? 'Emplacements' }}
-		{{ type is same as 'services' ? 'Services supplémentaires' }}
-		{{ type is same as 'ages' ? 'Adulte/enfants' }}
-		{{ type is same as 'offers' ? 'Offres' }}
-	</h3>
+	<div class="mt-12 mb-4 flex justify-between items-center">
+		<h2 class="text-2xl">
+			{{ type is same as 'places' ? 'Emplacements' }}
+			{{ type is same as 'services' ? 'Services supplémentaires' }}
+			{{ type is same as 'ages' ? 'Adulte/enfants' }}
+			{{ type is same as 'offers' ? 'Offres' }}
+		</h2>
+	</div>
 	<table class="w-full border-collapse border">
 		<thead>
 			<tr class="bg-green-200">

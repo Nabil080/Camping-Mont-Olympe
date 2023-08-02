@@ -1,4 +1,3 @@
-{% import "macro/_footer_admin.html.twig" as footer %}
 {% import 'macro/_nav_admin.html.twig' as nav %}
 
 <!DOCTYPE html>
@@ -26,8 +25,6 @@
 
 		{% block body %}{% endblock %}
 
-		{% block footer %}
-			{{ footer.footer(false) }}
-		{% endblock %}
+		{% block footer %}{% endblock %}
 	</body>
 </html>
