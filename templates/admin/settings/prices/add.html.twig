@@ -24,13 +24,13 @@
 		{{ type is same as 'offers' ? 'Offres' }}
 	</p>
 
-	{{ form_start(form) }}
-	{% for row in form.children %}
-		{{form_row(row)}}
-	{% endfor %}
-	<button type="submit">
-		Add Rule</button>
-	{{ form_end(form) }}
+	<div class="container mx-auto my-8 max-w-xl">
+		{{ form_start(form) }}
+		{{form_widget(form)}}
+		<button type="submit" class="g-button w-full" formnovalidate>
+			Add Rule</button>
+		{{ form_end(form) }}
+	</div>
 
 	<a href="{{ path('admin_settings_prices') }}">Back to List</a>
 {% endblock %}

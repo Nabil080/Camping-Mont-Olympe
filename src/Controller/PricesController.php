@@ -32,7 +32,7 @@ class PricesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $lastId = $configService->getLastPricesRules($type);
+            $lastId = $configService->getLastPricesRules($type, $id);
             $rule = ["id" => $lastId + 1];
             $rule += $form->getData();
 

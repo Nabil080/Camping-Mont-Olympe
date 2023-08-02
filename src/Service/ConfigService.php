@@ -65,9 +65,9 @@ class ConfigService
         return $config['prices'][$type] ?? [];
     }
 
-    public function getLastPricesRules(string $type): int
+    public function getLastPricesRules(string $type, int $id): int
     {
-        $lastId = $this->getPricesRules($type);
+        $lastId = $this->getPricesRules($type)[$id]['rules'];
         $lastId = end($lastId);
 
         return $lastId ? $lastId['id'] : 0;

@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class PriceRuleType extends AbstractType
 {
@@ -25,7 +27,12 @@ class PriceRuleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', NumberType::class)
+            ->add('amount', NumberType::class, [
+                'constraints' => [
+                    new NotBlank,
+                    new Length(['min' => 2])
+                ]
+            ])
             ->add('per_days', CheckboxType::class, [
                 'required' => false,
             ])
