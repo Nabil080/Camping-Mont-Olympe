@@ -23,7 +23,7 @@ class PricesController extends AbstractController
         ]);
     }
 
-    #[Route("/prices/add/{type}/{id<\d+>}", name: "admin_settings_prices_add")]
+    #[Route("/admin/settings/prices/{type}/{id<\d+>}/rule/add", name: "admin_settings_prices_add_rule")]
     public function add($type, $id, Request $request, ConfigService $configService): Response
     {
         $isOffer = $type === 'offers' ? true : false;
@@ -41,8 +41,9 @@ class PricesController extends AbstractController
             return $this->redirectToRoute('admin_settings_prices');
         }
 
-        return $this->render('param/prices/add.html.twig', [
+        return $this->render('admin/settings/prices/add.html.twig', [
             'form' => $form->createView(),
+            'type' => $type
         ]);
     }
 
@@ -83,7 +84,7 @@ class PricesController extends AbstractController
             }
         }
 
-        return $this->render('param/prices/add.html.twig', [
+        return $this->render('admin/settings/prices/add.html.twig', [
             'form' => $form->createView(),
         ]);
     }

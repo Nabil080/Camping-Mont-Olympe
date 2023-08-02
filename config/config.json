@@ -228,17 +228,35 @@
             "1": {
                 "id": 1,
                 "name": "H\u00e9bergement 1",
-                "rules": [
-                    {
-                        "id": 1,
-                        "amount": 0,
+                "rules": {
+                    "1": {
+                        "id": 3,
+                        "amount": 20,
                         "per_days": true,
-                        "per_person": false,
+                        "per_person": true,
                         "seasons": [
                             null
                         ]
+                    },
+                    "2": {
+                        "id": 3,
+                        "amount": 20,
+                        "per_days": true,
+                        "per_person": true,
+                        "seasons": [
+                            null
+                        ]
+                    },
+                    "3": {
+                        "id": 3,
+                        "amount": 20,
+                        "per_days": true,
+                        "per_person": true,
+                        "seasons": [
+                            "Saison une"
+                        ]
                     }
-                ]
+                }
             },
             "2": {
                 "id": 2,
