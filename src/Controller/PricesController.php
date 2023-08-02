@@ -42,7 +42,7 @@ class PricesController extends AbstractController
         }
 
         return $this->render('admin/settings/prices/add.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form,
             'type' => $type
         ]);
     }
