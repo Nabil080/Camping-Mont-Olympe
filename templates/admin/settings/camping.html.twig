@@ -5,9 +5,9 @@
 
 {% block body %}
 
-	<section id="camping-infos" class="grid grid-cols-2 mx-1/4 border">
+	<section id="camping-infos" class="flex">
 
-		<section id="left-infos">
+		<section id="left-infos" class="w-1/2">
 			<div id="infos" class="flex flex-col gap-4">
 				<div class="flex gap-2">
 					<label for="">Nom</label>
@@ -37,7 +37,7 @@
 			</div>
 		</section>
 
-		<section id="right-infos">
+		<section id="right-infos" class="w-1/2">
 			<div id="map">
 				<img src="{{ asset('img/map.jpg') }}"></img>
 			<button class="g-button">Modifier la carte</button>
