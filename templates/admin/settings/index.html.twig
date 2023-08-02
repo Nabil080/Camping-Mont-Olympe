@@ -6,7 +6,7 @@
 {% block body %}
 	<container>
 		<header class="text-center my-8">
-			<h1 class="text-3xl">Paramètres du camping</h1>
+			<h1 class="text-3xl peer-hover:text-white">Paramètres du camping</h1>
 			<p class="text-xl">Bienvenue
 				<span class="underline">Nabil</span>, que souhaitez vous paramétrer ?</p>
 		</header>
@@ -15,7 +15,7 @@
 			<article class="admin-card relative flex flex-col gap-5 px-12 py-8 border-2 border-black bg-white hover:bg-green-200 rounded-xl ">
 				<a class="absolute w-full h-full" href=""></a>
 				<div class="top-card grid place-content-center">
-					<svg class="w-36 h-36" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 512 512" xml:space="preserve" fill="#000000">
+					<svg class="w-36 h-36 " version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 512 512" xml:space="preserve">
 						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
 						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
 						<g id="SVGRepo_iconCarrier">
@@ -37,7 +37,7 @@
 					</p>
 				</div>
 				<div class="absolute bottom-4 right-4">
-					<div class="group relative">
+					<div class="group relative cursor-help">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
 						<div class="hidden group-hover:block z-50 absolute bg-white border bottom-full left-1/2 -translate-x-1/2 mb-4 border-black p-2 w-[300px]">
 							Modifiez les informations du camping, logo, carte, nom, adresse, téléphone...
@@ -63,7 +63,7 @@
 					<p>Tarifs</p>
 				</div>
 				<div class="absolute bottom-4 right-4">
-					<div class="group relative">
+					<div class="group relative cursor-help">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
 						<div class="hidden group-hover:block z-50 absolute bg-white border bottom-full left-1/2 -translate-x-1/2 mb-4 border-black p-2 w-[300px]">Vous pouvez régler les tarifs du camping en fonction des saisons et choisir si chaque nuit ou chaque personne multiplie le paiement.
 							<br><br>
@@ -73,7 +73,7 @@
 				</div>
 			</article>
 			<article class="admin-card relative flex flex-col gap-5 px-12 py-8 border-2 border-black bg-white hover:bg-green-200 rounded-xl ">
-				<a href="" class="absolute w-full h-full"></a>
+				<a href="{{ path('admin_settings_seasons') }}" class="absolute w-full h-full"></a>
 				<div class="top-card grid place-content-center">
 					<svg class="w-36 h-36" fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 490 490" xml:space="preserve">
 						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -106,7 +106,7 @@
 					<p>Saisons</p>
 				</div>
 				<div class="absolute bottom-4 right-4">
-					<div class="group relative">
+					<div class="group relative cursor-help">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
 						<div class="hidden group-hover:block z-50 absolute bg-white border bottom-full left-1/2 -translate-x-1/2 mb-4 border-black p-2 w-[300px]">
 							Définissez des saisons et leurs périodes correspondantes.
@@ -137,7 +137,7 @@
 					<p>Emplacements d'hébergement</p>
 				</div>
 				<div class="absolute bottom-4 right-4">
-					<div class="group relative">
+					<div class="group relative cursor-help">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
 						<div class="hidden group-hover:block z-50 absolute bg-white border bottom-full left-1/2 -translate-x-1/2 mb-4 border-black p-2 w-[300px]">Vous pouvez régler les tarifs du camping en fonction des saisons et choisir si chaque nuit ou chaque personne multiplie le paiement.
 							<br><br>
@@ -161,7 +161,7 @@
 					<p>Règles de réservation</p>
 				</div>
 				<div class="absolute bottom-4 right-4">
-					<div class="group relative">
+					<div class="group relative cursor-help">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
 						<div class="hidden group-hover:block z-50 absolute bg-white border bottom-full left-1/2 -translate-x-1/2 mb-4 border-black p-2 w-[300px]">Vous pouvez régler les tarifs du camping en fonction des saisons et choisir si chaque nuit ou chaque personne multiplie le paiement.
 							<br><br>
@@ -192,7 +192,7 @@
 					<p>Services supplémentaires</p>
 				</div>
 				<div class="absolute bottom-4 right-4">
-					<div class="group relative">
+					<div class="group relative cursor-help">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
 						<div class="hidden group-hover:block z-50 absolute bg-white border bottom-full left-1/2 -translate-x-1/2 mb-4 border-black p-2 w-[300px]">Vous pouvez régler les tarifs du camping en fonction des saisons et choisir si chaque nuit ou chaque personne multiplie le paiement.
 							<br><br>

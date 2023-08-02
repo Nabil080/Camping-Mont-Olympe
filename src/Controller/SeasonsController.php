@@ -16,13 +16,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SeasonsController extends AbstractController
 {
-    #[Route('/seasons', name: 'admin_settings_seasons')]
+    #[Route('/admin/settings/seasons', name: 'admin_settings_seasons')]
     public function index(ConfigService $configService): Response
     {
         $seasons = $configService->getSeasons();
 
 
-        return $this->render('param/seasons/index.html.twig', [
+        return $this->render('admin/settings/seasons/index.html.twig', [
             'seasons' => $seasons,
         ]);
     }
@@ -37,7 +37,7 @@ class SeasonsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $lastId = $configService->getLastSeason();
             $name = $form->getData()['name'];
-            $season = ["id" => $lastId + 1, "name" => $name, "rules" => [] ];
+            $season = ["id" => $lastId + 1, "name" => $name, "rules" => []];
 
             $configService->addSeason($season);
             $this->addFlash('success', 'New "places" price rule added successfully!');
@@ -59,13 +59,13 @@ class SeasonsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $name = $form->getData()['name'];
-            $season = ["id" => $oldSeason['id'], "name" => $name, "rules" => $oldSeason['rules'] ];
+            $season = ["id" => $oldSeason['id'], "name" => $name, "rules" => $oldSeason['rules']];
 
             $configService->updateSeason($seasonId, $season);
 
             $this->addFlash('success', 'New "places" price rule added successfully!');
             return $this->redirectToRoute('admin_settings_seasons');
-        }else{
+        } else {
             $form->get('name')->setData($oldSeason['name']);
         }
 
@@ -77,10 +77,10 @@ class SeasonsController extends AbstractController
     #[Route("/seasons/delete/{seasonId<\d+>}", name: "admin_settings_seasons_delete")]
     public function delete($seasonId, Request $request, ConfigService $configService): Response
     {
-            $configService->deleteSeason($seasonId);
+        $configService->deleteSeason($seasonId);
 
-            $this->addFlash('success', 'New "places" price rule added successfully!');
-            return $this->redirectToRoute('admin_settings_seasons');
+        $this->addFlash('success', 'New "places" price rule added successfully!');
+        return $this->redirectToRoute('admin_settings_seasons');
     }
 
     #[Route("/seasons/{seasonId<\d+>}/rule/add", name: "admin_settings_seasons_rule_add")]
@@ -109,8 +109,8 @@ class SeasonsController extends AbstractController
     public function updateRule(int $seasonId, int $ruleId, Request $request, ConfigService $configService): Response
     {
         $oldSeason = $configService->getSeasons()[$seasonId];
-        foreach($oldSeason['rules'] as $index => $rule){
-            if($rule['id'] === $ruleId)
+        foreach ($oldSeason['rules'] as $index => $rule) {
+            if ($rule['id'] === $ruleId)
                 $oldRule = $oldSeason['rules'][$index];
         }
 
@@ -124,10 +124,10 @@ class SeasonsController extends AbstractController
             $configService->updateSeasonRule($seasonId, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
             return $this->redirectToRoute('admin_settings_seasons');
-        }else{
-                $form->get('start')->setData($oldRule['start']);
-                $form->get('end')->setData($oldRule['end']);
-                $form->get('days')->setData($oldRule['days']);
+        } else {
+            $form->get('start')->setData($oldRule['start']);
+            $form->get('end')->setData($oldRule['end']);
+            $form->get('days')->setData($oldRule['days']);
         }
 
         return $this->render('param/seasons/add_rule.html.twig', [
@@ -138,9 +138,9 @@ class SeasonsController extends AbstractController
     #[Route("/seasons/{seasonId<\d+>}/rule/delete/{ruleId<\d+>}", name: "admin_settings_seasons_rule_delete")]
     public function deleteRule(int $seasonId, int $ruleId, Request $request, ConfigService $configService): Response
     {
-            $configService->deleteSeasonRule($seasonId, $ruleId);
+        $configService->deleteSeasonRule($seasonId, $ruleId);
 
-            $this->addFlash('success', 'New "places" price rule added successfully!');
-            return $this->redirectToRoute('admin_settings_seasons');
+        $this->addFlash('success', 'New "places" price rule added successfully!');
+        return $this->redirectToRoute('admin_settings_seasons');
     }
 }
