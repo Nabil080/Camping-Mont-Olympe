@@ -17,7 +17,7 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-	<body class="bg-green-">
+	<body class="bg-green- min-h-screen relative">
 
 		{% block nav %}
 			{{ nav.nav(false) }}
@@ -25,6 +25,10 @@
 
 		{% block body %}{% endblock %}
 
-		{% block footer %}{% endblock %}
+		{% block footer %}
+
+			{# <footer class="w-full bg-green-200 absolute bottom-0">Salut</footer> #}
+
+		{% endblock %}
 	</body>
 </html>

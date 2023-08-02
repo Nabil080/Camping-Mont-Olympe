@@ -19,18 +19,68 @@
 	</header>
 
 
-	<div class="container mx-auto mb-8">
+	<div class="container mx-auto py-6">
 
-		<section id="add-service">
+		<section id="add-service" class="mb-8">
 			<a href="">
 				<button class="bg-green-200 border-black border hover:outline hover:bg-green-300 px-4 py-2">Ajouter un service supplémentaire</button>
 			</a>
 		</section>
 
+		<p>Les tarifs sont configurables
+			<a href="{{ path('admin_settings_prices') }}" class="underline text-green-800 hover:text-green-600">ici</a>.
+		</p>
+		<table class="w-full border-collapse border">
+			<thead>
+				<tr class="bg-green-200">
+					<th class="p-2">Service</th>
+					<th class="p-2">Nombre maximum</th>
+					<th class="p-2">Emplacements</th>
+					<th class="p-2 text-end">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for service in services %}
+					<tr class="text-center bg-green-50">
+						<td class="p-2 ">{{ service.name }}</td>
+						<td></td>
+						<td></td>
+						<td class="p-2 space-x-4 text-end w-fit">
+							<a href="" class="cursor-pointer">
+								<i class="fa fa-plus"></i>
+							</a>
+							<a href="">
+								<i class="fa fa-pen"></i>
+							</a>
+							<a href="" onclick="return confirm('Voulez vous vraiment supprimer cette saison ?')">
+								<i class="fa fa-trash"></i>
+							</a>
+						</td>
+					</tr>
+					<tr>
+						{% for rule in service.rules %}
+							<tr class="text-center">
+								<td class="p-2"></td>
+								<td class="p-2">{{ rule.max }}</td>
+								<td class="p-2">{{ rule.places.0 is null ? "Tous" : rule.places|join(', ') }}</td>
+								<td class="p-2 space-x-4 text-end">
+									<a href="{{ path('admin_settings_services_update', {'serviceId': service.id, 'ruleId': rule.id}) }}" class="">
+										<i class="fa fa-pen"></i>
+									</a>
+									<a href="{{ path('admin_settings_services_delete', {'serviceId': service.id, 'ruleId': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')">
+										<i class="fa fa-trash"></i>
+									</a>
+								</td>
+							</tr>
+						{% endfor %}
+					{% endfor %}
+				</tbody>
+			</tbody>
+		</table>
 
 		{% for service in services %}
 
-			{{ macros.service_table(service) }}
+			{# {{ macros.service_table(service) }} #}
 
 		{% endfor %}
 
