@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\ConfigService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,58 +10,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class SettingsController extends AbstractController
 {
     #[Route('/admin/settings', name: 'admin_settings')]
-    public function index(): Response
+    public function index(ConfigService $configService): Response
     {
-        return $this->render('admin/settings/index.html.twig', [
-            'controller_name' => 'ParamController',
-        ]);
+
+
+        return $this->render('admin/settings/index.html.twig', []);
     }
 
-    #[Route('/param/camping', name: 'param_camping')]
-    public function camping(): Response
+    #[Route('/admin/settings/camping', name: 'admin_settings_camping')]
+    public function camping(ConfigService $configService): Response
     {
-        return $this->render('param/camping.html.twig', [
-            'controller_name' => 'campingController',
-        ]);
-    }
+        $camping = $configService->getCamping();
 
-    #[Route('/param/emplacements', name: 'emplacements')]
-    public function emplacements(): Response
-    {
-        return $this->render('param/emplacements.html.twig', [
-            'controller_name' => 'emplacementsController',
-        ]);
-    }
-
-    #[Route('/param/services', name: 'services')]
-    public function services(): Response
-    {
-        return $this->render('param/services.html.twig', [
-            'controller_name' => 'servicesController',
-        ]);
-    }
-
-    #[Route('/param/seasons', name: 'seasons')]
-    public function seasons(): Response
-    {
-        return $this->render('param/seasons.html.twig', [
-            'controller_name' => 'seasonsController',
-        ]);
-    }
-
-    #[Route('/param/prices', name: 'prices')]
-    public function prices(): Response
-    {
-        return $this->render('param/prices.html.twig', [
-            'controller_name' => 'pricesController',
-        ]);
-    }
-
-    #[Route('/param/reservations', name: 'reservations')]
-    public function reservations(): Response
-    {
-        return $this->render('param/reservations.html.twig', [
-            'controller_name' => 'reservationsController',
+        return $this->render('admin/settings/camping.html.twig', [
+            'camping' => $camping,
         ]);
     }
 }

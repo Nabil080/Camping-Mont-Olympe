@@ -1,0 +1,46 @@
+{% extends 'admin/settings/base.html.twig' %}
+
+{% block title %}Paramètres - Camping
+{% endblock %}
+
+{% block body %}
+
+	<section id="camping-infos" class="grid grid-cols-2 mx-1/4 border">
+
+		<section id="left-infos">
+			<div id="infos" class="flex flex-col gap-4">
+				<div class="flex gap-2">
+					<label for="">Nom</label>
+					<p>{{ camping.name }}</p>
+				</div>
+				<div class="flex gap-2">
+					<label for="">Adresse</label>
+					<p>{{ camping.adress }}</p>
+				</div>
+				<div class="flex gap-2">
+					<label for="">Téléphone</label>
+					<p>{{ camping.phone }}</p>
+				</div>
+				<div class="flex gap-2">
+					<label for="">Email</label>
+					<p>{{ camping.email }}</p>
+				</div>
+				<div class="flex gap-2">
+					<label for="">Site internet</label>
+					<p>{{ camping.website }}</p>
+				</div>
+				<button class="g-button w-fit">Modifier les informations</button>
+			</div>
+			<div id="logo">
+				<img src="{{ asset('img/logo-camping.png') }}" alt="">
+				<button class="g-button">Modifier le logo</button>
+			</div>
+		</section>
+
+		<section id="right-infos">
+			<div id="map">
+				<img src="{{ asset('img/map.jpg') }}"></img>
+			<button class="g-button">Modifier la carte</button>
+		</div>
+	</section>
+</section>{% endblock %}
