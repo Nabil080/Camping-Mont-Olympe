@@ -1,4 +1,5 @@
-{% import "macro/_footer_admin.html.twig" as macros %}
+{% import "macro/_footer_admin.html.twig" as footer %}
+{% import 'macro/_nav_admin.html.twig' as nav %}
 
 <!DOCTYPE html>
 <html>
@@ -20,13 +21,13 @@
 	<body class="bg-green-">
 
 		{% block nav %}
-			{{ include('include/_nav_admin.html.twig') }}
+			{{ nav.nav() }}
 		{% endblock %}
 
 		{% block body %}{% endblock %}
 
 		{% block footer %}
-			{{ macros.footer() }}
+			{{ footer.footer() }}
 		{% endblock %}
 	</body>
 </html>
