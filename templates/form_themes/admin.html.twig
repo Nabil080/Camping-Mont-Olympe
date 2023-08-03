@@ -25,6 +25,13 @@
     {{- block('form_label') -}}
 {%- endblock -%}
 
+{# {%- block choice_widget -%}
+    {%- set widget_class = widget_class|default('testt mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-200 focus:ring focus:ring-green-200 focus:ring-opacity-50') -%}
+    {{- parent() -}}
+{%- endblock -%} #}
+
+
+
 {# Modifie les erreurs #}
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
