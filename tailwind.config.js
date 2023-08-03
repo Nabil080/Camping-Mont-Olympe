@@ -7,6 +7,7 @@ module.exports = {
     "./templates/**/**/*.html.twig",
     "./src/Form/**.php",
     "./node_modules/flowbite/**/*.js", // set up the path to the flowbite package
+    "./vendor/symfony/twig-bridge/Resources/views/Form/tailwind_2_layout.html.twig" // tailwind form theme
   ],
   theme: {
     extend: {},

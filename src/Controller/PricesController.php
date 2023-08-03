@@ -27,6 +27,7 @@ class PricesController extends AbstractController
     public function add($type, $id, Request $request, ConfigService $configService): Response
     {
         $isOffer = $type === 'offers' ? true : false;
+        $typeName = $configService->getPricesRules($type)[$id]['name'];
 
         $form = $isOffer ? $this->createForm(OfferRuleType::class) : $this->createForm(PriceRuleType::class);
         $form->handleRequest($request);
@@ -43,7 +44,8 @@ class PricesController extends AbstractController
 
         return $this->render('admin/settings/prices/add.html.twig', [
             'form' => $form,
-            'type' => $type
+            'type' => $type,
+            'type_name' => $typeName,
         ]);
     }
 

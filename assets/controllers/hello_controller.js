@@ -16,7 +16,8 @@ export default class extends Controller {
     console.log("début");
   }
 
-  click(event) {
+
+  count(event) {
     event.preventDefault();
 
     this.element.textContent = "Sympa";

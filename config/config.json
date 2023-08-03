@@ -264,6 +264,16 @@
                         "seasons": [
                             "Saison une"
                         ]
+                    },
+                    "5": {
+                        "id": 5,
+                        "email": "bel@mail.com",
+                        "amount": 20,
+                        "per_days": true,
+                        "per_person": false,
+                        "seasons": [
+                            null
+                        ]
                     }
                 }
             },

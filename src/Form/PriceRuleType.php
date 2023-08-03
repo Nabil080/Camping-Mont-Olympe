@@ -29,26 +29,23 @@ class PriceRuleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('emila', EmailType::class, [
-                'constraints' => [
-                    new NotBlank,
-                    new Length(['min' => 2]),
-                    new Email
-                ]
-            ])
             ->add('amount', NumberType::class, [
+                'label' => 'Montant',
                 'constraints' => [
                     new NotBlank,
                     new Length(['min' => 2])
                 ]
             ])
             ->add('per_days', CheckboxType::class, [
+                'label' => 'Par jour',
                 'required' => false,
             ])
             ->add('per_person', CheckboxType::class, [
+                'label' => 'Par personne',
                 'required' => false,
             ])
             ->add('seasons', ChoiceType::class, [
+                'label' => 'Saisons',
                 'choices' => $this->cs->getSeasonsChoices(),
                 'multiple' => true,
                 'required' => false,
