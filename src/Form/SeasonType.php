@@ -13,6 +13,7 @@ class SeasonType extends AbstractType
     {
         $builder
         ->add('name', TextType::class, [
+            'label' => 'nom',
             'required' => true
         ])
         ;
