@@ -22,7 +22,7 @@
 	<div class="container mx-auto py-6">
 
 		<section id="add-service" class="mb-8">
-			<a href="">
+			<a href="{{ path('admin_settings_services_add') }}">
 				<button class="g-button">Ajouter un service supplémentaire</button>
 			</a>
 		</section>
@@ -49,7 +49,7 @@
 							<a href="" class="cursor-pointer">
 								<i class="fa fa-plus"></i>
 							</a>
-							<a href="">
+							<a href="{{ path('admin_settings_services_update', {'serviceId': service.id}) }}">
 								<i class="fa fa-pen"></i>
 							</a>
 							<a href="" onclick="return confirm('Voulez vous vraiment supprimer cette saison ?')">
@@ -64,10 +64,10 @@
 								<td class="p-2">{{ rule.max }}</td>
 								<td class="p-2">{{ rule.places.0 is null ? "Tous" : rule.places|join(', ') }}</td>
 								<td class="p-2 space-x-4 text-end">
-									<a href="{{ path('admin_settings_services_update', {'serviceId': service.id, 'ruleId': rule.id}) }}" class="">
+									<a href="{{ path('admin_settings_services_rule_update', {'serviceId': service.id, 'ruleId': rule.id}) }}" class="">
 										<i class="fa fa-pen"></i>
 									</a>
-									<a href="{{ path('admin_settings_services_delete', {'serviceId': service.id, 'ruleId': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')">
+									<a href="{{ path('admin_settings_services_rule_delete', {'serviceId': service.id, 'ruleId': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')">
 										<i class="fa fa-trash"></i>
 									</a>
 								</td>
