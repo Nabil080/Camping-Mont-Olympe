@@ -231,7 +231,7 @@
                 "rules": {
                     "1": {
                         "id": 1,
-                        "amount": 20,
+                        "amount": 50,
                         "per_days": true,
                         "per_person": true,
                         "seasons": [
@@ -247,15 +247,6 @@
                             null
                         ]
                     },
-                    "3": {
-                        "id": 3,
-                        "amount": 20,
-                        "per_days": true,
-                        "per_person": true,
-                        "seasons": [
-                            "Saison une"
-                        ]
-                    },
                     "4": {
                         "id": 4,
                         "amount": 30,
@@ -263,16 +254,6 @@
                         "per_person": false,
                         "seasons": [
                             "Saison une"
-                        ]
-                    },
-                    "5": {
-                        "id": 5,
-                        "email": "bel@mail.com",
-                        "amount": 20,
-                        "per_days": true,
-                        "per_person": false,
-                        "seasons": [
-                            null
                         ]
                     }
                 }
@@ -288,6 +269,15 @@
                         "per_person": false,
                         "seasons": [
                             "Saison 1"
+                        ]
+                    },
+                    "2": {
+                        "id": 3,
+                        "amount": 600,
+                        "per_days": false,
+                        "per_person": false,
+                        "seasons": [
+                            null
                         ]
                     }
                 }

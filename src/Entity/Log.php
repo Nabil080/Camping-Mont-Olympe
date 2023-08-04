@@ -17,12 +17,15 @@ class Log
     #[ORM\Column(length: 510)]
     private ?string $message = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
-
     #[ORM\ManyToOne(inversedBy: 'logs')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $User = null;
+
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private ?array $context = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
 
     public function getId(): ?int
     {
@@ -41,6 +44,30 @@ class Log
         return $this;
     }
 
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): static
+    {
+        $this->User = $User;
+
+        return $this;
+    }
+
+    public function getContext(): ?array
+    {
+        return $this->context;
+    }
+
+    public function setContext(?array $context): static
+    {
+        $this->context = $context;
+
+        return $this;
+    }
+
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
@@ -53,15 +80,4 @@ class Log
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->User;
-    }
-
-    public function setUser(?User $User): static
-    {
-        $this->User = $User;
-
-        return $this;
-    }
 }
