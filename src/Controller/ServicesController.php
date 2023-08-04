@@ -65,7 +65,7 @@ class ServicesController extends AbstractController
 
             $this->addFlash('success', 'New "places" price rule added successfully!');
 
-            $message = "Le service '" . $oldService['name'] . "' a été renommé en $name";
+            $message = "Le service '" . $oldService['name'] . "' a été renommé en '$name'";
             $context = ["update", "service"];
             $logService->write($message, $context);
 
@@ -77,6 +77,20 @@ class ServicesController extends AbstractController
         return $this->render('admin/settings/services/add.html.twig', [
             'form' => $form,
         ]);
+    }
+
+    #[Route("/services/delete/{serviceId<\d+>}", name: "admin_settings_services_delete")]
+    public function delete($serviceId, Request $request, ConfigService $configService, LogService $logService): Response
+    {
+        $oldService = $configService->getServices()[$serviceId];
+        $configService->deleteService($serviceId);
+
+        $message = "Le service '" . $oldService['name'] . "' a été supprimé";
+        $context = ["delete", "service"];
+        $logService->write($message, $context);
+
+        $this->addFlash('success', 'New "places" price rule added successfully!');
+        return $this->redirectToRoute('admin_settings_services');
     }
 
     #[Route('/services/{serviceId}/rule/add', name: 'admin_settings_services_rule_add')]

@@ -52,7 +52,7 @@
 							<a href="{{ path('admin_settings_services_update', {'serviceId': service.id}) }}">
 								<i class="fa fa-pen"></i>
 							</a>
-							<a href="" onclick="return confirm('Voulez vous vraiment supprimer cette saison ?')">
+							<a href="{{ path('admin_settings_services_delete', {'serviceId': service.id}) }}" onclick="return confirm('Voulez vous vraiment supprimer cette saison ?')">
 								<i class="fa fa-trash"></i>
 							</a>
 						</td>

@@ -71,7 +71,7 @@ class SeasonsController extends AbstractController
 
             $this->addFlash('success', 'New "places" price rule added successfully!');
 
-            $message = "La saison '" . $oldSeason['name'] . "' a été renommée en $name";
+            $message = "La saison '" . $oldSeason['name'] . "' a été renommée en '$name'";
             $context = ["update", "season"];
             $logService->write($message, $context);
 

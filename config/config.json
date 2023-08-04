@@ -439,16 +439,6 @@
                     ]
                 }
             ]
-        },
-        "3": {
-            "id": 3,
-            "name": "Chien",
-            "rules": []
-        },
-        "4": {
-            "id": 4,
-            "name": "Chat",
-            "rules": []
         }
     },
     "paiements": {
