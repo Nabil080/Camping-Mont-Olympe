@@ -198,16 +198,6 @@
                 "seasons": [
                     null
                 ]
-            },
-            {
-                "id": 3,
-                "amount": 500,
-                "places": [
-                    null
-                ],
-                "seasons": [
-                    null
-                ]
             }
         ],
         "maxStay": [

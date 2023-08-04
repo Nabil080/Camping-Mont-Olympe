@@ -67,7 +67,7 @@ class ReservationsController extends AbstractController
     }
 
     #[Route("/reservations/{type}/update/{ruleId<\d+>}", name: "admin_settings_reservations_update")]
-    public function update(string $type, int $ruleId, Request $request, ConfigService $configService): Response
+    public function update(string $type, int $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $oldReservation = $configService->getReservationsRules($type);
         foreach ($oldReservation as $index => $rule) {
@@ -90,6 +90,10 @@ class ReservationsController extends AbstractController
 
             $configService->updateReservationRule($type, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
+            $message = "Une règle de réservation $type a été modifiée";
+            $context = ['update','reservation'];
+            $logService->write($message,$context);
+
             return $this->redirectToRoute('admin_settings_reservations');
         } else {
             if ($isCheck) {
@@ -103,14 +107,20 @@ class ReservationsController extends AbstractController
 
         return $this->render('admin/settings/reservations/add.html.twig', [
             'form' => $form,
+            'type_name' => $type
         ]);
     }
 
     #[Route("/reservations/{type}/delete/{ruleId<\d+>}", name: "admin_settings_reservations_delete")]
-    public function delete(string $type, int $ruleId, Request $request, ConfigService $configService): Response
+    public function delete(string $type, int $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $configService->deleteReservationRule($type, $ruleId);
+
         $this->addFlash('success', 'New "places" price rule added successfully!');
+        $message = "Une règle de réservation $type a été supprimée";
+        $context = ['delete','reservation'];
+        $logService->write($message,$context);
+        
         return $this->redirectToRoute('admin_settings_reservations');
     }
 }
