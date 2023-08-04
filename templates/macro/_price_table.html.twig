@@ -33,7 +33,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for param in params %}
+			{% for id, param in params %}
 				<tr class="text-center bg-green-50">
 					<td class="p-2 ">{{ param.name }}</td>
 					<td></td>
@@ -45,7 +45,7 @@
 						<td></td>
 					{% endif %}
 					<td class="p-2 space-x-4 text-end w-fit">
-						<a href="{{ path('admin_settings_prices_add_rule', {'type': type, 'id': param.id}) }}" class="cursor-pointer">
+						<a href="{{ path('admin_settings_prices_add_rule', {'type': type, 'id': id}) }}" class="cursor-pointer">
 							<i class="fa fa-plus"></i>
 						</a>
 						<a class="" onclick="return alert('Vous ne pouvez pas supprimer cette règle')">
@@ -72,10 +72,10 @@
 								<td class="p-2">{{ rule.seasons.0 is null ? "Toutes" : rule.seasons|join(', ') }}</td>
 							{% endif %}
 							<td class="p-2 space-x-4 text-end w-fit">
-								<a href="{{ path('admin_settings_prices_update', {'type': type, 'id': param.id, 'ruleId': rule.id}) }}" class="">
+								<a href="{{ path('admin_settings_prices_update', {'type': type, 'id': id, 'ruleId': rule.id}) }}" class="">
 									<i class="fa fa-pen"></i>
 								</a>
-								<a href="{{ path('admin_settings_prices_delete', {'type': type, 'id': param.id, 'ruleId': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')">
+								<a href="{{ path('admin_settings_prices_delete', {'type': type, 'id': id, 'ruleId': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')">
 									<i class="fa fa-trash"></i>
 								</a>
 							</td>

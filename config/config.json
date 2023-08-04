@@ -287,17 +287,17 @@
             "1": {
                 "id": 1,
                 "name": "Service 1",
-                "rules": [
-                    {
-                        "id": 1,
-                        "amount": 0,
+                "rules": {
+                    "1": {
+                        "id": 2,
+                        "amount": 100,
                         "per_days": false,
                         "per_person": false,
                         "seasons": [
-                            "Saison 1"
+                            null
                         ]
                     }
-                ]
+                }
             }
         },
         "ages": {
@@ -307,7 +307,7 @@
                 "rules": [
                     {
                         "id": 1,
-                        "amount": 0,
+                        "amount": 10,
                         "per_days": true,
                         "per_person": true,
                         "seasons": [
@@ -359,6 +359,30 @@
                         "end": "2023-05-62",
                         "places": [
                             null
+                        ]
+                    },
+                    {
+                        "id": 3,
+                        "name": "COUPON",
+                        "amount": 10,
+                        "type": "percentage",
+                        "uses": null,
+                        "start": "2018-01-01",
+                        "end": "2019-01-01",
+                        "places": [
+                            "Camping Car"
+                        ]
+                    },
+                    {
+                        "id": 4,
+                        "name": "COUPON",
+                        "amount": 0.1,
+                        "type": "percentage",
+                        "uses": null,
+                        "start": "2018-01-01",
+                        "end": "2019-01-01",
+                        "places": [
+                            "Camping Car"
                         ]
                     }
                 ]

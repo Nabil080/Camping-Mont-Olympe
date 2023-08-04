@@ -24,8 +24,8 @@ class PricesController extends AbstractController
         ]);
     }
 
-    #[Route("/admin/settings/prices/{type}/{id<\d+>}/rule/add", name: "admin_settings_prices_add_rule")]
-    public function add($type, $id, Request $request, ConfigService $configService, LogService $logService): Response
+    #[Route("/admin/settings/prices/{type}/{id}/rule/add", name: "admin_settings_prices_add_rule")]
+    public function add($type, int|string $id, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $isOffer = $type === 'offers' ? true : false;
         $typeName = $configService->getPricesRules($type)[$id]['name'];
@@ -56,7 +56,7 @@ class PricesController extends AbstractController
         ]);
     }
 
-    #[Route("/prices/update/{type}/{id<\d+>}/{ruleId<\d+>}", name: "admin_settings_prices_update")]
+    #[Route("/prices/update/{type}/{id}/{ruleId<\d+>}", name: "admin_settings_prices_update")]
     public function update($type, $id, int $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $isOffer = $type === 'offers' ? true : false;
@@ -108,7 +108,7 @@ class PricesController extends AbstractController
     }
 
 
-    #[Route("/prices/delete/{type}/{id<\d+>}/{ruleId<\d+>}", name: "admin_settings_prices_delete")]
+    #[Route("/prices/delete/{type}/{id}/{ruleId<\d+>}", name: "admin_settings_prices_delete")]
     public function delete($type, $id, $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $configService->deletePriceRule($type, $id, $ruleId);
