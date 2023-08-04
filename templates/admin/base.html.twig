@@ -1,0 +1,30 @@
+{% import 'macro/_nav_admin.html.twig' as nav %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="icon" type="image/jpg" href="{{ asset('img/logo-camping.png') }}"/>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body class="bg-green-">
+
+		{% block nav %}
+			{{ nav.nav() }}
+		{% endblock %}
+
+		{% block body %}{% endblock %}
+
+		{% block footer %}{% endblock %}
+	</body>
+</html>

@@ -1,0 +1,214 @@
+{% extends 'admin/settings/base.html.twig' %}
+{% import "macro/_footer_admin.html.twig" as footer %}
+
+{% block title %}Hello AdminController!
+{% endblock %}
+
+{% block body %}
+
+
+	<container>
+		<header class="text-center my-8">
+			<h1 class="text-3xl peer-hover:text-white">Paramètres du camping</h1>
+			<p class="text-xl">Bienvenue
+				<span class="underline">Nabil</span>, que souhaitez vous paramétrer ?</p>
+		</header>
+
+		<section id="admin-cards" class=" my-12 grid grid-cols-3 gap-12 mx-auto w-fit p-4">
+			<article class="admin-card relative flex flex-col gap-5 px-12 py-8 border-[3px] border-black bg-white hover:bg-green-200 hover:outline rounded-xl ">
+				<a href="{{ path('admin_settings_camping') }}" class="overlay"></a>
+				<div class="top-card grid place-content-center">
+					<svg class="w-36 h-36 " version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 512 512" xml:space="preserve">
+						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+						<g id="SVGRepo_iconCarrier">
+							<style type="text/css">
+								.st0 {
+									fill: #000000;
+								}
+							</style>
+							<g>
+								<polygon class="st0" points="0,407.678 74.373,407.678 113.606,310.328 160.093,407.678 248.238,407.678 113.606,125.794 "></polygon>
+								<polygon class="st0" points="367.108,104.322 134.165,104.322 279.048,407.678 512,407.678 "></polygon>
+							</g>
+						</g>
+					</svg>
+				</div>
+				<div class="bot-card text-center text-xl">
+					<p>Infos
+						<span class="font-semibold">camping</span>
+					</p>
+				</div>
+				<div class="absolute bottom-4 right-4">
+					<div class="group relative cursor-help">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+						<div class="hidden group-hover:block z-50 absolute bg-white border bottom-full left-1/2 -translate-x-1/2 mb-4 border-black p-2 w-[300px]">
+							Modifiez les informations du camping, logo, carte, nom, adresse, téléphone...
+						</div>
+					</div>
+				</div>
+			</article>
+			<article class="admin-card relative flex flex-col gap-5 px-12 py-8 border-[3px] border-black bg-white hover:bg-green-200 hover:outline rounded-xl ">
+				<a href="{{ path('admin_settings_prices') }}" class="overlay"></a>
+				<div class="top-card grid place-content-center">
+					<svg class="w-36 h-36" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+						<g id="SVGRepo_iconCarrier">
+							<g>
+								<path fill="none" d="M0 0h24v24H0z"></path>
+								<path d="M14 2a8 8 0 0 1 3.292 15.293A8 8 0 1 1 6.706 6.707 8.003 8.003 0 0 1 14 2zm-3 7H9v1a2.5 2.5 0 0 0-.164 4.995L9 15h2l.09.008a.5.5 0 0 1 0 .984L11 16H7v2h2v1h2v-1a2.5 2.5 0 0 0 .164-4.995L11 13H9l-.09-.008a.5.5 0 0 1 0-.984L9 12h4v-2h-2V9zm3-5a5.985 5.985 0 0 0-4.484 2.013 8 8 0 0 1 8.47 8.471A6 6 0 0 0 14 4z"></path>
+							</g>
+						</g>
+					</svg>
+				</div>
+				<div class="bot-card text-center text-xl">
+					<p>Tarifs</p>
+				</div>
+				<div class="absolute bottom-4 right-4">
+					<div class="group relative cursor-help">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+						<div class="hidden group-hover:block z-50 absolute bg-white border bottom-full left-1/2 -translate-x-1/2 mb-4 border-black p-2 w-[300px]">Vous pouvez régler les tarifs du camping en fonction des saisons et choisir si chaque nuit ou chaque personne multiplie le paiement.
+							<br><br>
+							Un service supplémentaire a 2€/nuit/personne comptera en tout pour 6€ pour une personne restant 3jours.
+						</div>
+					</div>
+				</div>
+			</article>
+			<article class="admin-card relative flex flex-col gap-5 px-12 py-8 border-[3px] border-black bg-white hover:bg-green-200 hover:outline rounded-xl ">
+				<a href="{{ path('admin_settings_seasons') }}" class="overlay"></a>
+				<div class="top-card grid place-content-center">
+					<svg class="w-36 h-36" fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 490 490" xml:space="preserve">
+						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+						<g id="SVGRepo_iconCarrier">
+							<g>
+								<g>
+									<g>
+										<path d="M470,30h-65V10c0-5.523-4.477-10-10-10h-40c-5.523,0-10,4.477-10,10v20h-70V10c0-5.523-4.477-10-10-10h-40 c-5.523,0-10,4.477-10,10v20h-70V10c0-5.523-4.477-10-10-10H95c-5.523,0-10,4.477-10,10v20H20C8.972,30,0,38.972,0,50v420 c0,11.028,8.972,20,20,20h450c11.028,0,20-8.972,20-20V50C490,38.972,481.028,30,470,30z M365,20h20v70h-20V20z M235,20h20v70 h-20V20z M105,20h20v70h-20V20z M470,470H20V160h450V470z M470,140H20V50h65v50c0,5.523,4.477,10,10,10h40 c5.523,0,10-4.477,10-10V50h70v50c0,5.523,4.477,10,10,10h40c5.523,0,10-4.477,10-10V50h70v50c0,5.523,4.477,10,10,10h40 c5.523,0,10-4.477,10-10V50h65V140z"></path>
+										<path d="M50,255h60c5.523,0,10-4.477,10-10v-60c0-5.523-4.477-10-10-10H50c-5.523,0-10,4.477-10,10v60 C40,250.523,44.477,255,50,255z M60,195h40v40H60V195z"></path>
+										<path d="M50,455h60c5.523,0,10-4.477,10-10v-20h30v20c0,5.523,4.477,10,10,10h60c5.523,0,10-4.477,10-10v-60 c0-5.522-4.477-10-10-10h-60c-5.523,0-10,4.478-10,10v20h-30v-20c0-5.522-4.477-10-10-10H90v-20h20c5.523,0,10-4.477,10-10v-20 h30v20c0,5.523,4.477,10,10,10h60c5.523,0,10-4.477,10-10v-20h30v20c0,5.523,4.477,10,10,10h60c5.523,0,10-4.477,10-10v-20h30v20 c0,5.523,4.477,10,10,10h60c5.523,0,10-4.477,10-10v-60c0-5.522-4.477-10-10-10h-20v-20h20c5.523,0,10-4.477,10-10v-60 c0-5.523-4.477-10-10-10h-60c-5.523,0-10,4.477-10,10v20h-30v-20c0-5.523-4.477-10-10-10h-60c-5.523,0-10,4.477-10,10v20h-30v-20 c0-5.523-4.477-10-10-10h-60c-5.523,0-10,4.477-10,10v60c0,5.523,4.477,10,10,10h60c5.523,0,10-4.477,10-10v-20h30v20 c0,5.523,4.477,10,10,10h60c5.523,0,10-4.477,10-10v-20h30v20c0,5.523,4.477,10,10,10h20v20h-20c-5.523,0-10,4.478-10,10v20h-30 v-20c0-5.522-4.477-10-10-10h-60c-5.523,0-10,4.478-10,10v20h-30v-20c0-5.522-4.477-10-10-10h-60c-5.523,0-10,4.478-10,10v20h-30 v-20c0-5.522-4.477-10-10-10H50c-5.523,0-10,4.478-10,10v60c0,5.523,4.477,10,10,10h20v20H50c-5.523,0-10,4.478-10,10v60 C40,450.523,44.477,455,50,455z M170,395h40v40h-40V395z M210,235h-40v-40h40V235z M320,235h-40v-40h40V235z M390,235v-40h40v40 H390z M390,295h40v40h-40V295z M280,295h40v40h-40V295z M170,295h40v40h-40V295z M60,335v-40h40v40H60z M60,395h40v40H60V395z"></path>
+										<path d="M330,375h-60c-5.523,0-10,4.478-10,10v60c0,5.523,4.477,10,10,10h60c5.523,0,10-4.477,10-10v-60 C340,379.478,335.523,375,330,375z M320,435h-40v-40h40V435z"></path>
+										<path d="M440,375h-60c-5.523,0-10,4.478-10,10v60c0,5.523,4.477,10,10,10h60c5.523,0,10-4.477,10-10v-60 C450,379.478,445.523,375,440,375z M430,435h-40v-40h40V435z"></path>
+										<rect x="180" y="205" width="20" height="20"></rect>
+										<rect x="290" y="205" width="20" height="20"></rect>
+										<rect x="400" y="205" width="20" height="20"></rect>
+										<rect x="400" y="305" width="20" height="20"></rect>
+										<rect x="290" y="305" width="20" height="20"></rect>
+										<rect x="180" y="305" width="20" height="20"></rect>
+										<rect x="70" y="305" width="20" height="20"></rect>
+										<rect x="70" y="405" width="20" height="20"></rect>
+										<rect x="180" y="405" width="20" height="20"></rect>
+									</g>
+								</g>
+							</g>
+						</g>
+					</svg>
+				</div>
+				<div class="bot-card text-center text-xl">
+					<p>Saisons</p>
+				</div>
+				<div class="absolute bottom-4 right-4">
+					<div class="group relative cursor-help">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+						<div class="hidden group-hover:block z-50 absolute bg-white border bottom-full left-1/2 -translate-x-1/2 mb-4 border-black p-2 w-[300px]">
+							Définissez des saisons et leurs périodes correspondantes.
+							<br><br>
+							Les saisons serviront pour les autres paramètres
+						</div>
+					</div>
+				</div>
+			</article>
+			<article class="admin-card relative flex flex-col gap-5 px-12 py-8 border-[3px] border-black bg-white hover:bg-green-200 hover:outline rounded-xl ">
+				<a href="{{ path('admin_settings') }}" class="overlay"></a>
+				<div class="top-card grid place-content-center">
+					<svg class="w-36 h-36" fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 547.673 547.672" xml:space="preserve">
+						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+						<g id="SVGRepo_iconCarrier">
+							<g>
+								<g>
+									<path d="M140.808,334.86c-30.112,0-54.516,24.413-54.516,54.516s24.413,54.516,54.516,54.516s54.516-24.413,54.516-54.516 S170.92,334.86,140.808,334.86z M140.693,405.364c-8.559,0-15.491-6.933-15.491-15.491s6.933-15.491,15.491-15.491 s15.491,6.933,15.491,15.491C156.184,398.421,149.251,405.364,140.693,405.364z"></path>
+									<path d="M534.151,361.969h-39.904c-7.459,0-13.512,6.053-13.512,13.521v1.654c0,7.459,6.053,13.512,13.521,13.512h39.904 c7.459,0,13.512-6.053,13.512-13.521v-1.654C547.673,368.022,541.62,361.969,534.151,361.969z"></path>
+									<path d="M69.548,387.396c0-36.194,35.075-65.312,71.26-65.312c36.194,0,67.396,20.75,68.439,59.899 c0,1.521-0.431,18.226-0.536,18.226h247.898c12.45,0.01,14.563-18.389,14.563-30.839V119.235c0-12.441-2.113-15.453-14.563-15.453 H186.688h-2.391C107.798,103.782,0,206.407,0,285.67c0,69.261,21.735,92.612,69.548,101.831 C69.548,387.462,69.548,387.434,69.548,387.396z M308.61,196.002c0-9.648,11.562-15.721,19.278-15.721h65.188 c7.717,0,11.159,6.072,11.159,15.721v151.394c0,9.648-3.442,14.573-11.159,14.573h-65.188c-7.717,0-19.278-4.925-19.278-14.573 V196.002z M107.798,198.307c0-9.955,8.071-18.025,18.025-18.025h88.262c9.955,0,18.025,8.071,18.025,18.025v50.012 c0,9.955-8.071,18.025-18.025,18.025h-88.262c-9.955,0-18.025-8.071-18.025-18.025V198.307z"></path>
+								</g>
+							</g>
+						</g>
+					</svg>
+				</div>
+				<div class="bot-card text-center text-xl">
+					<p>Emplacements d'hébergement</p>
+				</div>
+				<div class="absolute bottom-4 right-4">
+					<div class="group relative cursor-help">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+						<div class="hidden group-hover:block z-50 absolute bg-white border bottom-full left-1/2 -translate-x-1/2 mb-4 border-black p-2 w-[300px]">Vous pouvez régler les tarifs du camping en fonction des saisons et choisir si chaque nuit ou chaque personne multiplie le paiement.
+							<br><br>
+							Un service supplémentaire a 2€/nuit/personne comptera en tout pour 6€ pour une personne restant 3jours.
+						</div>
+					</div>
+				</div>
+			</article>
+			<article class="admin-card relative flex flex-col gap-5 px-12 py-8 border-[3px] border-black bg-white hover:bg-green-200 hover:outline rounded-xl ">
+				<a href="{{ path('admin_settings_reservations') }}" class="overlay"></a>
+				<div class="top-card grid place-content-center">
+					<svg class="w-36 h-36" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+						<g id="SVGRepo_iconCarrier">
+							<path d="M11 6L21 6.00072M11 12L21 12.0007M11 18L21 18.0007M3 11.9444L4.53846 13.5L8 10M3 5.94444L4.53846 7.5L8 4M4.5 18H4.51M5 18C5 18.2761 4.77614 18.5 4.5 18.5C4.22386 18.5 4 18.2761 4 18C4 17.7239 4.22386 17.5 4.5 17.5C4.77614 17.5 5 17.7239 5 18Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+						</g>
+					</svg>
+				</div>
+				<div class="bot-card text-center text-xl">
+					<p>Règles de réservation</p>
+				</div>
+				<div class="absolute bottom-4 right-4">
+					<div class="group relative cursor-help">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+						<div class="hidden group-hover:block z-50 absolute bg-white border bottom-full left-1/2 -translate-x-1/2 mb-4 border-black p-2 w-[300px]">Vous pouvez régler les tarifs du camping en fonction des saisons et choisir si chaque nuit ou chaque personne multiplie le paiement.
+							<br><br>
+							Un service supplémentaire a 2€/nuit/personne comptera en tout pour 6€ pour une personne restant 3jours.
+						</div>
+					</div>
+				</div>
+			</article>
+			<article class="admin-card relative flex flex-col gap-5 px-12 py-8 border-[3px] border-black bg-white hover:bg-green-200 hover:outline rounded-xl ">
+				<a href="{{ path('admin_settings_services') }}" class="overlay"></a>
+				<div class="top-card grid place-content-center">
+					<svg class="w-36 h-36" viewbox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="si-glyph si-glyph-dog" fill="#000000">
+						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+						<g id="SVGRepo_iconCarrier">
+							<title>114</title>
+							<defs></defs>
+							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+								<g transform="translate(0.000000, 2.000000)" fill="#000000">
+									<path d="M3.348,4.007 C3.322,4.007 3.29,4.021 3.262,4.024 L3.293,3.994 L0.025,1.965 L0.011,2.562 L1.511,5.022 C1.234,5.363 1.038,5.728 1.038,6.01 L1.038,10.918 L3,10.918 L3,9.263 L5.98,7.929 L8.999,7.929 L9.666,10.918 L10.918,10.918 L10.918,5.328 L9.911,4.008 L3.348,4.008 L3.348,4.007 Z" class="si-glyph-fill"></path>
+									<path d="M13.752,1.623 L13.336,0.238 L10.681,2.86 L12.01,4.243 L14.82,4.847 L16.012,3.975 L13.752,1.623 Z" class="si-glyph-fill"></path>
+								</g>
+							</g>
+						</g>
+					</svg>
+				</div>
+				<div class="bot-card text-center text-xl">
+					<p>Services supplémentaires</p>
+				</div>
+				<div class="absolute bottom-4 right-4">
+					<div class="group relative cursor-help">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+						<div class="hidden group-hover:block z-50 absolute bg-white border bottom-full left-1/2 -translate-x-1/2 mb-4 border-black p-2 w-[300px]">Vous pouvez régler les tarifs du camping en fonction des saisons et choisir si chaque nuit ou chaque personne multiplie le paiement.
+							<br><br>
+							Un service supplémentaire a 2€/nuit/personne comptera en tout pour 6€ pour une personne restant 3jours.
+						</div>
+					</div>
+				</div>
+			</article>
+		</section>
+	</container>
+
+{% endblock %}
+
+{% block footer %}
+	{{ footer.footer(false) }}
+{% endblock %}

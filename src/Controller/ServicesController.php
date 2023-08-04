@@ -11,12 +11,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ServicesController extends AbstractController
 {
-    #[Route('/services', name: 'admin_settings_services')]
+    #[Route('/admin/settings/services', name: 'admin_settings_services')]
     public function index(ConfigService $configService): Response
     {
         $services = $configService->getServices();
 
-        return $this->render('param/services/index.html.twig', [
+        return $this->render('admin/settings/services/index.html.twig', [
             'services' => $services,
         ]);
     }
@@ -26,8 +26,8 @@ class ServicesController extends AbstractController
     {
         $form = $this->createForm(ServiceRuleType::class);
         $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) { 
+
+        if ($form->isSubmitted() && $form->isValid()) {
             $lastId = $configService->getLastServicesRule($serviceId);
             $rule = ["id" => $lastId + 1];
             $rule += $form->getData();
@@ -47,8 +47,8 @@ class ServicesController extends AbstractController
     public function update(int $serviceId, int $ruleId, ConfigService $configService, Request $request): Response
     {
         $oldService = $configService->getServices($serviceId);
-        foreach($oldService['rules'] as $index => $rule){
-            if($rule['id'] === $ruleId)
+        foreach ($oldService['rules'] as $index => $rule) {
+            if ($rule['id'] === $ruleId)
                 $oldRule = $oldService['rules'][$index];
         }
 
@@ -62,9 +62,9 @@ class ServicesController extends AbstractController
             $configService->updateServiceRule($serviceId, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
             return $this->redirectToRoute('admin_settings_services');
-        }else{
-                $form->get('max')->setData($oldRule['max']);
-                $form->get('places')->setData($oldRule['places']);
+        } else {
+            $form->get('max')->setData($oldRule['max']);
+            $form->get('places')->setData($oldRule['places']);
         }
 
         return $this->render('param/services/add.html.twig', [
@@ -75,9 +75,9 @@ class ServicesController extends AbstractController
     #[Route("/services/{serviceId}/delete/{ruleId<\d+>}", name: "admin_settings_services_delete")]
     public function deleteRule(int $serviceId, int $ruleId, Request $request, ConfigService $configService): Response
     {
-            $configService->deleteserviceRule($serviceId, $ruleId);
+        $configService->deleteserviceRule($serviceId, $ruleId);
 
-            $this->addFlash('success', 'New "places" price rule added successfully!');
-            return $this->redirectToRoute('admin_settings_services');
+        $this->addFlash('success', 'New "places" price rule added successfully!');
+        return $this->redirectToRoute('admin_settings_services');
     }
 }

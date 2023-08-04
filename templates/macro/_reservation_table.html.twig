@@ -1,68 +1,114 @@
 {% macro check_table(check, type) %}
-    
-    <table class="w-full border-collapse border border-gray-400 mb-12">
-        <thead>    
-            <tr class="bg-gray-200">
-                <th class="p-2">Jours {{ type is same as 'checkIn' ? "d'arrivées" : "de départ" }}</th>
-                <th class="p-2">Type d'hébergement</th>
-                <th class="p-2">Saisons</th>
-                <th class="p-2 text-end">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for rule in check %}
-                <tr class="text-center">
-                    <td class="p-2">
-                        {% for day in rule.days %}
-                            {% if day is same as 1 %} <span>Lundi</span>
-                            {% elseif day is same as 2 %} <span>Mardi</span>
-                            {% elseif day is same as 3 %} <span>Mercredi</span>
-                            {% elseif day is same as 4 %} <span>Jeudi</span>
-                            {% elseif day is same as 5 %} <span>Vendredi</span>
-                            {% elseif day is same as 6 %} <span>Samedi</span>
-                            {% elseif day is same as 7 %} <span>Dimanche</span>
-                            {% elseif day is null %} <span>Tous</span>
-                            {% endif %}
-                            {% if not loop.last %} , {% elseif loop.last and day is not null %} . {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td class="p-2">{{ rule.places.0 is null ? "Tous" : rule.places|join(', ') }}</td>
-                    <td class="p-2">{{ rule.seasons.0 is null ? "Toutes" : rule.seasons|join(', ') }}</td>
-                    <td class="p-2 space-x-4 text-end">
-                        <a href="{{ path('admin_settings_reservations_update', {'type': type, 'ruleId': rule.id}) }}" class=""><i class="fa fa-pen"></i></a>
-                        <a href="{{ path('admin_settings_reservations_delete', {'type': type, 'ruleId': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')"><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+	<article class="rule-container">
+
+		<div class="mt-12 mb-4 flex justify-between items-center">
+			<h2 class="text-2xl">
+				{{ type is same as 'checkIn' ? "Jours d'arrivées" }}
+				{{ type is same as 'checkOut' ? "Jours de départ" }}
+			</h2>
+			<a href="{{ path('admin_settings_reservations_add', {'type':type}) }}">
+				<button class="g-button">Ajouter une règle</button>
+			</a>
+		</div>
+
+		<table class="w-full border-collapse border">
+			<thead>
+				<tr class="bg-green-200">
+					<th class="p-2">Jours
+						{{ type is same as 'checkIn' ? "d'arrivées" : "de départ" }}</th>
+					<th class="p-2">Type d'hébergement</th>
+					<th class="p-2">Saisons</th>
+					<th class="p-2 text-end">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for rule in check %}
+					<tr class="text-center bg-green-50">
+						<td class="p-2">
+							{% for day in rule.days %}
+								{% if day is same as 1 %}
+									<span>Lundi</span>
+								{% elseif day is same as 2 %}
+									<span>Mardi</span>
+								{% elseif day is same as 3 %}
+									<span>Mercredi</span>
+								{% elseif day is same as 4 %}
+									<span>Jeudi</span>
+								{% elseif day is same as 5 %}
+									<span>Vendredi</span>
+								{% elseif day is same as 6 %}
+									<span>Samedi</span>
+								{% elseif day is same as 7 %}
+									<span>Dimanche</span>
+								{% elseif day is null %}
+									<span>Tous</span>
+								{% endif %}
+								{% if not loop.last %}
+									,
+								{% elseif loop.last and day is not null %}
+									.
+								{% endif %}
+							{% endfor %}
+						</td>
+						<td class="p-2">{{ rule.places.0 is null ? "Tous" : rule.places|join(', ') }}</td>
+						<td class="p-2">{{ rule.seasons.0 is null ? "Toutes" : rule.seasons|join(', ') }}</td>
+						<td class="p-2 space-x-4 text-end">
+							<a href="{{ path('admin_settings_reservations_update', {'type': type, 'ruleId': rule.id}) }}" class="">
+								<i class="fa fa-pen"></i>
+							</a>
+							<a href="{{ path('admin_settings_reservations_delete', {'type': type, 'ruleId': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')">
+								<i class="fa fa-trash"></i>
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</article>
 
 {% endmacro %}
 
 {% macro stay_table(stay, type) %}
-    
-    <table class="w-full border-collapse border border-gray-400 mb-12">
-        <thead>    
-            <tr class="bg-gray-200">
-                <th class="p-2">Séjour {{ type is same as 'minStay' ? "minimum" : "maximum" }}</th>
-                <th class="p-2">Type d'hébergement</th>
-                <th class="p-2">Saisons</th>
-                <th class="p-2 text-end">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for rule in stay %}
-                <tr class="text-center">
-                    <td class="p-2">{{ rule.amount }} {{ rule.amount is same as 1 ? 'nuit' : 'nuits' }}</td>
-                    <td class="p-2">{{ rule.places.0 is null ? "Tous" : rule.places|join(', ') }}</td>
-                    <td class="p-2">{{ rule.seasons.0 is null ? "Toutes" : rule.seasons|join(', ') }}</td>
-                    <td class="p-2 space-x-4 text-end">
-                        <a href="{{ path('admin_settings_reservations_update', {'type': type, 'ruleId': rule.id}) }}" class=""><i class="fa fa-pen"></i></a>
-                        <a href="{{ path('admin_settings_reservations_delete', {'type': type, 'ruleId': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')"><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+	<div class="mt-12 mb-4 flex justify-between items-center">
+		<h2 class="text-2xl">
+			{{ type is same as 'minStay' ? "Durée minimum de séjour" }}
+			{{ type is same as 'maxStay' ? "Durée maximum de séjour" }}
+		</h2>
+		<a href="{{ path('admin_settings_reservations_add', {'type':type}) }}">
+			<button class="g-button">Ajouter une règle</button>
+		</a>
+	</div>
+
+	<table class="w-full border-collapse border">
+		<thead>
+			<tr class="bg-green-200">
+				<th class="p-2">Séjour
+					{{ type is same as 'minStay' ? "minimum" : "maximum" }}</th>
+				<th class="p-2">Type d'hébergement</th>
+				<th class="p-2">Saisons</th>
+				<th class="p-2 text-end">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for rule in stay %}
+				<tr class="text-center bg-green-50">
+					<td class="p-2">{{ rule.amount }}
+						{{ rule.amount is same as 1 ? 'nuit' : 'nuits' }}</td>
+					<td class="p-2">{{ rule.places.0 is null ? "Tous" : rule.places|join(', ') }}</td>
+					<td class="p-2">{{ rule.seasons.0 is null ? "Toutes" : rule.seasons|join(', ') }}</td>
+					<td class="p-2 space-x-4 text-end">
+						<a href="{{ path('admin_settings_reservations_update', {'type': type, 'ruleId': rule.id}) }}" class="">
+							<i class="fa fa-pen"></i>
+						</a>
+						<a href="{{ path('admin_settings_reservations_delete', {'type': type, 'ruleId': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')">
+							<i class="fa fa-trash"></i>
+						</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
 {% endmacro %}

@@ -1,0 +1,47 @@
+{% import 'macro/_nav_admin.html.twig' as nav %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="icon" type="image/jpg" href="{{ asset('img/logo-camping.png') }}"/>
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body class="bg-green- min-h-screen relative">
+
+		{% block nav %}
+			{{ nav.nav(false) }}
+		{% endblock %}
+
+		{% block body %}{% endblock %}
+
+		{% block footer %}
+
+			{# <footer class="w-full bg-green-200 absolute bottom-0">Salut</footer> #}
+
+		{% endblock %}
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+		<script	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('select[multiple]').select2({
+		closeOnSelect: false,
+		language: 'fr'
+	});
+});
+</script>
+
+	</body>
+</html>

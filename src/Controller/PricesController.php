@@ -13,35 +13,27 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PricesController extends AbstractController
 {
-    #[Route('/prices', name: 'admin_settings_prices')]
+    #[Route('/admin/settings/prices', name: 'admin_settings_prices')]
     public function index(ConfigService $configService): Response
     {
-        $places = $configService->getPricesRules('places');
-        $services = $configService->getPricesRules('services');
-        $ages = $configService->getPricesRules('ages');
-        $offers = $configService->getPricesRules('offers');
-
         $prices = $configService->getPricesRules();
 
-        return $this->render('param/prices/index.html.twig', [
-            'places' => $places,
-            'services' => $services,
-            'ages' => $ages,
-            'offers' => $offers,
+        return $this->render('admin/settings/prices/index.html.twig', [
             'prices' => $prices,
         ]);
     }
 
-    #[Route("/prices/add/{type}/{id<\d+>}", name: "admin_settings_prices_add")]
+    #[Route("/admin/settings/prices/{type}/{id<\d+>}/rule/add", name: "admin_settings_prices_add_rule")]
     public function add($type, $id, Request $request, ConfigService $configService): Response
     {
         $isOffer = $type === 'offers' ? true : false;
+        $typeName = $configService->getPricesRules($type)[$id]['name'];
 
         $form = $isOffer ? $this->createForm(OfferRuleType::class) : $this->createForm(PriceRuleType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $lastId = $configService->getLastPricesRules($type);
+            $lastId = $configService->getLastPricesRules($type, $id);
             $rule = ["id" => $lastId + 1];
             $rule += $form->getData();
 
@@ -50,8 +42,10 @@ class PricesController extends AbstractController
             return $this->redirectToRoute('admin_settings_prices');
         }
 
-        return $this->render('param/prices/add.html.twig', [
-            'form' => $form->createView(),
+        return $this->render('admin/settings/prices/add.html.twig', [
+            'form' => $form,
+            'type' => $type,
+            'type_name' => $typeName,
         ]);
     }
 
@@ -60,7 +54,7 @@ class PricesController extends AbstractController
     {
         $isOffer = $type === 'offers' ? true : false;
 
-        $form = $isOffer ?$this->createForm(OfferRuleType::class) : $this->createForm(PriceRuleType::class);
+        $form = $isOffer ? $this->createForm(OfferRuleType::class) : $this->createForm(PriceRuleType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -70,13 +64,13 @@ class PricesController extends AbstractController
             $configService->updatePriceRule($type, $id, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
             return $this->redirectToRoute('admin_settings_prices');
-        }else{
+        } else {
             $config = $configService->getPricesRules($type);
-            foreach($config[$id]['rules'] as $index => $rule)
-                if($rule['id'] == $ruleId)
+            foreach ($config[$id]['rules'] as $index => $rule)
+                if ($rule['id'] == $ruleId)
                     $oldRule = $config[$id]['rules'][$index];
-            
-            if($isOffer){
+
+            if ($isOffer) {
                 $form->get('name')->setData($oldRule['name']);
                 $form->get('amount')->setData($oldRule['amount']);
                 $form->get('type')->setData($oldRule['type']);
@@ -84,15 +78,15 @@ class PricesController extends AbstractController
                 $form->get('start')->setData($oldRule['start']);
                 $form->get('end')->setData($oldRule['end']);
                 $form->get('places')->setData($oldRule['places']);
-            }else{
+            } else {
                 $form->get('amount')->setData($oldRule['amount']);
                 $form->get('per_days')->setData($oldRule['per_days']);
                 $form->get('per_person')->setData($oldRule['per_person']);
                 $form->get('seasons')->setData($oldRule['seasons']);
             }
         }
-    
-        return $this->render('param/prices/add.html.twig', [
+
+        return $this->render('admin/settings/prices/add.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -101,8 +95,8 @@ class PricesController extends AbstractController
     #[Route("/prices/delete/{type}/{id<\d+>}/{ruleId<\d+>}", name: "admin_settings_prices_delete")]
     public function delete($type, $id, $ruleId, Request $request, ConfigService $configService): Response
     {
-            $configService->deletePriceRule($type, $id, $ruleId);
-            $this->addFlash('success', 'New "places" price rule added successfully!');
-            return $this->redirectToRoute('admin_settings_prices');
+        $configService->deletePriceRule($type, $id, $ruleId);
+        $this->addFlash('success', 'New "places" price rule added successfully!');
+        return $this->redirectToRoute('admin_settings_prices');
     }
 }

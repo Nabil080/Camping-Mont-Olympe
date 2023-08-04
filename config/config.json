@@ -228,32 +228,60 @@
             "1": {
                 "id": 1,
                 "name": "H\u00e9bergement 1",
-                "rules": [
-                    {
+                "rules": {
+                    "1": {
                         "id": 1,
-                        "amount": 0,
+                        "amount": 20,
+                        "per_days": true,
+                        "per_person": true,
+                        "seasons": [
+                            null
+                        ]
+                    },
+                    "2": {
+                        "id": 2,
+                        "amount": 20,
+                        "per_days": true,
+                        "per_person": true,
+                        "seasons": [
+                            null
+                        ]
+                    },
+                    "3": {
+                        "id": 3,
+                        "amount": 20,
+                        "per_days": true,
+                        "per_person": true,
+                        "seasons": [
+                            "Saison une"
+                        ]
+                    },
+                    "4": {
+                        "id": 4,
+                        "amount": 30,
+                        "per_days": false,
+                        "per_person": false,
+                        "seasons": [
+                            "Saison une"
+                        ]
+                    },
+                    "5": {
+                        "id": 5,
+                        "email": "bel@mail.com",
+                        "amount": 20,
                         "per_days": true,
                         "per_person": false,
                         "seasons": [
                             null
                         ]
                     }
-                ]
+                }
             },
             "2": {
                 "id": 2,
                 "name": "H\u00e9bergement 2",
-                "rules": [
-                    {
-                        "id": 1,
-                        "amount": 0,
-                        "per_days": true,
-                        "per_person": false,
-                        "seasons": [
-                            "Saison 2"
-                        ]
-                    },
-                    {
+                "rules": {
+                    "1": {
                         "id": 2,
                         "amount": 6.5,
                         "per_days": true,
@@ -262,7 +290,7 @@
                             "Saison 1"
                         ]
                     }
-                ]
+                }
             }
         },
         "services": {

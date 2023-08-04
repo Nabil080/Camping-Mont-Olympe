@@ -2,14 +2,15 @@
 
 namespace App\Service;
 
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+
 class ConfigService
 {
     private string $configFilePath;
 
-    public function __construct(string $configFilePath = null)
+    public function __construct(ParameterBagInterface $parameterBag)
     {
-        if($configFilePath === null) $configFilePath = "config.json";
-        $this->configFilePath = $configFilePath;
+        $this->configFilePath = $parameterBag->get('kernel.project_dir') . '/config/config.json';
     }
 
     // ! --------------- CONFIG
@@ -18,7 +19,7 @@ class ConfigService
     {
         $config = $this->getConfigData();
 
-        if($name === null) return $config;
+        if ($name === null) return $config;
 
         return $config[$name] ?? [];
     }
@@ -37,17 +38,17 @@ class ConfigService
 
     // ! ----------------- CAMPING
 
-    public function getCamping():array
+    public function getCamping(): array
     {
         $config = $this->getConfigData();
 
         return $config['camping'];
     }
 
-    public function updateCamping(array $camping):void
+    public function updateCamping(array $camping): void
     {
         $config = $this->getConfigData();
-        
+
         $config['camping'] = $camping;
 
         $this->saveConfigData($config);
@@ -59,16 +60,16 @@ class ConfigService
     {
         $config = $this->getConfigData();
 
-        if($type === null) return $config['prices'];
+        if ($type === null) return $config['prices'];
 
         return $config['prices'][$type] ?? [];
     }
 
-    public function getLastPricesRules(string $type):int
+    public function getLastPricesRules(string $type, int $id): int
     {
-        $lastId = $this->getPricesRules($type);
+        $lastId = $this->getPricesRules($type)[$id]['rules'];
         $lastId = end($lastId);
-        
+
         return $lastId ? $lastId['id'] : 0;
     }
 
@@ -82,8 +83,8 @@ class ConfigService
     public function updatePriceRule(string $type, int $typeId, array $rule): void
     {
         $config = $this->getConfigData();
-        foreach($config['prices'][$type][$typeId]['rules'] as $index => $oldRule)
-            if($oldRule['id'] === $rule['id'])
+        foreach ($config['prices'][$type][$typeId]['rules'] as $index => $oldRule)
+            if ($oldRule['id'] === $rule['id'])
                 $config['prices'][$type][$typeId]['rules'][$index] = $rule;
 
         $this->saveConfigData($config);
@@ -92,8 +93,8 @@ class ConfigService
     public function deletePriceRule(string $type, int $id, int $ruleId): void
     {
         $config = $this->getConfigData();
-        foreach($config['prices'][$type][$id]['rules'] as $index => $rule)
-            if($rule['id'] === $ruleId)
+        foreach ($config['prices'][$type][$id]['rules'] as $index => $rule)
+            if ($rule['id'] === $ruleId)
                 unset($config['prices'][$type][$id]['rules'][$index]);
 
         $this->saveConfigData($config);
@@ -109,7 +110,7 @@ class ConfigService
         return $config['seasons'] ?? [];
     }
 
-    public function getLastSeason():int
+    public function getLastSeason(): int
     {
         $lastId = $this->getSeasons();
         $lastId = end($lastId);
@@ -140,11 +141,11 @@ class ConfigService
 
     // ! ------------ SEASON Rules
 
-    public function getLastSeasonRule(int $seasonId):int
+    public function getLastSeasonRule(int $seasonId): int
     {
         $lastId = $this->getSeasons()[$seasonId]['rules'];
         $lastId = end($lastId);
-        
+
         return $lastId ? $lastId['id'] : 0;
     }
 
@@ -158,8 +159,8 @@ class ConfigService
     public function updateSeasonRule(int $seasonId, array $rule): void
     {
         $config = $this->getConfigData();
-        foreach($config['seasons'][$seasonId]['rules'] as $index => $oldRule)
-            if($oldRule['id'] === $rule['id'])
+        foreach ($config['seasons'][$seasonId]['rules'] as $index => $oldRule)
+            if ($oldRule['id'] === $rule['id'])
                 $config['seasons'][$seasonId]['rules'][$index] = $rule;
 
         $this->saveConfigData($config);
@@ -169,9 +170,9 @@ class ConfigService
     {
         $config = $this->getConfigData();
 
-        foreach($config['seasons'][$seasonId]['rules'] as $index => $rule)
-        if($rule['id'] === $ruleId)
-            unset($config['seasons'][$seasonId]['rules'][$index]);
+        foreach ($config['seasons'][$seasonId]['rules'] as $index => $rule)
+            if ($rule['id'] === $ruleId)
+                unset($config['seasons'][$seasonId]['rules'][$index]);
 
         $this->saveConfigData($config);
     }
@@ -182,16 +183,16 @@ class ConfigService
     {
         $config = $this->getConfigData();
 
-        if($type === null) return $config['reservations'];
+        if ($type === null) return $config['reservations'];
 
         return $config['reservations'][$type] ?? [];
     }
 
-    public function getLastReservationRule(string $type):int
+    public function getLastReservationRule(string $type): int
     {
         $lastId = $this->getReservationsRules($type);
         $lastId = end($lastId);
-        
+
         return $lastId ? $lastId['id'] : 0;
     }
 
@@ -205,8 +206,8 @@ class ConfigService
     public function updateReservationRule(string $type, array $rule): void
     {
         $config = $this->getConfigData();
-        foreach($config['reservations'][$type] as $index => $oldRule)
-            if($oldRule['id'] === $rule['id'])
+        foreach ($config['reservations'][$type] as $index => $oldRule)
+            if ($oldRule['id'] === $rule['id'])
                 $config['reservations'][$type][$index] = $rule;
 
         $this->saveConfigData($config);
@@ -215,9 +216,9 @@ class ConfigService
     public function deleteReservationRule(string $type, int $ruleId): void
     {
         $config = $this->getConfigData();
-        foreach($config['reservations'][$type] as $index => $rule)
-            if($rule['id'] === $ruleId)
-                unset($config['reservations'][$type][$index]);        
+        foreach ($config['reservations'][$type] as $index => $rule)
+            if ($rule['id'] === $ruleId)
+                unset($config['reservations'][$type][$index]);
 
         $this->saveConfigData($config);
     }
@@ -228,16 +229,16 @@ class ConfigService
     {
         $config = $this->getConfigData();
 
-        if($id === null) return $config['services'];
+        if ($id === null) return $config['services'];
 
         return $config['services'][$id] ?? [];
     }
 
-    public function getLastServicesRule(int $serviceId):int
+    public function getLastServicesRule(int $serviceId): int
     {
         $lastId = $this->getServices($serviceId)['rules'];
         $lastId = end($lastId);
-        
+
         return $lastId ? $lastId['id'] : 0;
     }
 
@@ -251,20 +252,20 @@ class ConfigService
     public function updateServiceRule(int $serviceId, array $rule): void
     {
         $config = $this->getConfigData();
-        foreach($config['services'][$serviceId]['rules'] as $index => $oldRule)
-            if($oldRule['id'] === $rule['id'])
+        foreach ($config['services'][$serviceId]['rules'] as $index => $oldRule)
+            if ($oldRule['id'] === $rule['id'])
                 $config['services'][$serviceId]['rules'][$index] = $rule;
 
         $this->saveConfigData($config);
     }
-    
+
     public function deleteServiceRule(int $serviceId, int $ruleId): void
     {
         $config = $this->getConfigData();
 
-        foreach($config['services'][$serviceId]['rules'] as $index => $rule)
-        if($rule['id'] === $ruleId)
-            unset($config['services'][$serviceId]['rules'][$index]);
+        foreach ($config['services'][$serviceId]['rules'] as $index => $rule)
+            if ($rule['id'] === $ruleId)
+                unset($config['services'][$serviceId]['rules'][$index]);
 
         $this->saveConfigData($config);
     }
@@ -275,16 +276,16 @@ class ConfigService
     {
         $config = $this->getConfigData();
 
-        if($taxId === null) return $config['taxes'];
+        if ($taxId === null) return $config['taxes'];
 
-        return $config['taxes'][$taxId] ?? [];        
+        return $config['taxes'][$taxId] ?? [];
     }
 
     public function getLastTaxes(): int
     {
         $lastId = $this->getTaxes();
         $lastId = end($lastId);
-        
+
         return $lastId ? $lastId['id'] : 0;
     }
 
@@ -312,7 +313,7 @@ class ConfigService
     public function getPaiements(): array
     {
         $config = $this->getConfigData();
-        
+
         return $config['taxes'];
     }
 
@@ -328,18 +329,16 @@ class ConfigService
     public function getPlacesChoices(): array
     {
         // TODO: fetch la bdd pour les emplacements
-        $configService = new ConfigService();
-        $seasons = $configService->getConfigByName('seasons');
+        $seasons = $this->getConfigByName('seasons');
 
-        $choices = ["Tous" => null,"Camping-car" => "Camping Car"];
+        $choices = ["Tous" => null, "Camping-car" => "Camping Car"];
 
         return $choices;
     }
 
     public function getSeasonsChoices(): array
     {
-        $configService = new ConfigService;
-        $seasons = $configService->getConfigByName('seasons');
+        $seasons = $this->getConfigByName('seasons');
 
         $choices = ["Toutes" => null];
         foreach ($seasons as $season) {
@@ -367,7 +366,7 @@ class ConfigService
     {
         $services = $this->getServices();
         $choices = [];
-        foreach($services as $service){
+        foreach ($services as $service) {
             $choices += [$service['name'] => $service['id']];
         }
 

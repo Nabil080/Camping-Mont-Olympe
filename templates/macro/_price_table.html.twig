@@ -1,61 +1,88 @@
 {% macro price_table(type, params) %}
-    
-    <table class="w-full border-collapse border border-gray-400 my-12">
-        <thead>
-            <tr class="bg-gray-200">
-                <th class="p-2">{{ type }}</th>
-            {% if type is same as 'offers' %}
-                <th class="p-2">Nom</th>
-                <th class="p-2">Montant</th>
-                <th class="p-2">Début</th>
-                <th class="p-2">Fin</th>
-                <th class="p-2">Utilisations restantes</th>
-                <th class="p-2">Emplacements</th>
-                <th class="p-2">Actions</th>
-            {% else %}
-                <th class="p-2">Prix</th>
-                <th class="p-2">Par jour</th>
-                <th class="p-2">Par personne</th>
-                <th class="p-2">Saisons</th>
-                <th class="p-2 text-end">Actions</th>
-            {% endif %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for param in params %}
-                    <tr class="text-center bg-green-50">
-                        <td class="p-2 ">{{ param.name }}</td>
-                        <td></td><td></td><td></td><td></td>{% if type is same as 'offers' %}<td></td><td></td>{% endif %}
-                        <td class="p-2 space-x-4 text-end w-fit">
-                            <a href="{{ path('admin_settings_prices_add', {'type': type, 'id': param.id}) }}" class="cursor-pointer"><i class="fa fa-plus"></i></a>
-                            {# <i class="fa fa-pen"></i> #}
-                            <a class="" onclick="return alert('Vous ne pouvez pas supprimer cette règle')"><i class="fa fa-trash"></i></a>
-                        </td>
-                    <tr>
-                {% for rule in param.rules %}
-                        <tr class="text-center">
-                            <td></td>
-                        {% if type is same as 'offers' %}
-                            <td class="p-2">{{ rule.name }}</td>
-                            <td class="p-2">{{ rule.type is same as('devise') ? rule.amount ~ ' €' : rule.amount * 100 ~ ' %' }}</td>
-                            <td class="p-2">{{ rule.start }}</td>
-                            <td class="p-2">{{ rule.end is null ? "Pas de date de fin" : rule.end }}</td>
-                            <td class="p-2">{{ rule.uses is null ? "Pas d'utilisations maximum": rule.uses }}</td>
-                            <td class="p-2">{{ rule.places.0 is null ? "Tous" : rule.places|join(', ') }}</td>
-                        {% else %}
-                            <td class="p-2">{{ rule.amount }} €</td>
-                            <td class="p-2">{{ rule.per_days ? 'Oui' : 'Non' }}</td>
-                            <td class="p-2">{{ rule.per_person ? 'Oui' : 'Non' }}</td>
-                            <td class="p-2">{{ rule.seasons.0 is null ? "Toutes" : rule.seasons|join(', ') }}</td>
-                        {% endif %}
-                            <td class="p-2 space-x-4 text-end w-fit">
-                                <a href="{{ path('admin_settings_prices_update', {'type': type, 'id': param.id, 'ruleId': rule.id}) }}" class=""><i class="fa fa-pen"></i></a>
-                                <a href="{{ path('admin_settings_prices_delete', {'type': type, 'id': param.id, 'ruleId': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')"><i class="fa fa-trash"></i></a>
-                            </td>
-                        </tr>
-                {% endfor %}
-            {% endfor %}
-        </tbody>
-    </table>
 
-{% endmacro %}
+	<div class="mt-12 mb-4 flex justify-between items-center">
+		<h2 class="text-2xl">
+			{{ type is same as 'places' ? 'Emplacements' }}
+			{{ type is same as 'services' ? 'Services supplémentaires' }}
+			{{ type is same as 'ages' ? 'Adulte/enfants' }}
+			{{ type is same as 'offers' ? 'Offres' }}
+		</h2>
+	</div>
+	<table class="w-full border-collapse border">
+		<thead>
+			<tr class="bg-green-200">
+				{{ type is same as 'places' ? '<th class="p-2">Emplacement</th>' }}
+				{{ type is same as 'services' ? '<th class="p-2">Service</th>' }}
+				{{ type is same as 'ages' ? '<th class="p-2">Catégorie</th>' }}
+				{{ type is same as 'offers' ? '<th class="p-2">Type</th>' }}
+				{% if type is same as 'offers' %}
+					<th class="p-2">Nom</th>
+					<th class="p-2">Montant</th>
+					<th class="p-2">Début</th>
+					<th class="p-2">Fin</th>
+					<th class="p-2">Utilisations restantes</th>
+					<th class="p-2">Emplacements</th>
+					<th class="p-2 text-end">Actions</th>
+				{% else %}
+					<th class="p-2">Prix</th>
+					<th class="p-2">Par nuit</th>
+					<th class="p-2">Par personne</th>
+					<th class="p-2">Saisons</th>
+					<th class="p-2 text-end">Actions</th>
+				{% endif %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for param in params %}
+				<tr class="text-center bg-green-50">
+					<td class="p-2 ">{{ param.name }}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					{% if type is same as 'offers' %}
+						<td></td>
+						<td></td>
+					{% endif %}
+					<td class="p-2 space-x-4 text-end w-fit">
+						<a href="{{ path('admin_settings_prices_add_rule', {'type': type, 'id': param.id}) }}" class="cursor-pointer">
+							<i class="fa fa-plus"></i>
+						</a>
+						<a class="" onclick="return alert('Vous ne pouvez pas supprimer cette règle')">
+							<i class="fa fa-trash"></i>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					{% for rule in param.rules %}
+						<tr class="text-center">
+							<td></td>
+							{% if type is same as 'offers' %}
+								<td class="p-2">{{ rule.name }}</td>
+								<td class="p-2">{{ rule.type is same as('devise') ? rule.amount ~ ' €' : rule.amount * 100 ~ ' %' }}</td>
+								<td class="p-2">{{ rule.start }}</td>
+								<td class="p-2">{{ rule.end is null ? "Pas de date de fin" : rule.end }}</td>
+								<td class="p-2">{{ rule.uses is null ? "Pas d'utilisations maximum": rule.uses }}</td>
+								<td class="p-2">{{ rule.places.0 is null ? "Tous" : rule.places|join(', ') }}</td>
+							{% else %}
+								<td class="p-2">{{ rule.amount ~ ' €' }}
+								</td>
+								<td class="p-2">{{ rule.per_days ? 'Oui' : 'Non' }}</td>
+								<td class="p-2">{{ rule.per_person ? 'Oui' : 'Non' }}</td>
+								<td class="p-2">{{ rule.seasons.0 is null ? "Toutes" : rule.seasons|join(', ') }}</td>
+							{% endif %}
+							<td class="p-2 space-x-4 text-end w-fit">
+								<a href="{{ path('admin_settings_prices_update', {'type': type, 'id': param.id, 'ruleId': rule.id}) }}" class="">
+									<i class="fa fa-pen"></i>
+								</a>
+								<a href="{{ path('admin_settings_prices_delete', {'type': type, 'id': param.id, 'ruleId': rule.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')">
+									<i class="fa fa-trash"></i>
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				{% endfor %}
+			</tbody>
+		</tbody>
+	</table>
+</article>{% endmacro %}

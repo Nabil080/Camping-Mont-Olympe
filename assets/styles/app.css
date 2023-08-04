@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* body {
-    background-color: lightgray;
-} */
+.g-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid black;
+  background-color: #a7f3d0;
+}
+
+.g-button:hover {
+  background-color: #6ee7b7;
+}
+
+.overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
