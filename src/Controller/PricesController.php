@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\OfferRuleType;
 use App\Form\PriceRuleType;
 use App\Service\ConfigService;
+use App\Service\LogService;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +25,7 @@ class PricesController extends AbstractController
     }
 
     #[Route("/admin/settings/prices/{type}/{id<\d+>}/rule/add", name: "admin_settings_prices_add_rule")]
-    public function add($type, $id, Request $request, ConfigService $configService): Response
+    public function add($type, $id, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $isOffer = $type === 'offers' ? true : false;
         $typeName = $configService->getPricesRules($type)[$id]['name'];
@@ -38,7 +39,13 @@ class PricesController extends AbstractController
             $rule += $form->getData();
 
             $configService->addPriceRule($type, $id, $rule);
+
             $this->addFlash('success', 'New "places" price rule added successfully!');
+
+            $message = "Un tarif ".$logService->translate($type)." a été ajouté pour $typeName";
+            $context = ["add","price"];
+            $logService->write($message, $context);
+
             return $this->redirectToRoute('admin_settings_prices');
         }
 
@@ -50,9 +57,10 @@ class PricesController extends AbstractController
     }
 
     #[Route("/prices/update/{type}/{id<\d+>}/{ruleId<\d+>}", name: "admin_settings_prices_update")]
-    public function update($type, $id, int $ruleId, Request $request, ConfigService $configService): Response
+    public function update($type, $id, int $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $isOffer = $type === 'offers' ? true : false;
+        $typeName = $configService->getPricesRules($type)[$id]['name'];
 
         $form = $isOffer ? $this->createForm(OfferRuleType::class) : $this->createForm(PriceRuleType::class);
         $form->handleRequest($request);
@@ -63,8 +71,14 @@ class PricesController extends AbstractController
 
             $configService->updatePriceRule($type, $id, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
+
+            $message = "Un tarif ".$logService->translate($type)." a été modifié pour $typeName";
+            $context = ["update","price"];
+            $logService->write($message, $context);
+
+
             return $this->redirectToRoute('admin_settings_prices');
-        } else {
+        } elseif (!$form->isSubmitted()) {
             $config = $configService->getPricesRules($type);
             foreach ($config[$id]['rules'] as $index => $rule)
                 if ($rule['id'] == $ruleId)
@@ -87,16 +101,26 @@ class PricesController extends AbstractController
         }
 
         return $this->render('admin/settings/prices/add.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form,
+            'type' => $type,
+            'type_name' => $typeName
         ]);
     }
 
 
     #[Route("/prices/delete/{type}/{id<\d+>}/{ruleId<\d+>}", name: "admin_settings_prices_delete")]
-    public function delete($type, $id, $ruleId, Request $request, ConfigService $configService): Response
+    public function delete($type, $id, $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $configService->deletePriceRule($type, $id, $ruleId);
+
+        $typeName = $configService->getPricesRules($type)[$id]['name'];
         $this->addFlash('success', 'New "places" price rule added successfully!');
+        $message = "Un tarif ".$logService->translate($type)." a été supprimé pour $typeName";
+        $context = ["delete","price"];
+        
+        $logService->write($message, $context);
+        
+        
         return $this->redirectToRoute('admin_settings_prices');
     }
 }
