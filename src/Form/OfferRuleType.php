@@ -18,8 +18,8 @@ class OfferRuleType extends AbstractType
 {
     private ConfigService $cs;
 
-    public function __construct(){
-        $this->cs = new ConfigService;
+    public function __construct(ConfigService $configService){
+        $this->cs = $configService;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

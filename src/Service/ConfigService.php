@@ -65,7 +65,7 @@ class ConfigService
         return $config['prices'][$type] ?? [];
     }
 
-    public function getLastPricesRules(string $type, int $id): int
+    public function getLastPricesRules(string $type, int|string $id): int
     {
         $lastId = $this->getPricesRules($type)[$id]['rules'];
         $lastId = end($lastId);
@@ -73,14 +73,14 @@ class ConfigService
         return $lastId ? $lastId['id'] : 0;
     }
 
-    public function addPriceRule(string $type, int $typeId, array $rule): void
+    public function addPriceRule(string $type, int|string $typeId, array $rule): void
     {
         $config = $this->getConfigData();
         $config['prices'][$type][$typeId]['rules'][] = $rule;
         $this->saveConfigData($config);
     }
 
-    public function updatePriceRule(string $type, int $typeId, array $rule): void
+    public function updatePriceRule(string $type, int|string $typeId, array $rule): void
     {
         $config = $this->getConfigData();
         foreach ($config['prices'][$type][$typeId]['rules'] as $index => $oldRule)
@@ -90,7 +90,7 @@ class ConfigService
         $this->saveConfigData($config);
     }
 
-    public function deletePriceRule(string $type, int $id, int $ruleId): void
+    public function deletePriceRule(string $type, int|string $id, int $ruleId): void
     {
         $config = $this->getConfigData();
         foreach ($config['prices'][$type][$id]['rules'] as $index => $rule)

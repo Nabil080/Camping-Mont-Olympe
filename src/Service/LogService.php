@@ -35,12 +35,11 @@ class LogService
 
     public function translate($string):string
     {
-        if($string === "places") $fr = "emplacement";
-        if($string === "services") $fr = "service";
-        if($string === "offer") $fr = "age";
-        if($string === "ages") $fr = "offre";
+        if($string === "places") return "emplacement";
+        if($string === "services") return "service";
+        if($string === "ages") return "age";
+        if($string === "offers") return "offre";
 
-
-        return $fr;
+        return "";
     }
 }
