@@ -152,6 +152,30 @@
                 "seasons": [
                     null
                 ]
+            },
+            {
+                "id": 2,
+                "days": [
+                    1
+                ],
+                "places": [
+                    "Camping Car"
+                ],
+                "seasons": [
+                    "Saison une"
+                ]
+            },
+            {
+                "id": 3,
+                "days": [
+                    2
+                ],
+                "places": [
+                    "Camping Car"
+                ],
+                "seasons": [
+                    "Saison 2"
+                ]
             }
         ],
         "minStay": [
@@ -168,6 +192,16 @@
             {
                 "id": 2,
                 "amount": 10,
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
+            },
+            {
+                "id": 3,
+                "amount": 500,
                 "places": [
                     null
                 ],

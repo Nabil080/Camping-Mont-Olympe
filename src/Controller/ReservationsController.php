@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\CheckRuleType;
 use App\Form\StayRuleType;
 use App\Service\ConfigService;
+use App\Service\LogService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,7 +35,7 @@ class ReservationsController extends AbstractController
     }
 
     #[Route("/reservations/{type}/add", name: "admin_settings_reservations_add")]
-    public function add(string $type, Request $request, ConfigService $configService): Response
+    public function add(string $type, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $isCheck = str_contains(strtolower($type), 'check') ? true : false;
         $isStay = str_contains(strtolower($type), 'stay') ? true : false;
@@ -51,11 +52,17 @@ class ReservationsController extends AbstractController
 
             $configService->addReservationRule($type, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
+            $message = "Une règle de réservation $type a été ajoutée";
+            $context = ['add','reservation'];
+            $logService->write($message,$context);
+
+
             return $this->redirectToRoute('admin_settings_reservations');
         }
 
-        return $this->render('param/reservations/add.html.twig', [
-            'form' => $form->createView(),
+        return $this->render('admin/settings/reservations/add.html.twig', [
+            'form' => $form,
+            'type_name' => $type
         ]);
     }
 
@@ -94,8 +101,8 @@ class ReservationsController extends AbstractController
             $form->get('seasons')->setData($oldRule['seasons']);
         }
 
-        return $this->render('param/reservations/add.html.twig', [
-            'form' => $form->createView(),
+        return $this->render('admin/settings/reservations/add.html.twig', [
+            'form' => $form,
         ]);
     }
 
