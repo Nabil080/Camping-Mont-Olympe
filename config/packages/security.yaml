@@ -16,18 +16,31 @@ security:
     main:
       lazy: true
       provider: app_user_provider
+      custom_authenticator: App\Security\LoginFormAuthenticator
+      logout:
+        path: logout
+        # where to redirect after logout
+        # target: app_any_route
 
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#the-firewall
 
       # https://symfony.com/doc/current/security/impersonating_user.html
       # switch_user: true
+  role_hierarchy:
+    ROLE_ADMIN:
+    ROLE_SETTINGS: [ROLE_ADMIN, ROLE_ALLOWED_TO_CHANGE_SETTINGS]
+    ROLE_LOGS: [ROLE_SETTINGS, ROLE_ALLOWED_TO_SEE_LOGS]
+    ROLE_SUPER_ADMIN: [ROLE_LOGS, ROLE_ALLOWED_TO_CREATE_ADMINS]
 
   # Easy way to control access for large sections of your site
   # Note: Only the *first* access control that matches will be used
   access_control:
-    # - { path: ^/admin, roles: ROLE_ADMIN }
-    # - { path: ^/profile, roles: ROLE_USER }
+    - { path: ^/admin/users, roles: ROLE_ALLOWED_TO_CREATE_ADMINS }
+    - { path: ^/admin/logs, roles: ROLE_ALLOWED_TO_SEE_LOGS }
+    - { path: ^/admin/settings, roles: ROLE_ALLOWED_TO_CHANGE_SETTINGS }
+    - { path: ^/admin, roles: ROLE_ADMIN }
+
 
 when@test:
   security:
