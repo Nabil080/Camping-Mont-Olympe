@@ -395,7 +395,7 @@
     "services": {
         "1": {
             "id": 1,
-            "name": "Service 1",
+            "name": "Chien",
             "rules": {
                 "1": {
                     "id": 2,
@@ -406,7 +406,7 @@
                 },
                 "2": {
                     "id": 3,
-                    "max": 10,
+                    "max": 8,
                     "places": [
                         null
                     ]
@@ -429,13 +429,6 @@
                     "max": 2,
                     "places": [
                         "Camping Car"
-                    ]
-                },
-                {
-                    "id": 3,
-                    "max": 10,
-                    "places": [
-                        null
                     ]
                 }
             ]

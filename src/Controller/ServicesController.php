@@ -94,8 +94,10 @@ class ServicesController extends AbstractController
     }
 
     #[Route('/services/{serviceId}/rule/add', name: 'admin_settings_services_rule_add')]
-    public function addRule(int $serviceId, ConfigService $configService, Request $request): Response
+    public function addRule(int $serviceId, ConfigService $configService, Request $request, LogService $logService): Response
     {
+        $oldService = $configService->getServices($serviceId);
+
         $form = $this->createForm(ServiceRuleType::class);
         $form->handleRequest($request);
 
@@ -106,17 +108,22 @@ class ServicesController extends AbstractController
 
             $configService->addServiceRule($serviceId, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
+            $message = "Une règle a été ajoutée pour le service '".$oldService['name'];
+            $context = ["add", "service"];
+            $logService->write($message, $context);
+
             return $this->redirectToRoute('admin_settings_services');
         }
 
-        return $this->render('param/services/add_rule.html.twig', [
-            'form' => $form->createView(),
+        return $this->render('admin/settings/services/add_rule.html.twig', [
+            'form' => $form,
+            'service_name' => $oldService['name']
         ]);
     }
 
 
     #[Route('/services/{serviceId}/update/{ruleId<\d+>}', name: 'admin_settings_services_rule_update')]
-    public function updateRule(int $serviceId, int $ruleId, ConfigService $configService, Request $request): Response
+    public function updateRule(int $serviceId, int $ruleId, ConfigService $configService, Request $request, LogService $logService): Response
     {
         $oldService = $configService->getServices($serviceId);
         foreach ($oldService['rules'] as $index => $rule) {
@@ -133,23 +140,33 @@ class ServicesController extends AbstractController
 
             $configService->updateServiceRule($serviceId, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
+            $message = "Une règle a été modifiée pour le service '".$oldService['name'];
+            $context = ["update", "service"];
+            $logService->write($message, $context);
+
             return $this->redirectToRoute('admin_settings_services');
         } else {
             $form->get('max')->setData($oldRule['max']);
             $form->get('places')->setData($oldRule['places']);
         }
 
-        return $this->render('param/services/add.html.twig', [
-            'form' => $form->createView(),
+        return $this->render('admin/settings/services/add.html.twig', [
+            'form' => $form,
         ]);
     }
 
     #[Route("/services/{serviceId}/delete/{ruleId<\d+>}", name: "admin_settings_services_rule_delete")]
-    public function deleteRule(int $serviceId, int $ruleId, Request $request, ConfigService $configService): Response
+    public function deleteRule(int $serviceId, int $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
     {
+        $oldService = $configService->getServices($serviceId);
+
         $configService->deleteserviceRule($serviceId, $ruleId);
 
         $this->addFlash('success', 'New "places" price rule added successfully!');
+        $message = "Une règle a été supprimée pour le service '".$oldService['name'];
+        $context = ["delete", "service"];
+        $logService->write($message, $context);
+
         return $this->redirectToRoute('admin_settings_services');
     }
 }
