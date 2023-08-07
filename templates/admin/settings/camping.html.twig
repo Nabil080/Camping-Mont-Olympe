@@ -18,39 +18,52 @@
 	<section id="camping-infos" class="flex text-xl p-4 justify-center gap-20">
 
 		<section id="left-infos" class="p-4 flex flex-col justify-between">
-			<div id="infos" class="flex flex-col gap-4 p-12">
-				<div class="flex gap-2">
-					<label>
-						<span class="underline">Nom</span>
-						:</label>
-					<p class="grow text-end">{{ camping.name }}</p>
+			<form {{stimulus_controller('camping_form')}} id="container" class="p-12" method="post" action="{{ path('admin_settings_camping_update') }}">
+				<section id="infos" class="flex flex-col gap-4">
+					<div class="flex gap-2">
+						<label>
+							<span class="underline">Nom</span>
+							:</label>
+						<p class="grow text-end">{{ camping.name }}</p>
+						<input type="text" name="name" class="hidden self-end ml-auto" value="{{camping.name}}">
+					</div>
+					<div class="flex gap-2">
+						<label>
+							<span class="underline">Adresse</span>
+							:</label>
+						<p class="grow text-end">{{ camping.adress }}</p>
+						<input type="text" name="adress" class="hidden self-end ml-auto" value="{{camping.adress}}">
+					</div>
+					<div class="flex gap-2">
+						<label>
+							<span class="underline">Téléphone</span>
+							:</label>
+						<p class="grow text-end">{{ camping.phone }}</p>
+						<input type="tel" name="phone" class="hidden self-end ml-auto" value="{{camping.phone}}">
+					</div>
+					<div class="flex gap-2">
+						<label>
+							<span class="underline">Email</span>
+							:</label>
+						<p class="grow text-end">{{ camping.email }}</p>
+						<input type="email" name="email" class="hidden self-end ml-auto" value="{{camping.email}}">
+					</div>
+					<div class="flex gap-2">
+						<label>
+							<span class="underline">Site internet</span>
+							:</label>
+						<p class="grow text-end">{{ camping.website }}</p>
+						<input type="text" name="website" class="hidden self-end ml-auto" value="{{camping.website}}">
+					</div>
+				</section>
+				<div class="mt-4">
+					<button id="update" {{ stimulus_action('camping-form', 'toggleForm') }} class="g-button w-full">Modifier les informations</button>
+					<div id="form-buttons" class="grid grid-cols-2 gap-4">
+						<button {{ stimulus_action('camping-form', 'toggleForm') }} id="cancel" class="g-button hidden">Annuler</button>
+						<button type="submit" class="g-button hidden">Valider</button>
+					</div>
 				</div>
-				<div class="flex gap-2">
-					<label>
-						<span class="underline">Adresse</span>
-						:</label>
-					<p class="grow text-end">{{ camping.adress }}</p>
-				</div>
-				<div class="flex gap-2">
-					<label>
-						<span class="underline">Téléphone</span>
-						:</label>
-					<p class="grow text-end">{{ camping.phone }}</p>
-				</div>
-				<div class="flex gap-2">
-					<label>
-						<span class="underline">Email</span>
-						:</label>
-					<p class="grow text-end">{{ camping.email }}</p>
-				</div>
-				<div class="flex gap-2">
-					<label>
-						<span class="underline">Site internet</span>
-						:</label>
-					<p class="grow text-end">{{ camping.website }}</p>
-				</div>
-				<button class="g-button">Modifier les informations</button>
-			</div>
+			</form>
 			<div id="logo" class="p-12 flex flex-col gap-4">
 				<img src="{{ asset('img/logo-camping.png') }}" class="w-full" alt="logo du camping">
 				<button class="g-button">Modifier le logo</button>
