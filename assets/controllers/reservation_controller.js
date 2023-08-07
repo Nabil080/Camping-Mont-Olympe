@@ -4,7 +4,9 @@ export default class extends Controller {
   connect() {
     // console.log(this.element)
 
-    this.open()
+    // this.open()
+
+    // this.updateValue()
   }
 
   open() {
@@ -18,5 +20,18 @@ export default class extends Controller {
     const container = document.querySelector('#reservation-container')
     container.classList.add('translate-x-full');
   }
+
+  updateValue() {
+    const container = document.querySelector('#reservation-container')
+    const start = container.querySelector('#start-date')
+    const end = container.querySelector('#end-date')
+
+    const startInput = document.querySelector('#reservation [name="start"]') 
+    const endInput = document.querySelector('#reservation [name="end"]')
+    
+    start.innerText = startInput.value;
+    end.innerText = endInput.value;
+  }
+
 
 }

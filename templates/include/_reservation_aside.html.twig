@@ -1,6 +1,6 @@
-<section id="reservation-container" {{ stimulus_controller('reservation') }} class="text-emerald-800 w-[500px] fixed top-0 right-0 z-50 h-full bg-white translate-x-full duration-700 ease-in-out">
+<section id="reservation-container" {{ stimulus_controller('reservation date_picker') }} class="text-emerald-800 w-[600px] fixed top-0 right-0 z-50 h-full bg-white translate-x-full duration-700 ease-in-out">
 
-	<section id="top-bar" class="flex px-4 gap-6 py-1 bg-gray-400 items-center">
+	<section id="top-bar" class="flex px-4 gap-6 py-2 bg-gray-400 items-center">
 		<div id="close">
 			<button {{ stimulus_action('reservation','close') }} class="p-1 aspect-square rounded-full border border-emerald-800">
 				<i class="fa fa-xmark w-8 h-8"></i>
@@ -8,9 +8,11 @@
 		</div>
 		<div id="dates" class="flex p-2 px-4 rounded-full border border-emerald-800 items-center gap-2">
 			<i class="fa fa-calendar"></i>
-			<div id="start-date">06/08/2023</div>
+				<input name="start" type class="w-[10ch] bg-transparent border-none outline-none focus:outline-none" placeholder="06/08/2023">
+			{# <div id="start-date">06/08/2023</div> #}
 			<div class="w-2 h-0.5 bg-emerald-800"></div>
-			<div id="end-date">12/08/2023</div>
+				<input name="end" type class="w-[10ch] bg-transparent border-none outline-none focus:outline-none" placeholder="06/08/2023">
+			{# <div id="end-date">12/08/2023</div> #}
 		</div>
 		<div id="clients" class="flex p-2 px-4 rounded-full border border-emerald-800 items-center gap-2">
 			<i class="fa-solid fa-person"></i>
@@ -19,6 +21,5 @@
 			<div id="kids">1</div>
 		</div>
 	</section>
-
 
 </section>
