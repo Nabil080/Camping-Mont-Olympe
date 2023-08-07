@@ -5,10 +5,13 @@
 
 {% block body %}
 
-	<header class="w-screen h-screen bg-teal-500 text-white flex flex-col justify-between">
+	<header class="relative w-screen h-screen bg-emerald-600 text-white flex flex-col bg-cover [&_*]:z-20" style="
+									    background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5157.jpg')
+									    {# background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg') #}
+									    ">
+		<div id="overlay" class="overlay bg-black bg-opacity-20 z-10"></div>
 		<section id="slider" class="absolute"></section>
-		<nav id="header-nav" class=" flex w-full justify-center my-4">
-
+		<nav id="header-nav" class=" flex w-full justify-center py-4 backdrop-filter backdrop-blur-md">
 			<div id="left-nav" class="flex-1 flex flex-col justify-center">
 				<div id="top-left-nav" class="flex items-center mx-12 mb-4 self-start">
 					<div id="icons" class="text-3xl">
@@ -35,9 +38,10 @@
 					<div>
 						+33 3 24 33 23 60
 						<span class="mx-4">/</span>
-						<strong>FR</strong></div>
+						<strong>FR</strong>
+					</div>
 					<div class="separator h-full w-0.5 mx-4"></div>
-					<button class="g-button bg-teal-800 hover:bg-teal-700">Réserver</button>
+					<button class="g-button bg-transparent border-emerald-400 rounded-full">Réserver</button>
 				</div>
 				<div class="w-full h-0.5 bg-white"></div>
 				<div id="bottom-right-nav" class="flex justify-evenly mx-12 mt-4">
@@ -46,13 +50,40 @@
 					<a href="">FAQ</a>
 				</div>
 			</div>
-
 		</nav>
-		<section id="title" class="text-center">
-			<h1 class="uppercase">Camping Mont-Olympe</h1>vous accueille pour séjourner en Ardennes !
+
+		<section id="title" class="text-center text-[56px] my-32  ">
+			<h1 class="uppercase font-black">Camping
+				<span class="underline decoration-emerald-400">Mont-Olympe</span>
+			</h1>vous accueille pour séjourner en
+			<br>Ardennes !
 		</section>
-		<section id="reservation">
-			<div class="w-1/2 h-32 rounded-xl border border-white"></div>
+
+		<section date-rangepicker id="reservation" class="rounded-full border border-white grid grid-cols-3 w-fit mx-auto px-12 py-4 mt-auto mb-32 divide-x-2 backdrop-filter backdrop-blur-sm">
+			<section id="start-date" class="relative pb-4 pr-12">
+				<h2 class="font-bold text-xl mb-4">Date d'arrivée</h2>
+				{# <p>06/08/2023</p> #}
+				<input name="start" type class="w-fit bg-transparent border-none outline-none focus:outline-none" placeholder="06/08/2023">
+				<div class="absolute top-0 right-4 h-full grid place-items-center">
+					<i class="fa fa-chevron-right"></i>
+				</div>
+			</section>
+			<section id="end-date" class="relative pb-4 px-12">
+				<h2 class="font-bold text-xl mb-4">Date de départ</h2>
+				{# <p>06/08/2023</p> #}
+				<input name="end" type class="w-fit bg-transparent border-none outline-none focus:outline-none" placeholder="06/08/2023">
+
+				<div class="absolute top-0 right-4 h-full grid place-items-center">
+					<i class="fa fa-chevron-right"></i>
+				</div>
+			</section>
+			<section id="order" class="pl-12 py-2 ">
+				<button class="relative g-button w-full h-full bg-transparent border-emerald-400 text-emerald-400 rounded-full">Découvrir
+					<div class="absolute top-0 right-4 h-full grid place-items-center">
+						<i class="fa fa-chevron-right"></i>
+					</div>
+				</button>
+			</section>
 		</section>
 	</header>
 
