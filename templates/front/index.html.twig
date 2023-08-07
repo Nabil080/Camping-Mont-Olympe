@@ -6,9 +6,9 @@
 {% block body %}
 
 	<header class="relative w-screen h-screen bg-emerald-600 text-white flex flex-col bg-cover [&_*]:z-20" style="
-																								    background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5157.jpg')
-																								    {# background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg') #}
-																								    ">
+	background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5157.jpg')
+	{# background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg') #}
+	">
 		<div id="overlay" class="overlay bg-black bg-opacity-20 z-10"></div>
 		<section id="slider" class="absolute"></section>
 		<nav id="header-nav" class=" flex w-full justify-center py-4 backdrop-filter backdrop-blur-md">
@@ -41,7 +41,7 @@
 						<strong>FR</strong>
 					</div>
 					<div class="separator h-full w-0.5 mx-4"></div>
-					<button class="g-button bg-transparent border-emerald-400 rounded-full">Réserver</button>
+					<button {{ stimulus_controller('reservation') }} {{ stimulus_action('reservation','open') }} class="g-button bg-transparent border-emerald-400 rounded-full">Réserver</button>
 				</div>
 				<div class="w-full h-0.5 bg-white"></div>
 				<div id="bottom-right-nav" class="flex justify-evenly mx-12 mt-4">
@@ -52,14 +52,14 @@
 			</div>
 		</nav>
 
-		<section id="title" {{ stimulus_controller('anim') }} class="text-center text-[56px] my-32 opacity-0 translate-y-20 duration-700 ease-in-out">
+		<section id="title" {{ stimulus_controller('anim') }} data-delay='0' class="hidden text-center text-[56px] my-32 ease-in-out">
 			<h1 class="uppercase font-black">Camping
 				<span class="underline decoration-emerald-400">Mont-Olympe</span>
 			</h1>vous accueille pour séjourner en
 			<br>Ardennes !
 		</section>
 
-		<section date-rangepicker id="reservation" {{ stimulus_controller('anim') }} class="rounded-full border border-white grid grid-cols-3 w-fit mx-auto px-12 py-4 mt-auto mb-32 divide-x-2 backdrop-filter backdrop-blur-sm opacity-0 translate-y-20 delay-200 duration-700 ease-in-out">
+		<section id="reservation" {{ stimulus_controller('anim date_picker') }} class="hidden rounded-full border border-white grid grid-cols-3 w-fit mx-auto px-12 py-4 mt-auto mb-32 divide-x-2 backdrop-filter backdrop-blur-sm delay-200 ease-in-out">
 			<section id="start-date" class="relative pb-4 pr-12">
 				<h2 class="font-bold text-xl mb-4">Date d'arrivée</h2>
 				{# <p>06/08/2023</p> #}
@@ -78,7 +78,7 @@
 				</div>
 			</section>
 			<section id="order" class="pl-12 py-2 ">
-				<button class="relative g-button w-full h-full bg-transparent border-emerald-400 text-emerald-400 rounded-full">Découvrir
+				<button {{ stimulus_controller('reservation') }} {{ stimulus_action('reservation','open') }} class="relative g-button w-full h-full bg-transparent border-emerald-400 text-emerald-400 rounded-full">Découvrir
 					<div class="absolute top-0 right-4 h-full grid place-items-center">
 						<i class="fa fa-chevron-right"></i>
 					</div>
@@ -86,6 +86,8 @@
 			</section>
 		</section>
 	</header>
+
+{% include 'include/_reservation_aside.html.twig' %}
 
 
 {% endblock %}
