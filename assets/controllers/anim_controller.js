@@ -13,7 +13,6 @@ export default class extends Controller {
   connect() {    
     this.element.classList.remove('opacity-0')
     this.element.classList.remove('translate-y-20')
-    console.log(this.element)
   }
 
 
