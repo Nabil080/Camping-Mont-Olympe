@@ -1,17 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FrontController!{% endblock %}
+{% block title %}Camping Mont-Olympe
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <button {{stimulus_controller('hello')}}> slt! </button> ✅
+	<header class="w-screen h-screen bg-teal-500 text-white flex flex-col justify-between">
+		<section id="slider" class="absolute"></section>
+		<nav id="header-nav" class=" flex w-full justify-center my-4">
 
-    <a href="{{ path('login') }}">Connexion</a>
+			<div id="left-nav" class="flex-1 flex flex-col justify-center">
+				<div id="top-left-nav" class="flex items-center mx-12 mb-4 self-start">
+					<div id="icons" class="text-3xl">
+						<i class="fa-brands fa-facebook"></i>
+					</div>
+					<div class="separator h-full w-0.5 bg-white mx-4 "></div>
+					<div>
+						<strong>Contact</strong>
+						<span class="mx-4">/</span>
+						139 Rue des Pâquis</div>
+				</div>
+				<div class="w-full h-0.5 bg-white"></div>
+				<div id="bottom-left-nav" class="flex justify-evenly mx-12 mt-4">
+					<a href="">Accueil</a>
+					<a href="">Emplacements</a>
+					<a href="">Services</a>
+				</div>
+			</div>
+			<div id="middle-nav" class="mx-8">
+				<img src="{{ asset('img/logo-transparent.png') }}" alt="logo du camping">
+			</div>
+			<div id="right-nav" class="flex-1 flex flex-col justify-center">
+				<div id="top-right-nav" class="flex items-center mx-12 mb-4 self-end">
+					<div>
+						+33 3 24 33 23 60
+						<span class="mx-4">/</span>
+						<strong>FR</strong></div>
+					<div class="separator h-full w-0.5 mx-4"></div>
+					<button class="g-button bg-teal-800 hover:bg-teal-700">Réserver</button>
+				</div>
+				<div class="w-full h-0.5 bg-white"></div>
+				<div id="bottom-right-nav" class="flex justify-evenly mx-12 mt-4">
+					<a href="">Activités</a>
+					<a href="">Alentours</a>
+					<a href="">FAQ</a>
+				</div>
+			</div>
 
-</div>
+		</nav>
+		<section id="title" class="text-center">
+			<h1 class="uppercase">Camping Mont-Olympe</h1>vous accueille pour séjourner en Ardennes !
+		</section>
+		<section id="reservation">
+			<div class="w-1/2 h-32 rounded-xl border border-white"></div>
+		</section>
+	</header>
+
+
 {% endblock %}
