@@ -6,26 +6,18 @@ export default class extends Controller {
   connect() {
     this.buttonTarget.dataset.action = "collapse#toggle";
     this.contentTarget.classList.add(
-      "hidden",
-      "scale-y-0",
+      "max-h-0",
+      "overflow-hidden",
       "transition",
       "ease-in-out",
       "duration-300",
-      "origin-top",
     );
 
     // this.toggle()
   }
 
   toggle() {
-    if (this.contentTarget.classList.contains("scale-y-0")) {
-      this.contentTarget.classList.remove("hidden");
-      setTimeout(() =>
-        this.contentTarget.classList.replace("scale-y-0", "scale-y-100"),
-      );
-    } else {
-      this.contentTarget.classList.replace("scale-y-100", "scale-y-0"),
-        setTimeout(() => this.contentTarget.classList.add("hidden"),150);
-    }
+    this.contentTarget.classList.toggle("max-h-[300px]");
+    this.contentTarget.classList.toggle("p-5");
   }
 }
