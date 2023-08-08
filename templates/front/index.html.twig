@@ -1,4 +1,6 @@
 {% extends 'base.html.twig' %}
+{% import "macro/_svg.html.twig" as svg %}
+
 
 {% block title %}Camping Mont-Olympe
 {% endblock %}
@@ -7,9 +9,9 @@
 
 	{# * HEADER #}
 	<header class="relative w-screen h-screen text-white flex flex-col bg-cover [&_*]:z-20" style="
-																																																																																		background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5157.jpg')
-																																																																																		{# background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg') #}
-																																																																																		">
+													background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5157.jpg')
+													{# background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg') #}
+												">
 		<div id="overlay" class="overlay bg-black bg-opacity-20 z-10"></div>
 		<section id="slider" class="absolute"></section>
 		<nav id="header-nav" class=" flex w-full justify-center py-4 backdrop-filter backdrop-blur-md">
@@ -43,7 +45,7 @@
 					</div>
 					<div class="separator h-full w-0.5 mx-4"></div>
 					<button {{ stimulus_controller('reservation') }} {{ stimulus_action('reservation','open') }} class="g-button bg-transparent
-																																																																																																																																																																							border-white hover:bg-main-800 hover:border-main-800 rounded-full">Réserver</button>
+																																																																																																																																																																																																																													border-white hover:bg-main-800 hover:border-main-800 rounded-full">Réserver</button>
 				</div>
 				<div class="w-full h-0.5 bg-white"></div>
 				<div id="bottom-right-nav" class="flex justify-evenly mx-12 mt-4">
@@ -81,7 +83,7 @@
 			</section>
 			<section id="order" class="pl-12 py-2 ">
 				<button {{ stimulus_controller('reservation') }} {{ stimulus_action('reservation','open') }} class="relative g-button w-full h-full bg-transparent border-white
-																																																																																																																																											hover:border-main-800 hover:bg-main-800 rounded-full">Découvrir
+																																																																																																																																																																																								hover:border-main-800 hover:bg-main-800 rounded-full">Découvrir
 					<div class="absolute top-0 right-4 h-full grid place-items-center">
 						<i class="fa fa-chevron-right"></i>
 					</div>
@@ -93,13 +95,13 @@
 
 	{# * SECTION NEWS #}
 
-	<section id="news" class="h-[800px] bg-main-600 text-white px-12 ">
+	<section id="news" class="h-[800px] text-white px-12 ">
 		<header class="text-center pb-8">
 			<h2 class="text-[50px]">A l'affiche</h2>
 		</header>
 	</section>
 
-	<div class="separator bg-main-600 pt-24 pb-12">
+	<div class="separator pt-24 pb-12">
 		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
 	</div>
 
@@ -107,7 +109,7 @@
 	{# * SECTION CARDS APERCU #}
 
 
-	<section id="discover" class=" bg-main-600 text-white px-12 ">
+	<section id="discover" class=" text-white px-12 ">
 		<header class="text-center pb-8">
 			<h2 class="text-[50px]">Découvrez notre camping !</h2>
 		</header>
@@ -147,7 +149,7 @@
 	</section>
 
 
-	<div class="separator bg-main-600 pt-24 pb-12">
+	<div class="separator pt-24 pb-12">
 		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
 	</div>
 
@@ -155,7 +157,7 @@
 	{# * SECTION FAQ APERCU #}
 
 
-	<section id="faq" class=" bg-main-600 px-12 ">
+	<section id="faq" class=" px-12 ">
 		<header class="text-center pb-8">
 			<h2 class="text-[50px] text-white">Découvrez notre FAQ !</h2>
 		</header>
@@ -220,9 +222,44 @@
 			</article>
 		</section>
 
+		<div class="grid place-content-center py-8">
+			<button class="g-button bg-gray-200 bg-opacity-50 hover:bg-main-500">Voir la FAQ</button>
+		</div>
+
+
 	</section>
 
-	<div class="separator bg-main-600 pt-24 pb-12">
+	<div class="separator py-12">
+		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
+	</div>
+
+
+	<section id="image-separator" class="relative">
+		<figure class="overflow-hidden h-96 bg-cover bg-center bg-fixed" style="background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg')"></figure>
+		<div class="overlay bg-black bg-opacity-20 z-10"></div>
+	</section>
+
+	<div class="separator py-12">
+		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
+	</div>
+
+
+	<section id="pop-up-icons" class="grid grid-cols-3 w-fit gap-x-24 mx-auto my-12">
+		<button class="pop-up-icon">
+			{{ svg.map('w-60 aspect-square') }}
+			<div class="absolute bg-white w-3/4 border text-center py-4 px-4 -bottom-0.5">Plan du camping</div>
+		</button>
+		<button class="pop-up-icon">
+			{{ svg.map('w-60 aspect-square') }}
+			<div class="absolute bg-white w-3/4 border text-center py-4 px-4 -bottom-0.5">Plan du camping</div>
+		</button>
+		<button class="pop-up-icon">
+			{{ svg.map('w-60 aspect-square') }}
+			<div class="absolute bg-white w-3/4 border text-center py-4 px-4 -bottom-0.5">Plan du camping</div>
+		</button>
+	</section>
+
+	<div class="separator pt-24 pb-12">
 		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
 	</div>
 
