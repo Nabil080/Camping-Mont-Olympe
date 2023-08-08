@@ -2,26 +2,26 @@
 {% import 'macro/_svg.html.twig' as svg %}
 {% set add = 'add' in app.request.pathInfo %}
 
-{% block title %}{{ add ? "Ajout" : "Modification" }} période de saison
+{% block title %}{{ add ? "Ajout" : "Modification" }} règle de service
 {% endblock %}
 
 {% block body %}
 
 	<header class="mt-8 flex justify-center items-center gap-2">
-		<h1 class="text-3xl">{{ add ? "Ajout" : "Modification" }} période de saison
+		<h1 class="text-3xl">{{ add ? "Ajout" : "Modification" }} règle de service
 		</h1>
 		<div class="group relative cursor-help">
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
 			<div class="hidden group-hover:block absolute bg-white border left-1/2 -translate-x-1/2 mt-4 border-black p-2 w-[300px]">
-				Définissez des saisons et leurs périodes correspondantes.
+				Définissez des services et leurs règles correspondantes.
 				<br><br>
-				Les saisons serviront pour les autres paramètres
+				Les services serviront pour les autres paramètres
 			</div>
 		</div>
 	</header>
 	<div class="text-center">
-		<p class="">{{ add ? "Ajout" : "Modification" }} de période pour la saison :
-			<span class="underline decoration-green-800">{{ season_name }}</span>
+		<p class="">{{ add ? "Ajout" : "Modification" }} de règle pour le service :
+			<span class="underline decoration-green-800">{{ service_name }}</span>
 		</p>
 	</div>
 
@@ -31,20 +31,20 @@
 		<section class="grid grid-cols-2  [&>div]:grid [&>div]:mx-[10%] [&>div]: ">
 
 			<div class="mx-auto my-auto">
-                {{ svg.seasons("w-3/4") }}
+                {{ svg.services("w-3/4") }}
 			</div>
 
 			<div class="grid my-auto">
 				{{ form_start(form) }}
 				{{form_widget(form)}}
 				<button type="submit" class="g-button w-full" >
-					{{ add ? "Ajouter" : "Modifier" }} la saison</button>
+					{{ add ? "Ajouter" : "Modifier" }} le service</button>
 				{{ form_end(form) }}
 			</div>
 		</section>
 
 		<div class="mt-8">
-			<a href="{{ path('admin_settings_prices') }}">
+			<a href="{{ path('admin_settings_services') }}">
 				Retour à la liste
 			</a>
 		</div>

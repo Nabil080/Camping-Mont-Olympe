@@ -32,7 +32,8 @@
                     "start": "2018-01-01",
                     "end": "2019-01-01",
                     "days": [
-                        null
+                        1,
+                        3
                     ]
                 }
             ]
@@ -70,14 +71,6 @@
                     "days": [
                         null
                     ]
-                },
-                {
-                    "id": 2,
-                    "start": "2023-09-01",
-                    "end": "2023-09-15",
-                    "days": [
-                        null
-                    ]
                 }
             ]
         },
@@ -89,14 +82,6 @@
                     "id": 1,
                     "start": "2018-01-01",
                     "end": "2018-01-01",
-                    "days": [
-                        null
-                    ]
-                },
-                {
-                    "id": 2,
-                    "start": "2018-01-01",
-                    "end": "2018-03-03",
                     "days": [
                         null
                     ]
@@ -166,6 +151,30 @@
                 ],
                 "seasons": [
                     null
+                ]
+            },
+            {
+                "id": 2,
+                "days": [
+                    1
+                ],
+                "places": [
+                    "Camping Car"
+                ],
+                "seasons": [
+                    "Saison une"
+                ]
+            },
+            {
+                "id": 3,
+                "days": [
+                    2
+                ],
+                "places": [
+                    "Camping Car"
+                ],
+                "seasons": [
+                    "Saison 2"
                 ]
             }
         ],
@@ -410,7 +419,7 @@
     "services": {
         "1": {
             "id": 1,
-            "name": "Service 1",
+            "name": "Chien",
             "rules": {
                 "1": {
                     "id": 2,
@@ -421,7 +430,7 @@
                 },
                 "2": {
                     "id": 3,
-                    "max": 10,
+                    "max": 8,
                     "places": [
                         null
                     ]
@@ -444,13 +453,6 @@
                     "max": 2,
                     "places": [
                         "Camping Car"
-                    ]
-                },
-                {
-                    "id": 3,
-                    "max": 10,
-                    "places": [
-                        null
                     ]
                 }
             ]

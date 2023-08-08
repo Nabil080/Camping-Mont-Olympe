@@ -234,6 +234,37 @@ class ConfigService
         return $config['services'][$id] ?? [];
     }
 
+
+    public function getLastService(): int
+    {
+        $lastId = $this->getServices();
+        $lastId = end($lastId);
+
+        return $lastId ? $lastId['id'] : 0;
+    }
+
+    public function addService($service): void
+    {
+        $config = $this->getConfigData();
+        $config['services'][$service['id']] = $service;
+        $this->saveConfigData($config);
+    }
+
+    public function updateService(int $id, array $service): void
+    {
+        $config = $this->getConfigData();
+        $config['services'][$id] = $service;
+        $this->saveConfigData($config);
+    }
+
+    public function deleteService(int $serviceId): void
+    {
+        $config = $this->getConfigData();
+        unset($config['services'][$serviceId]);
+        $this->saveConfigData($config);
+    }
+
+
     public function getLastServicesRule(int $serviceId): int
     {
         $lastId = $this->getServices($serviceId)['rules'];

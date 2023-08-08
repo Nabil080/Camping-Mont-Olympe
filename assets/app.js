@@ -1,5 +1,6 @@
 require("@fortawesome/fontawesome-free/css/all.min.css");
 require("@fortawesome/fontawesome-free/js/all.js");
+require("@fontsource/roboto")
 // require('select2')
 
 
@@ -7,9 +8,11 @@ require("@fortawesome/fontawesome-free/js/all.js");
 import "./styles/app.css";
 
 // custom JS
+import "./js/datepicker"
 
 // stimulus
 import "./bootstrap.js";
 
 // flowbite
 import "flowbite";
+import "flowbite-datepicker"
