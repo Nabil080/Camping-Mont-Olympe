@@ -5,7 +5,7 @@
 
 {% block body %}
 
-	<header class="relative w-screen h-screen bg-emerald-600 text-white flex flex-col bg-cover [&_*]:z-20" style="
+	<header class="relative w-screen h-screen text-white flex flex-col bg-cover [&_*]:z-20" style="
 	background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5157.jpg')
 	{# background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg') #}
 	">
@@ -25,9 +25,9 @@
 				</div>
 				<div class="w-full h-0.5 bg-white"></div>
 				<div id="bottom-left-nav" class="flex justify-evenly mx-12 mt-4">
-					<a href="" class="hover:text-emerald-400 underline-animation after:bg-emerald-400">Accueil</a>
-					<a href="" class="hover:text-emerald-400 underline-animation after:bg-emerald-400">Emplacements</a>
-					<a href="" class="hover:text-emerald-400 underline-animation after:bg-emerald-400">Services</a>
+					<a href="" class="hover:text-main-400 underline-animation after:bg-main-400">Accueil</a>
+					<a href="" class="hover:text-main-400 underline-animation after:bg-main-400">Emplacements</a>
+					<a href="" class="hover:text-main-400 underline-animation after:bg-main-400">Services</a>
 				</div>
 			</div>
 			<div id="middle-nav" class="mx-8">
@@ -42,20 +42,20 @@
 					</div>
 					<div class="separator h-full w-0.5 mx-4"></div>
 					<button {{ stimulus_controller('reservation') }} {{ stimulus_action('reservation','open') }} class="g-button bg-transparent 
-					border-white hover:bg-emerald-800 hover:border-emerald-800 rounded-full">Réserver</button>
+					border-white hover:bg-main-800 hover:border-main-800 rounded-full">Réserver</button>
 				</div>
 				<div class="w-full h-0.5 bg-white"></div>
 				<div id="bottom-right-nav" class="flex justify-evenly mx-12 mt-4">
-					<a href="" class="hover:text-emerald-400 underline-animation after:bg-emerald-400">Activités</a>
-					<a href="" class="hover:text-emerald-400 underline-animation after:bg-emerald-400">Alentours</a>
-					<a href="" class="hover:text-emerald-400 underline-animation after:bg-emerald-400">FAQ</a>
+					<a href="" class="hover:text-main-400 underline-animation after:bg-main-400">Activités</a>
+					<a href="" class="hover:text-main-400 underline-animation after:bg-main-400">Alentours</a>
+					<a href="" class="hover:text-main-400 underline-animation after:bg-main-400">FAQ</a>
 				</div>
 			</div>
 		</nav>
 
 		<section id="title" {{ stimulus_controller('anim') }} data-delay='0' class="hidden text-center text-[56px] my-32 ease-in-out">
 			<h1 class="uppercase font-black">Camping
-				<span class="underline decoration-emerald-800">Mont-Olympe</span>
+				<span class="underline decoration-main-800">Mont-Olympe</span>
 			</h1>vous accueille pour séjourner en
 			<br>Ardennes !
 		</section>
@@ -80,7 +80,7 @@
 			</section>
 			<section id="order" class="pl-12 py-2 ">
 				<button {{ stimulus_controller('reservation') }} {{ stimulus_action('reservation','open') }} class="relative g-button w-full h-full bg-transparent border-white 
-				hover:border-emerald-800 hover:bg-emerald-800 rounded-full">Découvrir
+				hover:border-main-800 hover:bg-main-800 rounded-full">Découvrir
 					<div class="absolute top-0 right-4 h-full grid place-items-center">
 						<i class="fa fa-chevron-right"></i>
 					</div>

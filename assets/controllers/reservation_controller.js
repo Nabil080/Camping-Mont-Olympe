@@ -5,19 +5,21 @@ export default class extends Controller {
     // console.log(this.element)
 
     // this.open()
-
-    // this.updateValue()
   }
 
   open() {
-
     const container = document.querySelector('#reservation-container')
+    const overlay = document.querySelector('#reservation-overlay')
+
+    overlay.classList.remove('hidden')
     container.classList.remove('translate-x-full');
   }
 
   close() {
-
     const container = document.querySelector('#reservation-container')
+    const overlay = document.querySelector('#reservation-overlay')
+
+    overlay.classList.add('hidden')
     container.classList.add('translate-x-full');
   }
 
