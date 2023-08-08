@@ -10,10 +10,10 @@ module.exports = {
     "./vendor/symfony/twig-bridge/Resources/views/Form/tailwind_2_layout.html.twig", // tailwind form theme
   ],
   theme: {
-    // fontFamily: {
-    // sans: 'Roboto',
-    // title: 'Montserrat',
-    // },
+    fontFamily: {
+      // sans: "Roboto",
+      // title: "Montserrat",
+    },
     extend: {
       colors: {
         main: {
