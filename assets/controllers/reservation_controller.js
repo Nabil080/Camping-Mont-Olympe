@@ -4,7 +4,7 @@ export default class extends Controller {
   connect() {
     // console.log(this.element)
 
-    // this.open()
+    this.open()
   }
 
   open() {

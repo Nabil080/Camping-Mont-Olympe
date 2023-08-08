@@ -14,6 +14,11 @@
     background-color: #6ee7b7;
   }
   
+  .reservation-card {
+    background-color: white;
+    margin: 1rem ;
+    aspect-ratio: 16/7;
+  }
 }
 
 @layer utilities {
