@@ -14,7 +14,7 @@
 															">
 		<div id="overlay" class="overlay bg-black bg-opacity-20 z-10"></div>
 		<section id="slider" class="absolute"></section>
-		<nav id="header-nav" class=" flex w-full justify-center py-4 backdrop-filter backdrop-blur-md">
+		<nav id="header-nav" class=" flex w-full justify-center py-4 backdrop-filter backdrop-blur-sm">
 			<div id="left-nav" class="flex-1 flex flex-col justify-center">
 				<div id="top-left-nav" class="flex items-center mx-12 mb-4 self-start">
 					<div id="icons" class="text-3xl">
@@ -58,9 +58,9 @@
 
 		<section id="title" {{ stimulus_controller('anim') }} data-delay='0' class="hidden text-center text-[56px] my-32 ease-in-out">
 			<h1 class="uppercase font-black">Camping
-				<span class="underline decoration-main-800">Mont-Olympe</span>
-			</h1>vous accueille pour séjourner en
-			<br>Ardennes !
+				<span class="underline decoration-main-500">Mont-Olympe</span>
+			</h1>
+			<span class="font-title font-bold">vos vacances en Ardennes</span>
 		</section>
 
 		<section id="reservation" {{ stimulus_controller('anim date_picker') }} class="hidden rounded-full border border-white grid grid-cols-3 w-fit mx-auto px-12 py-4 mt-auto mb-32 divide-x-2 backdrop-filter backdrop-blur-sm delay-200 ease-in-out">
@@ -95,11 +95,11 @@
 
 	{# * SECTION NEWS #}
 
-	<section id="news" class="h-[800px] text-white px-12 ">
+	{# <section id="news" class="h-[800px] text-main-600 px-12 ">
 		<header class="text-center pb-8">
 			<h2 class="text-[50px]">A l'affiche</h2>
 		</header>
-	</section>
+	</section> #}
 
 	<div class="separator pt-24 pb-12">
 		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
@@ -109,39 +109,39 @@
 	{# * SECTION CARDS APERCU #}
 
 
-	<section id="discover" class=" text-white px-12 ">
+	<section id="discover" class="px-12 ">
 		<header class="text-center pb-8">
 			<h2 class="text-[50px]">Découvrez notre camping !</h2>
 		</header>
 
-		<section id="discover-cards" class="grid grid-cols-2 w-1/2 gap-x-12 gap-y-6 mx-auto">
-			<article class="discover-card">
+		<section id="discover-cards" class="grid grid-cols-2 w-1/2 gap-x-12 gap-y-6 mx-auto text-white">
+			<article class="discover-card bg-main-800">
 				<a href="{{ path('homepage') }}" class="overlay z-30"></a>
 				<div class="h-full w-full grid place-content-center z-20">
 					<h3 class="z-20 text-2xl group">Nos services</h3>
 				</div>
 				<img class="overlay" src="https://static.actu.fr/uploads/2023/01/20230106-123039.jpg" alt="">
 			</article>
-			<article class="discover-card">
+			<article class="discover-card bg-main-800">
 				<a href="{{ path('homepage') }}" class="overlay z-30"></a>
 				<div class="h-full w-full grid place-content-center z-20">
 					<h3 class="z-20 text-2xl group">Nos emplacements</h3>
-				</div>
-				<img class="object-cover opacity-50 overlay z-10 duration-300 ease-in-out" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg" alt="">
+				</div>	
+				<img class="overlay" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg" alt="">
 			</article>
-			<article class="discover-card">
+			<article class="discover-card bg-main-800">
 				<a href="{{ path('homepage') }}" class="overlay z-30"></a>
 				<div class="h-full w-full grid place-content-center z-20">
 					<h3 class="z-20 text-2xl group">Nos activités</h3>
 				</div>
-				<img class="object-cover opacity-50 overlay z-10 duration-300 ease-in-out" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2016/03/kayak-riudecanyes-tarragona-2.jpg" alt="">
+				<img class="overlay" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2016/03/kayak-riudecanyes-tarragona-2.jpg" alt="">
 			</article>
-			<article class="discover-card">
+			<article class="discover-card bg-main-800">
 				<a href="{{ path('homepage') }}" class="overlay z-30"></a>
 				<div class="h-full w-full grid place-content-center z-20">
 					<h3 class="z-20 text-2xl group">Nos environs</h3>
 				</div>
-				<img class="object-cover opacity-50 overlay z-10 duration-300 ease-in-out" src="https://www.ardennes.com/app/uploads/2022/03/3554_Charleville-Mezieres_place_Ducale_David-Truillard_1656x1102.jpg" alt="">
+				<img class="overlay" src="https://www.ardennes.com/app/uploads/2022/03/3554_Charleville-Mezieres_place_Ducale_David-Truillard_1656x1102.jpg" alt="">
 			</article>
 		</section>
 
@@ -159,12 +159,12 @@
 
 	<section id="faq" class=" px-12 ">
 		<header class="text-center pb-8">
-			<h2 class="text-[50px] text-white">Découvrez notre FAQ !</h2>
+			<h2 class="text-[50px] ">Découvrez notre FAQ !</h2>
 		</header>
 
 		<section id="faq-cards" class="w-1/2 mx-auto flex flex-col gap-8" data-accordion="open" data-inactive-classes="">
 			<article {{ stimulus_controller('collapse') }}>
-				<button data-collapse-target="button" class="w-full p-5 border bg-gray-200 bg-opacity-70 border-main-800">
+				<button data-collapse-target="button" class="w-full p-5 border bg-main-800 bg-opacity-70 border-main-800">
 					<div class="flex items-center justify-between">
 						<span class="text-lg">
 							Quels sont les horaires d'ouverture du camping ?
@@ -183,7 +183,7 @@
 				</div>
 			</article>
 			<article {{ stimulus_controller('collapse') }}>
-				<button data-collapse-target="button" class="w-full p-5 border bg-gray-200 bg-opacity-70 border-main-800">
+				<button data-collapse-target="button" class="w-full p-5 border bg-main-800 bg-opacity-70 border-main-800">
 					<div class="flex items-center justify-between">
 						<span class="text-lg">
 							Quels sont les horaires d'ouverture du camping ?
@@ -202,7 +202,7 @@
 				</div>
 			</article>
 			<article {{ stimulus_controller('collapse') }}>
-				<button data-collapse-target="button" class="w-full p-5 border bg-gray-200 bg-opacity-70 border-main-800">
+				<button data-collapse-target="button" class="w-full p-5 border bg-main-800 bg-opacity-70 border-main-800">
 					<div class="flex items-center justify-between">
 						<span class="text-lg">
 							Quels sont les horaires d'ouverture du camping ?
