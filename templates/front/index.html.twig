@@ -95,35 +95,54 @@
 
 	{# * SECTION NEWS #}
 
-	<section {{ stimulus_controller('news_anim') }} id="news" class=" border-main-900 mx-[15%] min-w-[1300px]">
+	<section id="news" class=" border-main-900 mx-[15%] min-w-[1300px]">
 				<section id="top-news" class="w-full flex gap-20">
 				<div class="items-center flex gap-4 min-w-1/3">
 					<div class="h-0.5 w-10 bg-main-500"></div>
-					<h2 class="font-title text-3xl text-main-500 italic">Le camping municipal  de <br> Charleville-Mézières</h2>
+					<h2 {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,translate-y-0" data-invisible-classes="opacity-0,-translate-y-full" data-transition-classes="duration-1000" 
+					class="font-title text-3xl text-main-500 italic duration-1000 ">Le camping municipal  de <br> Charleville-Mézières</h2>
 				</div>
 				<div class="flex-1 w-auto grid grid-cols-2 gap-4 p-4 mr-12">
 					<figure>
-						<img class="h-full aspect-auto object-cover object-center" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5183-1024x683.jpg" alt="">
+						<img {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,scale-100" data-invisible-classes="opacity-0,scale-50" data-transition-classes="duration-1000"  
+						class="h-full aspect-auto object-cover object-center" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5183-1024x683.jpg" alt="">
 					</figure>
 					<figure>
-						<img class="h-full aspect-auto object-cover object-center" src="https://france3-regions.francetvinfo.fr/image/EYo8Qm63PdtDXY6ER82QBF7fXXY/800x450/filters:format(webp)/regions/2021/05/13/609d340a5c016_espace_camping_haulme-5314546.jpg" alt="">
+						<img {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,scale-100" data-invisible-classes="opacity-0,scale-50" data-transition-classes="duration-1000"  
+						class="h-full  aspect-auto object-cover object-center" src="https://france3-regions.francetvinfo.fr/image/EYo8Qm63PdtDXY6ER82QBF7fXXY/800x450/filters:format(webp)/regions/2021/05/13/609d340a5c016_espace_camping_haulme-5314546.jpg" alt="">
 					</figure>
 					</div>
 				</section>
 
 				<section id="middle-news" class="w-full flex gap-4">
-					<figure class="w-3/5 bg-cover bg-center" style="background-image:url('https://www.ardennes.com/app/uploads/wpetourisme/a112b9ce-54ac-49ad-913a-07e1710a316e-horloge-ducale.jpg')">
+					<figure {{ stimulus_controller('visible') }} data-visible-classes="opacity-100" data-invisible-classes="opacity-0" data-transition-classes="duration-1000" 
+					class="w-3/5 bg-cover bg-center" style="background-image:url('https://www.ardennes.com/app/uploads/wpetourisme/a112b9ce-54ac-49ad-913a-07e1710a316e-horloge-ducale.jpg')">
 						{# <img  class="aspect-auto" src="https://www.ardennes.com/app/uploads/wpetourisme/a112b9ce-54ac-49ad-913a-07e1710a316e-horloge-ducale.jpg" alt=""> #}
 					</figure>
 					<div class="flex-1 my-8">
-						<h3 class="uppercase text-main-500 text-3xl font-bold my-8">Un camping en ardennes : le camping 4 étoiles du mont olympe</h3>
-						<p>
+						<h3 {{ stimulus_controller('visible') }} data-visible-classes="translate-x-0,-translate-y-0,opacity-100" data-invisible-classes="translate-x-full,-translate-y-full,opacity-0" data-transition-classes="duration-700,ease-in,delay-1000" 
+						class="uppercase text-main-500 text-3xl font-bold my-8">Un camping en ardennes : le camping 4 étoiles du mont olympe</h3>
+						<p {{ stimulus_controller('visible') }} data-visible-classes="translate-x-0,opacity-100" data-invisible-classes="translate-x-full,opacity-0" data-transition-classes="duration-700,ease-in">
 							Sandrine vous accueil au sein son Camping 4 étoiles Mont Olympe, situé sur la rive droite de la Meuse, dans un cadre verdoyant et naturel. Ressourcez vous dans ce camping familial où règnent calme et bien-être.
 							<br><br>
 							Faites une pause et <strong class="font-extrabold">détendez vous</strong> sur notre terrain de camping, au bord de la piscine.
 							<br><br>
 							Idéalement situé, vous pourrez <strong class="font-extrabold">découvrir la région</strong> tout en profitant de la joie du camping !
 						</p>
+					</div>
+				</section>
+
+				<section id="bot-news" class="w-full flex gap-20">
+				<div class="items-center flex gap-4 min-w-1/3">
+					<div class="h-0.5 w-10 bg-main-500"></div>
+					<div {{ stimulus_controller('visible') }} data-visible-classes="opacity-100" data-invisible-classes="opacity-0" data-transition-classes="duration-1000">
+						<h4 class="font-title text-3xl text-main-500 italic">Soyez au coeur de l'action  <br> et ne manquez pas ces évenements !</h4>
+					</div>
+				</div>
+				<div class="flex-1 w-auto p-4 mr-12">
+					<figure {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,translate-y-0" data-invisible-classes="opacity-0,translate-y-full" data-transition-classes="duration-1000">
+						<img class="h-full aspect-auto object-cover object-center" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2023/07/cv-2023-1-1024x587.jpg" alt="">
+					</figure>
 					</div>
 				</section>
 	</section>
@@ -137,12 +156,12 @@
 	{# * SECTION CARDS APERCU #}
 
 
-	<section id="discover" class="px-12 ">
+	<section id="discover" class="border-main-900 mx-[15%] min-w-[1300px]">
 		<header class="text-center pb-8">
-			<h2 class="text-[50px]">Découvrez notre camping !</h2>
+			<h2 class="uppercase text-main-500 text-3xl font-bold my-8">Découvrez notre camping !</h2>
 		</header>
 
-		<section id="discover-cards" class="grid grid-cols-2 w-1/2 gap-x-12 gap-y-6 mx-auto text-white">
+		<section id="discover-cards" class="grid grid-cols-4 gap mx-auto text-white">
 			<article class="discover-card bg-main-800">
 				<a href="{{ path('homepage') }}" class="overlay z-30"></a>
 				<div class="h-full w-full grid place-content-center z-20">
