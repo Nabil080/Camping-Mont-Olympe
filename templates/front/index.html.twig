@@ -46,7 +46,7 @@
 			<div id="right-nav" class="flex-1 flex flex-col justify-center">
 				<div id="top-right-nav" class="flex items-center mx-12 mb-4 self-end">
 					<div>
-						{{ camping.phone }}
+						{{ camping.phone|replace({'+33 ': '0'}) }}
 						<span class="mx-4">/</span>
 						<button class="font-bold aspect-square w-[4ch] rounded-full bg-main-500"><span>FR</span></button>
 					</div>

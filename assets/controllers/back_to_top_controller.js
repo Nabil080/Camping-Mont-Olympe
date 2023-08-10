@@ -17,10 +17,14 @@ export default class extends Controller {
 
   show() {
     this.element.classList.remove("translate-y-[300%]");
+    
+    if(this.element.dataset.order != undefined) this.element.querySelector('p').classList.add('animate-shake-horizontal')
   }
 
   hide() {
     this.element.classList.add("translate-y-[300%]");
+
+    if(this.element.dataset.order != undefined) this.element.querySelector('p').classList.remove('animate-shake-horizontal')
   }
 }
 

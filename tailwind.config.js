@@ -31,6 +31,21 @@ module.exports = {
           950: "#0b2826",
         },
       },
+      animation: {
+        'shake-horizontal': 'shake 4.5s ease infinite'
+      },
+      keyframes: {
+        shake: {
+            '10%': { transform: 'translateX(0)' },
+            '12%': { transform: 'translateX(5px)' },
+            '14%': { transform: 'translateX(0px)' },
+            '16%': { transform: 'translateX(5px)' },
+            '18%': { transform: 'translateX(0px)' },
+            '20%': { transform: 'translateX(5px)' },
+            '22%': { transform: 'translateX(0)' },
+            '100%': { transform: 'translateX(0)' },
+        }
+      }
     },
   },
   plugins: [require("flowbite/plugin"), require("@tailwindcss/forms")],
