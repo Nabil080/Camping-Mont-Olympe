@@ -11,7 +11,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      sans: "Poppins",
+      // sans: "Poppins",
       title: "Pacifico",
       // title: "Water brush",
     },
