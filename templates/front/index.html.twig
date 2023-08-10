@@ -74,7 +74,7 @@
 			<section id="start-date" class="relative pb-4 pr-12">
 				<h2 class="font-bold text-xl mb-4">Date d'arrivée</h2>
 				{# <p>06/08/2023</p> #}
-				<input name="start" type class="w-[10ch] bg-transparent border-none outline-none focus:outline-none" placeholder="06/08/2023">
+				<input name="start"  type class="w-[10ch] bg-transparent border-none outline-none focus:outline-none" placeholder="06/08/2023" >
 					<label for="start"><i class="ml-4 fa fa-chevron-right"></i></label>
 			</section>
 			<section id="end-date" class="relative pb-4 px-12">
@@ -153,6 +153,12 @@
 	</div>
 
 
+
+<div class="absolute w-36 h-36 ">
+	<img src="https://media0.giphy.com/media/zuG7p2efpdW9A424Ng/giphy.gif?cid=6c09b952w8y3cafvbf6p6ds6qad05h9x3f7zy0h8okor0ad1&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=s" alt="">
+</div>
+
+
 	{# * SECTION CARDS APERCU #}
 
 
@@ -167,25 +173,25 @@
 		class="group border relative min-h-[400px] overflow-hidden delay-100">
 			<a href="" class="overlay bg-black bg-opacity-20 z-10 group-hover:bg-main-500 group-hover:bg-opacity-50"></a>
 			<img class="object-cover h-full group-hover:scale-125 -z-10 duration-200" src="https://static.actu.fr/uploads/2023/01/20230106-123039.jpg" alt="">
-			<div class="overlay grid items-end text-center p-12"><p class="font-title font-bold text-2xl z-30">Services</p></div>
+			<div class="overlay grid items-end text-center p-12"><p class="font-title pointer-events-none font-bold text-2xl z-30">Services</p></div>
 		</article>
 		<article {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,translate-y-0" data-invisible-classes="opacity-0,translate-y-1/2" data-transition-classes="duration-700,delay-[200ms]" 
 		class="group border relative min-h-[400px] overflow-hidden delay-200">
 			<a href="" class="overlay bg-black bg-opacity-20 z-10 group-hover:bg-main-500 group-hover:bg-opacity-50"></a>
 			<img class="object-cover h-full group-hover:scale-125 -z-10 duration-200" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg" alt="">
-			<div class="overlay grid items-end text-center p-12"><p class="font-title font-bold text-2xl z-30">Emplacements</p></div>
+			<div class="overlay grid items-end text-center p-12"><p class="font-title pointer-events-none font-bold text-2xl z-30">Emplacements</p></div>
 		</article>
 		<article {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,translate-y-0" data-invisible-classes="opacity-0,translate-y-1/2" data-transition-classes="duration-700,delay-[300ms]" 
 		class="group border relative min-h-[400px] overflow-hidden delay-300">
 			<a href="" class="overlay bg-black bg-opacity-20 z-10 group-hover:bg-main-500 group-hover:bg-opacity-50"></a>
 			<img class="object-cover h-full group-hover:scale-125 -z-10 duration-200" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2016/03/kayak-riudecanyes-tarragona-2.jpg" alt="">
-			<div class="overlay grid items-end text-center p-12"><p class="font-title font-bold text-2xl z-30">Activités</p></div>
+			<div class="overlay grid items-end text-center p-12"><p class="font-title pointer-events-none font-bold text-2xl z-30">Activités</p></div>
 		</article>
 		<article {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,translate-y-0" data-invisible-classes="opacity-0,translate-y-1/2" data-transition-classes="duration-700,delay-[400ms]" 
 		class="group border relative min-h-[400px] overflow-hidden delay-500">
 			<a href="" class="overlay bg-black bg-opacity-20 z-10 group-hover:bg-main-500 group-hover:bg-opacity-50"></a>
 			<img class="object-cover h-full group-hover:scale-125 -z-10 duration-200" src="https://www.ardennes.com/app/uploads/2022/03/3554_Charleville-Mezieres_place_Ducale_David-Truillard_1656x1102.jpg" alt="">
-			<div class="overlay grid items-end text-center p-12"><p class="font-title font-bold text-2xl z-30">Alentours</p></div>
+			<div class="overlay grid items-end text-center p-12"><p class="font-title pointer-events-none font-bold text-2xl z-30">Alentours</p></div>
 		</article>
 {# 
 			<article class="discover-card bg-main-800">
@@ -230,6 +236,14 @@
 		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
 	</div>
 
+	<section id="image-separator" class="relative">
+		<figure class="overflow-hidden h-96 bg-cover bg-center bg-fixed" style="background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg')"></figure>
+		<div class="overlay bg-black bg-opacity-20 z-10"></div>
+	</section>
+
+	<div class="separator py-12">
+		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
+	</div>
 
 	{# * SECTION FAQ APERCU #}
 
@@ -311,15 +325,6 @@
 	</div>
 
 
-	<section id="image-separator" class="relative">
-		<figure class="overflow-hidden h-96 bg-cover bg-center bg-fixed" style="background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg')"></figure>
-		<div class="overlay bg-black bg-opacity-20 z-10"></div>
-	</section>
-
-	<div class="separator py-12">
-		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
-	</div>
-
 
 	<section id="pop-up-icons" class="grid grid-cols-3 w-fit gap-x-24 mx-auto my-12">
 		<button class="pop-up-icon">
@@ -337,6 +342,82 @@
 	</section>
 
 	<div class="separator pt-24 pb-12">
+		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
+	</div>
+
+		<section id="image-separator" class="relative">
+			<figure class="overflow-hidden bg-cover bg-center bg-fixed" style="background-image:url('https://images4.alphacoders.com/132/1323467.png')">
+			
+				<section id="opinions" class="mx-[15%] min-w-[1300px] grid grid-cols-3 place-content-center gap-12 h-fit my-auto py-32 ">
+			
+
+					<article class="bg-white bg-opacity-95 border-main-500 border p-8 space-y-6">
+					<div>
+						<p class="line-clamp-6">
+							<i class="fa-solid fa-quote-left text-green-500 w-6 h-6"></i> 
+							Personnel très sympathique <br>
+							Le terrain est très bien situé, pas loin de la ville, pas eu le temps de visiter car de passage, nous y reviendrons <br>
+							Sanitaire très propre <br>
+							Prix de l'emplacement très correct <br>
+							Boulanger qui passe le matin c'est très bien <br>
+						</p>
+					</div>
+					<div class="flex justify-between">
+						<div class="text-main-500 flex items-center gap-1 text-xl">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+						</div>
+						<div class="flex items-center gap-2">
+								<p class="font-semibold">Mai Li</p>
+							<div class="float-right rounded-full aspect-square overflow-hidden">
+								<img src="https://lh3.googleusercontent.com/a/AAcHTtczdhAByc7tdEa92AEeXw7k-C2g2iW_ska-tSBbymXf=s40-c-rp-mo-br100" alt="">
+							</div>
+						</div>
+					</div>
+					</article>
+
+					<article class="bg-white bg-opacity-95 border-main-500 border p-8 space-y-6">
+					<div>
+						<p class="line-clamp-6">
+							<i class="fa-solid fa-quote-left text-green-500 w-6 h-6"></i>
+							Nous sommes étonnés des avis que nous avons pu consulter, et heureux de ne pas avoir retrousser chemin en les lisant. <br>
+							Nous avons trouvé ce camping bien entretenu, les emplacements sont tops, les sanitaires également, tout était propre, et en très bon état! <br>
+							Un snack est présent à l’entrée du camping, <br>
+							Nous avons apprécié! Et recommandons à 100% ! <br>
+						</p>
+					</div>
+					<div class="flex justify-between">
+						<div class="text-main-500 flex items-center gap-1 text-xl">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+						</div>
+						<div class="flex items-center gap-2">
+								<p class="font-semibold">Lou28 Fa</p>
+							<div class="float-right rounded-full aspect-square overflow-hidden">
+								<img src="https://lh3.googleusercontent.com/a/AAcHTtcsKqszEnY45Ch7Y9YZ75aVbhJA_hc_j4f2pfBYerPc=s40-c-rp-mo-ba3-br100" alt="">
+							</div>
+						</div>
+					</div>
+					</article>
+
+					<figure class="grid place-content-center">
+						<img src="https://i.gifer.com/origin/98/98cd1c9783d0096b04b720372a89da33_w200.gif" alt="">
+					</figure>
+			
+
+				</section>
+
+			</figure>
+		<div class="overlay bg-black bg-opacity-20 z-10"></div>
+	</section>
+
+	<div class="separator py-12">
 		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
 	</div>
 
