@@ -7,6 +7,8 @@
   --main: #0a6559
 }
 
+html{scroll-behavior:smooth}
+
 @layer components {
   .g-button {
     padding: 0.5rem 1rem;
