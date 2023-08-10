@@ -1,5 +1,19 @@
-<section id="bottom_order" {{ stimulus_controller('back_to_top') }} class="hidden fixed bottom-0 w-full grid place-content-center group z-50">
-    <div></div>
+<section id="bottom_order" {{ stimulus_controller('back_to_top') }} class="hidden fixed bottom-1 w-full grid place-content-center group z-30">
+    <div class="uppercase space-y-2 font-semibold">
+        <div class="flex gap-16 text-main-500 text-sm">
+            <a href="tel:{{camping.phone}}" class="bg-white px-8 py-1 border-main-500 border">
+            {{ camping.phone }}
+            </a>
+            <a href="" class="bg-white px-8 py-1 border-main-500 border">
+                Nous contacter
+            </a>
+        </div>
+        <button {{ stimulus_controller('reservation') }}  {{ stimulus_action('reservation','open') }} class="w-full bg-main-500 bg-opacity-90 text-white text-center py-3 text-xl uppercase">
+            Réserver votre séjour
+        </button>
+    </div>
+
+
 
 
 </section>
