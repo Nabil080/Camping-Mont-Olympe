@@ -29,6 +29,7 @@
     "build": "encore production --progress"
   },
   "dependencies": {
+    "@fontsource/poppins": "^5.0.8",
     "@fontsource/roboto": "^5.0.8",
     "@fontsource/water-brush": "^5.0.8",
     "@fortawesome/fontawesome-free": "^6.4.0",

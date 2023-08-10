@@ -13,21 +13,26 @@
 																{# background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg') #}
 															">
 		<div id="overlay" class="overlay bg-black bg-opacity-20 z-10"></div>
-		<section id="slider" class="absolute"></section>
-		<nav id="header-nav" class=" flex w-full justify-center py-4 backdrop-filter backdrop-blur-sm">
+		<section id="topper" class="bg-main-500 text-center text-md p-1">
+		<i class="fa-solid fa-bullhorn"></i>
+		<span class="uppercase mx-2">Camping ouvert à l'année !</span>
+		<i class="fa-solid fa-bullhorn fa-flip-horizontal"></i>
+		</section>
+		<nav id="header-nav" class="relative flex w-full justify-center py-4 bg-opacity-10 backdrop-blur-sm">
+		<div class="overlay bg-gradient-to-b from-transparent via-black via-0% to-transparent to-100% opacity-50"></div>
 			<div id="left-nav" class="flex-1 flex flex-col justify-center">
 				<div id="top-left-nav" class="flex items-center mx-12 mb-4 self-start">
-					<div id="icons" class="text-3xl">
-						<i class="fa-brands fa-facebook"></i>
+					<div id="icons" class="text-3xl hover:text-main-400 duration-200">
+						<a href="https://www.facebook.com/campingdumontolympe/"><i class="fa-brands fa-facebook"></i></a>
 					</div>
 					<div class="separator h-full w-0.5 bg-white mx-4 "></div>
 					<div>
-						<a href="mailto:{{ camping.email }}" class="font-bold">Contact</a>
+						<a href="mailto:{{ camping.email }}" class="font-bold underline-animation hover:text-main-400 after:bg-main-400">Contact</a>
 						<span class="mx-4">/</span>
 						{{ camping.adress|split(',').0 }}</div>
 				</div>
 				<div class="w-full h-0.5 bg-white"></div>
-				<div id="bottom-left-nav" class="flex justify-evenly mx-12 mt-4">
+				<div id="bottom-left-nav" class="flex justify-evenly mx-12 mt-4 text-xl">
 					<a href="{{ path('homepage') }}" class="hover:text-main-400 underline-animation after:bg-main-400">Accueil</a>
 					<a href="" class="hover:text-main-400 underline-animation after:bg-main-400">Emplacements</a>
 					<a href="" class="hover:text-main-400 underline-animation after:bg-main-400">Services</a>
@@ -41,14 +46,14 @@
 					<div>
 						{{ camping.phone }}
 						<span class="mx-4">/</span>
-						<strong>FR</strong>
+						<button class="font-bold aspect-square w-[4ch] rounded-full bg-main-500"><span>FR</span></button>
 					</div>
 					<div class="separator h-full w-0.5 mx-4"></div>
-					<button {{ stimulus_controller('reservation') }} {{ stimulus_action('reservation','open') }} class="g-button bg-transparent
-																																																																																																																																																																																																																																			border-white hover:bg-main-800 hover:border-main-800 rounded-full">Réserver</button>
+					<button {{ stimulus_controller('reservation') }} {{ stimulus_action('reservation','open') }} class="g-button bg-transparent px-8 duration-200 transition-[background-color]
+																																																																												border-white hover:bg-main-500 hover:border-main-500 rounded-full uppercase">Réserver</button>
 				</div>
 				<div class="w-full h-0.5 bg-white"></div>
-				<div id="bottom-right-nav" class="flex justify-evenly mx-12 mt-4">
+				<div id="bottom-right-nav" class="flex justify-evenly mx-12 mt-4 text-xl">
 					<a href="" class="hover:text-main-400 underline-animation after:bg-main-400">Activités</a>
 					<a href="" class="hover:text-main-400 underline-animation after:bg-main-400">Alentours</a>
 					<a href="" class="hover:text-main-400 underline-animation after:bg-main-400">FAQ</a>
@@ -67,26 +72,19 @@
 			<section id="start-date" class="relative pb-4 pr-12">
 				<h2 class="font-bold text-xl mb-4">Date d'arrivée</h2>
 				{# <p>06/08/2023</p> #}
-				<input name="start" type class="w-fit bg-transparent border-none outline-none focus:outline-none" placeholder="06/08/2023">
-				<div class="absolute top-0 right-4 h-full grid place-items-center">
-					<i class="fa fa-chevron-right"></i>
-				</div>
+				<input name="start" type class="w-[10ch] bg-transparent border-none outline-none focus:outline-none" placeholder="06/08/2023">
+					<label for="start"><i class="ml-4 fa fa-chevron-right"></i></label>
 			</section>
 			<section id="end-date" class="relative pb-4 px-12">
 				<h2 class="font-bold text-xl mb-4">Date de départ</h2>
 				{# <p>06/08/2023</p> #}
-				<input name="end" type class="w-fit bg-transparent border-none outline-none focus:outline-none" placeholder="06/08/2023">
-
-				<div class="absolute top-0 right-4 h-full grid place-items-center">
-					<i class="fa fa-chevron-right"></i>
-				</div>
+				<input name="end" type class="w-[10ch] bg-transparent border-none outline-none focus:outline-none" placeholder="06/08/2023">
+					<label for="end"><i class="ml-4 fa fa-chevron-right"></i></label>
 			</section>
 			<section id="order" class="pl-12 py-2 ">
-				<button {{ stimulus_controller('reservation') }} {{ stimulus_action('reservation','open') }} class="relative g-button w-full h-full bg-transparent border-white
-																																																																																																																																																																																													hover:border-main-800 hover:bg-main-800 rounded-full">Découvrir
-					<div class="absolute top-0 right-4 h-full grid place-items-center">
-						<i class="fa fa-chevron-right"></i>
-					</div>
+				<button {{ stimulus_controller('reservation') }} {{ stimulus_action('reservation','open') }} class="group relative g-button text-lg w-full h-full bg-transparent uppercase border-white duration-200 transition-[background-color]
+			hover:border-main-500 hover:bg-main-500 rounded-full">Découvrir
+						<i class="ml-4 group-hover:ml-0 text-gray-200 group-hover:text-white text-xl fa-solid fa-arrow-right-long duration-200"></i>
 				</button>
 			</section>
 		</section>
