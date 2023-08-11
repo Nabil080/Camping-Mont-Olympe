@@ -1,3 +1,19 @@
 {% macro nav(admin = true) %}
-	<nav></nav>
+	<nav id="sticky-nav" {{ stimulus_controller('navbar') }} class="hidden bg-main-500 fixed w-full top-0 z-30 bg-opacity-90 text-white flex justify-center content-center py-4">
+	<div class="flex items-center gap-12 translate-y-4 uppercase text-xl">
+		<a href="{{ path('homepage') }}" class="underline-animation after:bg-white">Accueil</a>
+		<a href="" class="underline-animation after:bg-white">Emplacements</a>
+		<a href="" class="underline-animation after:bg-white">Services</a>
+	</div>
+		<div id="middle-nav" class="mx-12 duration-300 hover:scale-[1.05]">
+		<a href="#body">
+			<img src="{{ asset('img/logo-transparent.png') }}" alt="logo du camping" class="aspect-auto max-h-16">
+		</a>
+		</div>
+	<div class="flex items-center gap-12 translate-y-4 uppercase text-xl">
+		<a href="" class="underline-animation after:bg-white">Activités</a>
+		<a href="" class="underline-animation after:bg-white">Alentours</a>
+		<a href="" class="underline-animation after:bg-white">FAQ</a>
+	</div>
+	</nav>
 {% endmacro %}

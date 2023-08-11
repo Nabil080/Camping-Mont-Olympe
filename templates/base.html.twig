@@ -17,7 +17,12 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-	<body class="bg-main-600 bg-opacity-80">
+	<body
+		id="#body" class="bg-cover bg-fixed bg-center overflow-x-hidden" {# style="background-image:url('https://media.discordapp.net/attachments/1072195110453915721/1138478106580090940/bgfornabilbg.png?width=865&height=615')" #}>
+		{# <div class="fixed top-0 left-0 h-screen w-screen opacity-1 -z-50 bg-center bg-cover bg-fixed" style="background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5157.jpg')">
+					<div class="overlay bg-black bg-opacity-30"></div>
+				</div> #}
+
 
 		{% include 'include/_reservation_aside.html.twig' %}
 
@@ -27,6 +32,11 @@
 		{% endblock %}
 
 		{% block body %}{% endblock %}
+
+		{% block sticky %}
+			{% include 'include/_back_to_top.html.twig' %}
+			{% include 'include/_bottom_order.html.twig' %}
+		{% endblock %}
 
 		{% block footer %}{% endblock %}
 	</body>

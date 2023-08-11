@@ -2,53 +2,64 @@
 {% import "macro/_svg.html.twig" as svg %}
 
 
-{% block title %}Camping Mont-Olympe
+{% block title %}
+	{{camping.name}}
 {% endblock %}
 
 {% block body %}
-
 	{# * HEADER #}
 	<header class="relative w-screen h-screen text-white flex flex-col bg-cover [&_*]:z-20" style="
-													background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5157.jpg')
-													{# background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg') #}
-												">
+																			background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5157.jpg')
+																			{# background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg') #}
+																		">
 		<div id="overlay" class="overlay bg-black bg-opacity-20 z-10"></div>
-		<section id="slider" class="absolute"></section>
-		<nav id="header-nav" class=" flex w-full justify-center py-4 backdrop-filter backdrop-blur-md">
+		<section id="topper" class="bg-main-500 text-center text-md p-1">
+			<i class="fa-solid fa-bullhorn"></i>
+			<span class="uppercase mx-2">Camping ouvert à l'année !</span>
+			<i class="fa-solid fa-bullhorn fa-flip-horizontal"></i>
+		</section>
+		<nav id="header-nav" class="relative flex w-full justify-center py-4 bg-opacity-10 backdrop-blur-sm">
+			<div class="overlay bg-gradient-to-b from-transparent via-black via-0% to-transparent to-100% opacity-50"></div>
 			<div id="left-nav" class="flex-1 flex flex-col justify-center">
 				<div id="top-left-nav" class="flex items-center mx-12 mb-4 self-start">
-					<div id="icons" class="text-3xl">
-						<i class="fa-brands fa-facebook"></i>
+					<div id="icons" class="text-3xl hover:text-main-400 duration-200">
+						<a href="https://www.facebook.com/campingdumontolympe/">
+							<i class="fa-brands fa-facebook"></i>
+						</a>
 					</div>
 					<div class="separator h-full w-0.5 bg-white mx-4 "></div>
 					<div>
-						<strong>Contact</strong>
+						<a href="mailto:{{ camping.email }}" class="font-bold underline-animation hover:text-main-400 after:bg-main-400">Contact</a>
 						<span class="mx-4">/</span>
-						139 Rue des Pâquis</div>
+						{{ camping.adress|split(',').0 }}</div>
 				</div>
 				<div class="w-full h-0.5 bg-white"></div>
-				<div id="bottom-left-nav" class="flex justify-evenly mx-12 mt-4">
+				<div id="bottom-left-nav" class="flex justify-evenly mx-12 mt-4 text-xl">
 					<a href="{{ path('homepage') }}" class="hover:text-main-400 underline-animation after:bg-main-400">Accueil</a>
 					<a href="" class="hover:text-main-400 underline-animation after:bg-main-400">Emplacements</a>
 					<a href="" class="hover:text-main-400 underline-animation after:bg-main-400">Services</a>
 				</div>
 			</div>
-			<div id="middle-nav" class="mx-8">
-				<img src="{{ asset('img/logo-transparent.png') }}" alt="logo du camping">
+			<div id="middle-nav" class="mx-8 hover:mx-12 duration-300 hover:scale-[1.05]">
+				<a href="{{path('homepage')}}#body">
+					<img src="{{ asset('img/logo-transparent.png') }}" alt="logo du camping">
+				</a>
 			</div>
 			<div id="right-nav" class="flex-1 flex flex-col justify-center">
 				<div id="top-right-nav" class="flex items-center mx-12 mb-4 self-end">
 					<div>
-						+33 3 24 33 23 60
+						{{ camping.phone|replace({'+33 ': '0'}) }}
 						<span class="mx-4">/</span>
-						<strong>FR</strong>
+						<button class="font-bold aspect-square w-[4ch] rounded-full bg-main-500">
+							<span>FR</span>
+						</button>
 					</div>
 					<div class="separator h-full w-0.5 mx-4"></div>
-					<button {{ stimulus_controller('reservation') }} {{ stimulus_action('reservation','open') }} class="g-button bg-transparent
-																																																																																																																																																																																																																													border-white hover:bg-main-800 hover:border-main-800 rounded-full">Réserver</button>
+					<button {{ stimulus_controller('reservation') }} {{ stimulus_action('reservation','open') }} class="g-button bg-transparent px-8 duration-200 transition-[background-color]
+																																																																																		border-white hover:bg-main-500 hover:border-main-500 rounded-full uppercase">Réserver</button>
 				</div>
 				<div class="w-full h-0.5 bg-white"></div>
-				<div id="bottom-right-nav" class="flex justify-evenly mx-12 mt-4">
+				<div id="bottom-right-nav" class="flex justify-evenly mx-12 mt-4 text-xl">
 					<a href="" class="hover:text-main-400 underline-animation after:bg-main-400">Activités</a>
 					<a href="" class="hover:text-main-400 underline-animation after:bg-main-400">Alentours</a>
 					<a href="" class="hover:text-main-400 underline-animation after:bg-main-400">FAQ</a>
@@ -58,35 +69,32 @@
 
 		<section id="title" {{ stimulus_controller('anim') }} data-delay='0' class="hidden text-center text-[56px] my-32 ease-in-out">
 			<h1 class="uppercase font-black">Camping
-				<span class="underline decoration-main-800">Mont-Olympe</span>
-			</h1>vous accueille pour séjourner en
-			<br>Ardennes !
+				<span class="underline decoration-main-500">Mont-Olympe</span>
+			</h1>
+			<span class="font-title font-bold">vos vacances en Ardennes</span>
 		</section>
 
 		<section id="reservation" {{ stimulus_controller('anim date_picker') }} class="hidden rounded-full border border-white grid grid-cols-3 w-fit mx-auto px-12 py-4 mt-auto mb-32 divide-x-2 backdrop-filter backdrop-blur-sm delay-200 ease-in-out">
 			<section id="start-date" class="relative pb-4 pr-12">
 				<h2 class="font-bold text-xl mb-4">Date d'arrivée</h2>
 				{# <p>06/08/2023</p> #}
-				<input name="start" type class="w-fit bg-transparent border-none outline-none focus:outline-none" placeholder="06/08/2023">
-				<div class="absolute top-0 right-4 h-full grid place-items-center">
-					<i class="fa fa-chevron-right"></i>
-				</div>
+				<input name="start" type class="w-[10ch] bg-transparent border-none outline-none focus:outline-none" placeholder="06/08/2023">
+				<label for="start">
+					<i class="ml-4 fa fa-chevron-right"></i>
+				</label>
 			</section>
 			<section id="end-date" class="relative pb-4 px-12">
 				<h2 class="font-bold text-xl mb-4">Date de départ</h2>
 				{# <p>06/08/2023</p> #}
-				<input name="end" type class="w-fit bg-transparent border-none outline-none focus:outline-none" placeholder="06/08/2023">
-
-				<div class="absolute top-0 right-4 h-full grid place-items-center">
-					<i class="fa fa-chevron-right"></i>
-				</div>
+				<input name="end" type class="w-[10ch] bg-transparent border-none outline-none focus:outline-none" placeholder="06/08/2023">
+				<label for="end">
+					<i class="ml-4 fa fa-chevron-right"></i>
+				</label>
 			</section>
 			<section id="order" class="pl-12 py-2 ">
-				<button {{ stimulus_controller('reservation') }} {{ stimulus_action('reservation','open') }} class="relative g-button w-full h-full bg-transparent border-white
-																																																																																																																																																																																								hover:border-main-800 hover:bg-main-800 rounded-full">Découvrir
-					<div class="absolute top-0 right-4 h-full grid place-items-center">
-						<i class="fa fa-chevron-right"></i>
-					</div>
+				<button {{ stimulus_controller('reservation') }} {{ stimulus_action('reservation','open') }} class="group relative g-button text-lg w-full h-full bg-transparent uppercase border-white duration-200 transition-[background-color]
+								hover:border-main-500 hover:bg-main-500 rounded-full">Découvrir
+					<i class="ml-4 mt-[1px] group-hover:ml-0.5 text-gray-200 group-hover:text-white text-xl fa-solid fa-arrow-right-long duration-200"></i>
 				</button>
 			</section>
 		</section>
@@ -95,54 +103,146 @@
 
 	{# * SECTION NEWS #}
 
-	<section id="news" class="h-[800px] text-white px-12 ">
-		<header class="text-center pb-8">
-			<h2 class="text-[50px]">A l'affiche</h2>
-		</header>
+	<section id="news" class=" border-main-900 mx-[15%] min-w-[1300px]">
+		<section id="top-news" class="w-full flex gap-20">
+			<div class="items-center flex gap-4 min-w-1/3">
+				<div class="h-0.5 w-10 bg-main-500"></div>
+				<h2 {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,translate-y-0" data-invisible-classes="opacity-0,-translate-y-full" data-transition-classes="duration-1000" class="font-title text-3xl text-main-500 italic duration-1000 ">Le camping municipal  de
+					<br>
+					Charleville-Mézières</h2>
+			</div>
+			<div class="flex-1 w-auto grid grid-cols-2 gap-4 p-4 mr-12">
+				<figure>
+					<img {{ stimulus_controller('visible') }} data-visible-classes="opacity-100" data-invisible-classes="opacity-0" data-transition-classes="duration-1000" 
+					class="h-full aspect-auto object-cover object-center opacity-100 duration-10000 opacity-0" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5183-1024x683.jpg" alt="">
+				</figure>
+				<figure>
+					<img {{ stimulus_controller('visible') }} data-visible-classes="opacity-100" data-invisible-classes="opacity-0" data-transition-classes="duration-1000" 
+					class="h-full  aspect-auto object-cover object-center opacity-100 duration-10000 opacity-0" src="https://france3-regions.francetvinfo.fr/image/EYo8Qm63PdtDXY6ER82QBF7fXXY/800x450/filters:format(webp)/regions/2021/05/13/609d340a5c016_espace_camping_haulme-5314546.jpg" alt="">
+				</figure>
+			</div>
+		</section>
+
+		<section id="middle-news" class="w-full flex gap-4">
+			<figure
+				{{ stimulus_controller('visible') }} data-visible-classes="opacity-100" data-invisible-classes="opacity-0" data-transition-classes="duration-1000" class="w-3/5 bg-cover bg-center" style="background-image:url('https://www.ardennes.com/app/uploads/wpetourisme/a112b9ce-54ac-49ad-913a-07e1710a316e-horloge-ducale.jpg')">{# <img  class="aspect-auto" src="https://www.ardennes.com/app/uploads/wpetourisme/a112b9ce-54ac-49ad-913a-07e1710a316e-horloge-ducale.jpg" alt=""> #}
+			</figure>
+			<div class="flex-1 my-8">
+				<h3 data-visible-classes="translate-x-0,opacity-100" data-invisible-classes="translate-x-1/2,opacity-0" data-transition-classes="duration-700,ease-in" 
+				class="uppercase text-main-500 text-3xl font-bold my-8 duration-700">Un camping en ardennes : le camping 4 étoiles du mont olympe</h3>
+				<p data-visible-classes="translate-x-0,opacity-100" data-invisible-classes="translate-x-1/2,opacity-0" data-transition-classes="duration-700,ease-in,delay-300">
+					Sandrine vous accueil au sein son Camping 4 étoiles Mont Olympe, situé sur la rive droite de la Meuse, dans un cadre verdoyant et naturel. Ressourcez vous dans ce camping familial où règnent calme et bien-être.
+					<br><br>
+					Faites une pause et
+					<strong class="font-extrabold">détendez vous</strong>
+					sur notre terrain de camping, au bord de la piscine.
+					<br><br>
+					Idéalement situé, vous pourrez
+					<strong class="font-extrabold">découvrir la région</strong>
+					tout en profitant de la joie du camping !
+				</p>
+			</div>
+		</section>
+
+		<section id="bot-news" class="w-full flex gap-20">
+			<div class="items-center flex gap-4 min-w-1/3">
+				<div class="h-0.5 w-10 bg-main-500"></div>
+				<div {{ stimulus_controller('visible') }} data-visible-classes="opacity-100" data-invisible-classes="opacity-0" data-transition-classes="duration-1000">
+					<h4 class="font-title text-3xl text-main-500 italic">Soyez au coeur de l'action
+						<br>
+						et ne manquez pas ces évenements !</h4>
+				</div>
+			</div>
+			<div class="flex-1 w-auto p-4 mr-12">
+				<figure {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,translate-y-0,scale-100" data-invisible-classes="opacity-0,scale-50" data-transition-classes="duration-1000">
+					<img class="h-full aspect-auto object-cover object-center" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2023/07/cv-2023-1-1024x587.jpg" alt="">
+				</figure>
+			</div>
+		</section>
 	</section>
+	{# <img class="" src="https://remeng.rosselcdn.net/sites/default/files/dpistyles_v2/rem_16_9_1124w/2019/05/27/node_67940/10338375/public/2019/05/27/B9719741194Z.1_20190527112459_000%2BGPHDMNGDE.1-0.jpg?itok=x35HQ24b1558949845" alt=""> #}
 
 	<div class="separator pt-24 pb-12">
 		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
 	</div>
 
 
+	<div class="absolute w-36 h-36 ">
+		<img src="https://media0.giphy.com/media/zuG7p2efpdW9A424Ng/giphy.gif?cid=6c09b952w8y3cafvbf6p6ds6qad05h9x3f7zy0h8okor0ad1&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=s" alt="">
+	</div>
+
+
 	{# * SECTION CARDS APERCU #}
 
 
-	<section id="discover" class=" text-white px-12 ">
+	<section id="discover" class="border-main-900 mx-[15%] min-w-[1300px]">
 		<header class="text-center pb-8">
-			<h2 class="text-[50px]">Découvrez notre camping !</h2>
+			<h2 class="uppercase text-main-500 text-3xl font-bold my-8">Découvrez notre camping !</h2>
 		</header>
 
-		<section id="discover-cards" class="grid grid-cols-2 w-1/2 gap-x-12 gap-y-6 mx-auto">
-			<article class="discover-card">
-				<a href="{{ path('homepage') }}" class="overlay z-30"></a>
-				<div class="h-full w-full grid place-content-center z-20">
-					<h3 class="z-20 text-2xl group">Nos services</h3>
+		<section id="discover-cards" class="grid grid-cols-4 gap-2 mx-auto text-white">
+
+			<article {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,translate-y-0" data-invisible-classes="opacity-0,translate-y-1/2" data-transition-classes="duration-700,delay-[100ms]" class="group border relative min-h-[400px] overflow-hidden delay-100">
+				<a href="" class="overlay bg-black bg-opacity-20 z-10 group-hover:bg-main-500 group-hover:bg-opacity-50"></a>
+				<img class="object-cover h-full group-hover:scale-125 -z-10 duration-200" src="https://static.actu.fr/uploads/2023/01/20230106-123039.jpg" alt="">
+				<div class="overlay grid items-end text-center p-12">
+					<p class="font-title pointer-events-none font-bold text-2xl z-30">Services</p>
 				</div>
-				<img class="overlay" src="https://static.actu.fr/uploads/2023/01/20230106-123039.jpg" alt="">
 			</article>
-			<article class="discover-card">
-				<a href="{{ path('homepage') }}" class="overlay z-30"></a>
-				<div class="h-full w-full grid place-content-center z-20">
-					<h3 class="z-20 text-2xl group">Nos emplacements</h3>
+			<article {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,translate-y-0" data-invisible-classes="opacity-0,translate-y-1/2" data-transition-classes="duration-700,delay-[200ms]" class="group border relative min-h-[400px] overflow-hidden delay-200">
+				<a href="" class="overlay bg-black bg-opacity-20 z-10 group-hover:bg-main-500 group-hover:bg-opacity-50"></a>
+				<img class="object-cover h-full group-hover:scale-125 -z-10 duration-200" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg" alt="">
+				<div class="overlay grid items-end text-center p-12">
+					<p class="font-title pointer-events-none font-bold text-2xl z-30">Emplacements</p>
 				</div>
-				<img class="object-cover opacity-50 overlay z-10 duration-300 ease-in-out" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg" alt="">
 			</article>
-			<article class="discover-card">
-				<a href="{{ path('homepage') }}" class="overlay z-30"></a>
-				<div class="h-full w-full grid place-content-center z-20">
-					<h3 class="z-20 text-2xl group">Nos activités</h3>
+			<article {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,translate-y-0" data-invisible-classes="opacity-0,translate-y-1/2" data-transition-classes="duration-700,delay-[300ms]" class="group border relative min-h-[400px] overflow-hidden delay-300">
+				<a href="" class="overlay bg-black bg-opacity-20 z-10 group-hover:bg-main-500 group-hover:bg-opacity-50"></a>
+				<img class="object-cover h-full group-hover:scale-125 -z-10 duration-200" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2016/03/kayak-riudecanyes-tarragona-2.jpg" alt="">
+				<div class="overlay grid items-end text-center p-12">
+					<p class="font-title pointer-events-none font-bold text-2xl z-30">Activités</p>
 				</div>
-				<img class="object-cover opacity-50 overlay z-10 duration-300 ease-in-out" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2016/03/kayak-riudecanyes-tarragona-2.jpg" alt="">
 			</article>
-			<article class="discover-card">
-				<a href="{{ path('homepage') }}" class="overlay z-30"></a>
-				<div class="h-full w-full grid place-content-center z-20">
-					<h3 class="z-20 text-2xl group">Nos environs</h3>
+			<article {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,translate-y-0" data-invisible-classes="opacity-0,translate-y-1/2" data-transition-classes="duration-700,delay-[400ms]" class="group border relative min-h-[400px] overflow-hidden delay-500">
+				<a href="" class="overlay bg-black bg-opacity-20 z-10 group-hover:bg-main-500 group-hover:bg-opacity-50"></a>
+				<img class="object-cover h-full group-hover:scale-125 -z-10 duration-200" src="https://www.ardennes.com/app/uploads/2022/03/3554_Charleville-Mezieres_place_Ducale_David-Truillard_1656x1102.jpg" alt="">
+				<div class="overlay grid items-end text-center p-12">
+					<p class="font-title pointer-events-none font-bold text-2xl z-30">Alentours</p>
 				</div>
-				<img class="object-cover opacity-50 overlay z-10 duration-300 ease-in-out" src="https://www.ardennes.com/app/uploads/2022/03/3554_Charleville-Mezieres_place_Ducale_David-Truillard_1656x1102.jpg" alt="">
 			</article>
+			{# 
+						<article class="discover-card bg-main-800">
+							<a href="{{ path('homepage') }}" class="overlay z-30"></a>
+							<div class="h-full w-full grid place-content-center z-20">
+								<h3 class="z-20 text-2xl group">Nos services</h3>
+							</div>
+							<img class="overlay" src="https://static.actu.fr/uploads/2023/01/20230106-123039.jpg" alt="">
+						</article>
+			
+						<article class="discover-card bg-main-800">
+							<a href="{{ path('homepage') }}" class="overlay z-30"></a>
+							<div class="h-full w-full grid place-content-center z-20">
+								<h3 class="z-20 text-2xl group">Nos emplacements</h3>
+							</div>	
+							<img class="overlay" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg" alt="">
+						</article>
+			
+						<article class="discover-card bg-main-800">
+							<a href="{{ path('homepage') }}" class="overlay z-30"></a>
+							<div class="h-full w-full grid place-content-center z-20">
+								<h3 class="z-20 text-2xl group">Nos activités</h3>
+							</div>
+							<img class="overlay" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2016/03/kayak-riudecanyes-tarragona-2.jpg" alt="">
+						</article>
+			
+						<article class="discover-card bg-main-800">
+							<a href="{{ path('homepage') }}" class="overlay z-30"></a>
+							<div class="h-full w-full grid place-content-center z-20">
+								<h3 class="z-20 text-2xl group">Nos environs</h3>
+							</div>
+							<img class="overlay" src="https://www.ardennes.com/app/uploads/2022/03/3554_Charleville-Mezieres_place_Ducale_David-Truillard_1656x1102.jpg" alt="">
+						</article>
+						 #}
 		</section>
 
 
@@ -153,18 +253,26 @@
 		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
 	</div>
 
+	<section id="image-separator" class="relative">
+		<figure class="overflow-hidden h-96 bg-cover bg-center bg-fixed" style="background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg')"></figure>
+		<div class="overlay bg-black bg-opacity-20 z-10"></div>
+	</section>
+
+	<div class="separator py-12">
+		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
+	</div>
 
 	{# * SECTION FAQ APERCU #}
 
 
-	<section id="faq" class=" px-12 ">
+	<section id="faq" class="border-main-900 mx-[15%] min-w-[1300px]">
 		<header class="text-center pb-8">
-			<h2 class="text-[50px] text-white">Découvrez notre FAQ !</h2>
+			<h2 class="uppercase text-main-500 text-3xl font-bold my-8">Découvrez notre camping !</h2>
 		</header>
 
-		<section id="faq-cards" class="w-1/2 mx-auto flex flex-col gap-8" data-accordion="open" data-inactive-classes="">
-			<article {{ stimulus_controller('collapse') }}>
-				<button data-collapse-target="button" class="w-full p-5 border bg-gray-200 bg-opacity-70 border-main-800">
+		<section id="faq-cards" class="w-2/3 mx-auto flex flex-col gap-8" data-accordion="open" data-inactive-classes="">
+			<article {{ stimulus_controller('collapse visible') }} data-visible-classes='opacity-100,translate-x-0' data-invisible-classes='opacity-0,translate-x-full' data-transition-classes='duration-1000,delay-'>
+				<button data-collapse-target="button" class="w-full p-5 border border-main-500 bg-main-500 bg-opacity-80 text-white">
 					<div class="flex items-center justify-between">
 						<span class="text-lg">
 							Quels sont les horaires d'ouverture du camping ?
@@ -182,11 +290,11 @@
 						7h-20h du Vendredi au Dimanche.</p>
 				</div>
 			</article>
-			<article {{ stimulus_controller('collapse') }}>
-				<button data-collapse-target="button" class="w-full p-5 border bg-gray-200 bg-opacity-70 border-main-800">
+			<article {{ stimulus_controller('collapse visible') }} data-visible-classes='opacity-100,translate-x-0' data-invisible-classes='opacity-0,translate-x-full' data-transition-classes='duration-1000,delay-'>
+				<button data-collapse-target="button" class="w-full p-5 border border-main-500 bg-main-500 bg-opacity-80 delay-75 text-white">
 					<div class="flex items-center justify-between">
 						<span class="text-lg">
-							Quels sont les horaires d'ouverture du camping ?
+							Un réseau wifi est-il disponible ?
 						</span>
 						<svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 10 6">
 							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
@@ -201,11 +309,11 @@
 						7h-20h du Vendredi au Dimanche.</p>
 				</div>
 			</article>
-			<article {{ stimulus_controller('collapse') }}>
-				<button data-collapse-target="button" class="w-full p-5 border bg-gray-200 bg-opacity-70 border-main-800">
+			<article {{ stimulus_controller('collapse visible') }} data-visible-classes='opacity-100,translate-x-0' data-invisible-classes='opacity-0,translate-x-full' data-transition-classes='duration-1000,delay-'>
+				<button data-collapse-target="button" class="w-full p-5 border border-main-500 bg-main-500 bg-opacity-80 delay-150 text-white">
 					<div class="flex items-center justify-between">
 						<span class="text-lg">
-							Quels sont les horaires d'ouverture du camping ?
+							Est-ce qu'il y a un restaurant au Camping Mont Olympe ?
 						</span>
 						<svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 10 6">
 							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
@@ -223,47 +331,145 @@
 		</section>
 
 		<div class="grid place-content-center py-8">
-			<button class="g-button bg-gray-200 bg-opacity-50 hover:bg-main-500">Voir la FAQ</button>
+			<button class="group relative g-button text-lg w-full h-full bg-transparent uppercase border-main-400 duration-200 transition-[background-color] rounded-full
+							hover:border-main-400 hover:bg-main-400 hover:text-white animate-shake-horizontal">Voir la FAQ
+				<i class="ml-4 group-hover:ml-0.5 text-gray-200 group-hover:text-white text-xl fa-solid fa-arrow-right-long duration-200"></i>
+			</div>
+
+
+		</section>
+
+		<div class="separator py-12">
+			<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
 		</div>
 
 
-	</section>
+		<section id="pop-up-icons" class="border-main-900 mx-[15%] min-w-[1300px] flex justify-center gap-20">
+			<article class="overflow-hidden group cursor-pointer">
+				<div class="relative rounded-full border-dotted border-4 border-main-500 aspect-square p-12 opacity-50 translate-y-[20%] -z-10 group-hover:opacity-100 group-hover:translate-y-0 duration-300 ease-in">
+					{{ svg.map('w-36 aspect-square','#2e9e89') }}
+				</div>
+				<div class="bg-white border-2 border-main-500 text-center py-4 px-4 -bottom-0.5 z-10 font-semibold text-main-600 font-title">Plan du camping</div>
+			</article>
 
-	<div class="separator py-12">
-		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
-	</div>
+			<article class="overflow-hidden group cursor-pointer">
+				<div class="relative rounded-full border-dotted border-4 border-main-500 aspect-square p-12 opacity-50 translate-y-[20%] -z-10 group-hover:opacity-100 group-hover:translate-y-0 duration-300 ease-in">
+					{{ svg.logs('w-36 aspect-square','#2e9e89') }}
+				</div>
+				<div class="bg-white border-2 border-main-500 text-center py-4 px-4 -bottom-0.5 z-10 font-semibold text-main-600 font-title">Règlement intérieur</div>
+			</article>
+
+			<article class="overflow-hidden group cursor-pointer">
+				<div class="relative rounded-full border-dotted border-4 border-main-500 aspect-square p-12 opacity-50 translate-y-[20%] -z-10 group-hover:opacity-100 group-hover:translate-y-0 duration-300 ease-in">
+					{{ svg.services('w-36 aspect-square','#000000','#2e9e89') }}
+				</div>
+				<div class="bg-white border-2 border-main-500 text-center py-4 px-4 -bottom-0.5 z-10 font-semibold text-main-600 font-title">Règles de réservation</div>
+			</article>
+
+			{# <button class="pop-up-icon">
+						{{ svg.map('w-60 aspect-square') }}
+						<div class="absolute bg-white w-3/4 border text-center py-4 px-4 -bottom-0.5">Plan du camping</div>
+					</button> #}
+			{# <button class="pop-up-icon">
+						{{ svg.map('w-60 aspect-square') }}
+						<div class="absolute bg-white w-3/4 border text-center py-4 px-4 -bottom-0.5">Plan du camping</div>
+					</button>
+					<button class="pop-up-icon">
+						{{ svg.map('w-60 aspect-square') }}
+						<div class="absolute bg-white w-3/4 border text-center py-4 px-4 -bottom-0.5">Plan du camping</div>
+					</button> #}
+		</section>
+
+		<div class="separator pt-24 pb-12">
+			<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
+		</div>
+
+		<section id="image-separator" class="relative">
+			<figure class="overflow-hidden bg-cover bg-center bg-fixed" style="background-image:url('https://images4.alphacoders.com/132/1323467.png')">
+
+				<section id="opinions" class="mx-[15%] min-w-[1300px] grid grid-cols-3 place-content-center gap-12 h-fit my-auto py-32 ">
 
 
-	<section id="image-separator" class="relative">
-		<figure class="overflow-hidden h-96 bg-cover bg-center bg-fixed" style="background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5179.jpg')"></figure>
-		<div class="overlay bg-black bg-opacity-20 z-10"></div>
-	</section>
+					<article class="bg-white bg-opacity-95 border-main-500 border p-8 space-y-6">
+						<div>
+							<p class="line-clamp-6">
+								<i class="fa-solid fa-quote-left text-green-500 w-6 h-6"></i>
+								Personnel très sympathique
+								<br>
+								Le terrain est très bien situé, pas loin de la ville, pas eu le temps de visiter car de passage, nous y reviendrons
+								<br>
+								Sanitaire très propre
+								<br>
+								Prix de l'emplacement très correct
+								<br>
+								Boulanger qui passe le matin c'est très bien
+								<br>
+							</p>
+						</div>
+						<div class="flex justify-between">
+							<div class="text-main-500 flex items-center gap-1 text-xl">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+							</div>
+							<div class="flex items-center gap-2">
+								<p class="font-semibold">Mai Li</p>
+								<div class="float-right rounded-full aspect-square overflow-hidden">
+									<img src="https://lh3.googleusercontent.com/a/AAcHTtczdhAByc7tdEa92AEeXw7k-C2g2iW_ska-tSBbymXf=s40-c-rp-mo-br100" alt="">
+								</div>
+							</div>
+						</div>
+					</article>
 
-	<div class="separator py-12">
-		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
-	</div>
+					<article class="bg-white bg-opacity-95 border-main-500 border p-8 space-y-6">
+						<div>
+							<p class="line-clamp-6">
+								<i class="fa-solid fa-quote-left text-green-500 w-6 h-6"></i>
+								Nous sommes étonnés des avis que nous avons pu consulter, et heureux de ne pas avoir retrousser chemin en les lisant.
+								<br>
+								Nous avons trouvé ce camping bien entretenu, les emplacements sont tops, les sanitaires également, tout était propre, et en très bon état!
+								<br>
+								Un snack est présent à l’entrée du camping,
+								<br>
+								Nous avons apprécié! Et recommandons à 100% !
+								<br>
+							</p>
+						</div>
+						<div class="flex justify-between">
+							<div class="text-main-500 flex items-center gap-1 text-xl">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+							</div>
+							<div class="flex items-center gap-2">
+								<p class="font-semibold">Lou28 Fa</p>
+								<div class="float-right rounded-full aspect-square overflow-hidden">
+									<img src="https://lh3.googleusercontent.com/a/AAcHTtcsKqszEnY45Ch7Y9YZ75aVbhJA_hc_j4f2pfBYerPc=s40-c-rp-mo-ba3-br100" alt="">
+								</div>
+							</div>
+						</div>
+					</article>
+
+					<figure class="grid place-content-center">
+						<img src="https://i.gifer.com/origin/98/98cd1c9783d0096b04b720372a89da33_w200.gif" alt="">
+					</figure>
 
 
-	<section id="pop-up-icons" class="grid grid-cols-3 w-fit gap-x-24 mx-auto my-12">
-		<button class="pop-up-icon">
-			{{ svg.map('w-60 aspect-square') }}
-			<div class="absolute bg-white w-3/4 border text-center py-4 px-4 -bottom-0.5">Plan du camping</div>
-		</button>
-		<button class="pop-up-icon">
-			{{ svg.map('w-60 aspect-square') }}
-			<div class="absolute bg-white w-3/4 border text-center py-4 px-4 -bottom-0.5">Plan du camping</div>
-		</button>
-		<button class="pop-up-icon">
-			{{ svg.map('w-60 aspect-square') }}
-			<div class="absolute bg-white w-3/4 border text-center py-4 px-4 -bottom-0.5">Plan du camping</div>
-		</button>
-	</section>
+				</section>
 
-	<div class="separator pt-24 pb-12">
-		<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
-	</div>
+			</figure>
+			<div class="overlay bg-black bg-opacity-20 z-10"></div>
+		</section>
 
-	{% include 'include/_reservation_aside.html.twig' %}
+		<div class="separator py-12">
+			<div class="w-1/2 h-0.5 mx-auto bg-main-800"></div>
+		</div>
+
+		{% include 'include/_reservation_aside.html.twig' %}
 
 
-{% endblock %}
+	{% endblock %}
