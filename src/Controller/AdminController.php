@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\LogRepository;
 use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,27 +23,19 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/check', name: 'admin_check')]
-    public function check(): Response
+    #[Route('admin/logs', name: 'logs')]
+    public function logs(LogRepository $lr, Request $request): Response
     {
-        return $this->render('admin/check.html.twig', [
-            'controller_name' => 'checkController',
-        ]);
-    }
+        $search = $request->query->get('search');
 
-    #[Route('/admin/planning', name: 'admin_planning')]
-    public function planning(): Response
-    {
-        return $this->render('admin/planning.html.twig', [
-            'controller_name' => 'planningController',
-        ]);
-    }
+        if($search)
+            $logs = $lr->findSearch($search);
+        else
+            $logs = $lr->findAll();
 
-    #[Route('/admin/users', name: 'admin_users')]
-    public function users(): Response
-    {
-        return $this->render('admin/users.html.twig', [
-            'controller_name' => 'usersController',
+        return $this->render('admin/logs.html.twig', [
+            'logs' => $logs,
+            'request' => $request
         ]);
     }
 }

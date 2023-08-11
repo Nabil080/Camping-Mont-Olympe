@@ -67,7 +67,8 @@ class ServicesController extends AbstractController
 
             $message = "Le service '" . $oldService['name'] . "' a été renommé en '$name'";
             $context = ["update", "service"];
-            $logService->write($message, $context);
+            
+            for($i = 0; $i < 1000; $i++) $logService->write($message, $context);
 
             return $this->redirectToRoute('admin_settings_services');
         } else {
