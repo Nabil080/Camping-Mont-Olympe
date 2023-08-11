@@ -7,6 +7,7 @@ export default class extends Controller {
     this.buttonTarget.dataset.action = "collapse#toggle";
     this.contentTarget.classList.add(
       "max-h-0",
+      "h-auto",
       "overflow-hidden",
       "transition",
       "ease-in-out",

@@ -39,7 +39,6 @@ security:
     - { path: ^/admin/settings, roles: ROLE_ALLOWED_TO_CHANGE_SETTINGS }
     - { path: ^/admin, roles: ROLE_ADMIN }
 
-
 when@test:
   security:
     password_hashers:

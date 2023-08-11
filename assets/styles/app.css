@@ -1,13 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 
-:root{
-  --main: #0a6559
+:root {
+  --main: #0a6559;
 }
 
-html{scroll-behavior:smooth}
+html {
+  scroll-behavior: smooth;
+}
 
 @layer components {
   .g-button {
