@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\CheckRuleType;
 use App\Form\StayRuleType;
+use App\Repository\ReservationRepository;
 use App\Service\ConfigService;
 use App\Service\LogService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,8 +14,23 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ReservationsController extends AbstractController
 {
+
+    #[Route('admin/reservations', name: 'admin_reservations')]
+    public function index(ReservationRepository $rr): Response
+    {
+        $reservations = $rr->findAll();
+
+        return $this->render('admin/reservations/index.html.twig',[
+            'reservations' => $reservations,
+        ]);
+    }
+
+
+
+
+
     #[Route('/admin/settings/reservations', name: 'admin_settings_reservations')]
-    public function index(ConfigService $configService): Response
+    public function settings(ConfigService $configService): Response
     {
         $checkin = $configService->getReservationsRules('checkIn');
         $checkout = $configService->getReservationsRules('checkOut');
@@ -35,7 +51,7 @@ class ReservationsController extends AbstractController
     }
 
     #[Route("/reservations/{type}/add", name: "admin_settings_reservations_add")]
-    public function add(string $type, Request $request, ConfigService $configService, LogService $logService): Response
+    public function addRule(string $type, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $isCheck = str_contains(strtolower($type), 'check') ? true : false;
         $isStay = str_contains(strtolower($type), 'stay') ? true : false;
@@ -67,7 +83,7 @@ class ReservationsController extends AbstractController
     }
 
     #[Route("/reservations/{type}/update/{ruleId<\d+>}", name: "admin_settings_reservations_update")]
-    public function update(string $type, int $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
+    public function updateRule(string $type, int $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $oldReservation = $configService->getReservationsRules($type);
         foreach ($oldReservation as $index => $rule) {
@@ -112,7 +128,7 @@ class ReservationsController extends AbstractController
     }
 
     #[Route("/reservations/{type}/delete/{ruleId<\d+>}", name: "admin_settings_reservations_delete")]
-    public function delete(string $type, int $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
+    public function deleteRule(string $type, int $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $configService->deleteReservationRule($type, $ruleId);
 
