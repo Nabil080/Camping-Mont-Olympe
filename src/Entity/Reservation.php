@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Reservation
 {
     #[ORM\Id]
@@ -37,6 +38,13 @@ class Reservation
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
+
+    #[ORM\PrePersist]
+    public function prePersist(): void
+    {
+        if ($this->getDate() === null)
+            $this->setDate(new \DateTime('now'));
+    }
 
     public function getId(): ?int
     {

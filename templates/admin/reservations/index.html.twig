@@ -18,13 +18,20 @@
 		</div>
 	</header>
 
-	<section class="m-12">
+	<section
+		class="m-12">
 
 		{# <form action="{{path('logs')}}" method="get" class="w-fit my-12 mx-auto">
-			<label for="search">Champ de recherche :</label>
-			<input name="search" type="search" placeholder="Rechercher un message">
-			<button type="submit" class="g-button">Valider</button>
-		</form> #}
+					<label for="search">Champ de recherche :</label>
+					<input name="search" type="search" placeholder="Rechercher un message">
+					<button type="submit" class="g-button">Valider</button>
+				</form> #}
+
+		<section id="add-reservation" class="mb-8">
+			<a href="{{ path('admin_reservations_add') }}">
+				<button class="g-button">Créer une réservation</button>
+			</a>
+		</section>
 
 		<table class="w-full border-collapse border">
 			<thead>

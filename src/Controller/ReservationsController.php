@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Reservation;
 use App\Form\CheckRuleType;
 use App\Form\StayRuleType;
 use App\Repository\ReservationRepository;
 use App\Service\ConfigService;
 use App\Service\LogService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +27,29 @@ class ReservationsController extends AbstractController
         ]);
     }
 
+    #[Route('admin/reservations/add', name: 'admin_reservations_add')]
+    public function create(EntityManagerInterface $em): Response
+    {
+        $reservation = new Reservation;
+        $now = new \DateTime('now');
 
+        $reservation
+            ->setStart($now)
+            ->setEnd($now)
+            ->setAdults(2)
+            ->setChilds(1)
+            ->setPrice(99.99)
+            ->setPaid(0)
+        ;
+        
+        $em->persist($reservation);
+        $em->flush();
+        
+        dd($reservation);
+        return $this->render('admin/reservations/index.html.twig',[
+            
+        ]);
+    }
 
 
 
