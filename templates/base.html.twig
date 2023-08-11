@@ -1,18 +1,43 @@
+{% import 'macro/_nav.html.twig' as nav %}
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="icon" type="image/jpg" href="{{ asset('img/logo-camping.png') }}"/>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body
+		id="#body" class="bg-cover bg-fixed bg-center overflow-x-hidden" {# style="background-image:url('https://media.discordapp.net/attachments/1072195110453915721/1138478106580090940/bgfornabilbg.png?width=865&height=615')" #}>
+		{# <div class="fixed top-0 left-0 h-screen w-screen opacity-1 -z-50 bg-center bg-cover bg-fixed" style="background-image:url('https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5157.jpg')">
+					<div class="overlay bg-black bg-opacity-30"></div>
+				</div> #}
+
+
+		{% include 'include/_reservation_aside.html.twig' %}
+
+
+		{% block nav %}
+			{{ nav.nav() }}
+		{% endblock %}
+
+		{% block body %}{% endblock %}
+
+		{% block sticky %}
+			{% include 'include/_back_to_top.html.twig' %}
+			{% include 'include/_bottom_order.html.twig' %}
+		{% endblock %}
+
+		{% block footer %}{% endblock %}
+	</body>
 </html>
