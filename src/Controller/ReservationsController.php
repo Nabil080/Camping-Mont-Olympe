@@ -22,16 +22,17 @@ class ReservationsController extends AbstractController
     {
         $reservations = $rr->findAll();
 
-        return $this->render('admin/reservations/index.html.twig',[
+        return $this->render('admin/reservations/index.html.twig', [
             'reservations' => $reservations,
         ]);
     }
 
     #[Route('admin/reservations/add', name: 'admin_reservations_add')]
-    public function create(EntityManagerInterface $em): Response
+    public function create(EntityManagerInterface $em, LogService $logService, ReservationRepository $rr): Response
     {
         $reservation = new Reservation;
         $now = new \DateTime('now');
+
 
         $reservation
             ->setStart($now)
@@ -39,16 +40,19 @@ class ReservationsController extends AbstractController
             ->setAdults(2)
             ->setChilds(1)
             ->setPrice(99.99)
-            ->setPaid(0)
-        ;
-        
+            ->setPaid(0);
+
         $em->persist($reservation);
         $em->flush();
+
+        $id = $reservation->getId();
+        $message = "La réservation N°$id a été créée";
+        $context = ['add', 'reservation'];
+        $logService->write($message, $context);
+
         
         dd($reservation);
-        return $this->render('admin/reservations/index.html.twig',[
-            
-        ]);
+        return $this->render('admin/reservations/index.html.twig', []);
     }
 
 
@@ -93,8 +97,8 @@ class ReservationsController extends AbstractController
             $configService->addReservationRule($type, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
             $message = "Une règle de réservation $type a été ajoutée";
-            $context = ['add','reservation'];
-            $logService->write($message,$context);
+            $context = ['add', 'reservation'];
+            $logService->write($message, $context);
 
 
             return $this->redirectToRoute('admin_settings_reservations');
@@ -131,8 +135,8 @@ class ReservationsController extends AbstractController
             $configService->updateReservationRule($type, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
             $message = "Une règle de réservation $type a été modifiée";
-            $context = ['update','reservation'];
-            $logService->write($message,$context);
+            $context = ['update', 'reservation'];
+            $logService->write($message, $context);
 
             return $this->redirectToRoute('admin_settings_reservations');
         } else {
@@ -158,9 +162,9 @@ class ReservationsController extends AbstractController
 
         $this->addFlash('success', 'New "places" price rule added successfully!');
         $message = "Une règle de réservation $type a été supprimée";
-        $context = ['delete','reservation'];
-        $logService->write($message,$context);
-        
+        $context = ['delete', 'reservation'];
+        $logService->write($message, $context);
+
         return $this->redirectToRoute('admin_settings_reservations');
     }
 }

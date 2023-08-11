@@ -31,7 +31,7 @@ class AdminController extends AbstractController
         if($search)
             $logs = $lr->findSearch($search);
         else
-            $logs = $lr->findAll();
+            $logs = $lr->findBy([],['id' => 'DESC']);
 
         return $this->render('admin/logs.html.twig', [
             'logs' => $logs,
