@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Reservation;
 use App\Form\CheckRuleType;
+use App\Form\ReservationType;
 use App\Form\StayRuleType;
 use App\Repository\ReservationRepository;
 use App\Service\ConfigService;
@@ -28,31 +29,49 @@ class ReservationsController extends AbstractController
     }
 
     #[Route('admin/reservations/add', name: 'admin_reservations_add')]
-    public function create(EntityManagerInterface $em, LogService $logService, ReservationRepository $rr): Response
+    public function create(EntityManagerInterface $em, LogService $logService, Request $request): Response
     {
         $reservation = new Reservation;
         $now = new \DateTime('now');
 
+        $form = $this->createForm(ReservationType::class);
+        $form->handleRequest($request);
 
-        $reservation
-            ->setStart($now)
-            ->setEnd($now)
-            ->setAdults(2)
-            ->setChilds(1)
-            ->setPrice(99.99)
-            ->setPaid(0);
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        $em->persist($reservation);
-        $em->flush();
+            $reservation = $form->getData();
 
-        $id = $reservation->getId();
-        $message = "La réservation N°$id a été créée";
-        $context = ['add', 'reservation'];
-        $logService->write($message, $context);
+            $em->persist($reservation);
+            $em->flush();
 
-        
-        dd($reservation);
-        return $this->render('admin/reservations/index.html.twig', []);
+            $id = $reservation->getId();
+            $message = "La réservation N°$id a été créée";
+            $context = ['add', 'reservation'];
+            $logService->write($message, $context);
+
+            return $this->redirectToRoute('admin_reservations');
+        }
+
+        // $reservation
+        // ->setStart($now)
+        // ->setEnd($now)
+        // ->setAdults(2)
+        // ->setChilds(1)
+        // ->setPrice(99.99)
+        // ->setPaid(0);
+        // 
+        // $em->persist($reservation);
+        // $em->flush();
+        // 
+        // $id = $reservation->getId();
+        // $message = "La réservation N°$id a été créée";
+        // $context = ['add', 'reservation'];
+        // $logService->write($message, $context);
+
+
+        return $this->render('admin/reservations/add.html.twig', [
+            'form' => $form
+        ]);
     }
 
 
