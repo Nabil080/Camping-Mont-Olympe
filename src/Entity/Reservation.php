@@ -18,7 +18,7 @@ class Reservation
     private ?\DateTimeInterface $start = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $end_date = null;
+    private ?\DateTimeInterface $end = null;
 
     #[ORM\Column]
     private ?int $adults = null;
@@ -34,6 +34,9 @@ class Reservation
 
     #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 2)]
     private ?string $paid = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
 
     public function getId(): ?int
     {
@@ -52,14 +55,14 @@ class Reservation
         return $this;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
+    public function getEnd(): ?\DateTimeInterface
     {
-        return $this->end_date;
+        return $this->end;
     }
 
-    public function setEndDate(\DateTimeInterface $end_date): static
+    public function setEnd(\DateTimeInterface $end): static
     {
-        $this->end_date = $end_date;
+        $this->end = $end;
 
         return $this;
     }
@@ -120,6 +123,18 @@ class Reservation
     public function setPaid(string $paid): static
     {
         $this->paid = $paid;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): static
+    {
+        $this->date = $date;
 
         return $this;
     }
