@@ -36,19 +36,31 @@
 		<table class="w-full border-collapse border">
 			<thead>
 				<tr class="bg-green-200">
-					<th class="p-2">Utilisateur</th>
-					<th class="p-2">Message</th>
-					<th class="p-2">Contexte</th>
-					<th class="p-2">Date</th>
+					<th class="p-2">ID</th>
+					<th class="p-2">Début</th>
+					<th class="p-2">Fin</th>
+					<th class="p-2">Adultes</th>
+					<th class="p-2">Enfants</th>
+					<th class="p-2">Prix</th>
+					<th class="p-2">Payé</th>
+					<th class="p-2">Date de réservation</th>
+					<th class="p-2">Commentaire</th>
+					<th class="p-2">Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for reservation in reservations %}
 					<tr class="text-center bg-green-50">
-						<td class="p-2"></td>
-						<td class="p-2"></td>
-						<td class="p-2"></td>
-						<td class="p-2"></td>
+						<td class="p-2">{{ reservation.id }}</td>
+						<td class="p-2">{{ reservation.start|format_datetime(locale='fr',pattern="dd/MM/yyyy") }}</td>
+						<td class="p-2">{{ reservation.end|format_datetime(locale='fr',pattern="dd/MM/yyyy") }}</td>
+						<td class="p-2">{{ reservation.adults }}</td>
+						<td class="p-2">{{ reservation.childs }}</td>
+						<td class="p-2">{{ reservation.price }}</td>
+						<td class="p-2">{{ reservation.paid }}</td>
+						<td class="p-2">{{ reservation.date|date() }}</td>
+						<td class="p-2"> <button data-comment={{ reservation.comment }}> Voir le commentaire  </button> </td>
+						<td class="p-2"> ACTIONS </td>
 					</tr>
 				{% endfor %}
 			</tbody>
