@@ -94,7 +94,7 @@
 			<section id="order" class="pl-12 py-2 ">
 				<button {{ stimulus_controller('reservation') }} {{ stimulus_action('reservation','open') }} class="group relative g-button text-lg w-full h-full bg-transparent uppercase border-white duration-200 transition-[background-color]
 								hover:border-main-500 hover:bg-main-500 rounded-full">Découvrir
-					<i class="ml-4 group-hover:ml-0.5 text-gray-200 group-hover:text-white text-xl fa-solid fa-arrow-right-long duration-200"></i>
+					<i class="ml-4 mt-[1px] group-hover:ml-0.5 text-gray-200 group-hover:text-white text-xl fa-solid fa-arrow-right-long duration-200"></i>
 				</button>
 			</section>
 		</section>
@@ -113,10 +113,12 @@
 			</div>
 			<div class="flex-1 w-auto grid grid-cols-2 gap-4 p-4 mr-12">
 				<figure>
-					<img {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,scale-100" data-invisible-classes="opacity-0,scale-50" data-transition-classes="duration-1000" class="h-full aspect-auto object-cover object-center" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5183-1024x683.jpg" alt="">
+					<img {{ stimulus_controller('visible') }} data-visible-classes="opacity-100" data-invisible-classes="opacity-0" data-transition-classes="duration-1000" 
+					class="h-full aspect-auto object-cover object-center opacity-100 duration-10000 opacity-0" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2019/04/IMG_5183-1024x683.jpg" alt="">
 				</figure>
 				<figure>
-					<img {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,scale-100" data-invisible-classes="opacity-0,scale-50" data-transition-classes="duration-1000" class="h-full  aspect-auto object-cover object-center" src="https://france3-regions.francetvinfo.fr/image/EYo8Qm63PdtDXY6ER82QBF7fXXY/800x450/filters:format(webp)/regions/2021/05/13/609d340a5c016_espace_camping_haulme-5314546.jpg" alt="">
+					<img {{ stimulus_controller('visible') }} data-visible-classes="opacity-100" data-invisible-classes="opacity-0" data-transition-classes="duration-1000" 
+					class="h-full  aspect-auto object-cover object-center opacity-100 duration-10000 opacity-0" src="https://france3-regions.francetvinfo.fr/image/EYo8Qm63PdtDXY6ER82QBF7fXXY/800x450/filters:format(webp)/regions/2021/05/13/609d340a5c016_espace_camping_haulme-5314546.jpg" alt="">
 				</figure>
 			</div>
 		</section>
@@ -126,8 +128,9 @@
 				{{ stimulus_controller('visible') }} data-visible-classes="opacity-100" data-invisible-classes="opacity-0" data-transition-classes="duration-1000" class="w-3/5 bg-cover bg-center" style="background-image:url('https://www.ardennes.com/app/uploads/wpetourisme/a112b9ce-54ac-49ad-913a-07e1710a316e-horloge-ducale.jpg')">{# <img  class="aspect-auto" src="https://www.ardennes.com/app/uploads/wpetourisme/a112b9ce-54ac-49ad-913a-07e1710a316e-horloge-ducale.jpg" alt=""> #}
 			</figure>
 			<div class="flex-1 my-8">
-				<h3 {{ stimulus_controller('visible') }} data-visible-classes="translate-x-0,-translate-y-0,opacity-100" data-invisible-classes="translate-x-full,-translate-y-full,opacity-0" data-transition-classes="duration-700,ease-in,delay-1000" class="uppercase text-main-500 text-3xl font-bold my-8">Un camping en ardennes : le camping 4 étoiles du mont olympe</h3>
-				<p {{ stimulus_controller('visible') }} data-visible-classes="translate-x-0,opacity-100" data-invisible-classes="translate-x-full,opacity-0" data-transition-classes="duration-700,ease-in">
+				<h3 data-visible-classes="translate-x-0,opacity-100" data-invisible-classes="translate-x-1/2,opacity-0" data-transition-classes="duration-700,ease-in" 
+				class="uppercase text-main-500 text-3xl font-bold my-8 duration-700">Un camping en ardennes : le camping 4 étoiles du mont olympe</h3>
+				<p data-visible-classes="translate-x-0,opacity-100" data-invisible-classes="translate-x-1/2,opacity-0" data-transition-classes="duration-700,ease-in,delay-300">
 					Sandrine vous accueil au sein son Camping 4 étoiles Mont Olympe, situé sur la rive droite de la Meuse, dans un cadre verdoyant et naturel. Ressourcez vous dans ce camping familial où règnent calme et bien-être.
 					<br><br>
 					Faites une pause et
@@ -151,7 +154,7 @@
 				</div>
 			</div>
 			<div class="flex-1 w-auto p-4 mr-12">
-				<figure {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,translate-y-0" data-invisible-classes="opacity-0,translate-y-full" data-transition-classes="duration-1000">
+				<figure {{ stimulus_controller('visible') }} data-visible-classes="opacity-100,translate-y-0,scale-100" data-invisible-classes="opacity-0,scale-50" data-transition-classes="duration-1000">
 					<img class="h-full aspect-auto object-cover object-center" src="https://www.camping-mont-olympe.fr/wp-content/uploads/2023/07/cv-2023-1-1024x587.jpg" alt="">
 				</figure>
 			</div>
@@ -267,7 +270,7 @@
 			<h2 class="uppercase text-main-500 text-3xl font-bold my-8">Découvrez notre camping !</h2>
 		</header>
 
-		<section id="faq-cards" class="w-1/2 mx-auto flex flex-col gap-8" data-accordion="open" data-inactive-classes="">
+		<section id="faq-cards" class="w-2/3 mx-auto flex flex-col gap-8" data-accordion="open" data-inactive-classes="">
 			<article {{ stimulus_controller('collapse visible') }} data-visible-classes='opacity-100,translate-x-0' data-invisible-classes='opacity-0,translate-x-full' data-transition-classes='duration-1000,delay-'>
 				<button data-collapse-target="button" class="w-full p-5 border border-main-500 bg-main-500 bg-opacity-80 text-white">
 					<div class="flex items-center justify-between">
