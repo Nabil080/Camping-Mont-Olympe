@@ -26,11 +26,13 @@ class AdminController extends AbstractController
     #[Route('admin/logs', name: 'logs')]
     public function logs(LogRepository $lr, Request $request): Response
     {
+        $page = $request->query->get('page') ?? 1;
         $search = $request->query->get('search');
         $action = $request->query->get('action');
         $type = $request->query->get('type');
-        
-        $logs = $lr->findFilters($search, $action, $type);
+        $limit = 50;
+
+        $logs = $lr->findFilters($limit, $page, $search, $action, $type);
         // $logs = $lr->test();
         // dd($logs);
 

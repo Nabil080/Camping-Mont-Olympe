@@ -34,7 +34,4 @@ export default class extends Controller {
     endInputs.forEach((input) => (input.value = newEnd));
   }
 
-  test() {
-    console.log("SLT");
-  }
 }

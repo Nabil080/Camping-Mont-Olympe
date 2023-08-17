@@ -57,9 +57,9 @@ class LogRepository extends ServiceEntityRepository
         ->getResult();        
     }
 
-    public function findFilters($search,$action,$type): array
+    public function findFilters($limit,$page,$search,$action,$type): array
     {
-        // dd($action);
+        $offset = ($page - 1 ) * $limit;
 
         return $this->createQueryBuilder('p')
         ->andWhere('p.message like :search')
@@ -68,6 +68,9 @@ class LogRepository extends ServiceEntityRepository
         ->setParameter(':action',"%$action%")
         ->andWhere('p.context like :type')
         ->setParameter(':type',"%$type%")
+        ->orderBy('p.id', 'DESC')
+        ->setMaxResults($limit)
+        ->setFirstResult($offset)
         ->getQuery()
         ->getResult();   
     }

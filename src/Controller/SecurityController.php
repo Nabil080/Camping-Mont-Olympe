@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\LogService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,8 +26,14 @@ class SecurityController extends AbstractController
     }
 
     #[Route(path: '/logout', name: 'logout')]
-    public function logout(): void
+    public function logout(LogService $ls): void
     {
+        $user = $this->getUser();
+        $message = "$user s'est déconnecté";
+        $context = ["connection", "user"]; 
+        $ls->write($message,$context);
+        dd($user);
+
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }
