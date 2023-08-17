@@ -19,13 +19,13 @@
 	</header>
 
 	<section
-		class="m-12">
+		class="m-12 mx-36">
 
 		{# <form action="{{path('logs')}}" method="get" class="w-fit my-12 mx-auto">
-					<label for="search">Champ de recherche :</label>
-					<input name="search" type="search" placeholder="Rechercher un message">
-					<button type="submit" class="g-button">Valider</button>
-				</form> #}
+																			<label for="search">Champ de recherche :</label>
+																			<input name="search" type="search" placeholder="Rechercher un message">
+																			<button type="submit" class="g-button">Valider</button>
+																		</form> #}
 
 		<section id="add-reservation" class="mb-8">
 			<a href="{{ path('admin_reservations_add') }}">
@@ -37,30 +37,60 @@
 			<thead>
 				<tr class="bg-green-200">
 					<th class="p-2">ID</th>
-					<th class="p-2">Début</th>
-					<th class="p-2">Fin</th>
-					<th class="p-2">Adultes</th>
-					<th class="p-2">Enfants</th>
+					<th class="p-2">Check-in</th>
+					<th class="p-2">Check-out</th>
+					<th class="p-2">Type d'hébergement</th>
+					<th class="p-2">Emplacement</th>
+					<th class="p-2">Nombre</th>
+					<th class="p-2">Infos client</th>
 					<th class="p-2">Prix</th>
-					<th class="p-2">Payé</th>
 					<th class="p-2">Date de réservation</th>
-					<th class="p-2">Commentaire</th>
 					<th class="p-2">Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for reservation in reservations %}
+					{# {{ dump(reservation) }} #}
 					<tr class="text-center bg-green-50">
 						<td class="p-2">{{ reservation.id }}</td>
 						<td class="p-2">{{ reservation.start|format_datetime(locale='fr',pattern="dd/MM/yyyy") }}</td>
 						<td class="p-2">{{ reservation.end|format_datetime(locale='fr',pattern="dd/MM/yyyy") }}</td>
-						<td class="p-2">{{ reservation.adults }}</td>
-						<td class="p-2">{{ reservation.childs }}</td>
-						<td class="p-2">{{ reservation.price }}</td>
-						<td class="p-2">{{ reservation.paid }}</td>
+						<td class="p-2">{{ reservation.type ?? "Caravane"}}</td>
+						<td class="p-2">{{ reservation.spot ?? "30" }}</td>
+						<td class="p-2">
+							<div>Adultes :
+								{{reservation.adults}}</div>
+							<div>Enfants :
+								{{reservation.childs}}</div>
+						</td>
+						<td class="p-2">
+							<button data-client={{ reservation.client ?? 'blabl'}}>
+								Voir les informations du client
+							</button>
+							{% if reservation.comment %}
+								<button data-com={{reservation.comment}}>
+									Voir le commentaire du client
+								</button>
+							{% else %}
+								<div>
+									Pas de commentaire
+								</div>
+							{% endif %}
+						</td>
+						<td class="p-2">
+							<div>
+								Tarif :
+								{{reservation.price}}
+							</div>
+							<div>
+								Payé :
+								{{reservation.paid}}
+							</div>
+						</td>
 						<td class="p-2">{{ reservation.date|date() }}</td>
-						<td class="p-2"> <button data-comment={{ reservation.comment }}> Voir le commentaire  </button> </td>
-						<td class="p-2"> ACTIONS </td>
+						<td class="p-2">
+							ACTIONS
+						</td>
 					</tr>
 				{% endfor %}
 			</tbody>

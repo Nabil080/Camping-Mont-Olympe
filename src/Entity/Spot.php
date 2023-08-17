@@ -16,6 +16,10 @@ class Spot
     #[ORM\Column]
     private ?bool $available = null;
 
+    #[ORM\ManyToOne(inversedBy: 'spots')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Accomodation $accomodation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +33,18 @@ class Spot
     public function setAvailable(bool $available): static
     {
         $this->available = $available;
+
+        return $this;
+    }
+
+    public function getAccomodation(): ?Accomodation
+    {
+        return $this->accomodation;
+    }
+
+    public function setAccomodation(?Accomodation $accomodation): static
+    {
+        $this->accomodation = $accomodation;
 
         return $this;
     }

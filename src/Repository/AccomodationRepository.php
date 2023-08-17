@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\Location;
+use App\Entity\Accomodation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Location>
+ * @extends ServiceEntityRepository<Accomodation>
  *
- * @method Location|null find($id, $lockMode = null, $lockVersion = null)
- * @method Location|null findOneBy(array $criteria, array $orderBy = null)
- * @method Location[]    findAll()
- * @method Location[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Accomodation|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Accomodation|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Accomodation[]    findAll()
+ * @method Accomodation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class LocationRepository extends ServiceEntityRepository
+class AccomodationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Location::class);
+        parent::__construct($registry, Accomodation::class);
     }
 
 //    /**
-//     * @return Location[] Returns an array of Location objects
+//     * @return Accomodation[] Returns an array of Accomodation objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class LocationRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Location
+//    public function findOneBySomeField($value): ?Accomodation
 //    {
 //        return $this->createQueryBuilder('l')
 //            ->andWhere('l.exampleField = :val')
