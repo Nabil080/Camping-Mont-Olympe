@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\SpotRepository;
+use App\Repository\LocationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: SpotRepository::class)]
-class Spot
+#[ORM\Entity(repositoryClass: LocationRepository::class)]
+class Location
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "NONE")]
@@ -16,7 +16,7 @@ class Spot
     #[ORM\Column]
     private ?bool $available = null;
 
-    #[ORM\ManyToOne(inversedBy: 'spots')]
+    #[ORM\ManyToOne(inversedBy: 'Locations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Accomodation $accomodation = null;
 

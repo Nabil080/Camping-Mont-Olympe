@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\Spot;
+use App\Entity\Location;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Spot>
+ * @extends ServiceEntityRepository<Location>
  *
- * @method Spot|null find($id, $lockMode = null, $lockVersion = null)
- * @method Spot|null findOneBy(array $criteria, array $orderBy = null)
- * @method Spot[]    findAll()
- * @method Spot[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Location|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Location|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Location[]    findAll()
+ * @method Location[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SpotRepository extends ServiceEntityRepository
+class LocationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Spot::class);
+        parent::__construct($registry, Location::class);
     }
 
 //    /**
-//     * @return Spot[] Returns an array of Spot objects
+//     * @return Location[] Returns an array of Location objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class SpotRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Spot
+//    public function findOneBySomeField($value): ?Location
 //    {
 //        return $this->createQueryBuilder('s')
 //            ->andWhere('s.exampleField = :val')

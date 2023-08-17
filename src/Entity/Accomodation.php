@@ -24,12 +24,12 @@ class Accomodation
     #[ORM\Column]
     private ?bool $available = null;
 
-    #[ORM\OneToMany(mappedBy: 'accomodation', targetEntity: Spot::class, orphanRemoval: true)]
-    private Collection $spots;
+    #[ORM\OneToMany(mappedBy: 'accomodation', targetEntity: Location::class, orphanRemoval: true)]
+    private Collection $locations;
 
     public function __construct()
     {
-        $this->spots = new ArrayCollection();
+        $this->locations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -74,29 +74,29 @@ class Accomodation
     }
 
     /**
-     * @return Collection<int, Spot>
+     * @return Collection<int, Location>
      */
-    public function getSpots(): Collection
+    public function getLocations(): Collection
     {
-        return $this->spots;
+        return $this->locations;
     }
 
-    public function addSpot(Spot $spot): static
+    public function addLocation(Location $location): static
     {
-        if (!$this->spots->contains($spot)) {
-            $this->spots->add($spot);
-            $spot->setAccomodation($this);
+        if (!$this->locations->contains($location)) {
+            $this->locations->add($location);
+            $location->setAccomodation($this);
         }
 
         return $this;
     }
 
-    public function removeSpot(Spot $spot): static
+    public function removeLocation(Location $location): static
     {
-        if ($this->spots->removeElement($spot)) {
+        if ($this->locations->removeElement($location)) {
             // set the owning side to null (unless already changed)
-            if ($spot->getAccomodation() === $this) {
-                $spot->setAccomodation(null);
+            if ($location->getAccomodation() === $this) {
+                $location->setAccomodation(null);
             }
         }
 
