@@ -58,20 +58,39 @@ class AccomodationsController extends AbstractController
     }
 
     #[Route('admin/settings/accomodations/update/{id}', name: 'admin_settings_accomodations_update')]
-    public function update(Accomodation $accomodation, AccomodationRepository $ar): Response
+    public function update(Accomodation $accomodation, Request $request, EntityManagerInterface $em, LogService $ls): Response
     {
-        dd($accomodation);
 
-        return $this->render('admin/settings/accomodations/index.html.twig', [
-            'accomodations' => $accomodations,
+        $form = $this->createForm(AccomodationType::class,$accomodation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $accomodation = $form->getData();
+            $em->flush();
+
+            $message = "L'accomadation ".$accomodation->getName()." a été modifiée (N°".$accomodation->getId().")";
+            $context = ['add', 'accomodation'];
+            $ls->write($message, $context);
+
+            return $this->redirectToRoute('admin_settings_accomodations');
+        }
+
+        return $this->render('admin/settings/accomodations/add.html.twig', [
+            'form' => $form
         ]);
     }
 
     #[Route('admin/settings/accomodations/delete/{id}', name: 'admin_settings_accomodations_delete')]
-    public function delete(Accomodation $accomodation, EntityManagerInterface $em): Response
+    public function delete(Accomodation $accomodation, EntityManagerInterface $em, LogService $ls): Response
     {
+        $message = "L'accomadation ".$accomodation->getName()." a été supprimée (N°".$accomodation->getId().")";
+        $context = ['add', 'accomodation'];
+        $ls->write($message, $context);
+
         $em->remove($accomodation);
         $em->flush();
+
 
         return $this->redirectToRoute('admin_settings_accomodations');
     }

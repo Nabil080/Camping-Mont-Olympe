@@ -6,8 +6,6 @@
 
 {% block body %}
 
-{{ dump(action) }}
-
 	<header class="mt-8 flex justify-center items-center gap-2">
 		<h1 class="text-3xl">Registre</h1>
 		<div class="group relative cursor-help">
@@ -35,13 +33,13 @@
 			<label for="type">Type</label>
 			<select {{ stimulus_action('form','submit') }} name="type" id="">
 				<option value="">Tous</option>
-				<option value="connection" {% if type is same as "connection" %} selected {% endif %} >Connexion/Déconnexion</option>
-				<option value="reservation" {% if type is same as "reservation" %} selected {% endif %} >Réservation</option>
-				<option value="price" {% if type is same as "price" %} selected {% endif %} >Tarifs</option>
-				<option value="season" {% if type is same as "season" %} selected {% endif %} >Saison</option>
-				<option value="camping" {% if type is same as "camping" %} selected {% endif %} >Camping</option>
-				<option value="price" {% if type is same as "price" %} selected {% endif %} >Règles de réservation</option>
-				<option value="service" {% if type is same as "service" %} selected {% endif %} >Services</option>
+				<option value="connection" {% if type is same as "connection" %} selected {% endif %}>Connexion/Déconnexion</option>
+				<option value="reservation" {% if type is same as "reservation" %} selected {% endif %}>Réservation</option>
+				<option value="price" {% if type is same as "price" %} selected {% endif %}>Tarifs</option>
+				<option value="season" {% if type is same as "season" %} selected {% endif %}>Saison</option>
+				<option value="camping" {% if type is same as "camping" %} selected {% endif %}>Camping</option>
+				<option value="price" {% if type is same as "price" %} selected {% endif %}>Règles de réservation</option>
+				<option value="service" {% if type is same as "service" %} selected {% endif %}>Services</option>
 			</select>
 		</form>
 
