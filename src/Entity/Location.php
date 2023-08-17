@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Location
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: "NONE")]
+    #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 

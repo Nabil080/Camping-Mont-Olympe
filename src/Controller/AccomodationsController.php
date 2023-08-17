@@ -7,6 +7,7 @@ use App\Form\CheckRuleType;
 use App\Form\AccomodationType;
 use App\Form\StayRuleType;
 use App\Repository\AccomodationRepository;
+use App\Repository\LocationRepository;
 use App\Service\ConfigService;
 use App\Service\LogService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -95,4 +96,13 @@ class AccomodationsController extends AbstractController
         return $this->redirectToRoute('admin_settings_accomodations');
     }
 
+    #[Route('admin/settings/accomodations/{id}/locations', name: 'admin_settings_accomodations_locations')]
+    public function locations(Accomodation $accomodation, LocationRepository $lr, EntityManagerInterface $em, LogService $ls): Response
+    {
+        $locations = $lr->findBy(['accomodation' => $accomodation]); 
+
+        return $this->render('admin/settings/accomodations/locations.html.twig', [
+            'locations' => $locations
+        ]);
+    }
 }
