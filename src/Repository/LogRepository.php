@@ -56,4 +56,19 @@ class LogRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();        
     }
+
+    public function findFilters($search,$action,$type): array
+    {
+        // dd($action);
+
+        return $this->createQueryBuilder('p')
+        ->andWhere('p.message like :search')
+        ->setParameter(':search', "%$search%")
+        ->andWhere('p.context like :action')
+        ->setParameter(':action',"%$action%")
+        ->andWhere('p.context like :type')
+        ->setParameter(':type',"%$type%")
+        ->getQuery()
+        ->getResult();   
+    }
 }

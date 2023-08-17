@@ -38,6 +38,9 @@
 			{% include 'include/_bottom_order.html.twig' %}
 		{% endblock %}
 
-		{% block footer %}{% endblock %}
+		{% block footer %}
+		<a href={{ path('admin') }}>admin</a>
+		
+		{% endblock %}
 	</body>
 </html>

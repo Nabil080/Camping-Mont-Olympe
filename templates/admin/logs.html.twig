@@ -6,6 +6,7 @@
 
 {% block body %}
 
+{{ dump(action) }}
 
 	<header class="mt-8 flex justify-center items-center gap-2">
 		<h1 class="text-3xl">Registre</h1>
@@ -20,10 +21,28 @@
 
 	<section class="m-12">
 
-		<form action="{{path('logs')}}" method="get" class="w-fit my-12 mx-auto">
+		<form {{ stimulus_controller('form') }} action="{{path('logs')}}" method="get" class="w-fit my-12 mx-auto">
 			<label for="search">Champ de recherche :</label>
-			<input name="search" type="search" placeholder="Rechercher un message">
+			<input name="search" type="search" value="{{ search }}" placeholder="Rechercher un message">
 			<button type="submit" class="g-button">Valider</button>
+			<label for="action">Action</label>
+			<select {{ stimulus_action('form','submit') }} name="action" id="">
+				<option value="" {% if action is same as "" %} selected {% endif %}>Tous</option>
+				<option value="add" {% if action is same as "add" %} selected {% endif %}>Ajout</option>
+				<option value="update" {% if action is same as "update" %} selected {% endif %}>Modification</option>
+				<option value="delete" {% if action is same as "delete" %} selected {% endif %}>Supression</option>
+			</select>
+			<label for="type">Type</label>
+			<select {{ stimulus_action('form','submit') }} name="type" id="">
+				<option value="">Tous</option>
+				<option value="">Connexion/Déconnexion</option>
+				<option value="">Réservation</option>
+				<option value="">Tarifs</option>
+				<option value="">Saison</option>
+				<option value="">Camping</option>
+				<option value="">Règles de réservation</option>
+				<option value="">Services</option>
+			</select>
 		</form>
 
 		<table class="w-full border-collapse border">

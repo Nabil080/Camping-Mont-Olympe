@@ -27,15 +27,19 @@ class AdminController extends AbstractController
     public function logs(LogRepository $lr, Request $request): Response
     {
         $search = $request->query->get('search');
-
-        if($search)
-            $logs = $lr->findSearch($search);
-        else
-            $logs = $lr->findBy([],['id' => 'DESC']);
+        $action = $request->query->get('action');
+        $type = $request->query->get('type');
+        
+        $logs = $lr->findFilters($search, $action, $type);
+        // $logs = $lr->test();
+        // dd($logs);
 
         return $this->render('admin/logs.html.twig', [
             'logs' => $logs,
-            'request' => $request
+            'request' => $request,
+            'search' => $search,
+            'action' => $action,
+            'type' => $type,
         ]);
     }
 }
