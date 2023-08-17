@@ -68,13 +68,12 @@ class AccomodationsController extends AbstractController
     }
 
     #[Route('admin/settings/accomodations/delete/{id}', name: 'admin_settings_accomodations_delete')]
-    public function delete(AccomodationRepository $ar): Response
+    public function delete(Accomodation $accomodation, EntityManagerInterface $em): Response
     {
-        $accomodations = $ar->findAll();
+        $em->remove($accomodation);
+        $em->flush();
 
-        return $this->render('admin/settings/accomodations/index.html.twig', [
-            'accomodations' => $accomodations,
-        ]);
+        return $this->redirectToRoute('admin_settings_accomodations');
     }
 
 }
