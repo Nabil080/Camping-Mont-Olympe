@@ -8,7 +8,8 @@
 
 
 	<header class="mt-8 flex justify-center items-center gap-2">
-		<h1 class="text-3xl">Emplacements</h1>
+		<h1 class="text-3xl">Emplacements des
+			{{ locations.0.accomodation.name }}</h1>
 		<div class="group relative cursor-help">
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
 			<div class="hidden group-hover:block absolute bg-white border left-1/2 -translate-x-1/2 mt-4 border-black p-2 w-[300px]">Vous pouvez régler les tarifs du camping en fonction des saisons et choisir si chaque nuit ou chaque personne multiplie le paiement.
@@ -21,8 +22,9 @@
 	<section class="m-12 mx-36">
 
 		<section id="add-accomodation" class="mb-8">
-			<a href="{{ path('admin_settings_accomodations_add') }}">
-				<button class="g-button">Créer une accomodation</button>
+			<a href={{ path('admin_settings_locations_add', {'id': locations.0.accomodation.id}) }}>
+				<button class="g-button">Ajouter un emplacement pour
+					{{ locations.0.accomodation.name }}</button>
 			</a>
 		</section>
 
@@ -33,8 +35,7 @@
 					<th class="p-2">Numéro de l'emplacement</th>
 					<th class="p-2">Type d'hébergement</th>
 					<th class="p-2">Disponible</th>
-					<th class="p-2 text-end
-					">Actions</th>
+					<th class="p-2 text-end">Actions</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -45,10 +46,10 @@
 						<td class="p-2">{{ location.accomodation.name }}</td>
 						<td class="p-2">{{ location.available ? "Oui"  : "Non" }}</td>
 						<td class="p-2 space-x-4 text-end">
-							<a href="{{ path('admin_settings_accomodations_update', {'id': location.id}) }}" class="">
+							<a href="{{ path('admin_settings_locations_add', {'id': location.id}) }}" class="">
 								<i class="fa fa-pen"></i>
 							</a>
-							<a href="{{ path('admin_settings_accomodations_delete', {'id': location.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')">
+							<a href="{{ path('admin_settings_locations_delete', {'id': location.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')">
 								<i class="fa fa-trash"></i>
 							</a>
 						</td>
