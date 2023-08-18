@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\LocationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
+#[UniqueEntity('number')]
 class Location
 {
     #[ORM\Id]
@@ -20,7 +23,7 @@ class Location
     #[ORM\JoinColumn(nullable: false)]
     private ?Accomodation $accomodation = null;
 
-    #[ORM\Column]
+    #[ORM\Column(unique: true)]
     private ?int $number = null;
 
     public function getId(): ?int

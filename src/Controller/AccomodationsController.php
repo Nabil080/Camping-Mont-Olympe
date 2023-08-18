@@ -108,36 +108,4 @@ class AccomodationsController extends AbstractController
             'accomodation' => $accomodation,
         ]);
     }
-
-    #[Route('admin/settings/locations/add', name: 'admin_settings_locations_add')]
-    public function addLocation(EntityManagerInterface $em, LogService $logService, Request $request, AccomodationRepository $ar): Response
-    {
-        $location = new Location;
-        $id = $request->query->get('id') ?? null;
-
-        $form = $this->createForm(LocationType::class);
-        $form->handleRequest($request);
-
-        // if($id) $form->get('accomodation')->setData($ar->find($id));
-
-        return $this->render('admin/settings/accomodations/add_locations.html.twig',[
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('admin/settings/locations/{id}/delete', name: 'admin_settings_locations_delete')]
-    public function deleteLocation(Location $location, EntityManagerInterface $em, LogService $ls): Response
-    {
-        $accomodation = $location->getAccomodation();
-
-        $message = "L'emplacement " . $location->getNumber() . " a été supprimée (type " . $accomodation->getName() . ")";
-        $context = ['add', 'accomodation'];
-        $ls->write($message, $context);
-
-        $em->remove($location);
-        $em->flush();
-
-
-        return $this->redirectToRoute('admin_settings_accomodations_locations', ['id' => $accomodation->getId()]);
-    }
 }
