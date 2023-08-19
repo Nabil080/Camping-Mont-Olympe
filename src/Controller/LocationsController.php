@@ -18,7 +18,7 @@ class LocationsController extends AbstractController
     #[Route('admin/settings/locations', name: 'admin_settings_locations')]
     public function index(LocationRepository $lr, EntityManagerInterface $em, LogService $ls): Response
     {
-        $locations = $lr->findBy([],['number' => 'ASC']);
+        $locations = $lr->findBy([], ['number' => 'ASC']);
 
         return $this->render('admin/settings/accomodations/locations/index.html.twig', [
             'locations' => $locations,
@@ -40,12 +40,12 @@ class LocationsController extends AbstractController
             $em->persist($location);
             $em->flush();
 
-            $message = "L'emplacement " . $location->getNumber() . " a été ajouté (type" . $location->getAccomodation()->getName() . ")";
+            $message = "L'emplacement " . $location->getNumber() . " a été ajouté (type " . $location->getAccomodation()->getName() . ")";
             $context = ['add', 'location'];
             $ls->write($message, $context);
 
             return $this->redirectToRoute('admin_settings_accomodations_locations', ['id' => $location->getAccomodation()->getId()]);
-        } elseif (!$form->isSubmitted()){
+        } elseif (!$form->isSubmitted()) {
             if ($id) $form->get('accomodation')->setData($ar->find($id));
         }
 
@@ -57,7 +57,7 @@ class LocationsController extends AbstractController
     #[Route('admin/settings/locations/update/{id}', name: 'admin_settings_locations_update')]
     public function update(Location $location, EntityManagerInterface $em, LogService $ls, Request $request, AccomodationRepository $ar): Response
     {
-        $form = $this->createForm(LocationType::class,$location);
+        $form = $this->createForm(LocationType::class, $location);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -65,7 +65,7 @@ class LocationsController extends AbstractController
             $location = $form->getData();
             $em->flush();
 
-            $message = "L'emplacement " . $oldLocation->getNumber() . " de ".$oldLocation->getAccomodation()->getName()."a été modifiée en N°".$location->getNumber()." de ".$location->getAccomodation()->getName()." (ID ".$location->getId();
+            $message = "L'emplacement " . $oldLocation->getNumber() . " de " . $oldLocation->getAccomodation()->getName() . " a été modifiée en N°" . $location->getNumber() . " de " . $location->getAccomodation()->getName() . " (ID " . $location->getId() . ")";
             $context = ['update', 'location'];
             $ls->write($message, $context);
 

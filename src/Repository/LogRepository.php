@@ -63,6 +63,7 @@ class LogRepository extends ServiceEntityRepository
 
         return $this->createQueryBuilder('p')
         ->andWhere('p.message like :search')
+        ->orWhere('p.context like :search')
         ->setParameter(':search', "%$search%")
         ->andWhere('p.context like :action')
         ->setParameter(':action',"%$action%")
