@@ -4,18 +4,16 @@ export default class extends Controller {
     static targets = ["results"];
 
     onSearchInput(e) {
-        this.searchValue = e.target.value;
-
-        if (this.searchValue.length > 0) this.search();
+        if (e.target.value.length > 0) this.search(e);
         else this.stop();
     }
 
-    search() {
+    search(e) {
         this.resultsTarget.classList.remove("hidden");
 
         let results = values
             .filter((array) =>
-                array[0].toLowerCase().includes(this.searchValue.toLowerCase())
+                array[0].toLowerCase().includes(e.target.value.toLowerCase())
             )
             .map((array) => new Result(array[0], array[1]));
 
