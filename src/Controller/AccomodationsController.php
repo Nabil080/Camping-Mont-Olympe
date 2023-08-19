@@ -101,7 +101,7 @@ class AccomodationsController extends AbstractController
     #[Route('admin/settings/accomodations/{id}/locations', name: 'admin_settings_accomodations_locations')]
     public function locations(Accomodation $accomodation, LocationRepository $lr, EntityManagerInterface $em, LogService $ls): Response
     {
-        $locations = $lr->findBy(['accomodation' => $accomodation]);
+        $locations = $lr->findBy(['accomodation' => $accomodation],['number' => 'ASC']);
 
         return $this->render('admin/settings/accomodations/locations.html.twig', [
             'locations' => $locations,

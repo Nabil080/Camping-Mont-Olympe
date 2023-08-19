@@ -20,11 +20,13 @@
 	</header>
 
 	<section class="m-12 mx-36">
-		<a href={{ path('admin_settings_accomodations') }} class="underline mb-4">Retourner aux hébérgements</a>
-		<section id="add-accomodation" class="mb-8">
+		<section id="add-accomodation" class="mb-8 flex justify-between">
 			<a href={{ path('admin_settings_locations_add', {'id': accomodation.id} ) }}>
 				<button class="g-button">Ajouter un emplacement pour
 					{{ accomodation.name }}</button>
+			</a>
+			<a href={{ path('admin_settings_accomodations')}}>
+				<button class="g-button">Retourner aux hébérgements</button>
 			</a>
 		</section>
 

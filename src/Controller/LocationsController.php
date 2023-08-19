@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Location;
 use App\Form\LocationType;
 use App\Repository\AccomodationRepository;
+use App\Repository\LocationRepository;
 use App\Service\LogService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,6 +15,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LocationsController extends AbstractController
 {
+    #[Route('admin/settings/locations', name: 'admin_settings_locations')]
+    public function index(LocationRepository $lr, EntityManagerInterface $em, LogService $ls): Response
+    {
+        $locations = $lr->findBy([],['number' => 'ASC']);
+
+        return $this->render('admin/settings/accomodations/locations/index.html.twig', [
+            'locations' => $locations,
+        ]);
+    }
+
     #[Route('admin/settings/locations/add', name: 'admin_settings_locations_add')]
     public function add(EntityManagerInterface $em, LogService $ls, Request $request, AccomodationRepository $ar): Response
     {
@@ -67,7 +78,7 @@ class LocationsController extends AbstractController
     }
 
     #[Route('admin/settings/locations/{id}/delete', name: 'admin_settings_locations_delete')]
-    public function delete(Location $location, EntityManagerInterface $em, LogService $ls): Response
+    public function delete(Location $location, EntityManagerInterface $em, LogService $ls, Request $request): Response
     {
         $accomodation = $location->getAccomodation();
 
@@ -78,7 +89,7 @@ class LocationsController extends AbstractController
         $em->remove($location);
         $em->flush();
 
-
-        return $this->redirectToRoute('admin_settings_accomodations_locations', ['id' => $accomodation->getId()]);
+        $route = $request->headers->get('referer');
+        return $this->redirect($route);
     }
 }
