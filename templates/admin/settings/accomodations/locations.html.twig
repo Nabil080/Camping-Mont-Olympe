@@ -46,7 +46,7 @@
 						<td class="p-2">{{ location.accomodation.name }}</td>
 						<td class="p-2">{{ location.available ? "Oui"  : "Non" }}</td>
 						<td class="p-2 space-x-4 text-end">
-							<a href="{{ path('admin_settings_locations_add', {'id': location.id}) }}" class="">
+							<a href="{{ path('admin_settings_locations_update', {'id': location.id}) }}" class="">
 								<i class="fa fa-pen"></i>
 							</a>
 							<a href="{{ path('admin_settings_locations_delete', {'id': location.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')">

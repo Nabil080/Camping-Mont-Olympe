@@ -43,6 +43,29 @@ class LocationsController extends AbstractController
         ]);
     }
 
+    #[Route('admin/settings/locations/update/{id}', name: 'admin_settings_locations_update')]
+    public function update(Location $location, EntityManagerInterface $em, LogService $ls, Request $request, AccomodationRepository $ar): Response
+    {
+        $form = $this->createForm(LocationType::class,$location);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $oldLocation = $location;
+            $location = $form->getData();
+            $em->flush();
+
+            $message = "L'emplacement " . $oldLocation->getNumber() . " de ".$oldLocation->getAccomodation()->getName()."a été modifiée en N°".$location->getNumber()." de ".$location->getAccomodation()->getName()." (ID ".$location->getId();
+            $context = ['update', 'location'];
+            $ls->write($message, $context);
+
+            return $this->redirectToRoute('admin_settings_accomodations_locations', ['id' => $location->getAccomodation()->getId()]);
+        }
+
+        return $this->render('admin/settings/accomodations/add_locations.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
     #[Route('admin/settings/locations/{id}/delete', name: 'admin_settings_locations_delete')]
     public function delete(Location $location, EntityManagerInterface $em, LogService $ls): Response
     {
