@@ -4,7 +4,7 @@ export default class extends Controller {
     static targets = ["results"];
 
     onSearchInput(e) {
-        this.searchValue = e.target.value
+        this.searchValue = e.target.value;
 
         if (this.searchValue.length > 0) this.search();
         else this.stop();
@@ -14,20 +14,24 @@ export default class extends Controller {
         this.resultsTarget.classList.remove("hidden");
 
         let results = values
-            .filter((array) => array[0].toLowerCase().includes(this.searchValue.toLowerCase()))
+            .filter((array) =>
+                array[0].toLowerCase().includes(this.searchValue.toLowerCase())
+            )
             .map((array) => new Result(array[0], array[1]));
 
-        this.insertResults()
+        this.insertResults(results);
     }
 
     stop() {
         this.resultsTarget.classList.add("hidden");
     }
 
-    insertResults() {
-      this.resultsTarget.innerHTML = 'slt'
+    insertResults(results) {
+        this.resultsTarget.innerHTML = "";
 
-
+        results.forEach(
+            (result) => (this.resultsTarget.innerHTML += result.getHTML())
+        );
     }
 }
 
@@ -36,9 +40,15 @@ class Result {
         this.display = display;
         this.path = path;
     }
+
+    getHTML() {
+        return `<article> <a href="/${this.path}"></a>${this.display}</article>`;
+    }
 }
 
 let values = [
-    ["Ajouter une Saison", "admin_settings_seasons_add"],
-    ["Voir les Saisons", "admin_settings_seasons"],
+    ["Voir les Saisons", "admin/settings/seasons"],
+    ["Ajouter une Saison", "admin/settings/seasons/add"],
+    ["Voir les Saisons", "admin/settings/seasons"],
+    ["Ajouter un service supplémentaire", "admin/settings/services/add"],
 ];

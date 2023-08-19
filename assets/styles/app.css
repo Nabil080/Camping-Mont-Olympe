@@ -75,11 +75,14 @@ html {
     .search-suggestion {
         width: 100%;
         padding: 12px;
-        cursor: pointer;
         background-color: white;
+        position: relative;
     }
     .search-suggestion:hover {
         background-color:#a7f3d0;
+    }
+    .search-suggestion a {
+        @apply overlay
     }
 }
 
