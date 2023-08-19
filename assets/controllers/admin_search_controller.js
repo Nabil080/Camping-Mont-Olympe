@@ -1,8 +1,14 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  connect() {
+  static targets = ["results"];
 
-    console.log(this.element)
+  connect() {
+    console.log(this.resultsTarget)
+  }
+
+  onSearchInput() {
+
+    console.log(this.searchResults)
   }
 }
