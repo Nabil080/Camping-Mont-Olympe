@@ -15,8 +15,8 @@
 						Bienvenue
 						<span class="underline">Nabil</span>, nous sommes
 						<span class="font-medium">{{ date|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY")}}</span>
-						<br><span class="font-medium">42 emplacements occupés</span>,
-						<span class="font-medium">26 de libres</span>.
+						<br><span class="font-medium">{{ occuped }} emplacements occupés</span>,
+						<span class="font-medium">{{ available }} de libres</span>.
 						<br><span class="font-medium">3 arrivées</span>
 						et
 						<span class="font-medium">1 sorties</span>

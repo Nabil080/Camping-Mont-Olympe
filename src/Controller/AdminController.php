@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\LocationRepository;
 use App\Repository\LogRepository;
 use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,14 +13,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'admin')]
-    public function index(): Response
+    public function index(LocationRepository $lr): Response
     {
         $formatter = new \IntlDateFormatter('fr_FR', \IntlDateFormatter::FULL, \IntlDateFormatter::FULL);
         $now = new \DateTime('now', new DateTimeZone('Europe/Paris'));
 
+        $available = count($lr->findBy(['available' => true]));
+        $occuped = count($lr->findBy(['available' => false]));
 
         return $this->render('admin/index.html.twig', [
             'date' => $now,
+            'available' => $available,
+            'occuped' => $occuped,
         ]);
     }
 
