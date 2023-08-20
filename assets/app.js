@@ -8,7 +8,7 @@ require("@fontsource/poppins");
 import "./styles/app.css";
 
 // custom JS
-import "./js/datepicker";
+
 
 // stimulus
 import "./bootstrap.js";
