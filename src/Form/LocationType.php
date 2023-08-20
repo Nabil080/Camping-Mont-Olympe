@@ -16,7 +16,7 @@ class LocationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('available', CheckboxType::class , [
+            ->add('available', CheckboxType::class, [
                 'attr' => ['checked'   => 'checked'],
                 'required' => false,
             ])

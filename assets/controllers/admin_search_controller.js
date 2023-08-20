@@ -21,7 +21,7 @@ export default class extends Controller {
     }
 
     stop() {
-        this.resultsTarget.classList.add("hidden");
+        setTimeout(() => this.resultsTarget.classList.add("hidden"), 200);
     }
 
     insertResults(results) {
@@ -47,6 +47,6 @@ class Result {
 let values = [
     ["Voir les Saisons", "admin/settings/seasons"],
     ["Ajouter une Saison", "admin/settings/seasons/add"],
-    ["Voir les Saisons", "admin/settings/seasons"],
-    ["Ajouter un service supplémentaire", "admin/settings/services/add"],
+    ["Voir les Services supplémentaires", "admin/settings/services"],
+    ["Ajouter un Service supplémentaire", "admin/settings/services/add"],
 ];

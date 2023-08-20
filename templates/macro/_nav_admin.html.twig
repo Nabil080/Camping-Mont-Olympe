@@ -19,8 +19,7 @@
 		</section>
 		<section {{ stimulus_controller('admin_search') }} id="search-bar" class="relative grow md:mx-12 px-4 py-2">
 			<input {{ stimulus_action('admin_search','onSearchInput','input')|stimulus_action('admin_search','search','focus')|stimulus_action('admin_search','stop','focusout') }} id="search-input" type="text" placeholder="Rechercher une fonctionnalitée" class="w-full py-3 rounded-lg focus:ring-black focus:outline-none focus:bg-green-100 hover:bg-green-100 focus:border-black">
-			<section {{ stimulus_target('admin_search', 'results') }} id="search-results" class="hidden absolute left-1/2 -translate-x-1/2 bg-white border-green-200 border z-50 min-w-[60vw] w-[calc(100%-2rem)] [&>article]:search-suggestion overflow-scroll max-h-[50ch]">
-			</section>
+			<section {{ stimulus_target('admin_search', 'results') }} id="search-results" class="hidden absolute left-1/2 -translate-x-1/2 bg-white border-green-200 border z-50 min-w-[60vw] w-[calc(100%-2rem)] [&>article]:search-suggestion overflow-scroll max-h-[50ch]"></section>
 		</section>
 
 		<section id="right-nav" class="flex gap-2 items-center">

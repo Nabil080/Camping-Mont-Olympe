@@ -79,10 +79,10 @@ html {
         position: relative;
     }
     .search-suggestion:hover {
-        background-color:#a7f3d0;
+        background-color: #a7f3d0;
     }
     .search-suggestion a {
-        @apply overlay
+        @apply overlay;
     }
 }
 

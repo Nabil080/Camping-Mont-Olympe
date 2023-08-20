@@ -115,7 +115,7 @@ class SeasonsController extends AbstractController
             $configService->addSeasonRule($seasonId, $rule);
 
             $this->addFlash('success', 'New "places" price rule added successfully!');
-            $message = "Une période a été ajoutée pour la saison '".$oldSeason['name'];
+            $message = "Une période a été ajoutée pour la saison '" . $oldSeason['name'];
             $context = ["add", "season"];
             $logService->write($message, $context);
 
@@ -148,7 +148,7 @@ class SeasonsController extends AbstractController
             $configService->updateSeasonRule($seasonId, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
 
-            $message = "Une période a été modifiée pour la saison '".$oldSeason['name'];
+            $message = "Une période a été modifiée pour la saison '" . $oldSeason['name'];
             $context = ["update", "season"];
             $logService->write($message, $context);
 
@@ -173,7 +173,7 @@ class SeasonsController extends AbstractController
         $configService->deleteSeasonRule($seasonId, $ruleId);
 
         $this->addFlash('success', 'New "places" price rule added successfully!');
-        $message = "Une période a été supprimée pour la saison '".$oldSeason['name'];
+        $message = "Une période a été supprimée pour la saison '" . $oldSeason['name'];
         $context = ["delete", "season"];
         $logService->write($message, $context);
 
