@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use DateTime;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class ConfigService
@@ -137,6 +138,19 @@ class ConfigService
         $config = $this->getConfigData();
         unset($config['seasons'][$seasonId]);
         $this->saveConfigData($config);
+    }
+
+    public function getSeasonByDate(string $date): array
+    {
+        $seasons = $this->getSeasons();
+
+        foreach ($seasons as $id => $season)
+            foreach ($season['rules'] as $seasonRule)
+                if($this->isDateRangeMatching($seasonRule['start'],$seasonRule['end'],$date))
+                    $season = $seasons[$id];
+
+        dd($this->isDateRangeMatching('2023-08-20','2023-08-20','21/08/2023'));
+        return $season;
     }
 
     // ! ------------ SEASON Rules
@@ -402,5 +416,14 @@ class ConfigService
         }
 
         return $choices;
+    }
+
+    public function isDateRangeMatching(string $start, string $end, string $date):bool
+    {
+        $startValue = new DateTime(str_replace("/","-",$start)); 
+        $endValue = new DateTime(str_replace("/","-",$end)); 
+        $dateValue = new DateTime(str_replace("/","-",$date)); 
+
+        return $dateValue >= $startValue && $dateValue <= $endValue;
     }
 }

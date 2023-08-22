@@ -61,7 +61,7 @@ class ReservationRepository extends ServiceEntityRepository
             ->orWhere('r.end BETWEEN :start AND :end')
             ->setParameter('start', $start)
             ->setParameter('end', $end);
-
+        // Récupère uniquement pour un hébérgement si spécifié
         if ($accomodation) {
             $qb->andWhere('l.accomodation = :accomodation')
                 ->setParameter('accomodation', $accomodation->getId());

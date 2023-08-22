@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AccomodationRepository;
+use App\Service\ConfigService;
 use App\Service\ReservationService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -103,5 +104,20 @@ class Accomodation
         }
 
         return $this;
+    }
+
+    public function toJsonResponse(ConfigService $cs, array $data): array
+    {
+        $season = $cs->getSeasonByDate($data['start']);
+        $priceConfig = $cs->getPricesRules('places')[$this->id];
+
+        dd($this->name);
+
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'price' => $price,
+        ];
     }
 }

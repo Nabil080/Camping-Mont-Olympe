@@ -14,6 +14,7 @@ use App\Service\LogService;
 use App\Service\ReservationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -175,15 +176,16 @@ class ReservationsController extends AbstractController
 
 
     #[Route('/reservations/find', name: 'reservations_find')]
-    public function find(Request $request, ReservationService $rs): Response
+    public function find(Request $request, ReservationService $rs, ConfigService $cs): Response
     {
         $postData = json_decode($request->getContent(), true);
 
         $accomodations = $rs->getAvailableAccomodationsByPeriod($postData['start'], $postData['end']);
 
+        $message['count'] = count($accomodations);
+        foreach ($accomodations as $accomodation) $message['accomodations'][] = $accomodation->toJsonResponse($cs,$postData);
 
-        dd($accomodations);
-        
-        // return $this->json($postData, 200);
+
+        return $this->json($message, 200);
     }
 }

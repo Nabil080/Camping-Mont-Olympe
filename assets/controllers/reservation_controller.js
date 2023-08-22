@@ -4,9 +4,8 @@ export default class extends Controller {
     connect() {
         this.container = document.querySelector("#reservation-container");
         this.overlay = document.querySelector("#reservation-overlay");
-        this.cardsContainer = this.container.querySelector(
-            "#reservation-cards-container"
-        );
+        this.cardsContainer =
+            this.container.querySelector("#reservation-cards");
     }
 
     open() {
@@ -28,7 +27,7 @@ export default class extends Controller {
 
         let data = await this.fetchData(this.start, this.end);
 
-        this.cardsContainer.innerHTML = `${data}`;
+        this.insertData(data);
     }
 
     async fetchData(start, end) {
@@ -44,5 +43,20 @@ export default class extends Controller {
                 childs: 0,
             }),
         }).then((data) => data.json());
+    }
+
+    insertData(data) {
+        this.cardsContainer.innerHTML = `
+            <header>${data.count} résultats</header>
+        `;
+
+        console.log(data.accomodations);
+
+        data.accomodations.forEach(
+            (accom) =>
+                (this.cardsContainer.innerHTML += `
+        <article id="accom-${accom.id}"  class="reservation-card">${accom.name}</article>
+        `)
+        );
     }
 }
