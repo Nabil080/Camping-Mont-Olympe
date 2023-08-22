@@ -11,6 +11,7 @@ use App\Repository\LocationRepository;
 use App\Repository\ReservationRepository;
 use App\Service\ConfigService;
 use App\Service\LogService;
+use App\Service\ReservationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -174,14 +175,11 @@ class ReservationsController extends AbstractController
 
 
     #[Route('/reservations/find', name: 'reservations_find')]
-    public function find(Request $request, AccomodationRepository $ar): Response
+    public function find(Request $request, ReservationService $rs): Response
     {
         $postData = json_decode($request->getContent(), true);
 
-        $accomList = $ar->findBy(['available' => true]);
-        $accomodations = array_filter($accomList, function ($accomodation) use ($postData) {
-            return $accomodation->isAvailableDuringPeriod($postData['start'], $postData['end']);
-        });
+        $accomodations = $rs->getAvailableAccomodationsByPeriod($postData['start'], $postData['end']);
 
 
         dd($accomodations);
