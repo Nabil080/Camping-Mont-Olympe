@@ -5,14 +5,29 @@ import fr from "../../node_modules/flowbite-datepicker/js/i18n/locales/fr.js";
 
 export default class extends Controller {
     connect() {
+        this.setDates()
+        this.initializeDateRangePicker();
+        this.setDefaultValues();
+    }
+
+    setDates() {
         locales.fr = fr.fr;
 
+        let date = new Date();
+        this.today = date.toLocaleDateString("fr-FR");
+        this.nextWeek = new Date(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate() + 7
+        ).toLocaleDateString("fr-FR");
+    }
+
+    initializeDateRangePicker() {
         const options = {
             language: "fr",
             weekStart: 1,
             clearBtn: true,
-            minDate: "01-08-2023",
-            maxDate: "11-08-2023",
+            minDate: this.today,
         };
 
         const d = new DateRangePicker(this.element, options);
@@ -22,14 +37,19 @@ export default class extends Controller {
                 this.synchronizeValues();
             });
         });
+    }
 
-        this.element.querySelector('[name="start"]').value = '05-08-2023'
-        this.element.querySelector('[name="end"]').value = '06-08-2023'
+    setDefaultValues() {
+        this.start = this.element.querySelector('[name="start"]');
+        this.end = this.element.querySelector('[name="end"]')
+
+        this.start.value = this.today;
+        this.end.value = this.nextWeek;
     }
 
     synchronizeValues() {
-        let newStart = this.element.querySelector('[name="start"]').value;
-        let newEnd = this.element.querySelector('[name="end"]').value;
+        let newStart = this.start.value;
+        let newEnd = this.end.value;
         let startInputs = document.querySelectorAll('[name="start"]');
         let endInputs = document.querySelectorAll('[name="end"]');
 
