@@ -36,10 +36,9 @@ class ReservationService
         // Récupère toutes les réservations de l'accomodation dont le séjour chevauche la période voulue
         $reservations = $this->reservationRepository->getReservationsByPeriod($start, $end, $accomodation);
         // Récupère tous les emplacements de l'accomodation qui ne sont pas réservés
-        $locations = $this->locationRepository->getLocationsByReservations($reservations, true);
+        $locations = $this->locationRepository->getAccomodationLocationsByReservations($accomodation, $reservations, true);
 
-        dd($reservations, $locations);
 
-        return true;
+        return !empty($locations);
     }
 }

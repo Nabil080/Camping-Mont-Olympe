@@ -25,16 +25,22 @@ class LocationRepository extends ServiceEntityRepository
     }
 
 
-    public function getLocationsByReservations(array $reservations, bool $reversed = false): array
+    public function getAccomodationLocationsByReservations(Accomodation $accomodation, array $reservations, bool $reversed = false): array
     {
         $condition = $reversed ? 'NOT IN' : 'IN';
 
         $locationIds = array_map(fn ($reservation) => $reservation->getLocation()->getId(), $reservations);
 
-        return $this->createQueryBuilder('l')
-            ->andWhere("l.id $condition (:ids)")
-            ->setParameter('ids', $locationIds)
-            ->getQuery()
-            ->getResult();
+        $qb = $this->createQueryBuilder('l')
+            ->andWhere("l.available = true")
+            ->andWhere("l.accomodation = :accomodation")
+            ->setParameter("accomodation", $accomodation);
+        if (!empty($locationIds)) 
+            $qb->andWhere("l.id $condition (:ids)")
+            ->setParameter('ids', $locationIds);
+
+
+        return $qb->getQuery()
+                ->getResult();
     }
 }

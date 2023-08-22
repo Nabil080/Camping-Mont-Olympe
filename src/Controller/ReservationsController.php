@@ -183,6 +183,7 @@ class ReservationsController extends AbstractController
 
 
         dd($accomodations);
-        return $this->json($postData, 200);
+        
+        // return $this->json($postData, 200);
     }
 }

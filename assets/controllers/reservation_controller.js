@@ -28,8 +28,7 @@ export default class extends Controller {
 
         let data = await this.fetchData(this.start, this.end);
 
-        this.cardsContainer.innerHTML = ``;
-        this.cardsContainer.innerHTML += `slt`;
+        this.cardsContainer.innerHTML = `${data}`;
     }
 
     async fetchData(start, end) {
