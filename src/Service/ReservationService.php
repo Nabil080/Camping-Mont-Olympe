@@ -6,12 +6,14 @@ use App\Entity\Accomodation;
 use App\Entity\Reservation;
 use App\Repository\AccomodationRepository;
 use App\Repository\LocationRepository;
+use App\Repository\ReservationRepository;
 use Symfony\Component\Validator\Constraints\Date;
 
 class ReservationService
 {
     private AccomodationRepository $accomodationRepository;
     private LocationRepository $locationRepository;
+    private ReservationRepository $reservationRepository;
 
     public function __construct(AccomodationRepository $accomodationRepository, LocationRepository $locationRepository)
     {
@@ -30,8 +32,10 @@ class ReservationService
     }
     public function isAvailableDuringPeriod(Accomodation $accomodation, string|Date $start, string|Date $end): bool
     {
+        // Récupère toutes les réservations de l'accomodation dont le séjour chevauche la période voulue
+        return $this->locationRepository->isAccomAvailableDuringPeriod($accomodation, $start, $end);
 
 
-        return true;
+        // return true;
     }
 }
