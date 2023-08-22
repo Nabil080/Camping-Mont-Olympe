@@ -22,6 +22,9 @@ export default class extends Controller {
                 this.synchronizeValues();
             });
         });
+
+        this.element.querySelector('[name="start"]').value = '05-08-2023'
+        this.element.querySelector('[name="end"]').value = '06-08-2023'
     }
 
     synchronizeValues() {

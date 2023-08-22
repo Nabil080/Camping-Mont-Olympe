@@ -169,4 +169,13 @@ class ReservationsController extends AbstractController
 
         return $this->redirectToRoute('admin_settings_reservations');
     }
+
+
+    #[Route('/reservations/find' , name: 'reservations_find')]
+    public function find(Request $request): Response
+    {
+        $postData = json_decode($request->getContent(), true);
+
+        return $this->json($postData,200);
+    }
 }

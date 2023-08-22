@@ -4,11 +4,14 @@ export default class extends Controller {
     connect() {
         this.container = document.querySelector("#reservation-container");
         this.overlay = document.querySelector("#reservation-overlay");
+        this.cardsContainer = this.container.querySelector('#reservation-cards-container')
     }
 
     open() {
         this.overlay.classList.remove("hidden");
         this.container.classList.remove("translate-x-full");
+
+        this.find()
     }
 
     close() {
@@ -16,16 +19,29 @@ export default class extends Controller {
         this.container.classList.add("translate-x-full");
     }
 
-    updateValue() {
-        const start = this.container.querySelector("#start-date");
-        const end = this.container.querySelector("#end-date");
+    async find() {
+        this.start = this.container.querySelector('input[name="start"]').value
+        this.end = this.container.querySelector('input[name="end"]').value
+        if(!this.start && !this.end) return
 
-        const startInput = document.querySelector(
-            '#reservation [name="start"]'
-        );
-        const endInput = document.querySelector('#reservation [name="end"]');
+        let data = await this.fetchData(this.start,this.end)
+        
+        this.cardsContainer.innerHTML = `Message : ${data.start}`
+    }
 
-        start.innerText = startInput.value;
-        end.innerText = endInput.value;
+    async fetchData(start, end) {
+        return fetch("/reservations/find", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                start: start,
+                end: end,
+                adults: 1,
+                childs: 0,
+            }),
+        })
+        .then((data) => data.json());
     }
 }
