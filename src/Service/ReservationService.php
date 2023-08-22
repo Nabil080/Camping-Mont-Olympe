@@ -15,28 +15,31 @@ class ReservationService
     private LocationRepository $locationRepository;
     private ReservationRepository $reservationRepository;
 
-    public function __construct(AccomodationRepository $accomodationRepository, LocationRepository $locationRepository)
+    public function __construct(AccomodationRepository $accomodationRepository, LocationRepository $locationRepository, ReservationRepository $reservationRepository)
     {
         $this->accomodationRepository = $accomodationRepository;
         $this->locationRepository = $locationRepository;
+        $this->reservationRepository = $reservationRepository;
     }
 
     public function getAvailableAccomodationsByPeriod(string|Date $start, string|Date $end): array
     {
         $accomList = $this->accomodationRepository->findBy(['available' => true]);
-        $accomodations = array_filter($accomList, function ($accomodation) use ($start,$end) {
-            return $this->isAvailableDuringPeriod($accomodation,$start, $end);
+        $accomodations = array_filter($accomList, function ($accomodation) use ($start, $end) {
+            return $this->isAvailableDuringPeriod($accomodation, $start, $end);
         });
 
         return $accomodations;
     }
     public function isAvailableDuringPeriod(Accomodation $accomodation, string|Date $start, string|Date $end): bool
     {
-        // Récupère toutes les réservations de l'accomodation dont le séjour chevauche la période voulue2
-        $unavailableLocations = $this->locationRepository->getReservationsByPeriod($start, $end); 
-        // return ;
+        // Récupère toutes les réservations de l'accomodation dont le séjour chevauche la période voulue
+        $reservations = $this->reservationRepository->getReservationsByPeriod($start, $end, $accomodation);
+        // Récupère tous les emplacements de l'accomodation qui ne sont pas réservés
+        $locations = $this->locationRepository->getLocationsByReservations($reservations, true);
 
+        dd($reservations, $locations);
 
-        // return true;
+        return true;
     }
 }

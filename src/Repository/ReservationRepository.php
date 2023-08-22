@@ -2,9 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\Accomodation;
 use App\Entity\Reservation;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @extends ServiceEntityRepository<Reservation>
@@ -46,9 +49,33 @@ class ReservationRepository extends ServiceEntityRepository
     //        ;
     //    }
 
+    public function getReservationsByPeriod(string|DateTime $start, string|DateTime $end, Accomodation $accomodation = null,): array
+    {
+        $start = DateTime::createFromFormat('d/m/Y', $start);
+        $end = DateTime::createFromFormat('d/m/Y', $end);
+
+        // Récupère toutes les réservations dont le séjour chevauche la période voulue
+        $qb = $this->createQueryBuilder('r')
+            ->join('App\Entity\Location', 'l', 'with', 'r.Location = l.id')
+            ->andWhere('r.start BETWEEN :start AND :end')
+            ->orWhere('r.end BETWEEN :start AND :end')
+            ->setParameter('start', $start)
+            ->setParameter('end', $end);
+
+        if ($accomodation) {
+            $qb->andWhere('l.accomodation = :accomodation')
+                ->setParameter('accomodation', $accomodation->getId());
+        }
+
+        $reservations = $qb->getQuery()
+            ->getResult();
+
+        return $reservations;
+    }
+
     public function findCheckIns($count = null): array|int
     {
-        $today = new \DateTime('today');
+        $today = new DateTime('today');
 
         $qb = $this->createQueryBuilder('r');
 
@@ -63,7 +90,7 @@ class ReservationRepository extends ServiceEntityRepository
 
     public function findCheckOuts($count = null): array|int
     {
-        $today = new \DateTime('today');
+        $today = new DateTime('today');
 
         $qb = $this->createQueryBuilder('r');
 

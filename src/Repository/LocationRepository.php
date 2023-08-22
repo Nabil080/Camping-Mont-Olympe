@@ -25,30 +25,16 @@ class LocationRepository extends ServiceEntityRepository
     }
 
 
-    public function getReservationsByPeriod(string|Date $start, string|Date $end, Accomodation $accomodation = null,): array
+    public function getLocationsByReservations(array $reservations, bool $reversed = false): array
     {
-        $start = DateTime::createFromFormat('d/m/Y', $start);
-        $end = DateTime::createFromFormat('d/m/Y', $end);
+        $condition = $reversed ? 'NOT IN' : 'IN';
 
-        // Récupère toutes les réservations dont le séjour chevauche la période voulue
-        $qb = $this->createQueryBuilder('l')
-            ->join('App\Entity\Reservation', 'r', 'with', 'r.Location = l.id')
-            ->select('r')
-            ->andWhere('r.start BETWEEN :start AND :end')
-            ->orWhere('r.end BETWEEN :start AND :end')
-            ->setParameter('start', $start)
-            ->setParameter('end', $end);
+        $locationIds = array_map(fn ($reservation) => $reservation->getLocation()->getId(), $reservations);
 
-        if ($accomodation) {
-            $qb->andWhere('l.accomodation = :accomodation')
-                ->setParameter('accomodation', $accomodation->getId());
-        }
-
-        $reservations = $qb->getQuery()
+        return $this->createQueryBuilder('l')
+            ->andWhere("l.id $condition (:ids)")
+            ->setParameter('ids', $locationIds)
+            ->getQuery()
             ->getResult();
-
-        dd($reservations);
-
-        return $reservations;
     }
 }
