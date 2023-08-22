@@ -4,14 +4,16 @@ export default class extends Controller {
     connect() {
         this.container = document.querySelector("#reservation-container");
         this.overlay = document.querySelector("#reservation-overlay");
-        this.cardsContainer = this.container.querySelector('#reservation-cards-container')
+        this.cardsContainer = this.container.querySelector(
+            "#reservation-cards-container"
+        );
     }
 
     open() {
         this.overlay.classList.remove("hidden");
         this.container.classList.remove("translate-x-full");
 
-        this.find()
+        this.find();
     }
 
     close() {
@@ -20,13 +22,14 @@ export default class extends Controller {
     }
 
     async find() {
-        this.start = this.container.querySelector('input[name="start"]').value
-        this.end = this.container.querySelector('input[name="end"]').value
-        if(!this.start && !this.end) return
+        this.start = this.container.querySelector('input[name="start"]').value;
+        this.end = this.container.querySelector('input[name="end"]').value;
+        if (!this.start && !this.end) return;
 
-        let data = await this.fetchData(this.start,this.end)
-        
-        this.cardsContainer.innerHTML = `Message : ${data.start}`
+        let data = await this.fetchData(this.start, this.end);
+
+        this.cardsContainer.innerHTML = ``;
+        this.cardsContainer.innerHTML += `slt`;
     }
 
     async fetchData(start, end) {
@@ -41,7 +44,6 @@ export default class extends Controller {
                 adults: 1,
                 childs: 0,
             }),
-        })
-        .then((data) => data.json());
+        }).then((data) => data.json());
     }
 }

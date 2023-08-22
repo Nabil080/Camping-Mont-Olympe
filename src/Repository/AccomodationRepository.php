@@ -45,4 +45,5 @@ class AccomodationRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }

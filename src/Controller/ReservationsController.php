@@ -6,6 +6,8 @@ use App\Entity\Reservation;
 use App\Form\CheckRuleType;
 use App\Form\ReservationType;
 use App\Form\StayRuleType;
+use App\Repository\AccomodationRepository;
+use App\Repository\LocationRepository;
 use App\Repository\ReservationRepository;
 use App\Service\ConfigService;
 use App\Service\LogService;
@@ -171,11 +173,18 @@ class ReservationsController extends AbstractController
     }
 
 
-    #[Route('/reservations/find' , name: 'reservations_find')]
-    public function find(Request $request): Response
+    #[Route('/reservations/find', name: 'reservations_find')]
+    public function find(Request $request, AccomodationRepository $ar): Response
     {
         $postData = json_decode($request->getContent(), true);
 
-        return $this->json($postData,200);
+        $accomList = $ar->findBy(['available' => true]);
+        $accomodations = array_filter($accomList, function ($accomodation) use ($postData) {
+            return $accomodation->isAvailableDuringPeriod($postData['start'], $postData['end']);
+        });
+
+
+        dd($accomodations);
+        return $this->json($postData, 200);
     }
 }
