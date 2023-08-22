@@ -14,12 +14,14 @@ class ReservationService
     private AccomodationRepository $accomodationRepository;
     private LocationRepository $locationRepository;
     private ReservationRepository $reservationRepository;
+    private ConfigService $configService;
 
-    public function __construct(AccomodationRepository $accomodationRepository, LocationRepository $locationRepository, ReservationRepository $reservationRepository)
+    public function __construct(AccomodationRepository $accomodationRepository, LocationRepository $locationRepository, ReservationRepository $reservationRepository, ConfigService $configService)
     {
         $this->accomodationRepository = $accomodationRepository;
         $this->locationRepository = $locationRepository;
         $this->reservationRepository = $reservationRepository;
+        $this->configService = $configService;
     }
 
     public function getAvailableAccomodationsByPeriod(string|Date $start, string|Date $end): array
@@ -40,5 +42,21 @@ class ReservationService
 
 
         return !empty($locations);
+    }
+
+    public function toJsonResponse(Accomodation $accomodation, array $data): array
+    {
+        $season = $this->configService->getSeasonByDate($data['start']);
+        $priceConfig = $this->configService->getPricesRules('places')[$accomodation->getId()];
+        $rawPrice = $this->configService->findPriceBySeason($priceConfig, $season);
+        // dd($rawPrice);
+
+
+        return [
+            'id' => $accomodation->getId(),
+            'name' => $accomodation->getName(),
+            'description' => $accomodation->getDescription(),
+            'price' => $rawPrice,
+        ];
     }
 }

@@ -55,8 +55,12 @@ export default class extends Controller {
         data.accomodations.forEach(
             (accom) =>
                 (this.cardsContainer.innerHTML += `
-        <article id="accom-${accom.id}"  class="reservation-card">${accom.name}</article>
-        `)
+                    <article id="accom-${accom.id}"  class="reservation-card">
+                        <div>${accom.name}</div>
+                        <div>${accom.description}</div>
+                        <div>${accom.price}</div>
+                    </article>
+                `)
         );
     }
 }

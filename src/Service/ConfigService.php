@@ -101,6 +101,17 @@ class ConfigService
         $this->saveConfigData($config);
     }
 
+    public function findPriceBySeason(array $priceConfig, array $seasonConfig)
+    {
+        foreach ($priceConfig['rules'] as $index => $priceRule)
+            if (in_array($seasonConfig['name'], $priceRule['seasons']))
+                $price = $priceConfig['rules'][$index]['amount'];
+            elseif (in_array(null, $priceRule['seasons']) | in_array("All", $priceRule['seasons']))
+                $price2 = $priceConfig['rules'][$index]['amount'];
+
+                
+        return $price ?? $price2;
+    }
 
     // ! ----------------- SEASON
 
@@ -146,7 +157,7 @@ class ConfigService
 
         foreach ($seasons as $seasonId => $seasonValue)
             foreach ($seasonValue['rules'] as $seasonRule)
-                if($this->isDateRangeMatching($seasonRule['start'], $seasonRule['end'], $date))
+                if ($this->isDateRangeMatching($seasonRule['start'], $seasonRule['end'], $date))
                     $season = $seasons[$seasonId];
 
         return $season;

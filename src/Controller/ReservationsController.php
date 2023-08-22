@@ -183,7 +183,7 @@ class ReservationsController extends AbstractController
         $accomodations = $rs->getAvailableAccomodationsByPeriod($postData['start'], $postData['end']);
 
         $message['count'] = count($accomodations);
-        foreach ($accomodations as $accomodation) $message['accomodations'][] = $accomodation->toJsonResponse($cs,$postData);
+        foreach ($accomodations as $accomodation) $message['accomodations'][] = $rs->toJsonResponse($accomodation, $postData);
 
 
         return $this->json($message, 200);

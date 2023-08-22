@@ -105,19 +105,4 @@ class Accomodation
 
         return $this;
     }
-
-    public function toJsonResponse(ConfigService $cs, array $data): array
-    {
-        $season = $cs->getSeasonByDate($data['start']);
-        dd($season);
-        $priceConfig = $cs->getPricesRules('places')[$this->id];
-
-
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'price' => $price,
-        ];
-    }
 }
