@@ -24,6 +24,15 @@ class ReservationService
         $this->configService = $configService;
     }
 
+    public function getReservationsByFormData(array $data): array
+    {
+        $accomodations = $this->getAvailableAccomodationsByPeriod($data['start'], $data['end']);
+        $accomodationsData = $this->getDisplayAccomodations($accomodations, $data);
+
+
+        return $accomodationsData;
+    }
+
     public function getAvailableAccomodationsByPeriod(string|Date $start, string|Date $end): array
     {
         $accomList = $this->accomodationRepository->findBy(['available' => true]);
@@ -44,19 +53,28 @@ class ReservationService
         return !empty($locations);
     }
 
-    public function toJsonResponse(Accomodation $accomodation, array $data): array
+    public function getDisplayAccomodations(array $accomodations, array $data): array
     {
-        $season = $this->configService->getSeasonByDate($data['start']);
-        $priceConfig = $this->configService->getPricesRules('places')[$accomodation->getId()];
-        $rawPrice = $this->configService->findPriceBySeason($priceConfig, $season);
-        // dd($rawPrice);
+        foreach ($accomodations as $accomodation) {
+
+            $season = $this->configService->getSeasonByDate($data['start']);
+            $basePrice = $this->configService->findAccomodationPriceBySeason($accomodation->getId(), $season);
+
+            $finalPrice = $basePrice;
+            // $finalPrice = $basePrice->applyNight();
+            // $finalPrice = $basePrice->applyClients();
+            // $finalPrice = $basePrice->applyOffers();
+            // $finalPrice = $basePrice->applyTaxes();
 
 
-        return [
-            'id' => $accomodation->getId(),
-            'name' => $accomodation->getName(),
-            'description' => $accomodation->getDescription(),
-            'price' => $rawPrice,
-        ];
+            $displayAccomodations[] = [
+                'id' => $accomodation->getId(),
+                'name' => $accomodation->getName(),
+                'description' => $accomodation->getDescription(),
+                'price' => $finalPrice,
+            ];
+        }
+
+        return $displayAccomodations;
     }
 }

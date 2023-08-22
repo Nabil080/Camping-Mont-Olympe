@@ -176,15 +176,13 @@ class ReservationsController extends AbstractController
 
 
     #[Route('/reservations/find', name: 'reservations_find')]
-    public function find(Request $request, ReservationService $rs, ConfigService $cs): Response
+    public function find(Request $request, ReservationService $rs): Response
     {
         $postData = json_decode($request->getContent(), true);
 
-        $accomodations = $rs->getAvailableAccomodationsByPeriod($postData['start'], $postData['end']);
-
+        $accomodations = $rs->getReservationsByFormData($postData);
         $message['count'] = count($accomodations);
-        foreach ($accomodations as $accomodation) $message['accomodations'][] = $rs->toJsonResponse($accomodation, $postData);
-
+        $message['accomodations'] = $accomodations;
 
         return $this->json($message, 200);
     }
