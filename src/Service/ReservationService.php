@@ -32,8 +32,9 @@ class ReservationService
     }
     public function isAvailableDuringPeriod(Accomodation $accomodation, string|Date $start, string|Date $end): bool
     {
-        // Récupère toutes les réservations de l'accomodation dont le séjour chevauche la période voulue
-        return $this->locationRepository->isAccomAvailableDuringPeriod($accomodation, $start, $end);
+        // Récupère toutes les réservations de l'accomodation dont le séjour chevauche la période voulue2
+        $unavailableLocations = $this->locationRepository->getReservationsByPeriod($start, $end); 
+        // return ;
 
 
         // return true;

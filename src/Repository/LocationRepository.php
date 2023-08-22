@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Accomodation;
 use App\Entity\Location;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Validator\Constraints\Date;
@@ -24,16 +25,30 @@ class LocationRepository extends ServiceEntityRepository
     }
 
 
-    public function isAccomAvailableDuringPeriod(Accomodation $accomodation, string|Date $start, string|Date $end){
-        // Récupère toutes les réservations de l'accomodation dont le séjour chevauche la période voulue
-        $qb = $this->createQueryBuilder('l')
-        ->join('App\Entity\Reservation','r','with','r.Location = l.id')
-        // ->select('r')
-        ->andWhere('l.accomodation = :accomodation')
-        ->setParameter('accomodation',$accomodation->getId())
-        ->getQuery()
-        ->getResult();
+    public function getReservationsByPeriod(string|Date $start, string|Date $end, Accomodation $accomodation = null,): array
+    {
+        $start = DateTime::createFromFormat('d/m/Y', $start);
+        $end = DateTime::createFromFormat('d/m/Y', $end);
 
-        dd($qb);
+        // Récupère toutes les réservations dont le séjour chevauche la période voulue
+        $qb = $this->createQueryBuilder('l')
+            ->join('App\Entity\Reservation', 'r', 'with', 'r.Location = l.id')
+            ->select('r')
+            ->andWhere('r.start BETWEEN :start AND :end')
+            ->orWhere('r.end BETWEEN :start AND :end')
+            ->setParameter('start', $start)
+            ->setParameter('end', $end);
+
+        if ($accomodation) {
+            $qb->andWhere('l.accomodation = :accomodation')
+                ->setParameter('accomodation', $accomodation->getId());
+        }
+
+        $reservations = $qb->getQuery()
+            ->getResult();
+
+        dd($reservations);
+
+        return $reservations;
     }
 }
