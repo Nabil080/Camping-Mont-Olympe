@@ -109,9 +109,9 @@ class Accomodation
     public function toJsonResponse(ConfigService $cs, array $data): array
     {
         $season = $cs->getSeasonByDate($data['start']);
+        dd($season);
         $priceConfig = $cs->getPricesRules('places')[$this->id];
 
-        dd($this->name);
 
         return [
             'id' => $this->id,

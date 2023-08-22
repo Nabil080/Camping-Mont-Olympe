@@ -144,12 +144,11 @@ class ConfigService
     {
         $seasons = $this->getSeasons();
 
-        foreach ($seasons as $id => $season)
-            foreach ($season['rules'] as $seasonRule)
-                if($this->isDateRangeMatching($seasonRule['start'],$seasonRule['end'],$date))
-                    $season = $seasons[$id];
+        foreach ($seasons as $seasonId => $seasonValue)
+            foreach ($seasonValue['rules'] as $seasonRule)
+                if($this->isDateRangeMatching($seasonRule['start'], $seasonRule['end'], $date))
+                    $season = $seasons[$seasonId];
 
-        dd($this->isDateRangeMatching('2023-08-20','2023-08-20','21/08/2023'));
         return $season;
     }
 
@@ -418,11 +417,11 @@ class ConfigService
         return $choices;
     }
 
-    public function isDateRangeMatching(string $start, string $end, string $date):bool
+    public function isDateRangeMatching(string $start, string $end, string $date): bool
     {
-        $startValue = new DateTime(str_replace("/","-",$start)); 
-        $endValue = new DateTime(str_replace("/","-",$end)); 
-        $dateValue = new DateTime(str_replace("/","-",$date)); 
+        $startValue = new DateTime($start);
+        $endValue = new DateTime($end);
+        $dateValue = !str_contains($date, '/') ? new DateTime($date) : new DateTime(join("-", array_reverse(explode("/", $date))));
 
         return $dateValue >= $startValue && $dateValue <= $endValue;
     }
