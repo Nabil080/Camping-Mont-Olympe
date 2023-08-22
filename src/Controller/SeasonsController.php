@@ -28,7 +28,7 @@ class SeasonsController extends AbstractController
         ]);
     }
 
-    #[Route("/seasons/add", name: "admin_settings_seasons_add")]
+    #[Route("/admin/settings/seasons/add", name: "admin_settings_seasons_add")]
     public function add(Request $request, ConfigService $configService, LogService $logService): Response
     {
 
@@ -55,7 +55,7 @@ class SeasonsController extends AbstractController
         ]);
     }
 
-    #[Route("/seasons/update/{seasonId<\d+>}", name: "admin_settings_seasons_update")]
+    #[Route("/admin/settings/seasons/update/{seasonId<\d+>}", name: "admin_settings_seasons_update")]
     public function update(int $seasonId, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $oldSeason = $configService->getSeasons()[$seasonId];
@@ -85,7 +85,7 @@ class SeasonsController extends AbstractController
         ]);
     }
 
-    #[Route("/seasons/delete/{seasonId<\d+>}", name: "admin_settings_seasons_delete")]
+    #[Route("/admin/settings/seasons/delete/{seasonId<\d+>}", name: "admin_settings_seasons_delete")]
     public function delete($seasonId, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $oldSeason = $configService->getSeasons()[$seasonId];
@@ -99,7 +99,7 @@ class SeasonsController extends AbstractController
         return $this->redirectToRoute('admin_settings_seasons');
     }
 
-    #[Route("/seasons/{seasonId<\d+>}/rule/add", name: "admin_settings_seasons_rule_add")]
+    #[Route("/admin/settings/seasons/{seasonId<\d+>}/rule/add", name: "admin_settings_seasons_rule_add")]
     public function addRule(int $seasonId, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $oldSeason = $configService->getSeasons()[$seasonId];
@@ -115,7 +115,7 @@ class SeasonsController extends AbstractController
             $configService->addSeasonRule($seasonId, $rule);
 
             $this->addFlash('success', 'New "places" price rule added successfully!');
-            $message = "Une période a été ajoutée pour la saison '".$oldSeason['name'];
+            $message = "Une période a été ajoutée pour la saison '" . $oldSeason['name'];
             $context = ["add", "season"];
             $logService->write($message, $context);
 
@@ -129,7 +129,7 @@ class SeasonsController extends AbstractController
         ]);
     }
 
-    #[Route("/seasons/{seasonId<\d+>}/rule/update/{ruleId<\d+>}", name: "admin_settings_seasons_rule_update")]
+    #[Route("/admin/settings/seasons/{seasonId<\d+>}/rule/update/{ruleId<\d+>}", name: "admin_settings_seasons_rule_update")]
     public function updateRule(int $seasonId, int $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $oldSeason = $configService->getSeasons()[$seasonId];
@@ -148,7 +148,7 @@ class SeasonsController extends AbstractController
             $configService->updateSeasonRule($seasonId, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
 
-            $message = "Une période a été modifiée pour la saison '".$oldSeason['name'];
+            $message = "Une période a été modifiée pour la saison '" . $oldSeason['name'];
             $context = ["update", "season"];
             $logService->write($message, $context);
 
@@ -166,14 +166,14 @@ class SeasonsController extends AbstractController
         ]);
     }
 
-    #[Route("/seasons/{seasonId<\d+>}/rule/delete/{ruleId<\d+>}", name: "admin_settings_seasons_rule_delete")]
+    #[Route("/admin/settings/seasons/{seasonId<\d+>}/rule/delete/{ruleId<\d+>}", name: "admin_settings_seasons_rule_delete")]
     public function deleteRule(int $seasonId, int $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $oldSeason = $configService->getSeasons()[$seasonId];
         $configService->deleteSeasonRule($seasonId, $ruleId);
 
         $this->addFlash('success', 'New "places" price rule added successfully!');
-        $message = "Une période a été supprimée pour la saison '".$oldSeason['name'];
+        $message = "Une période a été supprimée pour la saison '" . $oldSeason['name'];
         $context = ["delete", "season"];
         $logService->write($message, $context);
 

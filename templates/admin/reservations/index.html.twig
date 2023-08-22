@@ -1,0 +1,101 @@
+{% extends 'admin/base.html.twig' %}
+{% import "macro/_footer_admin.html.twig" as footer %}
+
+{% block title %}Réservations - Mont Olympe
+{% endblock %}
+
+{% block body %}
+
+
+	<header class="mt-8 flex justify-center items-center gap-2">
+		<h1 class="text-3xl">Réservations</h1>
+		<div class="group relative cursor-help">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+			<div class="hidden group-hover:block absolute bg-white border left-1/2 -translate-x-1/2 mt-4 border-black p-2 w-[300px]">Vous pouvez régler les tarifs du camping en fonction des saisons et choisir si chaque nuit ou chaque personne multiplie le paiement.
+				<br><br>
+				Un service supplémentaire a 2€/nuit/personne comptera en tout pour 6€ pour une personne restant 3jours.
+			</div>
+		</div>
+	</header>
+
+	<section
+		class="m-12 mx-36">
+
+		{# <form action="{{path('logs')}}" method="get" class="w-fit my-12 mx-auto">
+																			<label for="search">Champ de recherche :</label>
+																			<input name="search" type="search" placeholder="Rechercher un message">
+																			<button type="submit" class="g-button">Valider</button>
+																		</form> #}
+
+		<section id="add-reservation" class="mb-8">
+			<a href="{{ path('admin_reservations_add') }}">
+				<button class="g-button">Créer une réservation</button>
+			</a>
+		</section>
+
+		<table class="w-full border-collapse border">
+			<thead>
+				<tr class="bg-green-200">
+					<th class="p-2">ID</th>
+					<th class="p-2">Check-in</th>
+					<th class="p-2">Check-out</th>
+					<th class="p-2">Type d'hébergement</th>
+					<th class="p-2">Emplacement</th>
+					<th class="p-2">Nombre</th>
+					<th class="p-2">Infos client</th>
+					<th class="p-2">Prix</th>
+					<th class="p-2">Date de réservation</th>
+					<th class="p-2">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for reservation in reservations %}
+					{# {{ dump(reservation) }} #}
+					<tr class="text-center bg-green-50">
+						<td class="p-2">{{ reservation.id }}</td>
+						<td class="p-2">{{ reservation.start|format_datetime(locale='fr',pattern="dd/MM/yyyy") }}</td>
+						<td class="p-2">{{ reservation.end|format_datetime(locale='fr',pattern="dd/MM/yyyy") }}</td>
+						<td class="p-2">{{ reservation.type ?? "Caravane"}}</td>
+						<td class="p-2">{{ reservation.spot ?? "30" }}</td>
+						<td class="p-2">
+							<div>Adultes :
+								{{reservation.adults}}</div>
+							<div>Enfants :
+								{{reservation.childs}}</div>
+						</td>
+						<td class="p-2">
+							<button data-client={{ reservation.client ?? 'blabl'}}>
+								Voir les informations du client
+							</button>
+							{% if reservation.comment %}
+								<button data-com={{reservation.comment}}>
+									Voir le commentaire du client
+								</button>
+							{% else %}
+								<div>
+									Pas de commentaire
+								</div>
+							{% endif %}
+						</td>
+						<td class="p-2">
+							<div>
+								Tarif :
+								{{reservation.price}}
+							</div>
+							<div>
+								Payé :
+								{{reservation.paid}}
+							</div>
+						</td>
+						<td class="p-2">{{ reservation.date|date() }}</td>
+						<td class="p-2">
+							ACTIONS
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</section>
+{% endblock %}
+
+{% block footer %}{% endblock %}

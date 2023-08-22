@@ -13,7 +13,6 @@ class SettingsController extends AbstractController
     public function index(ConfigService $configService): Response
     {
 
-
         return $this->render('admin/settings/index.html.twig', []);
     }
 }

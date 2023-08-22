@@ -23,7 +23,7 @@ class ServicesController extends AbstractController
         ]);
     }
 
-    #[Route('/services/add', name: 'admin_settings_services_add')]
+    #[Route('/admin/settings/services/add', name: 'admin_settings_services_add')]
     public function add(ConfigService $configService, Request $request, LogService $logService): Response
     {
         $form = $this->createForm(ServiceType::class);
@@ -67,7 +67,8 @@ class ServicesController extends AbstractController
 
             $message = "Le service '" . $oldService['name'] . "' a été renommé en '$name'";
             $context = ["update", "service"];
-            $logService->write($message, $context);
+
+            for ($i = 0; $i < 1000; $i++) $logService->write($message, $context);
 
             return $this->redirectToRoute('admin_settings_services');
         } else {
@@ -93,7 +94,7 @@ class ServicesController extends AbstractController
         return $this->redirectToRoute('admin_settings_services');
     }
 
-    #[Route('/services/{serviceId}/rule/add', name: 'admin_settings_services_rule_add')]
+    #[Route('/admin/settings/services/{serviceId}/rule/add', name: 'admin_settings_services_rule_add')]
     public function addRule(int $serviceId, ConfigService $configService, Request $request, LogService $logService): Response
     {
         $oldService = $configService->getServices($serviceId);
@@ -108,7 +109,7 @@ class ServicesController extends AbstractController
 
             $configService->addServiceRule($serviceId, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
-            $message = "Une règle a été ajoutée pour le service '".$oldService['name'];
+            $message = "Une règle a été ajoutée pour le service '" . $oldService['name'];
             $context = ["add", "service"];
             $logService->write($message, $context);
 
@@ -122,7 +123,7 @@ class ServicesController extends AbstractController
     }
 
 
-    #[Route('/services/{serviceId}/update/{ruleId<\d+>}', name: 'admin_settings_services_rule_update')]
+    #[Route('/admin/settings/services/{serviceId}/update/{ruleId<\d+>}', name: 'admin_settings_services_rule_update')]
     public function updateRule(int $serviceId, int $ruleId, ConfigService $configService, Request $request, LogService $logService): Response
     {
         $oldService = $configService->getServices($serviceId);
@@ -140,7 +141,7 @@ class ServicesController extends AbstractController
 
             $configService->updateServiceRule($serviceId, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
-            $message = "Une règle a été modifiée pour le service '".$oldService['name'];
+            $message = "Une règle a été modifiée pour le service '" . $oldService['name'];
             $context = ["update", "service"];
             $logService->write($message, $context);
 
@@ -163,7 +164,7 @@ class ServicesController extends AbstractController
         $configService->deleteserviceRule($serviceId, $ruleId);
 
         $this->addFlash('success', 'New "places" price rule added successfully!');
-        $message = "Une règle a été supprimée pour le service '".$oldService['name'];
+        $message = "Une règle a été supprimée pour le service '" . $oldService['name'];
         $context = ["delete", "service"];
         $logService->write($message, $context);
 

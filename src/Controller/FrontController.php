@@ -21,40 +21,4 @@ class FrontController extends AbstractController
             'date' => $now
         ]);
     }
-
-    #[Route('/emplacements', name: 'emplacements')]
-    public function emplacements(): Response
-    {
-
-        return $this->render('front/emplacements.html.twig', [
-            'controller_name' => 'FrontController',
-        ]);
-    }
-
-    #[Route('/emplacement/{id<\d+>}', name: 'emplacement')]
-    public function emplacement($id): Response
-    {
-
-        return $this->render('front/emplacement.html.twig', [
-            'controller_name' => 'FrontController',
-        ]);
-    }
-
-    #[Route('/reservation', name: 'reservation')]
-    public function reservation(): Response
-    {
-
-        return $this->render('front/reservation.html.twig', [
-            'controller_name' => 'FrontController',
-        ]);
-    }
-
-    #[Route('/contact', name: 'contact')]
-    public function contact(): Response
-    {
-
-        return $this->render('front/contact.html.twig', [
-            'controller_name' => 'FrontController',
-        ]);
-    }
 }

@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Log;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -45,4 +47,32 @@ class LogRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findSearch($search): array
+    {
+        return $this->createQueryBuilder('p')
+        ->andWhere('p.message like :search')
+        ->setParameter(':search', "%$search%")
+        ->getQuery()
+        ->getResult();        
+    }
+
+    public function findFilters($limit,$page,$search,$action,$type): array
+    {
+        $offset = ($page - 1 ) * $limit;
+
+        return $this->createQueryBuilder('p')
+        ->andWhere('p.message like :search')
+        ->orWhere('p.context like :search')
+        ->setParameter(':search', "%$search%")
+        ->andWhere('p.context like :action')
+        ->setParameter(':action',"%$action%")
+        ->andWhere('p.context like :type')
+        ->setParameter(':type',"%$type%")
+        ->orderBy('p.id', 'DESC')
+        ->setMaxResults($limit)
+        ->setFirstResult($offset)
+        ->getQuery()
+        ->getResult();   
+    }
 }

@@ -1,0 +1,69 @@
+{% extends 'admin/base.html.twig' %}
+{% import "macro/_footer_admin.html.twig" as footer %}
+
+{% block title %}Registre - Mont Olympe
+{% endblock %}
+
+{% block body %}
+
+	<header class="mt-8 flex justify-center items-center gap-2">
+		<h1 class="text-3xl">Registre</h1>
+		<div class="group relative cursor-help">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+			<div class="hidden group-hover:block absolute bg-white border left-1/2 -translate-x-1/2 mt-4 border-black p-2 w-[300px]">Vous pouvez régler les tarifs du camping en fonction des saisons et choisir si chaque nuit ou chaque personne multiplie le paiement.
+				<br><br>
+				Un service supplémentaire a 2€/nuit/personne comptera en tout pour 6€ pour une personne restant 3jours.
+			</div>
+		</div>
+	</header>
+
+	<section class="m-12">
+
+		<form {{ stimulus_controller('form') }} action="{{path('logs')}}" method="get" class="w-fit my-12 mx-auto">
+			<label for="search">Champ de recherche :</label>
+			<input name="search" type="search" value="{{ search }}" placeholder="Rechercher un message">
+			<button type="submit" class="g-button">Valider</button>
+			<label for="action">Action</label>
+			<select {{ stimulus_action('form','submit') }} name="action" id="">
+				<option value="" {% if action is same as "" %} selected {% endif %}>Tous</option>
+				<option value="add" {% if action is same as "add" %} selected {% endif %}>Ajout</option>
+				<option value="update" {% if action is same as "update" %} selected {% endif %}>Modification</option>
+				<option value="delete" {% if action is same as "delete" %} selected {% endif %}>Supression</option>
+			</select>
+			<label for="type">Type</label>
+			<select {{ stimulus_action('form','submit') }} name="type" id="">
+				<option value="">Tous</option>
+				<option value="connection" {% if type is same as "connection" %} selected {% endif %}>Connexion/Déconnexion</option>
+				<option value="reservation" {% if type is same as "reservation" %} selected {% endif %}>Réservation</option>
+				<option value="price" {% if type is same as "price" %} selected {% endif %}>Tarifs</option>
+				<option value="season" {% if type is same as "season" %} selected {% endif %}>Saison</option>
+				<option value="camping" {% if type is same as "camping" %} selected {% endif %}>Camping</option>
+				<option value="price" {% if type is same as "price" %} selected {% endif %}>Règles de réservation</option>
+				<option value="service" {% if type is same as "service" %} selected {% endif %}>Services</option>
+			</select>
+		</form>
+
+		<table class="w-full border-collapse border">
+			<thead>
+				<tr class="bg-green-200">
+					<th class="p-2">Utilisateur</th>
+					<th class="p-2">Message</th>
+					<th class="p-2">Contexte</th>
+					<th class="p-2">Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for log in logs %}
+					<tr class="text-center bg-green-50">
+						<td class="p-2">{{ log.user.firstname }}</td>
+						<td class="p-2">{{ log.message }}</td>
+						<td class="p-2">{{ log.context|join(',') }}</td>
+						<td class="p-2">{{ log.date|format_datetime(locale='fr') }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</section>
+{% endblock %}
+
+{% block footer %}{% endblock %}

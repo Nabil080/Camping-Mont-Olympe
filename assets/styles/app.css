@@ -4,31 +4,31 @@
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 
 :root {
-  --main: #0a6559;
+    --main: #0a6559;
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 @layer components {
-  .g-button {
-    padding: 0.5rem 1rem;
-    border: 1px solid black;
-    background-color: #a7f3d0;
-  }
+    .g-button {
+        padding: 0.5rem 1rem;
+        border: 1px solid black;
+        background-color: #a7f3d0;
+    }
 
-  .g-button:hover {
-    background-color: #6ee7b7;
-  }
+    .g-button:hover {
+        background-color: #6ee7b7;
+    }
 
-  .reservation-card {
-    background-color: white;
-    margin: 1rem;
-    aspect-ratio: 16/7;
-  }
+    .reservation-card {
+        background-color: white;
+        margin: 1rem;
+        aspect-ratio: 16/7;
+    }
 
-  /* .discover-card {
+    /* .discover-card {
     margin: 1rem;
     background-color: var(--main);
     overflow: hidden;
@@ -55,53 +55,66 @@ html {
     border: 4px solid var(--main);
   } */
 
-  .pop-up-icon {
-    border-radius: 9999px;
-    aspect-ratio: 1;
-    width: 100%;
-    display: grid;
-    place-items: center;
-    border: 2px solid #0e534a;
-    padding: 2rem;
-    position: relative;
-    transition-duration: 300ms;
-    transition-timing-function: ease-in-out;
-  }
+    .pop-up-icon {
+        border-radius: 9999px;
+        aspect-ratio: 1;
+        width: 100%;
+        display: grid;
+        place-items: center;
+        border: 2px solid #0e534a;
+        padding: 2rem;
+        position: relative;
+        transition-duration: 300ms;
+        transition-timing-function: ease-in-out;
+    }
 
-  .pop-up-icon:hover {
-    scale: 1.2;
-  }
+    .pop-up-icon:hover {
+        scale: 1.2;
+    }
+
+    .search-suggestion {
+        width: 100%;
+        padding: 12px;
+        background-color: white;
+        position: relative;
+    }
+    .search-suggestion:hover {
+        background-color: #a7f3d0;
+    }
+    .search-suggestion a {
+        @apply overlay;
+    }
 }
 
 @layer utilities {
-  .overlay {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-  }
+    .overlay {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
 
-  .underline-animation {
-    position: relative;
-  }
+    .underline-animation {
+        position: relative;
+    }
 
-  .underline-animation::after {
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
-    background-color: blue;
-  }
+    .underline-animation::after {
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        transform-origin: bottom right;
+        transition: transform 0.25s ease-out;
+        background-color: blue;
+    }
 
-  .underline-animation:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
+    .underline-animation:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
 
-  /* .separator{visibility: hidden;} */
+    /* .separator{visibility: hidden;} */
 }

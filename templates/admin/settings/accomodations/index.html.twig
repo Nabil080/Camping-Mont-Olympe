@@ -1,0 +1,69 @@
+{% extends 'admin/settings/base.html.twig' %}
+
+{% import "macro/_footer_admin.html.twig" as footer %}
+
+{% block title %}Hébérgements - Mont Olympe
+{% endblock %}
+
+{% block body %}
+
+
+	<header class="mt-8 flex justify-center items-center gap-2">
+		<h1 class="text-3xl">Hébérgements</h1>
+		<div class="group relative cursor-help">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+			<div class="hidden group-hover:block absolute bg-white border left-1/2 -translate-x-1/2 mt-4 border-black p-2 w-[300px]">Vous pouvez régler les tarifs du camping en fonction des saisons et choisir si chaque nuit ou chaque personne multiplie le paiement.
+				<br><br>
+				Un service supplémentaire a 2€/nuit/personne comptera en tout pour 6€ pour une personne restant 3jours.
+			</div>
+		</div>
+	</header>
+
+	<section class="m-12 mx-36">
+
+		<section id="add-accomodation" class="mb-8 flex justify-between">
+			<a href="{{ path('admin_settings_accomodations_add') }}">
+				<button class="g-button">Ajouter un hébérgement</button>
+			</a>
+			<a href="{{ path('admin_settings_locations') }}">
+				<button class="g-button">Voir les emplacements</button>
+			</a>
+		</section>
+
+		<table class="w-full border-collapse border">
+			<thead>
+				<tr class="bg-green-200">
+					<th class="p-2">ID</th>
+					<th class="p-2">Nom</th>
+					<th class="p-2">Description</th>
+					<th class="p-2">Disponible</th>
+					<th class="p-2">Emplacements</th>
+					<th class="p-2">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for accomodation in accomodations %}
+					<tr class="text-center bg-green-50">
+						<td class="p-2">{{ accomodation.id }}</td>
+						<td class="p-2">{{ accomodation.name }}</td>
+						<td class="p-2">{{ accomodation.description }}</td>
+						<td class="p-2">{{ accomodation.available ? "oui" : "non" }}</td>
+						<td class="p-2">{{ accomodation.locations|length }}
+							<a href={{ path('admin_settings_accomodations_locations', {'id': accomodation.id} ) }} class="">
+								<i class="fa fa-eye"></i>
+							</a>
+						</td>
+						<td class="p-2 space-x-4 text-end">
+							<a href={{ path('admin_settings_accomodations_update', {'id': accomodation.id}) }} class="">
+								<i class="fa fa-pen"></i>
+							</a>
+							<a href={{ path('admin_settings_accomodations_delete', {'id': accomodation.id}) }} class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')">
+								<i class="fa fa-trash"></i>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</tbody>
+		</tr>
+	{% endfor %}
+</tbody></table></section>{% endblock %}{% block footer %}{% endblock %}

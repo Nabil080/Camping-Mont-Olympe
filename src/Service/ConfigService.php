@@ -10,7 +10,7 @@ class ConfigService
 
     public function __construct(ParameterBagInterface $parameterBag)
     {
-        $this->configFilePath = $parameterBag->get('kernel.project_dir') . '/config/config.json';
+        $this->configFilePath = $parameterBag->get('config_directory');
     }
 
     // ! --------------- CONFIG

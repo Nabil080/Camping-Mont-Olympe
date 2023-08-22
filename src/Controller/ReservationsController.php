@@ -2,10 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Reservation;
 use App\Form\CheckRuleType;
+use App\Form\ReservationType;
 use App\Form\StayRuleType;
+use App\Repository\ReservationRepository;
 use App\Service\ConfigService;
 use App\Service\LogService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,8 +17,50 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ReservationsController extends AbstractController
 {
+
+    #[Route('admin/reservations', name: 'admin_reservations')]
+    public function index(ReservationRepository $rr): Response
+    {
+        $reservations = $rr->findAll();
+
+        return $this->render('admin/reservations/index.html.twig', [
+            'reservations' => $reservations,
+        ]);
+    }
+
+    #[Route('admin/reservations/add', name: 'admin_reservations_add')]
+    public function create(EntityManagerInterface $em, LogService $logService, Request $request): Response
+    {
+        $reservation = new Reservation;
+        $now = new \DateTime('now');
+
+        $form = $this->createForm(ReservationType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $reservation = $form->getData();
+
+            $em->persist($reservation);
+            $em->flush();
+
+            $id = $reservation->getId();
+            $message = "La réservation N°$id a été créée";
+            $context = ['add', 'reservation'];
+            $logService->write($message, $context);
+
+            return $this->redirectToRoute('admin_reservations');
+        }
+
+        return $this->render('admin/reservations/add.html.twig', [
+            'form' => $form
+        ]);
+    }
+
+
+
     #[Route('/admin/settings/reservations', name: 'admin_settings_reservations')]
-    public function index(ConfigService $configService): Response
+    public function settings(ConfigService $configService): Response
     {
         $checkin = $configService->getReservationsRules('checkIn');
         $checkout = $configService->getReservationsRules('checkOut');
@@ -35,7 +81,7 @@ class ReservationsController extends AbstractController
     }
 
     #[Route("/reservations/{type}/add", name: "admin_settings_reservations_add")]
-    public function add(string $type, Request $request, ConfigService $configService, LogService $logService): Response
+    public function addRule(string $type, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $isCheck = str_contains(strtolower($type), 'check') ? true : false;
         $isStay = str_contains(strtolower($type), 'stay') ? true : false;
@@ -53,8 +99,8 @@ class ReservationsController extends AbstractController
             $configService->addReservationRule($type, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
             $message = "Une règle de réservation $type a été ajoutée";
-            $context = ['add','reservation'];
-            $logService->write($message,$context);
+            $context = ['add', 'reservation'];
+            $logService->write($message, $context);
 
 
             return $this->redirectToRoute('admin_settings_reservations');
@@ -67,7 +113,7 @@ class ReservationsController extends AbstractController
     }
 
     #[Route("/reservations/{type}/update/{ruleId<\d+>}", name: "admin_settings_reservations_update")]
-    public function update(string $type, int $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
+    public function updateRule(string $type, int $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $oldReservation = $configService->getReservationsRules($type);
         foreach ($oldReservation as $index => $rule) {
@@ -91,8 +137,8 @@ class ReservationsController extends AbstractController
             $configService->updateReservationRule($type, $rule);
             $this->addFlash('success', 'New "places" price rule added successfully!');
             $message = "Une règle de réservation $type a été modifiée";
-            $context = ['update','reservation'];
-            $logService->write($message,$context);
+            $context = ['update', 'reservation'];
+            $logService->write($message, $context);
 
             return $this->redirectToRoute('admin_settings_reservations');
         } else {
@@ -112,15 +158,15 @@ class ReservationsController extends AbstractController
     }
 
     #[Route("/reservations/{type}/delete/{ruleId<\d+>}", name: "admin_settings_reservations_delete")]
-    public function delete(string $type, int $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
+    public function deleteRule(string $type, int $ruleId, Request $request, ConfigService $configService, LogService $logService): Response
     {
         $configService->deleteReservationRule($type, $ruleId);
 
         $this->addFlash('success', 'New "places" price rule added successfully!');
         $message = "Une règle de réservation $type a été supprimée";
-        $context = ['delete','reservation'];
-        $logService->write($message,$context);
-        
+        $context = ['delete', 'reservation'];
+        $logService->write($message, $context);
+
         return $this->redirectToRoute('admin_settings_reservations');
     }
 }
