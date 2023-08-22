@@ -54,10 +54,10 @@
 							</a>
 						</td>
 						<td class="p-2 space-x-4 text-end">
-							<a href="{{ path('admin_settings_accomodations_update', {'id': accomodation.id}) }}" class="">
+							<a href={{ path('admin_settings_accomodations_update', {'id': accomodation.id}) }} class="">
 								<i class="fa fa-pen"></i>
 							</a>
-							<a href="{{ path('admin_settings_accomodations_delete', {'id': accomodation.id}) }}" class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')">
+							<a href={{ path('admin_settings_accomodations_delete', {'id': accomodation.id}) }} class="" onclick="return confirm('Voulez vous vraiment supprimer cette règle ?')">
 								<i class="fa fa-trash"></i>
 							</a>
 						</td>

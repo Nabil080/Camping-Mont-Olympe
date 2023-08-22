@@ -52,23 +52,6 @@ class ReservationsController extends AbstractController
             return $this->redirectToRoute('admin_reservations');
         }
 
-        // $reservation
-        // ->setStart($now)
-        // ->setEnd($now)
-        // ->setAdults(2)
-        // ->setChilds(1)
-        // ->setPrice(99.99)
-        // ->setPaid(0);
-        // 
-        // $em->persist($reservation);
-        // $em->flush();
-        // 
-        // $id = $reservation->getId();
-        // $message = "La réservation N°$id a été créée";
-        // $context = ['add', 'reservation'];
-        // $logService->write($message, $context);
-
-
         return $this->render('admin/reservations/add.html.twig', [
             'form' => $form
         ]);

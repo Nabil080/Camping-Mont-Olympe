@@ -1,12 +1,9 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  connect() {
+    connect() {}
+
+    submit() {
+        this.element.querySelector('button[type="submit"]').click();
     }
-
-
-  submit() {
-    this.element.querySelector('button[type="submit"]').click()
-
-  }
 }
