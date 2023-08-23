@@ -111,12 +111,12 @@
             {
                 "id": 2,
                 "days": [1],
-                "places": ["Camping Car"],
-                "seasons": ["Saison une"]
+                "places": ["Caravane"],
+                "seasons": [null]
             },
             {
                 "id": 3,
-                "days": [2, 4, 6],
+                "days": [2, 4, 6, 3],
                 "places": ["Camping Car"],
                 "seasons": ["Saison 2"]
             }
@@ -124,13 +124,13 @@
         "minStay": [
             {
                 "id": 1,
-                "amount": 1,
-                "places": [null],
-                "seasons": [null]
+                "amount": 10,
+                "places": ["Camping Car"],
+                "seasons": ["Saison 1"]
             },
             {
                 "id": 2,
-                "amount": 10,
+                "amount": 1,
                 "places": [null],
                 "seasons": [null]
             }
@@ -138,9 +138,9 @@
         "maxStay": [
             {
                 "id": 1,
-                "amount": 12,
+                "amount": 20,
                 "places": [null],
-                "seasons": ["Saison une"]
+                "seasons": [null]
             },
             {
                 "id": 2,

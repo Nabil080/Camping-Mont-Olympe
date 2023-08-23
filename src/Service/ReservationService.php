@@ -72,7 +72,6 @@ class ReservationService
 
             // Vérifie les règles de réservations
             $error = $this->configService->checkReservationRules($reservation, $season);
-            dd($error);
 
             $basePrice = $this->configService->findAccomodationPriceBySeason($accomodation->getId(), $season);
             $reservation->setPrice($basePrice);
@@ -92,6 +91,7 @@ class ReservationService
             ];
         }
 
+        dd($displayAccomodations);
         return $displayAccomodations;
     }
 
