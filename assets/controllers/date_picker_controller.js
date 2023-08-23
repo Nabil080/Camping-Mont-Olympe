@@ -14,6 +14,7 @@ export default class extends Controller {
         locales.fr = fr.fr;
 
         let date = new Date();
+        this.today = date
         this.nextWeek = new Date(
             date.getFullYear(),
             date.getMonth(),
@@ -31,7 +32,7 @@ export default class extends Controller {
             language: "fr",
             weekStart: 1,
             clearBtn: true,
-            minDate: this.nextWeek,
+            minDate: this.today,
         };
 
         const d = new DateRangePicker(this.element, options);
