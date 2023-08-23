@@ -28,7 +28,7 @@ export default class extends Controller {
         this.showLoader()
         let data = await this.fetchData(this.start, this.end);
 
-        if(data.length > 0) this.insertData(data);
+        if(data.count > 0) this.insertData(data);
     }
 
     async fetchData(start, end) {

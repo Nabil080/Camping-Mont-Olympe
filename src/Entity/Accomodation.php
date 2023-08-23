@@ -30,9 +30,16 @@ class Accomodation
     #[ORM\OneToMany(mappedBy: 'accomodation', targetEntity: Location::class, orphanRemoval: true)]
     private Collection $locations;
 
+    #[ORM\OneToMany(mappedBy: 'accomodation', targetEntity: Image::class)]
+    private Collection $images;
+
+    #[ORM\Column(nullable: true)]
+    private ?array $tags = null;
+
     public function __construct()
     {
         $this->locations = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -102,6 +109,48 @@ class Accomodation
                 $location->setAccomodation(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): static
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setAccomodation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getAccomodation() === $this) {
+                $image->setAccomodation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTags(): ?array
+    {
+        return $this->tags;
+    }
+
+    public function setTags(?array $tags): static
+    {
+        $this->tags = $tags;
 
         return $this;
     }
