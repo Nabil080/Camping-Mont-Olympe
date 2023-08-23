@@ -77,12 +77,15 @@ class ReservationService
             $basePrice = $this->configService->getAccomodationPriceBySeason($accomodation->getId(), $season);
             $adultPrice = $this->configService->getAdultPriceBySeason($season);
             $childPrice = $this->configService->getChildPriceBySeason($season);
-            
+
             $stay = $reservation->getStart()->diff($reservation->getEnd())->format('%a%');
-            $totalPrice = ($basePrice + $adultPrice + $childPrice) * $stay ;
+            $totalAdult = $adultPrice * $reservation->getAdults();
+            $totalChild = $childPrice * $reservation->getChilds();
+            $totalPrice = ($basePrice + $totalAdult + $totalChild) * $stay;
 
 
-            $displayReservations[] = [
+            // Ajoute la card dans un array selon les erreurs
+            $displayReservations[$error ? 'unavailable' : 'available'][] = [
                 'accomodation' => [
                     'id' => $accomodation->getId(),
                     'name' => $accomodation->getName(),

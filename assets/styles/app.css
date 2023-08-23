@@ -28,6 +28,10 @@ html {
         aspect-ratio: 16/7;
     }
 
+    .unavailable-reservation {
+        position: relative;
+    }
+
     /* .discover-card {
     margin: 1rem;
     background-color: var(--main);

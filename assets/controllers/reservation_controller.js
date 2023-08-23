@@ -24,8 +24,10 @@ export default class extends Controller {
         this.start = this.container.querySelector('input[name="start"]').value;
         this.end = this.container.querySelector('input[name="end"]').value;
         if (!this.start && !this.end) return;
-
+        
+        this.showLoader()
         let data = await this.fetchData(this.start, this.end);
+        // this.hideLoader()
 
         this.insertData(data);
     }
@@ -40,7 +42,7 @@ export default class extends Controller {
                 start: start,
                 end: end,
                 adults: 1,
-                childs: 0,
+                childs: 2,
             }),
         }).then((data) => data.json());
     }
@@ -50,17 +52,44 @@ export default class extends Controller {
             <header>${data.count} résultats</header>
         `;
 
-        console.log(data.accomodations);
+        console.log(data);
 
-        data.accomodations.forEach(
-            (accom) =>
+        data.available.forEach(
+            (card) =>
                 (this.cardsContainer.innerHTML += `
-                    <article id="accom-${accom.id}"  class="reservation-card">
-                        <div>${accom.name}</div>
-                        <div>${accom.description}</div>
-                        <div>${accom.price}</div>
+                    <article id="accom-${card.accomodation.id}" data-location-id="${card.location.id}" data-location-number="${card.location.number}" class="reservation-card available-reservation">
+                        <div>${card.accomodation.name}</div>
+                        <div>${card.accomodation.description}</div>
+                        <div>${card.price.total}€</div>
+                        <div>${card.reservation.stay} nuits</div>
                     </article>
                 `)
         );
+
+        if(data.unavailable){
+            data.unavailable.forEach(
+                (card) =>
+                (this.cardsContainer.innerHTML += `
+                <article id="accom-${card.accomodation.id}" data-location-id="${card.location.id}" data-location-number="${card.location.number}" class="reservation-card unavailable-reservation">
+                <div class="overlay bg-black bg-opacity-50 text-white">
+                        <div class="grid w-full h-full place-items-center text-xl">
+                            Emplacement indisponible car ${card.error.rule} ${card.error.value} 
+                            </div>
+                    </div>
+                    <div>${card.accomodation.name}</div>
+                    <div>${card.accomodation.description}</div>
+                    <div>${card.price.total}€</div>
+                    </article>
+                `)
+            );
+        }
+    }
+
+    showLoader() {
+        this.cardsContainer.innerHTML = `
+        <div class="animate-spin grid h-full w-full place-items-center">
+            CA CHAAAAARGEEEEEE
+        </div>
+    `;
     }
 }

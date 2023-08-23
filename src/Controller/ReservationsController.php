@@ -180,9 +180,9 @@ class ReservationsController extends AbstractController
     {
         $postData = json_decode($request->getContent(), true);
 
-        $accomodations = $rs->getReservationsByFormData($postData);
-        $message['count'] = count($accomodations);
-        $message['accomodations'] = $accomodations;
+        $reservations = $rs->getReservationsByFormData($postData);
+        $message = $reservations;
+        $message['count'] = count($reservations);
 
         return $this->json($message, 200);
     }
