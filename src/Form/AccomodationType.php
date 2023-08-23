@@ -36,6 +36,7 @@ class AccomodationType extends AbstractType
                 'class' => Tag::class,
                 'choice_label' => 'name',
                 'multiple' => true,
+                'required' => false
             ])
         ;
     }

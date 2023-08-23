@@ -24,11 +24,11 @@ export default class extends Controller {
         this.start = this.container.querySelector('input[name="start"]').value;
         this.end = this.container.querySelector('input[name="end"]').value;
         if (!this.start && !this.end) return;
-        
-        this.showLoader()
+
+        this.showLoader();
         let data = await this.fetchData(this.start, this.end);
 
-        if(data.count > 0) this.insertData(data);
+        if (data.count > 0) this.insertData(data);
     }
 
     async fetchData(start, end) {
@@ -47,39 +47,54 @@ export default class extends Controller {
     }
 
     insertData(data) {
-        this.cardsContainer.innerHTML = `
-            <header>${data.count} résultats</header>
-        `;
-
-        console.log(data);
+        this.cardsContainer.innerHTML = `<header>${data.count} résultats</header>`;
 
         data.available.forEach(
-            (card) =>
-                (this.cardsContainer.innerHTML += `
-                    <article id="accom-${card.accomodation.id}" data-location-id="${card.location.id}" data-location-number="${card.location.number}" class="reservation-card available-reservation">
-                        <div>${card.accomodation.name}</div>
-                        <div>${card.accomodation.description}</div>
-                        <div>${card.price.total}€</div>
-                        <div>${card.reservation.stay} nuits</div>
-                    </article>
-                `)
+            (card) => (this.cardsContainer.innerHTML += this.getHTMLCard(card))
         );
 
         data.unavailable.forEach(
             (card) =>
-            (this.cardsContainer.innerHTML += `
-            <article id="accom-${card.accomodation.id}" data-location-id="${card.location.id}" data-location-number="${card.location.number}" class="reservation-card unavailable-reservation">
-            <div class="overlay bg-black bg-opacity-50 text-white">
-                    <div class="grid w-full h-full place-items-center text-xl">
-                        Emplacement indisponible car ${card.error.rule} ${card.error.value} 
-                        </div>
-                </div>
+            (this.cardsContainer.innerHTML +=
+                this.getUnavailableHTMLCard(card))
+        );
+    }
+
+    getHTMLCard(card) {
+        let tags = "";
+        card.accomodation.tags.forEach(tag => tags += `<div class='reservation-tag'>${tag}</div>`);
+
+        return `
+                <article id="accom-${card.accomodation.id}" data-location-id="${card.location.id}" data-location-number="${card.location.number}" class="reservation-card available-reservation">
+                <img src="uploads/accomodations/${card.accomodation.image}">
                 <div>${card.accomodation.name}</div>
                 <div>${card.accomodation.description}</div>
                 <div>${card.price.total}€</div>
+                <div>${card.reservation.stay} nuits</div>
+                <div>${tags}</div>
                 </article>
-            `)
-        );
+            `;
+    }
+
+    getUnavailableHTMLCard(card) {
+        let tags = "";
+        card.accomodation.tags.forEach(tag => tags += `<div class='reservation-tag'>${tag}</div>`);
+
+        return `
+            <article id="accom-${card.accomodation.id}" data-location-id="${card.location.id}" data-location-number="${card.location.number}" class="reservation-card unavailable-reservation">
+                <div class="overlay bg-black bg-opacity-50 text-white">
+                    <div class="grid w-full h-full place-items-center text-xl">
+                    Emplacement indisponible car ${card.error.rule} ${card.error.value} 
+                    </div>
+                </div>
+                <img src="uploads/accomodations/${card.accomodation.image}">
+                <div>${card.accomodation.name}</div>
+                <div>${card.accomodation.description}</div>
+                <div>${card.price.total}€</div>
+                <div>${card.reservation.stay} nuits</div>
+                <div>${tags}</div>
+                </article>
+            `;
     }
 
     showLoader() {
