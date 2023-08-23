@@ -66,23 +66,21 @@ export default class extends Controller {
                 `)
         );
 
-        if(data.unavailable){
-            data.unavailable.forEach(
-                (card) =>
-                (this.cardsContainer.innerHTML += `
-                <article id="accom-${card.accomodation.id}" data-location-id="${card.location.id}" data-location-number="${card.location.number}" class="reservation-card unavailable-reservation">
-                <div class="overlay bg-black bg-opacity-50 text-white">
-                        <div class="grid w-full h-full place-items-center text-xl">
-                            Emplacement indisponible car ${card.error.rule} ${card.error.value} 
-                            </div>
-                    </div>
-                    <div>${card.accomodation.name}</div>
-                    <div>${card.accomodation.description}</div>
-                    <div>${card.price.total}€</div>
-                    </article>
-                `)
-            );
-        }
+        data.unavailable.forEach(
+            (card) =>
+            (this.cardsContainer.innerHTML += `
+            <article id="accom-${card.accomodation.id}" data-location-id="${card.location.id}" data-location-number="${card.location.number}" class="reservation-card unavailable-reservation">
+            <div class="overlay bg-black bg-opacity-50 text-white">
+                    <div class="grid w-full h-full place-items-center text-xl">
+                        Emplacement indisponible car ${card.error.rule} ${card.error.value} 
+                        </div>
+                </div>
+                <div>${card.accomodation.name}</div>
+                <div>${card.accomodation.description}</div>
+                <div>${card.price.total}€</div>
+                </article>
+            `)
+        );
     }
 
     showLoader() {

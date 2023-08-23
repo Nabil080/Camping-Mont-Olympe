@@ -182,7 +182,7 @@ class ReservationsController extends AbstractController
 
         $reservations = $rs->getReservationsByFormData($postData);
         $message = $reservations;
-        $message['count'] = count($reservations);
+        $message['count'] = count($reservations['available']) + count($reservations['unavailable']);
 
         return $this->json($message, 200);
     }
