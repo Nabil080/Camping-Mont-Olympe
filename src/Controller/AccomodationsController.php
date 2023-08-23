@@ -42,6 +42,7 @@ class AccomodationsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $accomodation = $form->getData();
+            $images = $form->get("images")->getData();
 
             $em->persist($accomodation);
             $em->flush();
