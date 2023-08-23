@@ -28,6 +28,10 @@ html {
         aspect-ratio: 16/7;
     }
 
+    .unavailable-reservation {
+        position: relative;
+    }
+
     /* .discover-card {
     margin: 1rem;
     background-color: var(--main);
@@ -116,5 +120,13 @@ html {
         transform-origin: bottom left;
     }
 
+    .datepicker .disabled {
+        opacity: 0.50;
+        cursor: default;
+    }
+
+    .datepicker .selected {
+        background-color: var(--main);
+    }
     /* .separator{visibility: hidden;} */
 }

@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use App\Entity\Reservation;
+use DateTime;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class ConfigService
@@ -100,6 +102,47 @@ class ConfigService
         $this->saveConfigData($config);
     }
 
+    public function getAccomodationPriceBySeason(int $accomodationId, array $seasonConfig)
+    {
+        $priceConfig = $this->getPricesRules('places')[$accomodationId];
+
+        foreach ($priceConfig['rules'] as $index => $priceRule)
+            if (in_array($seasonConfig['name'], $priceRule['seasons']))
+                $price = $priceConfig['rules'][$index]['amount'];
+            elseif (in_array(null, $priceRule['seasons']))
+                $price2 = $priceConfig['rules'][$index]['amount'];
+
+
+        return $price ?? $price2;
+    }
+
+    public function getAdultPriceBySeason(array $seasonConfig)
+    {
+        $priceConfig = $this->getPricesRules('ages')['adult']['rules'];
+
+        foreach ($priceConfig as $index => $priceRule)
+            if (in_array($seasonConfig['name'], $priceRule['seasons']))
+                $price = $priceConfig[$index]['amount'];
+            elseif (in_array(null, $priceRule['seasons']))
+                $price2 = $priceConfig[$index]['amount'];
+
+
+        return $price ?? $price2;
+    }
+
+    public function getChildPriceBySeason(array $seasonConfig)
+    {
+        $priceConfig = $this->getPricesRules('ages')['children']['rules'];
+
+        foreach ($priceConfig as $index => $priceRule)
+            if (in_array($seasonConfig['name'], $priceRule['seasons']))
+                $price = $priceConfig[$index]['amount'];
+            elseif (in_array(null, $priceRule['seasons']))
+                $price2 = $priceConfig[$index]['amount'];
+
+
+        return $price ?? $price2;
+    }
 
     // ! ----------------- SEASON
 
@@ -137,6 +180,18 @@ class ConfigService
         $config = $this->getConfigData();
         unset($config['seasons'][$seasonId]);
         $this->saveConfigData($config);
+    }
+
+    public function getSeasonByDate(string $date): array
+    {
+        $seasons = $this->getSeasons();
+
+        foreach ($seasons as $seasonId => $seasonValue)
+            foreach ($seasonValue['rules'] as $seasonRule)
+                if ($this->isDateRangeMatching($seasonRule['start'], $seasonRule['end'], $date))
+                    $season = $seasons[$seasonId];
+
+        return $season;
     }
 
     // ! ------------ SEASON Rules
@@ -221,6 +276,132 @@ class ConfigService
                 unset($config['reservations'][$type][$index]);
 
         $this->saveConfigData($config);
+    }
+
+    public function checkReservationRules(Reservation $reservation, array $season)
+    {
+        $startDay = $reservation->getStart()->format('N');
+        $endDay = $reservation->getEnd()->format('N');
+        $numberOfDays = $reservation->getStart()->diff($reservation->getEnd())->format('%a%');
+
+        $checkInDays = $this->getReservationCheckIn($reservation, $season);
+
+        if (!in_array($startDay, $checkInDays) && !in_array(null, $checkInDays))
+            return $error = ['rule' => 'checkIn', 'value' => $checkInDays];
+
+        $checkOutDays = $this->getReservationCheckOut($reservation, $season);
+
+        if (!in_array($endDay, $checkOutDays) && !in_array(null, $checkOutDays))
+            return $error = ['rule' => 'checkOut', 'value' => $checkOutDays];
+
+
+        $minStay = $this->getReservationMinStay($reservation, $season);
+        if ($minStay && $minStay > $numberOfDays)
+            return $error = ['rule' => 'minStay', 'value' => $minStay];
+
+
+        $maxStay = $this->getReservationMaxStay($reservation, $season);
+        if ($maxStay && $maxStay < $numberOfDays)
+            return $error = ['rule' => 'maxStay', 'value' => $maxStay];
+
+
+        return null;
+    }
+
+    public function getReservationCheckIn(Reservation $reservation, array $season)
+    {
+        $rules = $this->getReservationsRules()['checkIn'];
+        $accomodation = $reservation->getLocation()->getAccomodation();
+
+        foreach ($rules as $checkIn) {
+            if (in_array($accomodation->getName(), $checkIn['places'])) {
+
+                if (in_array($season['name'], $checkIn['seasons']))
+                    $rule = $checkIn['days'];
+                elseif (in_array(null, $checkIn['seasons']))
+                    $rule2 = $checkIn['days'];
+            } elseif (in_array(null, $checkIn['places'])) {
+
+                if (in_array($season['name'], $checkIn['seasons']))
+                    $rule3 = $checkIn['days'];
+                elseif (in_array(null, $checkIn['seasons']))
+                    $rule4 = $checkIn['days'];
+            }
+        }
+
+        return $rule ?? $rule2 ?? $rule3 ?? $rule4 ?? false;
+    }
+
+    public function getReservationCheckOut(Reservation $reservation, array $season)
+    {
+        $rules = $this->getReservationsRules()['checkOut'];
+        $accomodation = $reservation->getLocation()->getAccomodation();
+
+        foreach ($rules as $checkOut) {
+            if (in_array($accomodation->getName(), $checkOut['places'])) {
+
+                if (in_array($season['name'], $checkOut['seasons']))
+                    $rule = $checkOut['days'];
+                elseif (in_array(null, $checkOut['seasons']))
+                    $rule2 = $checkOut['days'];
+            } elseif (in_array(null, $checkOut['places'])) {
+
+                if (in_array($season['name'], $checkOut['seasons']))
+                    $rule3 = $checkOut['days'];
+                elseif (in_array(null, $checkOut['seasons']))
+                    $rule4 = $checkOut['days'];
+            }
+        }
+
+        return $rule ?? $rule2 ?? $rule3 ?? $rule4 ?? false;
+    }
+
+    public function getReservationMinStay(Reservation $reservation, array $season)
+    {
+        $rules = $this->getReservationsRules()['minStay'];
+        $accomodation = $reservation->getLocation()->getAccomodation();
+
+        foreach ($rules as $minStay) {
+            if (in_array($accomodation->getName(), $minStay['places'])) {
+
+                if (in_array($season['name'], $minStay['seasons']))
+                    $rule = $minStay['amount'];
+                elseif (in_array(null, $minStay['seasons']))
+                    $rule2 = $minStay['amount'];
+            } elseif (in_array(null, $minStay['places'])) {
+
+                if (in_array($season['name'], $minStay['seasons']))
+                    $rule3 = $minStay['amount'];
+                elseif (in_array(null, $minStay['seasons']))
+                    $rule4 = $minStay['amount'];
+            }
+        }
+
+        return $rule ?? $rule2 ?? $rule3 ?? $rule4 ?? false;
+    }
+
+    public function getReservationMaxStay(Reservation $reservation, array $season)
+    {
+        $rules = $this->getReservationsRules()['maxStay'];
+        $accomodation = $reservation->getLocation()->getAccomodation();
+
+        foreach ($rules as $maxStay) {
+            if (in_array($accomodation->getName(), $maxStay['places'])) {
+
+                if (in_array($season['name'], $maxStay['seasons']))
+                    $rule = $maxStay['amount'];
+                elseif (in_array(null, $maxStay['seasons']))
+                    $rule2 = $maxStay['amount'];
+            } elseif (in_array(null, $maxStay['places'])) {
+
+                if (in_array($season['name'], $maxStay['seasons']))
+                    $rule3 = $maxStay['amount'];
+                elseif (in_array(null, $maxStay['seasons']))
+                    $rule4 = $maxStay['amount'];
+            }
+        }
+
+        return $rule ?? $rule2 ?? $rule3 ?? $rule4 ?? false;
     }
 
     // ! ------------ SERVICES 
@@ -402,5 +583,14 @@ class ConfigService
         }
 
         return $choices;
+    }
+
+    public function isDateRangeMatching(string $start, string $end, string $date): bool
+    {
+        $startValue = new DateTime($start);
+        $endValue = new DateTime($end);
+        $dateValue = !str_contains($date, '/') ? new DateTime($date) : new DateTime(join("-", array_reverse(explode("/", $date))));
+
+        return $dateValue >= $startValue && $dateValue <= $endValue;
     }
 }

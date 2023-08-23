@@ -2,9 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\Accomodation;
 use App\Entity\Location;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @extends ServiceEntityRepository<Location>
@@ -21,28 +24,23 @@ class LocationRepository extends ServiceEntityRepository
         parent::__construct($registry, Location::class);
     }
 
-//    /**
-//     * @return Location[] Returns an array of Location objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
-//    public function findOneBySomeField($value): ?Location
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function getAccomodationLocationsByReservations(Accomodation $accomodation, array $reservations, bool $reversed = false): array
+    {
+        $condition = $reversed ? 'NOT IN' : 'IN';
+
+        $locationIds = array_map(fn ($reservation) => $reservation->getLocation()->getId(), $reservations);
+
+        $qb = $this->createQueryBuilder('l')
+            ->andWhere("l.available = true")
+            ->andWhere("l.accomodation = :accomodation")
+            ->setParameter("accomodation", $accomodation);
+        if (!empty($locationIds)) 
+            $qb->andWhere("l.id $condition (:ids)")
+            ->setParameter('ids', $locationIds);
+
+
+        return $qb->getQuery()
+                ->getResult();
+    }
 }

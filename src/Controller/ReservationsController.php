@@ -6,11 +6,15 @@ use App\Entity\Reservation;
 use App\Form\CheckRuleType;
 use App\Form\ReservationType;
 use App\Form\StayRuleType;
+use App\Repository\AccomodationRepository;
+use App\Repository\LocationRepository;
 use App\Repository\ReservationRepository;
 use App\Service\ConfigService;
 use App\Service\LogService;
+use App\Service\ReservationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -168,5 +172,18 @@ class ReservationsController extends AbstractController
         $logService->write($message, $context);
 
         return $this->redirectToRoute('admin_settings_reservations');
+    }
+
+
+    #[Route('/reservations/find', name: 'reservations_find')]
+    public function find(Request $request, ReservationService $rs): Response
+    {
+        $postData = json_decode($request->getContent(), true);
+
+        $reservations = $rs->getReservationsByFormData($postData);
+        $message = $reservations;
+        $message['count'] = count($reservations['available']) + count($reservations['unavailable']);
+
+        return $this->json($message, 200);
     }
 }
