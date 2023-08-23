@@ -71,7 +71,8 @@ class ReservationService
             $reservation->setChilds($data['childs']);
 
             // Vérifie les règles de réservations
-            if ($this->configService->checkReservationRules($reservation, $season)) die;
+            $error = $this->configService->checkReservationRules($reservation, $season);
+            dd($error);
 
             $basePrice = $this->configService->findAccomodationPriceBySeason($accomodation->getId(), $season);
             $reservation->setPrice($basePrice);
@@ -86,7 +87,8 @@ class ReservationService
                 'id' => $accomodation->getId(),
                 'name' => $accomodation->getName(),
                 'description' => $accomodation->getDescription(),
-                'price' => $reservation->getPrice()
+                'price' => $reservation->getPrice(),
+                'error' => $error
             ];
         }
 

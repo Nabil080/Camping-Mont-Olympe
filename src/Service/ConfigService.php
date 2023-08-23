@@ -252,12 +252,20 @@ class ConfigService
 
     public function checkReservationRules(Reservation $reservation, array $season)
     {
-        $reservationDay = $reservation->getStart()->format('N');
+        $startDay = $reservation->getStart()->format('N');
+        $endDay = $reservation->getEnd()->format('N');
 
-        $checkInRule = $this->getReservationCheckIn($reservation, $season);
-        $checkOutRule = $this->getReservationCheckOut($reservation, $season);
+        $checkInDays = $this->getReservationCheckIn($reservation, $season)['days'];
 
-        dd($checkInRule, $checkOutRule);
+        if(!in_array($startDay, $checkInDays) && !in_array(null,$checkInDays))
+            return $error = ['rule' => 'checkIn', 'value' => $checkInDays];
+
+        $checkOutDays = $this->getReservationCheckOut($reservation, $season)['days'];
+
+        if(!in_array($endDay, $checkOutDays) && !in_array(null,$checkOutDays))
+            return $error = ['rule' => 'checkOut', 'value' => $checkOutDays];
+
+        return null;
     }
 
     public function getReservationCheckIn(Reservation $reservation, array $season)
