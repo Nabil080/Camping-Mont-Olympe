@@ -5,7 +5,7 @@ import fr from "../../node_modules/flowbite-datepicker/js/i18n/locales/fr.js";
 
 export default class extends Controller {
     connect() {
-        this.setDates()
+        this.setDates();
         this.initializeDateRangePicker();
         this.setDefaultValues();
     }
@@ -14,11 +14,15 @@ export default class extends Controller {
         locales.fr = fr.fr;
 
         let date = new Date();
-        this.today = date.toLocaleDateString("fr-FR");
         this.nextWeek = new Date(
             date.getFullYear(),
             date.getMonth(),
             date.getDate() + 7
+        ).toLocaleDateString("fr-FR");
+        this.nextNextWeek = new Date(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate() + 14
         ).toLocaleDateString("fr-FR");
     }
 
@@ -27,7 +31,7 @@ export default class extends Controller {
             language: "fr",
             weekStart: 1,
             clearBtn: true,
-            minDate: this.today,
+            minDate: this.nextWeek,
         };
 
         const d = new DateRangePicker(this.element, options);
@@ -41,10 +45,10 @@ export default class extends Controller {
 
     setDefaultValues() {
         this.start = this.element.querySelector('[name="start"]');
-        this.end = this.element.querySelector('[name="end"]')
+        this.end = this.element.querySelector('[name="end"]');
 
-        this.start.value = this.today;
-        this.end.value = this.nextWeek;
+        this.start.value = this.nextWeek;
+        this.end.value = this.nextNextWeek;
     }
 
     synchronizeValues() {

@@ -74,25 +74,23 @@
 			<span class="font-title font-bold">vos vacances en Ardennes</span>
 		</section>
 
-		<section id="reservation" {{ stimulus_controller('anim date_picker') }} class="hidden rounded-full border border-white grid grid-cols-3 w-fit mx-auto px-12 py-4 mt-auto mb-32 divide-x-2 backdrop-filter backdrop-blur-sm delay-200 ease-in-out">
+		<section id="reservation" {{ stimulus_controller('anim date_picker reservation') }} class="hidden rounded-full border border-white grid grid-cols-3 w-fit mx-auto px-12 py-4 mt-auto mb-32 divide-x-2 backdrop-filter backdrop-blur-sm delay-200 ease-in-out">
 			<section id="start-date" class="relative pb-4 pr-12">
 				<h2 class="font-bold text-xl mb-4">Date d'arrivée</h2>
-				{# <p>06/08/2023</p> #}
-				<input name="start" type class="w-[10ch] bg-transparent border-none outline-none focus:outline-none" placeholder="06/08/2023">
+				<input name="start" type class="w-[10ch] bg-transparent border-none outline-none focus:outline-none">
 				<label for="start">
 					<i class="ml-4 fa fa-chevron-right"></i>
 				</label>
 			</section>
 			<section id="end-date" class="relative pb-4 px-12">
 				<h2 class="font-bold text-xl mb-4">Date de départ</h2>
-				{# <p>06/08/2023</p> #}
-				<input name="end" type class="w-[10ch] bg-transparent border-none outline-none focus:outline-none" placeholder="06/08/2023">
+				<input name="end" type class="w-[10ch] bg-transparent border-none outline-none focus:outline-none">
 				<label for="end">
 					<i class="ml-4 fa fa-chevron-right"></i>
 				</label>
 			</section>
 			<section id="order" class="pl-12 py-2 ">
-				<button {{ stimulus_controller('reservation') }} {{ stimulus_action('reservation','open') }} class="group relative g-button text-lg w-full h-full bg-transparent uppercase border-white duration-200 transition-[background-color]
+				<button {{ stimulus_action('reservation','open') }} class="group relative g-button text-lg w-full h-full bg-transparent uppercase border-white duration-200 transition-[background-color]
 								hover:border-main-500 hover:bg-main-500 rounded-full">Découvrir
 					<i class="ml-4 mt-[1px] group-hover:ml-0.5 text-gray-200 group-hover:text-white text-xl fa-solid fa-arrow-right-long duration-200"></i>
 				</button>
