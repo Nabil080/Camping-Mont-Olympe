@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Reservation;
 use DateTime;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -247,6 +248,64 @@ class ConfigService
                 unset($config['reservations'][$type][$index]);
 
         $this->saveConfigData($config);
+    }
+
+    public function checkReservationRules(Reservation $reservation, array $season)
+    {
+        $reservationDay = $reservation->getStart()->format('N');
+
+        $checkInRule = $this->getReservationCheckIn($reservation, $season);
+        $checkOutRule = $this->getReservationCheckOut($reservation, $season);
+
+        dd($checkInRule, $checkOutRule);
+    }
+
+    public function getReservationCheckIn(Reservation $reservation, array $season)
+    {
+        $rules = $this->getReservationsRules()['checkIn'];
+        $accomodation = $reservation->getLocation()->getAccomodation();
+
+        foreach ($rules as $checkIn) {
+            if (in_array($accomodation->getName(), $checkIn['places'])) {
+
+                if (in_array($season['name'], $checkIn['seasons']))
+                    $rule = $checkIn;
+                elseif (in_array(null, $checkIn['seasons']))
+                    $rule2 = $checkIn;
+            } elseif (in_array(null, $checkIn['places'])) {
+
+                if (in_array($season['name'], $checkIn['seasons']))
+                    $rule3 = $checkIn;
+                elseif (in_array(null, $checkIn['seasons']))
+                    $rule4 = $checkIn;
+            }
+        }
+
+        return $rule ?? $rule2 ?? $rule3 ?? $rule4;
+    }
+
+    public function getReservationCheckOut(Reservation $reservation, array $season)
+    {
+        $rules = $this->getReservationsRules()['checkOut'];
+        $accomodation = $reservation->getLocation()->getAccomodation();
+
+        foreach ($rules as $checkOut) {
+            if (in_array($accomodation->getName(), $checkOut['places'])) {
+
+                if (in_array($season['name'], $checkOut['seasons']))
+                    $rule = $checkOut;
+                elseif (in_array(null, $checkOut['seasons']))
+                    $rule2 = $checkOut;
+            } elseif (in_array(null, $checkOut['places'])) {
+
+                if (in_array($season['name'], $checkOut['seasons']))
+                    $rule3 = $checkOut;
+                elseif (in_array(null, $checkOut['seasons']))
+                    $rule4 = $checkOut;
+            }
+        }
+
+        return $rule ?? $rule2 ?? $rule3 ?? $rule4;
     }
 
     // ! ------------ SERVICES 

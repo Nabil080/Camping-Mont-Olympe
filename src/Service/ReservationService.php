@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Accomodation;
+use App\Entity\Location;
 use App\Entity\Reservation;
 use App\Repository\AccomodationRepository;
 use App\Repository\LocationRepository;
@@ -26,23 +27,26 @@ class ReservationService
 
     public function getReservationsByFormData(array $data): array
     {
-        $accomodations = $this->getAvailableAccomodationsByPeriod($data['start'], $data['end']);
-        $accomodationsData = $this->getDisplayAccomodations($accomodations, $data);
+        $locations = $this->getAvailableLocationsByPeriod($data['start'], $data['end']);
+        $locationsData = $this->getDisplayReservations($locations, $data);
 
 
-        return $accomodationsData;
+        return $locationsData;
     }
 
-    public function getAvailableAccomodationsByPeriod(string|Date $start, string|Date $end): array
+    public function getAvailableLocationsByPeriod(string|Date $start, string|Date $end): array
     {
         $accomList = $this->accomodationRepository->findBy(['available' => true]);
-        $accomodations = array_filter($accomList, function ($accomodation) use ($start, $end) {
+        $locations = array_map(function ($accomodation) use ($start, $end) {
             return $this->isAvailableDuringPeriod($accomodation, $start, $end);
-        });
+        }, $accomList);
 
-        return $accomodations;
+
+        return array_filter($locations, function ($location) {
+            return $location != false;
+        });
     }
-    public function isAvailableDuringPeriod(Accomodation $accomodation, string|Date $start, string|Date $end): bool
+    public function isAvailableDuringPeriod(Accomodation $accomodation, string|Date $start, string|Date $end): bool|Location
     {
         // Récupère toutes les réservations de l'accomodation dont le séjour chevauche la période voulue
         $reservations = $this->reservationRepository->getReservationsByPeriod($start, $end, $accomodation);
@@ -50,31 +54,57 @@ class ReservationService
         $locations = $this->locationRepository->getAccomodationLocationsByReservations($accomodation, $reservations, true);
 
 
-        return !empty($locations);
+        return empty($locations) ? false : $locations[array_rand($locations)];
     }
 
-    public function getDisplayAccomodations(array $accomodations, array $data): array
+    public function getDisplayReservations(array $locations, array $data): array
     {
-        foreach ($accomodations as $accomodation) {
-
+        foreach ($locations as $location) {
             $season = $this->configService->getSeasonByDate($data['start']);
-            $basePrice = $this->configService->findAccomodationPriceBySeason($accomodation->getId(), $season);
+            $accomodation = $location->getAccomodation();
+            $reservation = new Reservation();
 
-            $finalPrice = $basePrice;
-            // $finalPrice = $basePrice->applyNight();
+            $reservation->setLocation($location);
+            $reservation->setStart($data['start']);
+            $reservation->setEnd($data['end']);
+            $reservation->setAdults($data['adults']);
+            $reservation->setChilds($data['childs']);
+
+            // Vérifie les règles de réservations
+            if ($this->configService->checkReservationRules($reservation, $season)) die;
+
+            $basePrice = $this->configService->findAccomodationPriceBySeason($accomodation->getId(), $season);
+            $reservation->setPrice($basePrice);
+
             // $finalPrice = $basePrice->applyClients();
             // $finalPrice = $basePrice->applyOffers();
             // $finalPrice = $basePrice->applyTaxes();
+
 
 
             $displayAccomodations[] = [
                 'id' => $accomodation->getId(),
                 'name' => $accomodation->getName(),
                 'description' => $accomodation->getDescription(),
-                'price' => $finalPrice,
+                'price' => $reservation->getPrice()
             ];
         }
 
         return $displayAccomodations;
     }
+
+    // public function checkRules(Reservation $reservation)
+    // {
+    //     // Vérifie le jour d'arrivée
+    //     dd($this->configService->checkReservation;
+
+    //     dd($reservation->getStart());
+
+    //     // Vérifie le jour de départ
+
+    //     // Vérifie la durée du séjour
+
+
+    //     return $error;
+    // }
 }

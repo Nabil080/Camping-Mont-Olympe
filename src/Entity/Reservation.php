@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ReservationRepository;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -58,7 +59,7 @@ class Reservation
     public function prePersist(): void
     {
         if ($this->getDate() === null)
-            $this->setDate(new \DateTime('now'));
+            $this->setDate(new DateTime('now'));
     }
 
     public function getId(): ?int
@@ -71,9 +72,10 @@ class Reservation
         return $this->start;
     }
 
-    public function setStart(\DateTimeInterface $start): static
+    public function setStart($start): static
     {
-        $this->start = $start;
+        $startDate = !str_contains($start, '/') ? new DateTime($start) : new DateTime(join("-", array_reverse(explode("/", $start))));
+        $this->start = $startDate;
 
         return $this;
     }
@@ -83,9 +85,10 @@ class Reservation
         return $this->end;
     }
 
-    public function setEnd(\DateTimeInterface $end): static
+    public function setEnd($end): static
     {
-        $this->end = $end;
+        $endDate = !str_contains($end, '/') ? new DateTime($end) : new DateTime(join("-", array_reverse(explode("/", $end))));
+        $this->end = $endDate;
 
         return $this;
     }

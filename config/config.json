@@ -199,7 +199,7 @@
                     },
                     "2": {
                         "id": 3,
-                        "amount": 600,
+                        "amount": 500,
                         "per_days": false,
                         "per_person": false,
                         "seasons": [null]
