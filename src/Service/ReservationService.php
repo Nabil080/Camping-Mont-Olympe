@@ -28,10 +28,10 @@ class ReservationService
     public function getReservationsByFormData(array $data): array
     {
         $locations = $this->getAvailableLocationsByPeriod($data['start'], $data['end']);
-        $locationsData = $this->getDisplayReservations($locations, $data);
+        $reservationsData = $this->getDisplayReservations($locations, $data);
 
-
-        return $locationsData;
+        // dd($reservationsData);
+        return $reservationsData;
     }
 
     public function getAvailableLocationsByPeriod(string|Date $start, string|Date $end): array
@@ -76,8 +76,8 @@ class ReservationService
             $basePrice = $this->configService->findAccomodationPriceBySeason($accomodation->getId(), $season);
             $reservation->setPrice($basePrice);
 
-            // $finalPrice = $basePrice->applyClients();
-            // $finalPrice = $basePrice->applyOffers();
+            // $adultPrice = $reservation->applyAdults();
+            // $childPrice = $reservation->applyOffers();
             // $finalPrice = $basePrice->applyTaxes();
 
 
@@ -86,12 +86,20 @@ class ReservationService
                 'id' => $accomodation->getId(),
                 'name' => $accomodation->getName(),
                 'description' => $accomodation->getDescription(),
-                'price' => $reservation->getPrice(),
+                'price' => [
+                    'accomodation' => $basePrice,
+                    // 'adult' => $adultPrice,
+                    // 'child' => $childPrice,
+                    'total' => $reservation->getPrice(),
+                ],
+                'location' => [
+                    'id' => $location->getId(),
+                    'number' => $location->getNumber(),
+                ],
                 'error' => $error
             ];
         }
 
-        dd($displayAccomodations);
         return $displayAccomodations;
     }
 

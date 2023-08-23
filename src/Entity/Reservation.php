@@ -191,12 +191,12 @@ class Reservation
 
     public function getFirstname(): ?string
     {
-        return $this->firstname;
+        return $this->first_name;
     }
 
     public function setFirstname(string $firstname): static
     {
-        $this->firstname = $firstname;
+        $this->first_name = $firstname;
 
         return $this;
     }
@@ -223,5 +223,12 @@ class Reservation
         $this->email = $email;
 
         return $this;
+    }
+
+    public function applyAdults(): int
+    {
+        dd($this->price);
+
+        return $this->price;
     }
 }
