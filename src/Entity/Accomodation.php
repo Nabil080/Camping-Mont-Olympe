@@ -30,16 +30,15 @@ class Accomodation
     #[ORM\OneToMany(mappedBy: 'accomodation', targetEntity: Location::class, orphanRemoval: true)]
     private Collection $locations;
 
-    #[ORM\OneToMany(mappedBy: 'accomodation', targetEntity: Image::class)]
-    private Collection $images;
-
-    #[ORM\OneToMany(mappedBy: 'accomodation', targetEntity: Tag::class)]
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'accomodations')]
     private Collection $tags;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private $image = null;
 
     public function __construct()
     {
         $this->locations = new ArrayCollection();
-        $this->images = new ArrayCollection();
         $this->tags = new ArrayCollection();
     }
 
@@ -114,35 +113,6 @@ class Accomodation
         return $this;
     }
 
-    /**
-     * @return Collection<int, Image>
-     */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    public function addImage(Image $image): static
-    {
-        if (!$this->images->contains($image)) {
-            $this->images->add($image);
-            $image->setAccomodation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(Image $image): static
-    {
-        if ($this->images->removeElement($image)) {
-            // set the owning side to null (unless already changed)
-            if ($image->getAccomodation() === $this) {
-                $image->setAccomodation(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Tag>
@@ -156,7 +126,6 @@ class Accomodation
     {
         if (!$this->tags->contains($tag)) {
             $this->tags->add($tag);
-            $tag->setAccomodation($this);
         }
 
         return $this;
@@ -164,14 +133,22 @@ class Accomodation
 
     public function removeTag(Tag $tag): static
     {
-        if ($this->tags->removeElement($tag)) {
-            // set the owning side to null (unless already changed)
-            if ($tag->getAccomodation() === $this) {
-                $tag->setAccomodation(null);
-            }
-        }
+        $this->tags->removeElement($tag);
 
         return $this;
     }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
 
 }

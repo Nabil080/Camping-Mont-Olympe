@@ -78,6 +78,7 @@ class ReservationService
             $stay = $reservation->getStart()->diff($reservation->getEnd())->format('%a%');
             // Récupère l'hébergement correspondant
             $accomodation = $location->getAccomodation();
+            $tags = array_map(function($tag) { return $tag->getName() ;}, $accomodation->getTags()->getValues());
 
 
             // Ajoute la card dans un array selon les erreurs
@@ -86,6 +87,8 @@ class ReservationService
                     'id' => $accomodation->getId(),
                     'name' => $accomodation->getName(),
                     'description' => $accomodation->getDescription(),
+                    'image' => $accomodation->getImage(),
+                    'tags' => $tags
                 ],
                 'location' => [
                     'id' => $location->getId(),

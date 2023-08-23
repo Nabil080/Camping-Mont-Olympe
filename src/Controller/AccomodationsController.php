@@ -14,9 +14,12 @@ use App\Service\ConfigService;
 use App\Service\LogService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AccomodationsController extends AbstractController
 {
@@ -32,18 +35,40 @@ class AccomodationsController extends AbstractController
     }
 
     #[Route('admin/settings/accomodations/add', name: 'admin_settings_accomodations_add')]
-    public function add(EntityManagerInterface $em, LogService $logService, Request $request): Response
+    public function add(EntityManagerInterface $em, LogService $logService, Request $request, SluggerInterface $slugger): Response
     {
         $accomodation = new Accomodation;
 
-        $form = $this->createForm(AccomodationType::class);
+        $form = $this->createForm(AccomodationType::class,);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
-
+            
             $accomodation = $form->getData();
-            $images = $form->get("images")->getData();
+            
+            $imageFile = $form->get('image')->getData();
 
+            $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+            // this is needed to safely include the file name as part of the URL
+            $safeFilename = $slugger->slug($originalFilename);
+            $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+            // Move the file to the directory where brochures are stored
+            try {
+                $imageFile->move(
+                    $this->getParameter('accomodations_directory'),
+                    $newFilename
+                );
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
+
+            // updates the 'brochureFilename' property to store the PDF file name
+            // instead of its contents
+            $accomodation->setImage($newFilename);
+
+
+            
             $em->persist($accomodation);
             $em->flush();
 
@@ -64,6 +89,7 @@ class AccomodationsController extends AbstractController
     #[Route('admin/settings/accomodations/update/{id}', name: 'admin_settings_accomodations_update')]
     public function update(Accomodation $accomodation, Request $request, EntityManagerInterface $em, LogService $ls): Response
     {
+        $accomodation->setImage(new File($this->getParameter('accomodations_directory').'/'.$accomodation->getImage()));
 
         $form = $this->createForm(AccomodationType::class, $accomodation);
         $form->handleRequest($request);
