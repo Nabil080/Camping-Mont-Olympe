@@ -120,5 +120,13 @@ html {
         transform-origin: bottom left;
     }
 
+    .datepicker .disabled {
+        opacity: 0.50;
+        cursor: default;
+    }
+
+    .datepicker .selected {
+        background-color: var(--main);
+    }
     /* .separator{visibility: hidden;} */
 }
