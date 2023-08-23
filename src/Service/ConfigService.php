@@ -102,15 +102,43 @@ class ConfigService
         $this->saveConfigData($config);
     }
 
-    public function findAccomodationPriceBySeason(int $accomodationId, array $seasonConfig)
+    public function getAccomodationPriceBySeason(int $accomodationId, array $seasonConfig)
     {
         $priceConfig = $this->getPricesRules('places')[$accomodationId];
 
         foreach ($priceConfig['rules'] as $index => $priceRule)
             if (in_array($seasonConfig['name'], $priceRule['seasons']))
                 $price = $priceConfig['rules'][$index]['amount'];
-            elseif (in_array(null, $priceRule['seasons']) | in_array("All", $priceRule['seasons']))
+            elseif (in_array(null, $priceRule['seasons']))
                 $price2 = $priceConfig['rules'][$index]['amount'];
+
+
+        return $price ?? $price2;
+    }
+
+    public function getAdultPriceBySeason(array $seasonConfig)
+    {
+        $priceConfig = $this->getPricesRules('ages')['adult']['rules'];
+
+        foreach ($priceConfig as $index => $priceRule)
+            if (in_array($seasonConfig['name'], $priceRule['seasons']))
+                $price = $priceConfig[$index]['amount'];
+            elseif (in_array(null, $priceRule['seasons']))
+                $price2 = $priceConfig[$index]['amount'];
+
+
+        return $price ?? $price2;
+    }
+
+    public function getChildPriceBySeason(array $seasonConfig)
+    {
+        $priceConfig = $this->getPricesRules('ages')['children']['rules'];
+
+        foreach ($priceConfig as $index => $priceRule)
+            if (in_array($seasonConfig['name'], $priceRule['seasons']))
+                $price = $priceConfig[$index]['amount'];
+            elseif (in_array(null, $priceRule['seasons']))
+                $price2 = $priceConfig[$index]['amount'];
 
 
         return $price ?? $price2;

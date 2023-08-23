@@ -59,8 +59,9 @@ class ReservationService
 
     public function getDisplayReservations(array $locations, array $data): array
     {
+        $season = $this->configService->getSeasonByDate($data['start']);
+
         foreach ($locations as $location) {
-            $season = $this->configService->getSeasonByDate($data['start']);
             $accomodation = $location->getAccomodation();
             $reservation = new Reservation();
 
@@ -72,49 +73,42 @@ class ReservationService
 
             // Vérifie les règles de réservations
             $error = $this->configService->checkReservationRules($reservation, $season);
+            // Récupère les prix
+            $basePrice = $this->configService->getAccomodationPriceBySeason($accomodation->getId(), $season);
+            $adultPrice = $this->configService->getAdultPriceBySeason($season);
+            $childPrice = $this->configService->getChildPriceBySeason($season);
+            
+            $stay = $reservation->getStart()->diff($reservation->getEnd())->format('%a%');
+            $totalPrice = ($basePrice + $adultPrice + $childPrice) * $stay ;
 
-            $basePrice = $this->configService->findAccomodationPriceBySeason($accomodation->getId(), $season);
-            $reservation->setPrice($basePrice);
 
-            // $adultPrice = $reservation->applyAdults();
-            // $childPrice = $reservation->applyOffers();
-            // $finalPrice = $basePrice->applyTaxes();
-
-
-
-            $displayAccomodations[] = [
-                'id' => $accomodation->getId(),
-                'name' => $accomodation->getName(),
-                'description' => $accomodation->getDescription(),
+            $displayReservations[] = [
+                'accomodation' => [
+                    'id' => $accomodation->getId(),
+                    'name' => $accomodation->getName(),
+                    'description' => $accomodation->getDescription(),
+                ],
                 'price' => [
                     'accomodation' => $basePrice,
-                    // 'adult' => $adultPrice,
-                    // 'child' => $childPrice,
-                    'total' => $reservation->getPrice(),
+                    'adult' => $adultPrice,
+                    'child' => $childPrice,
+                    'total' => $totalPrice,
                 ],
                 'location' => [
                     'id' => $location->getId(),
                     'number' => $location->getNumber(),
                 ],
+                'reservation' => [
+                    'start' => $reservation->getStart(),
+                    'end' => $reservation->getEnd(),
+                    'adults' => $reservation->getAdults(),
+                    'childs' => $reservation->getChilds(),
+                    'stay' => $stay,
+                ],
                 'error' => $error
             ];
         }
 
-        return $displayAccomodations;
+        return $displayReservations;
     }
-
-    // public function checkRules(Reservation $reservation)
-    // {
-    //     // Vérifie le jour d'arrivée
-    //     dd($this->configService->checkReservation;
-
-    //     dd($reservation->getStart());
-
-    //     // Vérifie le jour de départ
-
-    //     // Vérifie la durée du séjour
-
-
-    //     return $error;
-    // }
 }

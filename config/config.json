@@ -172,7 +172,7 @@
                     },
                     "2": {
                         "id": 2,
-                        "amount": 20,
+                        "amount": 12,
                         "per_days": true,
                         "per_person": true,
                         "seasons": ["Saison 2"]
@@ -199,7 +199,7 @@
                     },
                     "2": {
                         "id": 3,
-                        "amount": 500,
+                        "amount": 21,
                         "per_days": false,
                         "per_person": false,
                         "seasons": [null]
@@ -219,7 +219,7 @@
                     },
                     "2": {
                         "id": 3,
-                        "amount": 600,
+                        "amount": 60,
                         "per_days": false,
                         "per_person": false,
                         "seasons": [null]
@@ -262,7 +262,7 @@
                 "rules": [
                     {
                         "id": 1,
-                        "amount": 0,
+                        "amount": 2,
                         "per_days": true,
                         "per_person": true,
                         "seasons": [null]

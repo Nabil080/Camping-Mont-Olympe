@@ -224,11 +224,4 @@ class Reservation
 
         return $this;
     }
-
-    public function applyAdults(): int
-    {
-        dd($this->price);
-
-        return $this->price;
-    }
 }
