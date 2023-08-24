@@ -61,7 +61,7 @@ class ReservationService
     {
         $season = $this->configService->getSeasonByDate($data['start']);
         $displayReservations = ['available' => [], 'unavailable' => []];
-        
+
         foreach ($locations as $location) {
             $reservation = new Reservation();
 
@@ -96,8 +96,8 @@ class ReservationService
                     'number' => $location->getNumber(),
                 ],
                 'reservation' => [
-                    'start' => $reservation->getStart(),
-                    'end' => $reservation->getEnd(),
+                    'start' => $data['start'],
+                    'end' => $data['end'],
                     'adults' => $reservation->getAdults(),
                     'childs' => $reservation->getChilds(),
                     'stay' => $stay,
