@@ -72,44 +72,28 @@ class ReservationService
 
             // Vérifie les règles de réservations
             $error = $this->configService->checkReservationRules($reservation, $season);
-            // Récupère les prix
-            $prices = $this->getReservationPrices($reservation,$season);
-            // Calcule le nombre de nuits
-            $stay = $reservation->getStart()->diff($reservation->getEnd())->format('%a%');
-            // Récupère l'hébergement correspondant
-            $accomodation = $location->getAccomodation();
-            $tags = array_map(function($tag) { return $tag->getName() ;}, $accomodation->getTags()->getValues());
-
 
             // Ajoute la card dans un array selon les erreurs
             $displayReservations[$error ? 'unavailable' : 'available'][] = [
-                'accomodation' => [
-                    'id' => $accomodation->getId(),
-                    'name' => $accomodation->getName(),
-                    'description' => $accomodation->getDescription(),
-                    'image' => $accomodation->getImage(),
-                    'tags' => $tags
-                ],
-                'location' => [
-                    'id' => $location->getId(),
-                    'number' => $location->getNumber(),
-                ],
+                'accomodation' => $location->getAccomodation()->getDisplayArray(),
+                'location' => $location->getDisplayArray(),
+                'price' => $this->getReservationPrices($reservation, $season),
+                'error' => $error,
                 'reservation' => [
                     'start' => $data['start'],
                     'end' => $data['end'],
                     'adults' => $reservation->getAdults(),
                     'childs' => $reservation->getChilds(),
-                    'stay' => $stay,
+                    'stay' => $reservation->getStart()->diff($reservation->getEnd())->format('%a%'),
                 ],
-                'price' => $prices,
-                'error' => $error
             ];
         }
 
         return $displayReservations ?? [];
     }
 
-    public function getReservationPrices(Reservation $reservation, array $season){
+    public function getReservationPrices(Reservation $reservation, array $season)
+    {
         $accomodation = $reservation->getLocation()->getAccomodation();
 
         $basePrice = $this->configService->getAccomodationPriceBySeason($accomodation->getId(), $season);
@@ -127,6 +111,5 @@ class ReservationService
             'child' => $childPrice,
             'total' => $totalPrice,
         ];
-        
     }
 }

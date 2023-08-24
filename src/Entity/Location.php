@@ -106,4 +106,12 @@ class Location
 
         return $this;
     }
+
+    public function getDisplayArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'number' => $this->number,
+        ];
+    }
 }

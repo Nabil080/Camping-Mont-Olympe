@@ -150,5 +150,17 @@ class Accomodation
         return $this;
     }
 
+    public function getDisplayArray(): array
+    {
+        $tags = array_map(function($tag) { return $tag->getName() ;}, $this->getTags()->getValues());
+        
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'image' => $this->image,
+            'tags' => $tags
+        ];
+    }
 
 }

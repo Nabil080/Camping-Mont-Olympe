@@ -191,7 +191,7 @@ class ConfigService
                 if ($this->isDateRangeMatching($seasonRule['start'], $seasonRule['end'], $date))
                     $season = $seasons[$seasonId];
 
-        return $season;
+        return $season ?? ['name' => null];
     }
 
     // ! ------------ SEASON Rules
