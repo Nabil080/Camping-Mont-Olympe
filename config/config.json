@@ -116,7 +116,7 @@
             },
             {
                 "id": 3,
-                "days": [2, 4, 6, 3],
+                "days": [2, 3, 4, 6],
                 "places": ["Camping Car"],
                 "seasons": ["Saison 2"]
             }

@@ -28,6 +28,7 @@
 			<div class="w-2 h-0.5 bg-main-700"></div>
 			<div id="kids">{{ "1" }}</div>
 		</div>
+		<button {{ stimulus_action('reservation','find') }} class='g-button rounded-full'><i class="fa fa-search"></i></button>
 	</section>
 
 	<section id="reservation-cards" class=" p-2 px-4 bg-gray-100 border-t-2 border-gray-200 h-full overflow-scroll space-y-4">

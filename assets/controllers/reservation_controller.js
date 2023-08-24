@@ -31,7 +31,7 @@ export default class extends Controller {
         this.showLoader();
         let data = await this.fetchData(this.start, this.end);
 
-        if (data.count > 0) this.insertData(data);
+        if (data.count.found > 0) this.insertData(data);
     }
 
     async fetchData(start, end) {
@@ -50,7 +50,7 @@ export default class extends Controller {
     }
 
     insertData(data) {
-        this.cardsContainer.innerHTML = `<header class="text-sm opacity-80">${data.count} résultats</header>`;
+        this.cardsContainer.innerHTML = `<header class="text-sm opacity-80">${data.count.found} résultats sur ${data.count.total}</header>`;
 
         data.available.forEach(
             (card) => (this.cardsContainer.innerHTML += this.getHTMLCard(card))
@@ -104,7 +104,7 @@ export default class extends Controller {
                     </section>
                     <div id="price-${
                         card.accomodation.id
-                    }" class="hidden my-2 text-xs opacity-80">
+                    }" class="hidden my-2 text-sm opacity-80">
                         <span class="font-bold"> Prix de l'hébergement : ${
                             card.price.accomodation
                         }€ </span> <br>
@@ -177,23 +177,31 @@ export default class extends Controller {
     }
 
     getErrorMessage(error) {
-        let message = ''
+        let message = "";
         let value = error.value;
-        const days = ['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche']
-        let messageDays = value.map(value => days[value-1]).join(', ');
+        const days = [
+            "lundi",
+            "mardi",
+            "mercredi",
+            "jeudi",
+            "vendredi",
+            "samedi",
+            "dimanche",
+        ];
+        let messageDays = value.map((value) => days[value - 1]).join(", ");
 
         switch (error.rule) {
-            case 'checkIn':
+            case "checkIn":
                 message = `Jour d'arrivée non autorisé. <br> Sont autorisés : ${messageDays} `;
                 break;
-            case 'checkOut':
-                message = `Jour de départ non autorisé. <br> Sont autorisés : ${messageDays} `
+            case "checkOut":
+                message = `Jour de départ non autorisé. <br> Sont autorisés : ${messageDays} `;
                 break;
-            case 'minStay' :
-                message = `Le séjour doit durer au minimum ${value} nuits`
+            case "minStay":
+                message = `Le séjour doit durer au minimum ${value} nuits`;
                 break;
-            case 'maxStay' :
-                message = `Le séjour doit durer au minimum ${value} nuits`
+            case "maxStay":
+                message = `Le séjour doit durer au minimum ${value} nuits`;
                 break;
             default:
                 message = `Une règle de réservation n'a pas été respectée`;

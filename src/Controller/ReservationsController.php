@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Accomodation;
 use App\Entity\Reservation;
 use App\Form\CheckRuleType;
 use App\Form\ReservationType;
@@ -176,13 +177,14 @@ class ReservationsController extends AbstractController
 
 
     #[Route('/reservations/find', name: 'reservations_find')]
-    public function find(Request $request, ReservationService $rs): Response
+    public function find(Request $request, ReservationService $rs, AccomodationRepository $ar): Response
     {
         $postData = json_decode($request->getContent(), true);
 
         $reservations = $rs->getReservationsByFormData($postData);
         $message = $reservations;
-        $message['count'] = count($reservations['available']) + count($reservations['unavailable']);
+        $message['count']['found'] = count($reservations['available']) + count($reservations['unavailable']);
+        $message['count']['total'] = $ar->getTotalCount();
 
         return $this->json($message, 200);
     }

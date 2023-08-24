@@ -30,7 +30,6 @@ class ReservationService
         $locations = $this->getAvailableLocationsByPeriod($data['start'], $data['end']);
         $reservationsData = $this->getDisplayReservations($locations, $data);
 
-
         return $reservationsData;
     }
 
@@ -60,7 +59,7 @@ class ReservationService
     public function getDisplayReservations(array $locations, array $data): array
     {
         $season = $this->configService->getSeasonByDate($data['start']);
-        $displayReservations = ['available' => [], 'unavailable' => []];
+        $displayReservations = ['available' => [], 'unavailable' => [], 'full' => []];
 
         foreach ($locations as $location) {
             $reservation = new Reservation();
