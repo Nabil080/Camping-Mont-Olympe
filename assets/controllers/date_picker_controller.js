@@ -48,8 +48,8 @@ export default class extends Controller {
         this.start = this.element.querySelector('[name="start"]');
         this.end = this.element.querySelector('[name="end"]');
 
-        this.start.value = this.nextWeek;
-        this.end.value = this.nextNextWeek;
+        if(this.start.value === "") this.start.value = this.nextWeek
+        if(this.end.value === "") this.end.value = this.nextNextWeek
     }
 
     synchronizeValues() {

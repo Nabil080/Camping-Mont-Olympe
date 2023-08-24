@@ -1,41 +1,35 @@
-<section id="reservation-overlay" {{ stimulus_controller('reservation') }} class="hidden fixed top-0 w-full h-full bg-black z-50 bg-opacity-30">
+<section id="reservation-overlay" {{ stimulus_controller('reservation') }} class="hidden fixed top-0 w-full h-full bg-black z-50 bg-opacity-0 duration-1000">
 
 	<button class="overlay cursor-default" {{ stimulus_action('reservation','close') }}></button>
 
 </section>
 
-<section id="reservation-container" {{ stimulus_controller('reservation date_picker') }} class="text-main-700 w-[700px] max-w-[100vw] bg-white fixed top-0 right-0 z-50 h-full translate-x-full duration-700 ease-in-out">
+<section id="reservation-container" {{ stimulus_controller('reservation date_picker') }} class="text-main-700 w-[750px] max-w-[100vw] bg-white fixed top-0 right-0 z-50 h-full translate-x-full duration-700 ease-in-out">
 
-	<section id="top-bar" class="flex p-2 px-4 gap-4 items-center bg-white">
-		<button id="close" {{ stimulus_action('reservation','close') }} class="p-1 aspect-square rounded-full border border-main-700">
-			<i class="fa fa-xmark w-8 h-8"></i>
+	<section id="top-bar" class="flex p-1.5 px-4 gap-2 items-center bg-white text-sm">
+		<button id="close" {{ stimulus_action('reservation','close') }} class="p-1.5 aspect-square rounded-full border border-main-700">
+			<svg class="w-6 h-6 stroke-main-700" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+				<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+				<g id="SVGRepo_iconCarrier">
+					<path d="M19 5L4.99998 19M5.00001 5L19 19" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+				</g>
+			</svg>
 		</button>
 		<div id="dates" class="flex p-2 px-4 rounded-full border border-main-700 items-center gap-2">
-			<i class="fa fa-calendar w-6 h-6"></i>
-			<input
-			name="start" type class="w-[10ch] cursor-pointer bg-transparent border-none placeholder-shown:w-[2ch] placeholder:text-main-900 placeholder:text-transparent outline-none focus:outline-none" placeholder="dd/mm/yyyy">
-			{# <div id="start-date">06/08/2023</div> #}
+			<i class="fa fa-calendar w-4 h-4"></i>
+			<input name="start" type class="w-[10ch] cursor-pointer bg-transparent border-none placeholder-shown:w-[2ch] placeholder:text-main-900 placeholder:text-transparent outline-none focus:outline-none" placeholder="dd/mm/yyyy">
 			<div class="w-2 h-0.5 bg-main-700"></div>
-			<input
-			name="end" type class="w-[10ch] cursor-pointer bg-transparent border-none placeholder-shown:w-[2ch] placeholder:text-main-900 placeholder:text-transparent outline-none focus:outline-none" placeholder="dd/mm/yyyy">
-		{# <div id="end-date">12/08/2023</div> #}
+			<input name="end" type class="w-[10ch] cursor-pointer bg-transparent border-none placeholder-shown:w-[2ch] placeholder:text-main-900 placeholder:text-transparent outline-none focus:outline-none" placeholder="dd/mm/yyyy">
 		</div>
 		<div id="clients" class="flex p-2 px-4 rounded-full border border-main-700 items-center gap-2">
-			<i class="fa-solid fa-person w-6 h-6"></i>
+			<i class="fa-solid fa-person w-4 h-4"></i>
 			<div id="adults">{{ "2" }}</div>
 			<div class="w-2 h-0.5 bg-main-700"></div>
 			<div id="kids">{{ "1" }}</div>
 		</div>
 	</section>
 
-	<section id="reservation-cards" class=" p-2 px-4 bg-gray-200 h-full overflow-scroll">
-		{# <header>{{ "3 résultats" }}</header> #}
-
-		<div id="reservation-cards-container" class="overflow-scroll">
-			{# <article class="reservation-card"></article>
-			<article class="reservation-card"></article>
-			<article class="reservation-card"></article> #}
-		</div>
-
+	<section id="reservation-cards" class=" p-2 px-4 bg-gray-100 border-t-2 border-gray-200 h-full overflow-scroll space-y-4">
 	</section>
 </section>

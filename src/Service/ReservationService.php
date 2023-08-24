@@ -60,7 +60,8 @@ class ReservationService
     public function getDisplayReservations(array $locations, array $data): array
     {
         $season = $this->configService->getSeasonByDate($data['start']);
-
+        $displayReservations = ['available' => [], 'unavailable' => []];
+        
         foreach ($locations as $location) {
             $reservation = new Reservation();
 
