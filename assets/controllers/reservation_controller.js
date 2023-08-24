@@ -101,7 +101,7 @@ export default class extends Controller {
         return `
                 <article id="accom-${card.accomodation.id}" data-location-id="${card.location.id}" data-location-number="${card.location.number}" class="reservation-card unavailable-reservation flex gap-4 bg-white border border-gray-200 p-2">
                 <div class="overlay z-50 bg-black bg-opacity-70 text-white">
-                    <div class="grid w-full h-full place-items-center text-xl">
+                    <div class="grid w-full h-full place-items-center text-xl text-center">
                         ${errorMessage} 
                     </div>
                 </div>
