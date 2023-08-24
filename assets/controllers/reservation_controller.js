@@ -4,9 +4,7 @@ export default class extends Controller {
     connect() {
         this.container = document.querySelector("#reservation-container");
         this.overlay = document.querySelector("#reservation-overlay");
-        this.cardsContainer =
-            this.container.querySelector("#reservation-cards");
-        this.open();
+        this.cardsContainer = this.container.querySelector("#reservation-cards");
     }
 
     open() {

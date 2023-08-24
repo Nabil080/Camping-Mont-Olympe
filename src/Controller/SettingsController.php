@@ -10,9 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class SettingsController extends AbstractController
 {
     #[Route('/admin/settings', name: 'admin_settings')]
-    public function index(ConfigService $configService): Response
+    public function index(): Response
     {
-
-        return $this->render('admin/settings/index.html.twig', []);
+        return $this->render('admin/settings/index.html.twig');
     }
 }

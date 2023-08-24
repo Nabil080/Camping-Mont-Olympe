@@ -22,12 +22,15 @@ class StayRuleType extends AbstractType
     {
         $builder
         ->add('amount', IntegerType::class, [
+            'label' => 'montant',
         ])
         ->add('places', ChoiceType::class, [
+            'label' => 'emplacements',
             'choices' => $this->cs->getPlacesChoices(),
             'multiple' => true,
         ])
         ->add('seasons', ChoiceType::class, [
+            'label' => 'saisons',
             'choices' => $this->cs->getSeasonsChoices(),
             'multiple' => true,
         ])
