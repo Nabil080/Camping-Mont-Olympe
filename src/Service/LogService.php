@@ -20,12 +20,10 @@ class LogService
 
     public function write(string $message, array $context):void
     {
-        $user = $this->security->getUser();
-        $now = new \DateTime('now', new DateTimeZone('Europe/Paris'));
         $log = new Log;
+        $user = $this->security->getUser();
         $log->setUser($user);
-        $log->setDate($now);
-
+        
         $log->setMessage($message);
         $log->setContext($context);
 

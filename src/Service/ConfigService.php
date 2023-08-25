@@ -3,16 +3,19 @@
 namespace App\Service;
 
 use App\Entity\Reservation;
+use App\Repository\AccomodationRepository;
 use DateTime;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class ConfigService
 {
     private string $configFilePath;
+    public AccomodationRepository $accomodationRepository;
 
-    public function __construct(ParameterBagInterface $parameterBag)
+    public function __construct(ParameterBagInterface $parameterBag, AccomodationRepository $accomodationRepository)
     {
         $this->configFilePath = $parameterBag->get('config_directory');
+        $this->accomodationRepository = $accomodationRepository;
     }
 
     // ! --------------- CONFIG
@@ -540,10 +543,13 @@ class ConfigService
 
     public function getPlacesChoices(): array
     {
-        // TODO: fetch la bdd pour les emplacements
-        $seasons = $this->getConfigByName('seasons');
+        $accomodations = $this->accomodationRepository->findAll();
+        $names = array_map(fn($accomodation) => $accomodation->getName() ,$accomodations);
 
-        $choices = ["Tous" => null, "Camping-car" => "Camping Car"];
+        $choices = ["Tous" => null];
+        foreach ($names as $name) {
+            $choices[$name] = $name;
+        }
 
         return $choices;
     }

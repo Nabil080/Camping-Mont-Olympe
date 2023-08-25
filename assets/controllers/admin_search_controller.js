@@ -45,8 +45,26 @@ class Result {
 }
 
 let values = [
+    ["Consulter le registre", "admin/logs"],
+    ["Consulter la Caisse", "admin/caisse"],
+    ["Consulter le planning", "admin/planning"],
+    ["Voir les arrivées et départs", "admin/checkInOut"],
+    ["Accéder aux paramètres", "admin/settings"],
+    ["Voir les Réservations", "admin/reservations"],
+    ["Créer une Réservation", "admin/reservations/add"],
     ["Voir les Saisons", "admin/settings/seasons"],
     ["Ajouter une Saison", "admin/settings/seasons/add"],
     ["Voir les Services supplémentaires", "admin/settings/services"],
     ["Ajouter un Service supplémentaire", "admin/settings/services/add"],
+    ["Voir les Hébergements", "admin/settings/accomodations"],
+    ["Ajouter un Hébergement", "admin/settings/accomodations/add"],
+    ["Voir les Emplacements", "admin/settings/locations"],
+    ["Ajouter une Emplacement", "admin/settings/locations/add"],
+    ["Voir les informations du camping", "admin/settings/camping"],
+    ["Voir les Tarifs du camping", "admin/settings/prices"],
+    ["Voir les règles de réservation", "admin/settings/reservations"],
+    ["Ajouter une Saison", "admin/settings/seasons/add"],
+    ["Voir mon profil", "admin/profile"],
+    ["Aller à l'écran d'accueil", "admin"],
+    ["Aller consulter le site du camping", ""],
 ];

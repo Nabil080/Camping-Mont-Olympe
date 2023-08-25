@@ -55,7 +55,7 @@
 			<tbody>
 				{% for log in logs %}
 					<tr class="text-center bg-green-50">
-						<td class="p-2">{{ log.user.firstname }}</td>
+						<td class="p-2">{{ log.user.lastname|upper }} {{ log.user.firstname }}</td>
 						<td class="p-2">{{ log.message }}</td>
 						<td class="p-2">{{ log.context|join(',') }}</td>
 						<td class="p-2">{{ log.date|format_datetime(locale='fr') }}</td>

@@ -37,3 +37,4 @@ function addClassesToElement(classes, element) {
 function removeClassesToElement(classes, element) {
     classes.forEach((className) => element.classList.remove(className));
 }
+    

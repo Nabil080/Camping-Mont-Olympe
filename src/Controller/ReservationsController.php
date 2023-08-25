@@ -102,7 +102,7 @@ class ReservationsController extends AbstractController
             $rule += $form->getData();
 
             $configService->addReservationRule($type, $rule);
-            $this->addFlash('success', 'New "places" price rule added successfully!');
+            $this->addFlash('success', 'Nouvel règle d\'emplacement ajouté avec succès!');
             $message = "Une règle de réservation $type a été ajoutée";
             $context = ['add', 'reservation'];
             $logService->write($message, $context);

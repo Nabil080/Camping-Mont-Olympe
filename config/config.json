@@ -15,19 +15,26 @@
                     "id": 1,
                     "start": "2023-01-01",
                     "end": "2023-06-30",
-                    "days": [null]
+                    "days": [
+                        null
+                    ]
                 },
                 {
                     "id": 2,
                     "start": "2023-09-01",
                     "end": "2023-09-15",
-                    "days": [null]
+                    "days": [
+                        null
+                    ]
                 },
                 {
                     "id": 3,
                     "start": "2018-01-01",
                     "end": "2019-01-01",
-                    "days": [1, 3]
+                    "days": [
+                        1,
+                        3
+                    ]
                 }
             ]
         },
@@ -39,13 +46,17 @@
                     "id": 1,
                     "start": "2023-07-01",
                     "end": "2023-08-31",
-                    "days": [null]
+                    "days": [
+                        null
+                    ]
                 },
                 {
                     "id": 2,
                     "start": "2023-09-16",
                     "end": "2023-09-24",
-                    "days": [null]
+                    "days": [
+                        null
+                    ]
                 }
             ]
         },
@@ -57,7 +68,9 @@
                     "id": 1,
                     "start": "2023-01-01",
                     "end": "2023-06-30",
-                    "days": [null]
+                    "days": [
+                        null
+                    ]
                 }
             ]
         },
@@ -69,91 +82,194 @@
                     "id": 1,
                     "start": "2018-01-01",
                     "end": "2018-01-01",
-                    "days": [null]
+                    "days": [
+                        null
+                    ]
                 }
             ]
+        },
+        "5": {
+            "id": 5,
+            "name": "Super saison",
+            "rules": []
         }
     },
     "reservations": {
         "checkIn": [
             {
                 "id": 1,
-                "days": [null],
-                "places": [null],
-                "seasons": [null]
+                "days": [
+                    null
+                ],
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
             },
             {
                 "id": 2,
-                "days": [null],
-                "places": [null],
-                "seasons": [null]
+                "days": [
+                    null
+                ],
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
             },
             {
                 "id": 3,
-                "days": [null],
-                "places": [null],
-                "seasons": ["Saison 2"]
+                "days": [
+                    null
+                ],
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    "Saison 2"
+                ]
             },
             {
                 "id": 4,
-                "days": [1, 3, 5, 7],
-                "places": ["Camping Car"],
-                "seasons": [null]
+                "days": [
+                    1,
+                    3,
+                    5,
+                    7
+                ],
+                "places": [
+                    "Camping Car"
+                ],
+                "seasons": [
+                    null
+                ]
             }
         ],
         "checkOut": [
             {
                 "id": 1,
-                "days": [null],
-                "places": [null],
-                "seasons": [null]
+                "days": [
+                    null
+                ],
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
             },
             {
                 "id": 2,
-                "days": [1],
-                "places": ["Caravane"],
-                "seasons": [null]
+                "days": [
+                    1
+                ],
+                "places": [
+                    "Caravane"
+                ],
+                "seasons": [
+                    null
+                ]
             },
             {
                 "id": 3,
-                "days": [2, 3, 4, 6],
-                "places": ["Camping Car"],
-                "seasons": ["Saison 2"]
+                "days": [
+                    2,
+                    3,
+                    4,
+                    6
+                ],
+                "places": [
+                    "Camping Car"
+                ],
+                "seasons": [
+                    "Saison 2"
+                ]
             }
         ],
         "minStay": [
             {
                 "id": 1,
                 "amount": 10,
-                "places": ["Camping Car"],
-                "seasons": ["Saison 1"]
+                "places": [
+                    "Camping Car"
+                ],
+                "seasons": [
+                    "Saison 1"
+                ]
             },
             {
                 "id": 2,
                 "amount": 1,
-                "places": [null],
-                "seasons": [null]
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
+            },
+            {
+                "id": 3,
+                "amount": 10,
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
+            },
+            {
+                "id": 4,
+                "amount": 2,
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
+            },
+            {
+                "id": 5,
+                "amount": 500,
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
             }
         ],
         "maxStay": [
             {
                 "id": 1,
                 "amount": 20,
-                "places": [null],
-                "seasons": [null]
+                "places": [
+                    null
+                ],
+                "seasons": [
+                    null
+                ]
             },
             {
                 "id": 2,
                 "amount": 90,
-                "places": ["Camping Car"],
-                "seasons": ["Songe"]
+                "places": [
+                    "Camping Car"
+                ],
+                "seasons": [
+                    "Songe"
+                ]
             }
         ],
         "places": [
             {
                 "id": 1,
                 "canChoose": false,
-                "places": [null]
+                "places": [
+                    null
+                ]
             }
         ]
     },
@@ -168,21 +284,27 @@
                         "amount": 50,
                         "per_days": true,
                         "per_person": true,
-                        "seasons": [null]
+                        "seasons": [
+                            null
+                        ]
                     },
                     "2": {
                         "id": 2,
                         "amount": 12,
                         "per_days": true,
                         "per_person": true,
-                        "seasons": ["Saison 2"]
+                        "seasons": [
+                            "Saison 2"
+                        ]
                     },
                     "4": {
                         "id": 4,
                         "amount": 30,
                         "per_days": false,
                         "per_person": false,
-                        "seasons": ["Saison une"]
+                        "seasons": [
+                            "Saison une"
+                        ]
                     }
                 }
             },
@@ -195,14 +317,18 @@
                         "amount": 6.5,
                         "per_days": true,
                         "per_person": false,
-                        "seasons": ["Saison 1"]
+                        "seasons": [
+                            "Saison 1"
+                        ]
                     },
                     "2": {
                         "id": 3,
                         "amount": 21,
                         "per_days": false,
                         "per_person": false,
-                        "seasons": [null]
+                        "seasons": [
+                            null
+                        ]
                     }
                 }
             },
@@ -215,14 +341,18 @@
                         "amount": 6.5,
                         "per_days": true,
                         "per_person": false,
-                        "seasons": ["Saison 1"]
+                        "seasons": [
+                            "Saison 1"
+                        ]
                     },
                     "2": {
                         "id": 3,
                         "amount": 60,
                         "per_days": false,
                         "per_person": false,
-                        "seasons": [null]
+                        "seasons": [
+                            null
+                        ]
                     }
                 }
             }
@@ -237,7 +367,9 @@
                         "amount": 100,
                         "per_days": false,
                         "per_person": false,
-                        "seasons": [null]
+                        "seasons": [
+                            null
+                        ]
                     }
                 }
             }
@@ -252,7 +384,9 @@
                         "amount": 10,
                         "per_days": true,
                         "per_person": true,
-                        "seasons": [null]
+                        "seasons": [
+                            null
+                        ]
                     }
                 ]
             },
@@ -265,7 +399,9 @@
                         "amount": 2,
                         "per_days": true,
                         "per_person": true,
-                        "seasons": [null]
+                        "seasons": [
+                            null
+                        ]
                     }
                 ]
             }
@@ -283,7 +419,9 @@
                         "uses": 20,
                         "start": "2023-01-01",
                         "end": null,
-                        "places": [null]
+                        "places": [
+                            null
+                        ]
                     },
                     {
                         "id": 2,
@@ -293,7 +431,9 @@
                         "uses": null,
                         "start": "2023-01-01",
                         "end": "2023-05-62",
-                        "places": [null]
+                        "places": [
+                            null
+                        ]
                     },
                     {
                         "id": 3,
@@ -303,7 +443,9 @@
                         "uses": null,
                         "start": "2018-01-01",
                         "end": "2019-01-01",
-                        "places": ["Camping Car"]
+                        "places": [
+                            "Camping Car"
+                        ]
                     },
                     {
                         "id": 4,
@@ -313,7 +455,9 @@
                         "uses": null,
                         "start": "2018-01-01",
                         "end": "2019-01-01",
-                        "places": ["Camping Car"]
+                        "places": [
+                            "Camping Car"
+                        ]
                     }
                 ]
             },
@@ -329,7 +473,9 @@
                         "uses": null,
                         "start": "2023-12-01",
                         "end": "2024-01-01",
-                        "places": [null]
+                        "places": [
+                            null
+                        ]
                     }
                 ]
             }
@@ -343,12 +489,16 @@
                 "1": {
                     "id": 2,
                     "max": 6,
-                    "places": ["Camping Car"]
+                    "places": [
+                        "Camping Car"
+                    ]
                 },
                 "2": {
                     "id": 3,
                     "max": 8,
-                    "places": [null]
+                    "places": [
+                        null
+                    ]
                 }
             }
         },
@@ -359,12 +509,16 @@
                 {
                     "id": 1,
                     "max": 6,
-                    "places": [null]
+                    "places": [
+                        null
+                    ]
                 },
                 {
                     "id": 2,
                     "max": 2,
-                    "places": ["Camping Car"]
+                    "places": [
+                        "Camping Car"
+                    ]
                 }
             ]
         }

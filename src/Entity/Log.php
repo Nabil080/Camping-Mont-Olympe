@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\LogRepository;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LogRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Log
 {
     #[ORM\Id]
@@ -78,6 +80,13 @@ class Log
         $this->date = $date;
 
         return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function prePersist(): void
+    {
+        if ($this->getDate() === null)
+            $this->setDate(new DateTime('now'));
     }
 
 }
