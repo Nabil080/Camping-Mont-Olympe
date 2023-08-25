@@ -95,8 +95,8 @@
         }
     },
     "reservations": {
-        "checkIn": [
-            {
+        "checkIn": {
+            "0": {
                 "id": 1,
                 "days": [
                     null
@@ -108,19 +108,7 @@
                     null
                 ]
             },
-            {
-                "id": 2,
-                "days": [
-                    null
-                ],
-                "places": [
-                    null
-                ],
-                "seasons": [
-                    null
-                ]
-            },
-            {
+            "2": {
                 "id": 3,
                 "days": [
                     null
@@ -132,7 +120,7 @@
                     "Saison 2"
                 ]
             },
-            {
+            "3": {
                 "id": 4,
                 "days": [
                     1,
@@ -147,7 +135,7 @@
                     null
                 ]
             }
-        ],
+        },
         "checkOut": [
             {
                 "id": 1,
@@ -229,22 +217,12 @@
                 "seasons": [
                     null
                 ]
-            },
-            {
-                "id": 5,
-                "amount": 500,
-                "places": [
-                    null
-                ],
-                "seasons": [
-                    null
-                ]
             }
         ],
         "maxStay": [
             {
                 "id": 1,
-                "amount": 20,
+                "amount": 60,
                 "places": [
                     null
                 ],
@@ -254,12 +232,23 @@
             },
             {
                 "id": 2,
-                "amount": 90,
+                "amount": 20,
                 "places": [
-                    "Camping Car"
+                    null
                 ],
                 "seasons": [
-                    "Songe"
+                    "Test"
+                ]
+            },
+            {
+                "id": 3,
+                "amount": 50,
+                "places": [
+                    "Camping Car",
+                    "Caravane"
+                ],
+                "seasons": [
+                    null
                 ]
             }
         ],

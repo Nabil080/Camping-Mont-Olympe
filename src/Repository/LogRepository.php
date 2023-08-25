@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Log;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
@@ -51,7 +52,7 @@ class LogRepository extends ServiceEntityRepository
     public function findSearch($search): array
     {
         return $this->createQueryBuilder('p')
-        ->andWhere('p.message like :search')
+        ->andWhere('l.message like :search')
         ->setParameter(':search', "%$search%")
         ->getQuery()
         ->getResult();        
@@ -61,18 +62,21 @@ class LogRepository extends ServiceEntityRepository
     {
         $offset = ($page - 1 ) * $limit;
 
-        return $this->createQueryBuilder('p')
-        ->andWhere('p.message like :search')
-        ->orWhere('p.context like :search')
+        return ($this->createQueryBuilder('l')
+        ->join('App\Entity\User', 'u', 'with', 'l.User = u.id')
+        ->andWhere('l.message like :search')
+        ->orWhere('l.context like :search')
+        ->orWhere('u.first_name like :search')
+        ->orWhere('u.last_name like :search')
         ->setParameter(':search', "%$search%")
-        ->andWhere('p.context like :action')
+        ->andWhere('l.context like :action')
         ->setParameter(':action',"%$action%")
-        ->andWhere('p.context like :type')
+        ->andWhere('l.context like :type')
         ->setParameter(':type',"%$type%")
-        ->orderBy('p.id', 'DESC')
+        ->orderBy('l.id', 'DESC')
         ->setMaxResults($limit)
         ->setFirstResult($offset)
         ->getQuery()
-        ->getResult();   
+        ->getResult());   
     }
 }

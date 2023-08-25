@@ -22,10 +22,10 @@
 		class="m-12 mx-36">
 
 		{# <form action="{{path('logs')}}" method="get" class="w-fit my-12 mx-auto">
-																			<label for="search">Champ de recherche :</label>
-																			<input name="search" type="search" placeholder="Rechercher un message">
-																			<button type="submit" class="g-button">Valider</button>
-																		</form> #}
+																									<label for="search">Champ de recherche :</label>
+																									<input name="search" type="search" placeholder="Rechercher un message">
+																									<button type="submit" class="g-button">Valider</button>
+																								</form> #}
 
 		<section id="add-reservation" class="mb-8">
 			<a href="{{ path('admin_reservations_add') }}">
@@ -55,27 +55,23 @@
 						<td class="p-2">{{ reservation.id }}</td>
 						<td class="p-2">{{ reservation.start|format_datetime(locale='fr',pattern="dd/MM/yyyy") }}</td>
 						<td class="p-2">{{ reservation.end|format_datetime(locale='fr',pattern="dd/MM/yyyy") }}</td>
-						<td class="p-2">{{ reservation.type ?? "Caravane"}}</td>
-						<td class="p-2">{{ reservation.spot ?? "30" }}</td>
+						<td class="p-2">{{ reservation.location.accomodation.name ?? "aucun"}}</td>
+						<td class="p-2">{{ reservation.location.number ?? "aucun" }}</td>
 						<td class="p-2">
-							<div>Adultes :
-								{{reservation.adults}}</div>
-							<div>Enfants :
-								{{reservation.childs}}</div>
+							<div>Adultes :{{reservation.adults}}</div>
+							<div>Enfants :{{reservation.childs}}</div>
 						</td>
 						<td class="p-2">
-							<button data-client={{ reservation.client ?? 'blabl'}}>
-								Voir les informations du client
-							</button>
-							{% if reservation.comment %}
-								<button data-com={{reservation.comment}}>
-									Voir le commentaire du client
+							<div class='flex flex-col gap-2 items-center justify-center '>
+								<button class='g-button w-fit py-2 px-4 border-0 outline-0 rounded-full h-fit my-auto' data-client={{ reservation.client ?? 'blabl'}}>
+									Voir les informations du client
 								</button>
-							{% else %}
-								<div>
-									Pas de commentaire
-								</div>
-							{% endif %}
+								{% if reservation.comment %}
+									<button class='g-button w-fit py-2 px-4 border-0 outline-0 rounded-full' data-com={{reservation.comment}}>
+										Voir le commentaire du client
+									</button>
+								{% endif %}
+							</div>
 						</td>
 						<td class="p-2">
 							<div>
@@ -88,8 +84,11 @@
 							</div>
 						</td>
 						<td class="p-2">{{ reservation.date|date() }}</td>
-						<td class="p-2">
-							ACTIONS
+						<td class="p-2 flex flex-col text-sm [&>a]:underline">
+							<a href="">Modifier</a>
+							<a href="">Supprimer</a>
+							<a href="">Encaisser</a>
+							<a href="">Facture</a>
 						</td>
 					</tr>
 				{% endfor %}

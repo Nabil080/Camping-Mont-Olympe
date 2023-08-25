@@ -27,6 +27,8 @@ class ReservationsController extends AbstractController
     public function index(ReservationRepository $rr): Response
     {
         $reservations = $rr->findAll();
+        array_map(fn($reservation) => $reservation->getLocation()?->getAccomodation()?->getName()  ,$reservations);
+        array_map(fn($reservation) => $reservation->getLocation()?->getAccomodation()->getName()  ,$reservations);
 
         return $this->render('admin/reservations/index.html.twig', [
             'reservations' => $reservations,
