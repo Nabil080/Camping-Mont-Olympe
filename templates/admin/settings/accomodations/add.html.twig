@@ -29,13 +29,13 @@
 		<section class="grid grid-cols-2  [&>div]:grid [&>div]:mx-[10%] [&>div]: ">
 
 			<div class="mx-auto my-auto">
-				{{ svg.rules('w-3/4') }}
+				{{ svg.places('w-3/4') }}
 			</div>
 
 			<div class="grid my-auto">
 				{{ form_start(form) }}
 				{{form_widget(form)}}
-				<button type="submit" class="g-button w-full" >
+				<button type="submit" class="g-button w-full" formnovalidate>
 					{{ add ? "Ajouter" : "Modifier" }}
 					l'accomodation</button>
 				{{ form_end(form) }}

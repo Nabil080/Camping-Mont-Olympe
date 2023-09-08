@@ -12,12 +12,7 @@ use Symfony\Component\Validator\Constraints\Date;
 
 class ReservationService
 {
-    private AccomodationRepository $accomodationRepository;
-    private LocationRepository $locationRepository;
-    private ReservationRepository $reservationRepository;
-    private ConfigService $configService;
-
-    public function __construct(AccomodationRepository $accomodationRepository, LocationRepository $locationRepository, ReservationRepository $reservationRepository, ConfigService $configService)
+    public function __construct(private AccomodationRepository $accomodationRepository, private LocationRepository $locationRepository, private ReservationRepository $reservationRepository, private ConfigService $configService)
     {
         $this->accomodationRepository = $accomodationRepository;
         $this->locationRepository = $locationRepository;

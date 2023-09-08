@@ -85,7 +85,7 @@
 						</td>
 						<td class="p-2">{{ reservation.date|date() }}</td>
 						<td class="p-2 flex flex-col text-sm [&>a]:underline">
-							<a href="">Modifier</a>
+							<a href={{ path('admin_reservations_update', { id: reservation.id }) }}>Modifier</a>
 							<a href="">Supprimer</a>
 							<a href="">Encaisser</a>
 							<a href="">Facture</a>

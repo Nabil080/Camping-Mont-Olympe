@@ -34,10 +34,10 @@ security:
     ROLE_SUPER_ADMIN: [ROLE_LOGS, ROLE_ALLOWED_TO_CREATE_ADMINS]
 
   access_control:
-    # - { path: ^/admin/users, roles: ROLE_ALLOWED_TO_CREATE_ADMINS }
-    # - { path: ^/admin/logs, roles: ROLE_ALLOWED_TO_SEE_LOGS }
-    # - { path: ^/admin/settings, roles: ROLE_ALLOWED_TO_CHANGE_SETTINGS }
-    # - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/admin/users, roles: ROLE_ALLOWED_TO_CREATE_ADMINS }
+    - { path: ^/admin/logs, roles: ROLE_ALLOWED_TO_SEE_LOGS }
+    - { path: ^/admin/settings, roles: ROLE_ALLOWED_TO_CHANGE_SETTINGS }
+    - { path: ^/admin, roles: ROLE_ADMIN }
 
 when@test:
   security:

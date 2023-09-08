@@ -288,12 +288,11 @@ class ConfigService
         $numberOfDays = $reservation->getStart()->diff($reservation->getEnd())->format('%a%');
 
         $checkInDays = $this->getReservationCheckIn($reservation, $season);
-
         if (!in_array($startDay, $checkInDays) && !in_array(null, $checkInDays))
             return $error = ['rule' => 'checkIn', 'value' => $checkInDays];
 
+            
         $checkOutDays = $this->getReservationCheckOut($reservation, $season);
-
         if (!in_array($endDay, $checkOutDays) && !in_array(null, $checkOutDays))
             return $error = ['rule' => 'checkOut', 'value' => $checkOutDays];
 

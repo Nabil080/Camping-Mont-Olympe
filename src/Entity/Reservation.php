@@ -74,7 +74,8 @@ class Reservation
 
     public function setStart($start): static
     {
-        $startDate = !str_contains($start, '/') ? new DateTime($start) : new DateTime(join("-", array_reverse(explode("/", $start))));
+        if(is_string($start)) $startDate = !str_contains($start, '/') ? new DateTime($start) : new DateTime(join("-", array_reverse(explode("/", $start))));
+        else $startDate = $start;
         $this->start = $startDate;
 
         return $this;
@@ -87,7 +88,8 @@ class Reservation
 
     public function setEnd($end): static
     {
-        $endDate = !str_contains($end, '/') ? new DateTime($end) : new DateTime(join("-", array_reverse(explode("/", $end))));
+        if(is_string($end)) $endDate = !str_contains($end, '/') ? new DateTime($end) : new DateTime(join("-", array_reverse(explode("/", $end))));
+        else $endDate = $end;
         $this->end = $endDate;
 
         return $this;

@@ -90,9 +90,7 @@ export default class extends Controller {
 
     getUnavailableHTMLCard(card) {
         let tags = "";
-        card.accomodation.tags.forEach(
-            (tag) => (tags += `<div class='reservation-tag'>${tag}</div>`)
-        );
+        card.accomodation.tags.forEach((tag) => tags += `<div class='reservation-tag'>${tag}</div>` );
 
         let errorMessage = this.getErrorMessage(card.error);
 
@@ -143,9 +141,7 @@ export default class extends Controller {
     }
 
     price(e) {
-        this.container
-            .querySelector(`#${e.target.dataset.div}`)
-            .classList.toggle("hidden");
+        this.container.querySelector(`#${e.target.dataset.div}`).classList.toggle("hidden");
         e.target.innerText =
             e.target.innerText === "Cacher le détail du prix"
                 ? "Voir le détail du prix"

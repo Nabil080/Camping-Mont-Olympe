@@ -39,7 +39,6 @@ class ReservationsController extends AbstractController
     public function create(EntityManagerInterface $em, LogService $logService, Request $request): Response
     {
         $reservation = new Reservation;
-        $now = new \DateTime('now');
 
         $form = $this->createForm(ReservationType::class);
         $form->handleRequest($request);
@@ -64,6 +63,30 @@ class ReservationsController extends AbstractController
         ]);
     }
 
+    #[Route('admin/reservations/update/{id}', name: 'admin_reservations_update')]
+    public function update(Reservation $reservation, EntityManagerInterface $em, LogService $logService, Request $request): Response
+    {
+        $form = $this->createForm(ReservationType::class,$reservation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $em->persist($reservation);
+            $em->flush();
+
+            $id = $reservation->getId();
+            $message = "La réservation N°$id a été modifiée";
+            $context = ['update', 'reservation'];
+            $logService->write($message, $context);
+
+            return $this->redirectToRoute('admin_reservations');
+        }
+
+        return $this->render('admin/reservations/add.html.twig', [
+            'form' => $form
+        ]);
+    }
 
 
     #[Route('/admin/settings/reservations', name: 'admin_settings_reservations')]

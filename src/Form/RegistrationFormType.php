@@ -24,7 +24,9 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class, ['label' => 'Email', 'attr' => ['placeholder' => 'Email ', 'autocomplete' => 'false'],
             'constraints' => [
                 new NotBlank
-            ]])
+            ],
+            'help' => 'Un mail de vérification sera envoyé à cette adresse'
+            ])
             ->add('first_name', TextType::class, ['label' => 'Prénom', 'attr' => ['placeholder' => 'Nom ']])
             ->add('last_name', TextType::class, ['label' => 'Nom', 'attr' => ['placeholder' => 'Prenom ']])
             ->add('phone', TelType::class, ['label' => 'Téléphone', 'attr' => ['placeholder' => 'Téléphone ']])
